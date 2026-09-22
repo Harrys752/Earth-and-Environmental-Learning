@@ -1,6 +1,5 @@
 ---
 import Badge from '../ui/Badge.astro';
-import { withBase } from '../../lib/base';
 
 export interface Props {
   id: string;
@@ -49,12 +48,11 @@ const {
 
     {/* Title & Description */}
     <h3 class="text-lg font-bold text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors leading-snug mb-2">
-      <a href={withBase(`/learn/${slug}`)} class="focus:outline-none focus-visible:underline">
+      <a href={`/learn/${slug}`} class="focus:outline-none focus-visible:underline">
         <span class="absolute inset-0" aria-hidden="true" />
         {title}
       </a>
     </h3>
-
 
     {tagline && (
       <p class="text-xs font-medium text-[var(--color-accent)] mb-2">

@@ -4,12 +4,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import TopicCard from '../components/learning/TopicCard.astro';
 import LearningCard from '../components/learning/LearningCard.astro';
 import Button from '../components/ui/Button.astro';
-import { withBase } from '../lib/base';
 
 const topics = await getCollection('topics');
 const experiences = await getCollection('experiences');
 const flagshipExp = experiences.find((e) => (e.data.id || e.id) === 'why-volcanoes-form') || experiences[0];
-const flagshipSlug = flagshipExp.data.id || flagshipExp.id;
 ---
 
 <BaseLayout title="Earth & Environmental Sciences — Interactive Learning Platform">
@@ -31,14 +29,14 @@ const flagshipSlug = flagshipExp.data.id || flagshipExp.id;
         </p>
 
         <div class="flex flex-wrap items-center gap-3 pt-2">
-          <Button href={withBase('/learn/why-volcanoes-form')} variant="primary" size="lg">
+          <Button href="/learn/why-volcanoes-form" variant="primary" size="lg">
             <span>Explore Flagship: Why Do Volcanoes Form?</span>
             <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
               <polyline points="9 18 15 12 9 6" />
             </svg>
           </Button>
 
-          <Button href={withBase('/explore')} variant="outline" size="lg">
+          <Button href="/explore" variant="outline" size="lg">
             <span>Browse All Topics</span>
           </Button>
         </div>
@@ -75,7 +73,7 @@ const flagshipSlug = flagshipExp.data.id || flagshipExp.id;
           </p>
         </div>
 
-        <Button href={withBase(`/learn/${flagshipSlug}`)} variant="primary" size="md">
+        <Button href={`/learn/${flagshipExp.data.id || flagshipExp.id}`} variant="primary" size="md">
           Begin Experience
         </Button>
       </div>
@@ -114,7 +112,7 @@ const flagshipSlug = flagshipExp.data.id || flagshipExp.id;
           </div>
 
           <a
-            href={withBase(`/learn/${flagshipSlug}`)}
+            href={`/learn/${flagshipExp.data.id || flagshipExp.id}`}
             class="text-xs font-bold text-[var(--color-secondary)] hover:underline inline-flex items-center gap-1 mt-2"
           >
             <span>Launch Interactive Simulation</span>
@@ -138,7 +136,7 @@ const flagshipSlug = flagshipExp.data.id || flagshipExp.id;
           </h2>
         </div>
         <a
-          href={withBase('/explore/topics')}
+          href="/explore/topics"
           class="text-xs font-semibold text-[var(--color-accent)] hover:underline inline-flex items-center gap-1"
         >
           <span>View all topics</span>
@@ -179,7 +177,7 @@ const flagshipSlug = flagshipExp.data.id || flagshipExp.id;
           </h2>
         </div>
         <a
-          href={withBase('/explore/experiences')}
+          href="/explore/experiences"
           class="text-xs font-semibold text-[var(--color-interactive)] hover:underline inline-flex items-center gap-1"
         >
           <span>All experiences</span>
@@ -225,7 +223,7 @@ const flagshipSlug = flagshipExp.data.id || flagshipExp.id;
         </p>
       </div>
 
-      <Button href={withBase('/journey')} variant="secondary" size="md">
+      <Button href="/journey" variant="secondary" size="md">
         <span>Open Journey Timeline</span>
         <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <polyline points="9 18 15 12 9 6" />
@@ -234,4 +232,3 @@ const flagshipSlug = flagshipExp.data.id || flagshipExp.id;
     </section>
   </div>
 </BaseLayout>
-

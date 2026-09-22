@@ -1,7 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Breadcrumb from '../components/ui/Breadcrumb.astro';
-import { withBase } from '../lib/base';
 
 const GEOMAP_URL = 'https://harrys752.github.io/GeoMap-New/';
 
@@ -115,7 +114,7 @@ const featuredLocations = [
 
             <div class="pt-3 border-t border-[var(--color-border)] flex items-center justify-between">
               <a
-                href={withBase('/learn/why-volcanoes-form')}
+                href={`/learn/why-volcanoes-form`}
                 class="text-xs text-[var(--color-text-dim)] hover:underline"
               >
                 Related Concept →

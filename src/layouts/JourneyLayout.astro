@@ -1,7 +1,6 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import Breadcrumb, { type BreadcrumbItem } from '../components/ui/Breadcrumb.astro';
-import { withBase } from '../lib/base';
 
 export interface Props {
   title: string;
@@ -16,10 +15,10 @@ const {
 } = Astro.props;
 
 const tabs = [
-  { id: 'overview', label: 'Overview Dashboard', href: withBase('/journey') },
-  { id: 'timeline', label: 'Timeline & Logs', href: withBase('/journey/timeline') },
-  { id: 'reflections', label: 'Reflections', href: withBase('/journey/reflections') },
-  { id: 'projects', label: 'Built Projects', href: withBase('/journey/projects') },
+  { id: 'overview', label: 'Overview Dashboard', href: '/journey' },
+  { id: 'timeline', label: 'Timeline & Logs', href: '/journey/timeline' },
+  { id: 'reflections', label: 'Reflections', href: '/journey/reflections' },
+  { id: 'projects', label: 'Built Projects', href: '/journey/projects' },
 ];
 
 const breadcrumbItems: BreadcrumbItem[] = [

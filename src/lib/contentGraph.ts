@@ -1,5 +1,3 @@
-import { withBase } from './base';
-
 /**
  * Static Knowledge Graph Resolver
  * Connects Concepts, Experiences, Locations, and Topics in a web of discovery.
@@ -63,27 +61,18 @@ export const CONTENT_GRAPH: Record<string, StaticGraphEntry> = {
     relatedExperiences: ['why-volcanoes-form'],
     relatedLocations: ['java-volcanic-arc', 'mount-merapi'],
     relatedConcepts: ['subduction'],
-    relatedTopics: ['plate-tectonics', 'natural-hazards'],
+    relatedTopics: ['plate-tectonics', 'geology'],
   },
   'plate-tectonics-process': {
-    relatedExperiences: ['why-volcanoes-form', 'reading-rock-layers'],
-    relatedConcepts: ['subduction', 'stratigraphy'],
+    relatedExperiences: ['why-volcanoes-form'],
+    relatedLocations: ['java-volcanic-arc'],
+    relatedConcepts: ['subduction', 'volcanic-arcs'],
     relatedTopics: ['plate-tectonics'],
-  },
-  'condensation': {
-    relatedExperiences: ['how-rain-forms'],
-    relatedLocations: ['bogor-rain-belt'],
-    relatedConcepts: ['atmospheric-pressure'],
-    relatedTopics: ['atmosphere', 'hydrology'],
-  },
-  'atmospheric-pressure': {
-    relatedExperiences: ['how-rain-forms'],
-    relatedConcepts: ['condensation'],
-    relatedTopics: ['atmosphere'],
   },
   'stratigraphy': {
     relatedExperiences: ['reading-rock-layers'],
-    relatedLocations: ['karangsambung-geopark', 'sangiran-valley'],
+    relatedLocations: ['karangsambung-geopark'],
+    relatedConcepts: ['sedimentation', 'relative-dating'],
     relatedTopics: ['geology', 'rocks'],
   },
   'sedimentation': {
@@ -91,6 +80,12 @@ export const CONTENT_GRAPH: Record<string, StaticGraphEntry> = {
     relatedLocations: ['sangiran-valley'],
     relatedConcepts: ['stratigraphy'],
     relatedTopics: ['geology', 'hydrology'],
+  },
+  'condensation': {
+    relatedExperiences: ['how-rain-forms'],
+    relatedLocations: ['bogor-rain-belt'],
+    relatedConcepts: ['atmospheric-pressure'],
+    relatedTopics: ['atmosphere', 'hydrology'],
   },
 
   // Locations
@@ -117,7 +112,7 @@ export const CONTENT_GRAPH: Record<string, StaticGraphEntry> = {
 };
 
 /**
- * Registry of all node definitions with human titles and hrefs
+ * Metadata dictionary for rich node presentation
  */
 export const NODE_REGISTRY: Record<string, KnowledgeNode> = {
   // Experiences
@@ -125,82 +120,82 @@ export const NODE_REGISTRY: Record<string, KnowledgeNode> = {
     id: 'why-volcanoes-form',
     type: 'experience',
     title: 'Why Do Volcanoes Form?',
-    summary: 'Subduction dynamics, flux melting, and active volcanic arc formation across Java.',
+    summary: 'Subduction, mantle melting, and how oceanic plates fuel explosive volcanic arcs.',
     href: '/learn/why-volcanoes-form',
-    badge: 'Flagship Inquiry',
+    badge: 'Flagship Experience',
   },
   'how-rain-forms': {
     id: 'how-rain-forms',
     type: 'experience',
     title: 'How Does Rain Form?',
-    summary: 'Evaporation, atmospheric convection, adiabatic cooling, and tropical rainfall in Bogor.',
+    summary: 'Atmospheric moisture, adiabatic cooling, droplet growth, and tropical monsoon precipitation.',
     href: '/learn/how-rain-forms',
-    badge: 'Atmosphere Inquiry',
+    badge: 'Atmosphere',
   },
   'reading-rock-layers': {
     id: 'reading-rock-layers',
     type: 'experience',
     title: 'Reading Rock Layers',
-    summary: 'Stratigaphy, Steno laws, deep time, and the Karangsambung accretionary complex.',
+    summary: 'Deciphering millions of years of Earth history through strata, fossils, and the Law of Superposition.',
     href: '/learn/reading-rock-layers',
-    badge: 'Geology Inquiry',
+    badge: 'Geology',
   },
 
   // Concepts
   'subduction': {
     id: 'subduction',
     type: 'concept',
-    title: 'Subduction Kinematics',
-    summary: 'The oceanic plate descending beneath continental or oceanic lithosphere into the asthenosphere.',
+    title: 'Subduction Zones',
+    summary: 'Where heavy oceanic lithosphere plunges beneath another plate into the mantle.',
     href: '/learn/concepts/subduction',
-    badge: 'Core Concept',
+    badge: 'Concept',
   },
   'volcanic-arcs': {
     id: 'volcanic-arcs',
     type: 'concept',
-    title: 'Volcanic Arc Offsets',
-    summary: 'Curved chains of stratovolcanoes positioned ~100-300km inland from subduction trenches.',
+    title: 'Volcanic Arcs',
+    summary: 'Curving chains of volcanoes formed above a subducting tectonic plate.',
     href: '/learn/concepts/volcanic-arcs',
-    badge: 'Core Concept',
+    badge: 'Concept',
   },
   'plate-tectonics-process': {
     id: 'plate-tectonics-process',
     type: 'concept',
-    title: 'Plate Tectonic Convection Engine',
-    summary: 'Mantle convection and lithospheric plate movements shaping global geography.',
+    title: 'Plate Tectonics Mechanism',
+    summary: 'Mantle convection, slab pull, and ridge push driving planetary crust dynamics.',
     href: '/learn/concepts/plate-tectonics-process',
-    badge: 'Core Concept',
+    badge: 'Concept',
+  },
+  'stratigraphy': {
+    id: 'stratigraphy',
+    type: 'concept',
+    title: 'Stratigraphy & Superposition',
+    summary: 'The geological study of rock strata and the chronological records they hold.',
+    href: '/learn/concepts/stratigraphy',
+    badge: 'Concept',
+  },
+  'sedimentation': {
+    id: 'sedimentation',
+    type: 'concept',
+    title: 'Sedimentation & Deposition',
+    summary: 'The settling of mineral particles from water and wind over geological time.',
+    href: '/learn/concepts/sedimentation',
+    badge: 'Concept',
   },
   'condensation': {
     id: 'condensation',
     type: 'concept',
-    title: 'Water Vapor Condensation',
-    summary: 'Phase change of gas to liquid around cloud condensation nuclei when air cools to dew point.',
+    title: 'Atmospheric Condensation',
+    summary: 'Phase change of water vapor into liquid water droplets around condensation nuclei.',
     href: '/learn/concepts/condensation',
-    badge: 'Core Concept',
+    badge: 'Concept',
   },
   'atmospheric-pressure': {
     id: 'atmospheric-pressure',
     type: 'concept',
     title: 'Atmospheric Pressure Gradients',
-    summary: 'Weight of air columns driving planetary wind patterns and adiabatic expansion.',
+    summary: 'Pressure variations across air masses driving global and local wind circulation.',
     href: '/learn/concepts/atmospheric-pressure',
-    badge: 'Core Concept',
-  },
-  'stratigraphy': {
-    id: 'stratigraphy',
-    type: 'concept',
-    title: 'Stratigraphic Principles',
-    summary: 'Superposition, original horizontality, and lateral continuity in sedimentary rock sequences.',
-    href: '/learn/concepts/stratigraphy',
-    badge: 'Core Concept',
-  },
-  'sedimentation': {
-    id: 'sedimentation',
-    type: 'concept',
-    title: 'Sediment Transport & Deposition',
-    summary: 'Weathering, erosion, and deposition of mineral particles across oceanic and river basins.',
-    href: '/learn/concepts/sedimentation',
     badge: 'Concept',
   },
   'relative-dating': {
@@ -263,18 +258,15 @@ export function getRelatedContent(slug: string): RelatedContentResult {
 
   const relatedExperiences = (entry.relatedExperiences || [])
     .map((s) => NODE_REGISTRY[s])
-    .filter(Boolean)
-    .map((node) => ({ ...node, href: withBase(node.href) }));
+    .filter(Boolean);
 
   const relatedConcepts = (entry.relatedConcepts || [])
     .map((s) => NODE_REGISTRY[s])
-    .filter(Boolean)
-    .map((node) => ({ ...node, href: withBase(node.href) }));
+    .filter(Boolean);
 
   const relatedLocations = (entry.relatedLocations || [])
     .map((s) => NODE_REGISTRY[s])
-    .filter(Boolean)
-    .map((node) => ({ ...node, href: withBase(node.href) }));
+    .filter(Boolean);
 
   return {
     relatedExperiences,

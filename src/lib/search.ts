@@ -5,8 +5,6 @@
  */
 
 
-import { withBase } from './base';
-
 export interface SearchIndexItem {
   id: string;
   type: 'experience' | 'topic' | 'concept' | 'location' | 'project';
@@ -220,7 +218,6 @@ export function searchKnowledgeBase(query: string): SearchResult[] {
     if (score > 0) {
       results.push({
         ...item,
-        href: withBase(item.href),
         score,
         matchReason,
       });
@@ -229,4 +226,3 @@ export function searchKnowledgeBase(query: string): SearchResult[] {
 
   return results.sort((a, b) => b.score - a.score);
 }
-

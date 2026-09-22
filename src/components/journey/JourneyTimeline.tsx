@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'preact/hooks';
 import type { JourneyEntry } from '../../types/journey';
 import { getJourneyEntries } from '../../lib/storage';
-import { withBase } from '../../lib/base';
 
 export default function JourneyTimeline() {
   const [entries, setEntries] = useState<JourneyEntry[]>([]);
@@ -85,7 +84,7 @@ export default function JourneyTimeline() {
           As you investigate experiences, manipulate plate boundary simulations, and record field observations, your personal timeline will document your growing understanding of Earth systems.
         </p>
         <a
-          href={withBase('/learn/why-volcanoes-form')}
+          href="/learn/why-volcanoes-form"
           class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[var(--color-accent)] text-white text-xs font-semibold hover:bg-[var(--color-accent-hover)] transition-all shadow-sm"
         >
           <span>Start Flagship Experience: Why Do Volcanoes Form?</span>

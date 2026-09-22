@@ -2,7 +2,6 @@
 import JourneyLayout from '../../layouts/JourneyLayout.astro';
 import JourneyTimeline from '../../components/journey/JourneyTimeline';
 import Button from '../../components/ui/Button.astro';
-import { withBase } from '../../lib/base';
 ---
 
 <JourneyLayout
@@ -23,7 +22,7 @@ import { withBase } from '../../lib/base';
           </p>
         </div>
 
-        <Button href={withBase('/journey/timeline')} variant="outline" size="sm">
+        <Button href="/journey/timeline" variant="outline" size="sm">
           Full Timeline View
         </Button>
       </div>
@@ -35,7 +34,7 @@ import { withBase } from '../../lib/base';
     <!-- Quick Navigation to Portfolio Sections -->
     <section class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6 border-t border-[var(--color-border)]">
       <a
-        href={withBase('/journey/timeline')}
+        href="/journey/timeline"
         class="p-5 rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] hover:border-[var(--color-accent)] transition-all space-y-2 block"
       >
         <span class="text-xs font-mono uppercase tracking-wider text-[var(--color-accent)] font-semibold">
@@ -50,7 +49,7 @@ import { withBase } from '../../lib/base';
       </a>
 
       <a
-        href={withBase('/journey/reflections')}
+        href="/journey/reflections"
         class="p-5 rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] hover:border-[var(--color-secondary)] transition-all space-y-2 block"
       >
         <span class="text-xs font-mono uppercase tracking-wider text-[var(--color-secondary)] font-semibold">
@@ -65,7 +64,7 @@ import { withBase } from '../../lib/base';
       </a>
 
       <a
-        href={withBase('/journey/projects')}
+        href="/journey/projects"
         class="p-5 rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] hover:border-[var(--color-interactive)] transition-all space-y-2 block"
       >
         <span class="text-xs font-mono uppercase tracking-wider text-[var(--color-interactive)] font-semibold">

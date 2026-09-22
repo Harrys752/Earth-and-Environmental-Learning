@@ -9,7 +9,6 @@ import {
   addJourneyEntry,
 } from '../../lib/storage';
 import { getMasteryLabel } from '../../lib/progress';
-import { withBase } from '../../lib/base';
 
 export interface QuizProps {
   quiz: QuizType;
@@ -198,7 +197,7 @@ export default function Quiz({ quiz, experienceSlug, experienceTitle }: QuizProp
           </button>
 
           <a
-            href={withBase('/journey')}
+            href="/journey"
             class="px-5 py-2 rounded-xl bg-[var(--color-accent)] text-white text-xs font-semibold hover:bg-[var(--color-accent-hover)] transition-colors inline-flex items-center gap-1.5 shadow-sm"
           >
             <span>View Journey Progress</span>

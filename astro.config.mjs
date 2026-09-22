@@ -4,7 +4,12 @@ import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
-// Dynamically determine base path for GitHub Pages project site:
+// Dynamically determine base path:
+// 1. Respect explicit BASE_URL or ASTRO_BASE environment variables.
+// 2. If deployed in GitHub Actions (GITHUB_REPOSITORY present):
+//    - If repo ends with .github.io (user site) -> '/'
+//    - Otherwise use actual repository name -> '/<repo-name>/'
+// 3. Fallback to '/' for local development.
 function getBasePath() {
   if (process.env.BASE_URL) return process.env.BASE_URL;
   if (process.env.ASTRO_BASE) return process.env.ASTRO_BASE;
@@ -18,8 +23,7 @@ function getBasePath() {
     return `/${repoName}/`;
   }
 
-  // Default to the GitHub repository name for project site deployment
-  return '/Earth-and-Environmental-Learning/';
+  return '/';
 }
 
 // https://astro.build/config
@@ -36,3 +40,4 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
 });
+

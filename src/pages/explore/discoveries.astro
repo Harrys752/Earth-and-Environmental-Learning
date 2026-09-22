@@ -2,7 +2,6 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumb from '../../components/ui/Breadcrumb.astro';
-import { withBase } from '../../lib/base';
 import GeoMapLink from '../../components/geomap/GeoMapLink.astro';
 
 const concepts = await getCollection('concepts');
@@ -90,7 +89,7 @@ const breadcrumbItems = [
                 {c.data.domain}
               </span>
               <h3 class="text-base font-bold text-[var(--color-text)]">
-                <a href={withBase(`/learn/concepts/${c.data.id || c.id}`)} class="hover:underline">
+                <a href={`/learn/concepts/${c.data.id || c.id}`} class="hover:underline">
                   {c.data.title}
                 </a>
               </h3>
@@ -102,7 +101,7 @@ const breadcrumbItems = [
             <div class="pt-3 mt-3 border-t border-[var(--color-border)] text-xs text-[var(--color-text-dim)] flex items-center justify-between">
               <span>{c.data.relatedExperiences.length} related experience</span>
               <a
-                href={withBase(`/learn/concepts/${c.data.id || c.id}`)}
+                href={`/learn/concepts/${c.data.id || c.id}`}
                 class="font-semibold text-[var(--color-accent)] hover:underline"
               >
                 Inspect →
