@@ -42,6 +42,9 @@ jobs:
         run: npm run build
         env:
           CI: true
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          BASE_URL: ${{ vars.BASE_URL }}
+
 
       - name: Upload GitHub Pages Artifact
         if: github.ref == 'refs/heads/main'
