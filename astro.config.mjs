@@ -29,7 +29,7 @@ function getBasePath() {
 // https://astro.build/config
 export default defineConfig({
   site: 'https://harrys752.github.io',
-  base: getBasePath(),
+  base: '/Earth-and-Environmental-Learning',
   output: 'static',
   integrations: [
     preact({ compat: false }),
