@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import ThemeToggle from '../components/ui/ThemeToggle';
+import { withBase } from '../lib/base';
 
 export interface Props {
   title: string;
@@ -24,8 +25,13 @@ const fullTitle = title.includes('Earth Learning')
 
 const currentPath = Astro.url.pathname;
 const isActive = (path: string) => {
-  if (path === '/' && currentPath === '/') return true;
-  if (path !== '/' && currentPath.startsWith(path)) return true;
+  const target = withBase(path);
+  if (target.endsWith('/') && target !== withBase('/')) {
+    const trimmed = target.slice(0, -1);
+    return currentPath === target || currentPath === trimmed || currentPath.startsWith(trimmed + '/');
+  }
+  if (path === '/' && (currentPath === withBase('/') || currentPath === withBase('').slice(0, -1))) return true;
+  if (path !== '/' && currentPath.startsWith(withBase(path))) return true;
   return false;
 };
 ---
@@ -36,10 +42,10 @@ const isActive = (path: string) => {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} />
     <meta name="generator" content={Astro.generator} />
 
-    <!-- Open Graph / SEO -->
+    {/* Open Graph / SEO */}
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content={ogType} />
@@ -47,7 +53,7 @@ const isActive = (path: string) => {
 
     <title>{fullTitle}</title>
 
-    <!-- Theme Initialization Script to prevent flash -->
+    {/* Theme Initialization Script to prevent flash */}
     <script is:inline>
       (function() {
         try {
@@ -66,7 +72,7 @@ const isActive = (path: string) => {
     </script>
   </head>
   <body class="bg-canvas text-main min-h-screen flex flex-col selection:bg-[var(--color-accent-subtle)] selection:text-[var(--color-accent)]">
-    <!-- Skip to Main Content Link for Accessibility (§19) -->
+    {/* Skip to Main Content Link for Accessibility (§19) */}
     <a
       href="#main-content"
       class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 z-50 px-4 py-2 rounded-lg bg-[var(--color-accent)] text-white font-semibold text-xs shadow-lg"
@@ -74,12 +80,12 @@ const isActive = (path: string) => {
       Skip to main content
     </a>
 
-    <!-- Global Navigation Header -->
+    {/* Global Navigation Header */}
     <header class="sticky top-0 z-40 w-full border-b border-[var(--color-border)] bg-[var(--color-background)]/90 backdrop-blur-md transition-colors">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
         {/* Brand Logo & Tagline */}
         <div class="flex items-center gap-3">
-          <a href="/" class="flex items-center gap-2.5 group focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] rounded-lg p-1">
+          <a href={withBase('/')} class="flex items-center gap-2.5 group focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] rounded-lg p-1">
             <div class="w-8 h-8 rounded-xl bg-[var(--color-accent)] text-white flex items-center justify-center font-bold text-sm shadow-sm group-hover:scale-105 transition-transform">
               <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                 <circle cx="12" cy="12" r="10" />
@@ -101,7 +107,7 @@ const isActive = (path: string) => {
         {/* Primary Desktop Navigation Links (§3.2) */}
         <nav class="hidden md:flex items-center gap-1 text-sm font-medium" aria-label="Main Navigation">
           <a
-            href="/"
+            href={withBase('/')}
             class={`px-3 py-1.5 rounded-lg transition-colors ${
               isActive('/')
                 ? 'text-[var(--color-accent)] font-semibold bg-[var(--color-accent-subtle)]'
@@ -111,7 +117,7 @@ const isActive = (path: string) => {
             Home
           </a>
           <a
-            href="/explore"
+            href={withBase('/explore')}
             class={`px-3 py-1.5 rounded-lg transition-colors ${
               isActive('/explore')
                 ? 'text-[var(--color-accent)] font-semibold bg-[var(--color-accent-subtle)]'
@@ -121,7 +127,7 @@ const isActive = (path: string) => {
             Explore
           </a>
           <a
-            href="/learn"
+            href={withBase('/learn')}
             class={`px-3 py-1.5 rounded-lg transition-colors ${
               isActive('/learn')
                 ? 'text-[var(--color-accent)] font-semibold bg-[var(--color-accent-subtle)]'
@@ -131,7 +137,7 @@ const isActive = (path: string) => {
             Learn
           </a>
           <a
-            href="/journey"
+            href={withBase('/journey')}
             class={`px-3 py-1.5 rounded-lg transition-colors ${
               isActive('/journey')
                 ? 'text-[var(--color-accent)] font-semibold bg-[var(--color-accent-subtle)]'
@@ -141,7 +147,7 @@ const isActive = (path: string) => {
             Journey
           </a>
           <a
-            href="/geomap"
+            href={withBase('/geomap')}
             class={`px-3 py-1.5 rounded-lg transition-colors ${
               isActive('/geomap')
                 ? 'text-[var(--color-interactive)] font-semibold bg-[var(--color-interactive-subtle)]'
@@ -151,7 +157,7 @@ const isActive = (path: string) => {
             GeoMap Bridge
           </a>
           <a
-            href="/about"
+            href={withBase('/about')}
             class={`px-3 py-1.5 rounded-lg transition-colors ${
               isActive('/about')
                 ? 'text-[var(--color-accent)] font-semibold bg-[var(--color-accent-subtle)]'
@@ -165,7 +171,7 @@ const isActive = (path: string) => {
         {/* Global Utilities: Search Icon & Theme Toggle Island */}
         <div class="flex items-center gap-2">
           <a
-            href="/search"
+            href={withBase('/search')}
             class="w-9 h-9 rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:bg-[var(--color-surface-hover)] flex items-center justify-center transition-colors focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
             title="Search topics, experiences, and concepts (Shortcut)"
             aria-label="Search earth sciences knowledge base"
@@ -181,7 +187,7 @@ const isActive = (path: string) => {
           {/* Mobile Menu Trigger */}
           <div class="md:hidden flex items-center">
             <a
-              href="/explore"
+              href={withBase('/explore')}
               class="px-2.5 py-1.5 rounded-lg border border-[var(--color-border)] text-xs font-semibold text-[var(--color-text-muted)]"
             >
               Menu
@@ -191,12 +197,12 @@ const isActive = (path: string) => {
       </div>
     </header>
 
-    <!-- Main Landmark -->
+    {/* Main Landmark */}
     <main id="main-content" class={`flex-1 ${className}`}>
       <slot />
     </main>
 
-    <!-- Global Educational Footer -->
+    {/* Global Educational Footer */}
     <footer class="border-t border-[var(--color-border)] bg-[var(--color-surface)] py-12 text-xs text-[var(--color-text-muted)]">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -218,10 +224,10 @@ const isActive = (path: string) => {
               Exploration
             </h4>
             <ul class="space-y-1.5 list-none p-0 m-0">
-              <li><a href="/explore/topics" class="hover:text-[var(--color-text)]">All Topics</a></li>
-              <li><a href="/explore/experiences" class="hover:text-[var(--color-text)]">Learning Experiences</a></li>
-              <li><a href="/learn/why-volcanoes-form" class="hover:text-[var(--color-text)]">Volcanism Flagship</a></li>
-              <li><a href="/geomap" class="hover:text-[var(--color-interactive)]">GeoMap Bridge</a></li>
+              <li><a href={withBase('/explore/topics')} class="hover:text-[var(--color-text)]">All Topics</a></li>
+              <li><a href={withBase('/explore/experiences')} class="hover:text-[var(--color-text)]">Learning Experiences</a></li>
+              <li><a href={withBase('/learn/why-volcanoes-form')} class="hover:text-[var(--color-text)]">Volcanism Flagship</a></li>
+              <li><a href={withBase('/geomap')} class="hover:text-[var(--color-interactive)]">GeoMap Bridge</a></li>
             </ul>
           </div>
 
@@ -230,10 +236,10 @@ const isActive = (path: string) => {
               Scientific Ethics
             </h4>
             <ul class="space-y-1.5 list-none p-0 m-0">
-              <li><a href="/about" class="hover:text-[var(--color-text)]">Sources & Pedagogy</a></li>
-              <li><a href="/about#illustrative-models" class="hover:text-[var(--color-text)]">Model Disclosures</a></li>
-              <li><a href="/journey" class="hover:text-[var(--color-text)]">Personal Journey</a></li>
-              <li><a href="/search" class="hover:text-[var(--color-text)]">Knowledge Search</a></li>
+              <li><a href={withBase('/about')} class="hover:text-[var(--color-text)]">Sources & Pedagogy</a></li>
+              <li><a href={withBase('/about#illustrative-models')} class="hover:text-[var(--color-text)]">Model Disclosures</a></li>
+              <li><a href={withBase('/journey')} class="hover:text-[var(--color-text)]">Personal Journey</a></li>
+              <li><a href={withBase('/search')} class="hover:text-[var(--color-text)]">Knowledge Search</a></li>
             </ul>
           </div>
         </div>
@@ -243,8 +249,8 @@ const isActive = (path: string) => {
             Earth Science Learning Platform (V1). Open scientific education.
           </div>
           <div class="flex items-center gap-4">
-            <a href="/about" class="hover:underline">About</a>
-            <a href="/geomap" class="hover:underline">GeoMap Indonesia 2.0 (External)</a>
+            <a href={withBase('/about')} class="hover:underline">About</a>
+            <a href={withBase('/geomap')} class="hover:underline">GeoMap Indonesia 2.0 (External)</a>
           </div>
         </div>
       </div>

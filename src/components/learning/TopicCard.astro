@@ -1,4 +1,6 @@
 ---
+import { withBase } from '../../lib/base';
+
 export interface Props {
   slug: string;
   title: string;
@@ -48,11 +50,12 @@ const iconPath = categoryIcons[category] || categoryIcons['geology'];
     </div>
 
     <h3 class="text-lg font-bold text-[var(--color-text)] group-hover:text-[var(--color-secondary)] transition-colors leading-snug mb-2">
-      <a href={`/explore/topics/${slug}`} class="focus:outline-none focus-visible:underline">
+      <a href={withBase(`/explore/topics/${slug}`)} class="focus:outline-none focus-visible:underline">
         <span class="absolute inset-0" aria-hidden="true" />
         {title}
       </a>
     </h3>
+
 
     {tagline && (
       <p class="text-xs font-medium text-[var(--color-secondary)] mb-2">

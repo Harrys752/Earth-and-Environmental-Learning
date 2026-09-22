@@ -5,6 +5,7 @@ import Breadcrumb from '../../components/ui/Breadcrumb.astro';
 import TopicCard from '../../components/learning/TopicCard.astro';
 import LearningCard from '../../components/learning/LearningCard.astro';
 import Button from '../../components/ui/Button.astro';
+import { withBase } from '../../lib/base';
 
 const topics = await getCollection('topics');
 const experiences = await getCollection('experiences');
@@ -33,13 +34,13 @@ const breadcrumbItems = [
       </p>
 
       <div class="flex items-center gap-2 pt-2 flex-wrap">
-        <Button href="/explore/experiences" variant="outline" size="sm">
+        <Button href={withBase('/explore/experiences')} variant="outline" size="sm">
           Browse All Experiences ({experiences.length})
         </Button>
-        <Button href="/explore/discoveries" variant="ghost" size="sm">
+        <Button href={withBase('/explore/discoveries')} variant="ghost" size="sm">
           Field Discoveries & Observations
         </Button>
-        <Button href="/geomap" variant="ghost" size="sm">
+        <Button href={withBase('/geomap')} variant="ghost" size="sm">
           GeoMap Indonesia Connection
         </Button>
       </div>

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'preact/hooks';
 import type { Reflection } from '../../types/journey';
 import { getReflections } from '../../lib/storage';
+import { withBase } from '../../lib/base';
 
 export default function ReflectionsViewer() {
   const [reflections, setReflections] = useState<Reflection[]>([]);
@@ -31,7 +32,7 @@ export default function ReflectionsViewer() {
           At the end of each learning experience, you can record short reflections, personal questions, or outdoor observations.
         </p>
         <a
-          href="/learn/why-volcanoes-form"
+          href={withBase('/learn/why-volcanoes-form')}
           class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[var(--color-accent)] text-white text-xs font-semibold hover:bg-[var(--color-accent-hover)] transition-all"
         >
           Explore Why Do Volcanoes Form?

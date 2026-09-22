@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'preact/hooks';
 import { searchKnowledgeBase, type SearchResult } from '../../lib/search';
+import { withBase } from '../../lib/base';
 
 export default function SearchBox() {
   const [query, setQuery] = useState('');
@@ -146,7 +147,7 @@ export default function SearchBox() {
               </p>
               <div class="pt-2">
                 <a
-                  href="/explore/topics"
+                  href={withBase('/explore/topics')}
                   class="text-xs font-semibold text-[var(--color-accent)] hover:underline"
                 >
                   Browse all topics instead →

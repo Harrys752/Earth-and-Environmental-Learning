@@ -1,0 +1,41 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/ui/Button.astro';
+import { withBase } from '../lib/base';
+---
+
+<BaseLayout
+  title="404 - Scientific Horizon Not Found"
+  description="The requested Earth science page or observation path could not be located."
+>
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center space-y-8">
+    <div class="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-[var(--color-accent-subtle)] text-[var(--color-accent)] border border-[var(--color-accent)]/30 shadow-sm">
+      <span class="text-3xl font-mono font-extrabold">404</span>
+    </div>
+
+    <div class="space-y-3">
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-[var(--color-text)] tracking-tight">
+        Scientific Horizon Not Found
+      </h1>
+      <p class="text-base sm:text-lg text-[var(--color-text-muted)] max-w-lg mx-auto leading-relaxed">
+        The observation coordinate or topic path you requested doesn't exist or has shifted in deep time.
+      </p>
+    </div>
+
+    <div class="p-4 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] text-xs font-mono text-[var(--color-text-muted)] max-w-md mx-auto">
+      Status: 404_PAGE_NOT_FOUND • Base URL: {import.meta.env.BASE_URL}
+    </div>
+
+    <div class="flex flex-wrap items-center justify-center gap-4 pt-4">
+      <Button href={withBase('/')} variant="primary" size="md">
+        Return to Homepage
+      </Button>
+      <Button href={withBase('/explore')} variant="outline" size="md">
+        Explore All Topics
+      </Button>
+      <Button href={withBase('/learn/why-volcanoes-form')} variant="ghost" size="md">
+        Flagship Experience
+      </Button>
+    </div>
+  </div>
+</BaseLayout>

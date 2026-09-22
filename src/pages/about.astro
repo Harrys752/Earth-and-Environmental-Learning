@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Breadcrumb from '../components/ui/Breadcrumb.astro';
 import Button from '../components/ui/Button.astro';
+import { withBase } from '../lib/base';
 
 const breadcrumbItems = [
   { label: 'About', current: true },
@@ -86,10 +87,10 @@ const breadcrumbItems = [
     </section>
 
     <div class="pt-4 flex items-center gap-3">
-      <Button href="/explore" variant="primary" size="md">
+      <Button href={withBase('/explore')} variant="primary" size="md">
         Start Exploring Earth Sciences
       </Button>
-      <Button href="/journey" variant="outline" size="md">
+      <Button href={withBase('/journey')} variant="outline" size="md">
         View Journey Timeline
       </Button>
     </div>

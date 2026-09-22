@@ -1,4 +1,6 @@
 ---
+import { withBase } from '../../lib/base';
+
 export interface BreadcrumbItem {
   label: string;
   href?: string;
@@ -17,7 +19,7 @@ const { items, class: className = '' } = Astro.props;
   <ol class="flex items-center flex-wrap gap-1.5 list-none m-0 p-0">
     <li class="flex items-center gap-1.5">
       <a
-        href="/"
+        href={withBase('/')}
         class="hover:text-[var(--color-text)] transition-colors inline-flex items-center gap-1 focus-visible:ring-1 focus-visible:ring-[var(--color-accent)] rounded"
       >
         <svg class="w-3.5 h-3.5 opacity-70" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -31,10 +33,11 @@ const { items, class: className = '' } = Astro.props;
     {
       items.map((item, index) => {
         const isLast = index === items.length - 1;
+        const targetHref = item.href ? withBase(item.href) : undefined;
         return (
           <li class="flex items-center gap-1.5">
             <span class="text-[var(--color-border)] select-none" aria-hidden="true">/</span>
-            {isLast || item.current ? (
+            {isLast || item.current || !targetHref ? (
               <span
                 class="font-medium text-[var(--color-text)] truncate max-w-[200px] sm:max-w-xs"
                 aria-current="page"
@@ -43,7 +46,7 @@ const { items, class: className = '' } = Astro.props;
               </span>
             ) : (
               <a
-                href={item.href}
+                href={targetHref}
                 class="hover:text-[var(--color-text)] transition-colors truncate max-w-[150px] focus-visible:ring-1 focus-visible:ring-[var(--color-accent)] rounded"
               >
                 {item.label}
@@ -55,3 +58,4 @@ const { items, class: className = '' } = Astro.props;
     }
   </ol>
 </nav>
+

@@ -4,6 +4,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumb from '../../components/ui/Breadcrumb.astro';
 import LearningCard from '../../components/learning/LearningCard.astro';
 import Button from '../../components/ui/Button.astro';
+import { withBase } from '../../lib/base';
 
 const experiences = await getCollection('experiences');
 
@@ -46,10 +47,10 @@ const breadcrumbItems = [
       </div>
 
       <div class="flex items-center gap-3 flex-wrap">
-        <Button href="/learn/why-volcanoes-form" variant="primary" size="md">
+        <Button href={withBase('/learn/why-volcanoes-form')} variant="primary" size="md">
           Start Flagship Experience (20 min)
         </Button>
-        <Button href="/explore/topics/plate-tectonics" variant="outline" size="md">
+        <Button href={withBase('/explore/topics/plate-tectonics')} variant="outline" size="md">
           Explore Plate Tectonics Topic
         </Button>
       </div>
