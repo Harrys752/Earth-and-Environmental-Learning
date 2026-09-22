@@ -1,0 +1,120 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../components/ui/Breadcrumb.astro';
+import LearningCard from '../../../components/learning/LearningCard.astro';
+import GeoMapLink from '../../../components/geomap/GeoMapLink.astro';
+
+export async function getStaticPaths() {
+  const concepts = await getCollection('concepts');
+  return concepts.map((entry) => ({
+    params: { concept: entry.data.id || entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+
+// Get related experiences
+const allExperiences = await getCollection('experiences');
+const relatedExps = allExperiences.filter((exp) =>
+  entry.data.relatedExperiences.includes(exp.data.id || exp.id)
+);
+
+const breadcrumbItems = [
+  { label: 'Explore', href: '/explore' },
+  { label: 'Concepts', href: '/explore/discoveries' },
+  { label: entry.data.title, current: true },
+];
+---
+
+<BaseLayout
+  title={`${entry.data.title} — Earth Science Concept Reference`}
+  description={entry.data.description}
+>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+    <Breadcrumb items={breadcrumbItems} class="mb-6" />
+
+    <header class="border-b border-[var(--color-border)] pb-8 mb-8 space-y-3">
+      <div class="flex items-center gap-2">
+        <span class="px-2.5 py-0.5 rounded-full text-xs font-mono font-semibold bg-[var(--color-accent-subtle)] text-[var(--color-accent)] border border-[var(--color-accent)]/30">
+          Core Scientific Concept
+        </span>
+        <span class="text-xs text-[var(--color-text-dim)]">•</span>
+        <span class="text-xs font-semibold text-[var(--color-text-muted)]">
+          {entry.data.domain}
+        </span>
+      </div>
+
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-[var(--color-text)] tracking-tight">
+        {entry.data.title}
+      </h1>
+
+      <p class="text-base sm:text-lg text-[var(--color-text-muted)] leading-relaxed">
+        {entry.data.summary}
+      </p>
+
+      {entry.data.scientificNotes && (
+        <div class="mt-4 p-4 rounded-xl bg-[var(--color-surface-hover)] border border-[var(--color-border)] text-xs text-[var(--color-text-muted)] leading-relaxed">
+          <strong class="text-[var(--color-text)] font-semibold">Scientific Note: </strong>
+          {entry.data.scientificNotes}
+        </div>
+      )}
+    </header>
+
+    <!-- Concept Narrative Body -->
+    <article class="prose prose-stone dark:prose-invert max-w-none space-y-6">
+      <Content />
+    </article>
+
+    <!-- Learning Experiences Exploring this Concept -->
+    {relatedExps.length > 0 && (
+      <section class="mt-12 pt-8 border-t border-[var(--color-border)] space-y-6">
+        <div>
+          <h2 class="text-xl font-bold text-[var(--color-text)]">
+            Experiences Exploring This Concept
+          </h2>
+          <p class="text-xs text-[var(--color-text-muted)] mt-1">
+            Investigate this concept in action through step-by-step processes and simulations.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {relatedExps.map((exp) => (
+            <LearningCard
+              id={exp.data.id || exp.id}
+              slug={exp.data.id || exp.id}
+              title={exp.data.title}
+              tagline={exp.data.tagline}
+              description={exp.data.description}
+              topic={exp.data.topic}
+              difficulty={exp.data.difficulty}
+              estimatedTime={exp.data.estimatedTime}
+              isIndonesiaFirst={exp.data.realWorldConnections?.[0]?.isIndonesiaFirst}
+              hasInteractive={exp.data.interactiveElements?.length > 0}
+            />
+          ))}
+        </div>
+      </section>
+    )}
+
+    <!-- Real-World Field Locations -->
+    {entry.data.relatedLocations.length > 0 && (
+      <section class="mt-12 pt-8 border-t border-[var(--color-border)] space-y-4">
+        <h2 class="text-xl font-bold text-[var(--color-text)]">
+          Real-World Geological Locations
+        </h2>
+        <div class="space-y-3">
+          {entry.data.relatedLocations.map((locSlug) => (
+            <GeoMapLink
+              locationSlug={locSlug}
+              label={`Inspect ${locSlug.replace(/-/g, ' ')} on GeoMap`}
+              description={`Examine regional geohazards, fault systems, and tectonic structures connected to ${entry.data.title}.`}
+            />
+          ))}
+        </div>
+      </section>
+    )}
+  </div>
+</BaseLayout>

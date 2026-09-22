@@ -1,0 +1,97 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumb from '../components/ui/Breadcrumb.astro';
+import Button from '../components/ui/Button.astro';
+
+const breadcrumbItems = [
+  { label: 'About', current: true },
+];
+---
+
+<BaseLayout
+  title="About the Platform — Purpose, Pedagogy & Scientific Ethics"
+  description="Learn about our mission to turn Earth & Environmental Sciences into narrative-driven, interactive inquiry without server dependencies."
+>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-12">
+    <Breadcrumb items={breadcrumbItems} />
+
+    <header class="border-b border-[var(--color-border)] pb-8 space-y-3">
+      <span class="text-xs font-mono uppercase tracking-widest text-[var(--color-accent)] font-bold">
+        Mission & Architecture
+      </span>
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[var(--color-text)] tracking-tight">
+        About Earth Sciences Platform
+      </h1>
+      <p class="text-base sm:text-lg text-[var(--color-text-muted)] max-w-3xl leading-relaxed">
+        An interactive, narrative-driven Earth & Environmental Sciences learning platform that turns scientific concepts into experiences learners can explore, understand, apply, and connect to the real Earth around them.
+      </p>
+    </header>
+
+    <!-- Core Philosophy -->
+    <section class="space-y-4">
+      <h2 class="text-2xl font-bold text-[var(--color-text)]">
+        Why This Product Exists
+      </h2>
+      <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">
+        Traditional Earth Science education is fragmented. Students memorize definitions without understanding the physical processes behind them, examine static cross-section diagrams without knowing how plates move in deep time, or study maps without geological context.
+      </p>
+      <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">
+        This platform unifies <strong class="text-[var(--color-text)]">knowledge + visualization + interaction + geography + application + reflection</strong> into a single cohesive experience guided by the continuous inquiry loop:
+      </p>
+
+      <div class="p-4 rounded-xl bg-[var(--color-surface-hover)] border border-[var(--color-border)] font-mono text-xs text-[var(--color-accent)] font-bold text-center">
+        Curious → Question → Explore → Learn → Interact → Understand → Test → Apply → Observe → Reflect → Explore Again
+      </div>
+    </section>
+
+    <!-- Indonesia-First Perspective -->
+    <section class="p-6 rounded-2xl border border-[var(--color-secondary)]/30 bg-[var(--color-secondary-subtle)]/30 space-y-3">
+      <h3 class="text-lg font-bold text-[var(--color-text)]">
+        🇮🇩 Indonesia-First Geographic Lens
+      </h3>
+      <p class="text-xs sm:text-sm text-[var(--color-text-muted)] leading-relaxed">
+        Indonesia is a living geological laboratory. Sitting at the complex collision zone of the Indo-Australian, Sunda (Eurasian), and Pacific plates, the archipelago hosts active volcanic arcs, deep trenches, tropical rainforest microclimates, and world-class accretionary complexes.
+      </p>
+      <p class="text-xs sm:text-sm text-[var(--color-text-muted)] leading-relaxed">
+        Our platform anchors abstract planetary concepts in real Indonesian locations—from Mount Merapi and the Java Trench to Karangsambung Geopark and Bogor’s rain belt—before generalizing outward to global Earth systems.
+      </p>
+    </section>
+
+    <!-- Scientific Sources & Illustrative Model Disclosures (§17.3) -->
+    <section id="illustrative-models" class="space-y-4 pt-4 border-t border-[var(--color-border)]">
+      <h2 class="text-2xl font-bold text-[var(--color-text)]">
+        Scientific Integrity & Model Disclosures
+      </h2>
+      <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">
+        We adhere to strict standards of scientific integrity:
+      </p>
+      <ul class="space-y-2 text-xs sm:text-sm text-[var(--color-text-muted)] list-disc list-inside">
+        <li><strong>Primary Sources:</strong> Content is synthesized from peer-reviewed literature, university geological textbooks, the United States Geological Survey (USGS), Badan Geologi / PVMBG Indonesia, and BMKG.</li>
+        <li><strong>Distinction of Models from Reality:</strong> Interactive simulations (such as the Plate Boundary Kinematics simulator) are explicitly labeled as <span class="px-2 py-0.5 rounded bg-amber-100 text-amber-900 border border-amber-300 dark:bg-amber-950 dark:text-amber-200 font-mono text-xs">Illustrative Models</span>. They illustrate first-order physical principles (e.g. flux melting, slab dehydration) in simplified 2D kinematics and do not represent real-time measured seismic or geodetic telemetry.</li>
+        <li><strong>No False Precision:</strong> We avoid invented decimal points or artificial numerical scores. Learner progress and mastery are represented as qualitative indicators based on deliberate practice and inquiry depth.</li>
+      </ul>
+    </section>
+
+    <!-- Privacy & Static Infrastructure (§1.6 / 10.4) -->
+    <section class="p-6 rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] space-y-3">
+      <h3 class="text-lg font-bold text-[var(--color-text)]">
+        Privacy & Zero Server Infrastructure
+      </h3>
+      <p class="text-xs sm:text-sm text-[var(--color-text-muted)] leading-relaxed">
+        This platform runs entirely as static files hosted on GitHub Pages. There is no required backend server, database, or tracking analytics.
+      </p>
+      <p class="text-xs sm:text-sm text-[var(--color-text-muted)] leading-relaxed">
+        <strong class="text-[var(--color-text)]">All progress, quiz scores, reflections, and fieldwork logs are stored 100% locally in your web browser.</strong> You can export or clear your data at any time from your browser settings.
+      </p>
+    </section>
+
+    <div class="pt-4 flex items-center gap-3">
+      <Button href="/explore" variant="primary" size="md">
+        Start Exploring Earth Sciences
+      </Button>
+      <Button href="/journey" variant="outline" size="md">
+        View Journey Timeline
+      </Button>
+    </div>
+  </div>
+</BaseLayout>

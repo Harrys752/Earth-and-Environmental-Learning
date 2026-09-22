@@ -1,0 +1,206 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   Earth & Environmental Sciences Learning Platform - Design Tokens
+   Scientific interface + digital museum + modern learning platform
+   ========================================================================== */
+
+:root {
+  /* Color Tokens - Light Theme (Earth strata, clean limestone, deep minerals) */
+  --color-background: #f8faf9;
+  --color-surface: #ffffff;
+  --color-surface-hover: #f1f5f3;
+  --color-surface-elevated: #ffffff;
+  --color-border: #e2e8e5;
+  --color-border-subtle: #edf2ef;
+
+  --color-text: #17211d;
+  --color-text-muted: #4e6157;
+  --color-text-dim: #71877c;
+
+  /* Scientific Accents (Magma/Terracotta, Ocean Basalt, Deep Forest/Biosphere) */
+  --color-accent: #c44d2d;         /* Terracotta / Magmatic orange-red */
+  --color-accent-hover: #a83d21;
+  --color-accent-subtle: #faebe7;
+  --color-accent-text: #ffffff;
+
+  --color-secondary: #245b54;      /* Deep Earth / Serpentine green */
+  --color-secondary-subtle: #e9f3f1;
+
+  --color-interactive: #1d6980;    /* Oceanic blue / Hydrosphere */
+  --color-interactive-hover: #144f62;
+  --color-interactive-subtle: #e7f2f6;
+
+  /* Semantic Feedback */
+  --color-success: #1f7a4d;
+  --color-success-subtle: #e6f6ed;
+  --color-warning: #9e6400;
+  --color-warning-subtle: #fef7e6;
+  --color-error: #b82c2c;
+  --color-error-subtle: #fbeeed;
+  --color-info: #175e88;
+  --color-info-subtle: #e7f3fa;
+
+  /* Typography Stacks - Performant Modern System Fonts (Zero external network dependencies) */
+  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+
+  /* Shadows & Depth */
+  --shadow-sm: 0 1px 2px 0 rgba(16, 32, 24, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(16, 32, 24, 0.08), 0 2px 4px -2px rgba(16, 32, 24, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(16, 32, 24, 0.08), 0 4px 6px -4px rgba(16, 32, 24, 0.04);
+  --shadow-border: 0 0 0 1px var(--color-border);
+
+  /* Radii */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+}
+
+/* Dark Theme - Deep Basalt / Asthenosphere / Night Sky */
+[data-theme="dark"] {
+  --color-background: #0d1311;
+  --color-surface: #141c19;
+  --color-surface-hover: #1a2521;
+  --color-surface-elevated: #1f2c27;
+  --color-border: #283730;
+  --color-border-subtle: #1e2a24;
+
+  --color-text: #eaf1ed;
+  --color-text-muted: #9eb2a7;
+  --color-text-dim: #6c8075;
+
+  --color-accent: #e66a47;
+  --color-accent-hover: #fa805e;
+  --color-accent-subtle: #311e18;
+  --color-accent-text: #ffffff;
+
+  --color-secondary: #489b8f;
+  --color-secondary-subtle: #142823;
+
+  --color-interactive: #42a2c2;
+  --color-interactive-hover: #63b9d6;
+  --color-interactive-subtle: #142931;
+
+  --color-success: #3ab077;
+  --color-success-subtle: #132a1e;
+  --color-warning: #e09f3e;
+  --color-warning-subtle: #2d210b;
+  --color-error: #e05353;
+  --color-error-subtle: #2d1313;
+  --color-info: #48a0d4;
+  --color-info-subtle: #142430;
+
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -2px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.6), 0 4px 6px -4px rgba(0, 0, 0, 0.5);
+  --shadow-border: 0 0 0 1px var(--color-border);
+}
+
+/* System Defaults fallback */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-background: #0d1311;
+    --color-surface: #141c19;
+    --color-surface-hover: #1a2521;
+    --color-surface-elevated: #1f2c27;
+    --color-border: #283730;
+    --color-border-subtle: #1e2a24;
+
+    --color-text: #eaf1ed;
+    --color-text-muted: #9eb2a7;
+    --color-text-dim: #6c8075;
+
+    --color-accent: #e66a47;
+    --color-accent-hover: #fa805e;
+    --color-accent-subtle: #311e18;
+    --color-accent-text: #ffffff;
+
+    --color-secondary: #489b8f;
+    --color-secondary-subtle: #142823;
+
+    --color-interactive: #42a2c2;
+    --color-interactive-hover: #63b9d6;
+    --color-interactive-subtle: #142931;
+
+    --color-success: #3ab077;
+    --color-success-subtle: #132a1e;
+    --color-warning: #e09f3e;
+    --color-warning-subtle: #2d210b;
+    --color-error: #e05353;
+    --color-error-subtle: #2d1313;
+    --color-info: #48a0d4;
+    --color-info-subtle: #142430;
+
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -2px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.6), 0 4px 6px -4px rgba(0, 0, 0, 0.5);
+    --shadow-border: 0 0 0 1px var(--color-border);
+  }
+}
+
+/* Base Document Styles */
+html {
+  font-family: var(--font-sans);
+  background-color: var(--color-background);
+  color: var(--color-text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Accessible Focus States */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Utility classes for semantic tokens */
+.bg-canvas { background-color: var(--color-background); }
+.bg-surface { background-color: var(--color-surface); }
+.bg-surface-hover:hover { background-color: var(--color-surface-hover); }
+.bg-surface-elevated { background-color: var(--color-surface-elevated); }
+.border-subtle { border-color: var(--color-border-subtle); }
+.border-default { border-color: var(--color-border); }
+
+.text-main { color: var(--color-text); }
+.text-muted { color: var(--color-text-muted); }
+.text-dim { color: var(--color-text-dim); }
+
+.badge-accent {
+  background-color: var(--color-accent-subtle);
+  color: var(--color-accent);
+  border: 1px solid var(--color-accent);
+}
+
+.badge-secondary {
+  background-color: var(--color-secondary-subtle);
+  color: var(--color-secondary);
+  border: 1px solid var(--color-secondary);
+}
+
+.badge-interactive {
+  background-color: var(--color-interactive-subtle);
+  color: var(--color-interactive);
+  border: 1px solid var(--color-interactive);
+}

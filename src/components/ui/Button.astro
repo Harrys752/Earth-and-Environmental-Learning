@@ -1,0 +1,72 @@
+---
+export interface Props {
+  variant?: 'primary' | 'secondary' | 'accent' | 'outline' | 'ghost';
+  size?: 'sm' | 'md' | 'lg';
+  href?: string;
+  type?: 'button' | 'submit' | 'reset';
+  class?: string;
+  id?: string;
+  disabled?: boolean;
+  'aria-label'?: string;
+  target?: string;
+  rel?: string;
+}
+
+const {
+  variant = 'primary',
+  size = 'md',
+  href,
+  type = 'button',
+  class: className = '',
+  id,
+  disabled = false,
+  'aria-label': ariaLabel,
+  target,
+  rel,
+  ...rest
+} = Astro.props;
+
+const sizeStyles = {
+  sm: 'px-3 py-1.5 text-xs font-medium rounded-md gap-1.5',
+  md: 'px-4 py-2 text-sm font-medium rounded-lg gap-2',
+  lg: 'px-6 py-3 text-base font-semibold rounded-lg gap-2.5',
+};
+
+const variantStyles = {
+  primary: 'bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-hover)] shadow-sm focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]',
+  secondary: 'bg-[var(--color-secondary)] text-white hover:opacity-90 shadow-sm focus-visible:ring-2 focus-visible:ring-[var(--color-secondary)]',
+  accent: 'bg-[var(--color-interactive)] text-white hover:bg-[var(--color-interactive-hover)] shadow-sm focus-visible:ring-2 focus-visible:ring-[var(--color-interactive)]',
+  outline: 'border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text)] hover:bg-[var(--color-surface-hover)] shadow-sm',
+  ghost: 'bg-transparent text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:bg-[var(--color-surface-hover)]',
+};
+
+const baseStyles = 'inline-flex items-center justify-center transition-all duration-150 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed select-none focus:outline-none';
+const combinedClass = `${baseStyles} ${sizeStyles[size]} ${variantStyles[variant]} ${className}`;
+---
+
+{
+  href ? (
+    <a
+      href={href}
+      class={combinedClass}
+      id={id}
+      aria-label={ariaLabel}
+      target={target}
+      rel={rel}
+      {...rest}
+    >
+      <slot />
+    </a>
+  ) : (
+    <button
+      type={type}
+      class={combinedClass}
+      id={id}
+      disabled={disabled}
+      aria-label={ariaLabel}
+      {...rest}
+    >
+      <slot />
+    </button>
+  )
+}

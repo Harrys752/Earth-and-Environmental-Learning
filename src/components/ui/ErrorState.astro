@@ -1,0 +1,43 @@
+---
+import Button from './Button.astro';
+
+export interface Props {
+  title?: string;
+  message: string;
+  actionText?: string;
+  actionHref?: string;
+  onRetry?: string; // function or script trigger
+  class?: string;
+}
+
+const {
+  title = 'Something unexpected occurred',
+  message,
+  actionText = 'Return to Explore',
+  actionHref = '/explore',
+  class: className = '',
+} = Astro.props;
+---
+
+<div class={`rounded-xl border border-[var(--color-error)]/30 bg-[var(--color-error-subtle)]/40 p-6 sm:p-8 text-center max-w-lg mx-auto ${className}`} role="alert">
+  <div class="w-12 h-12 rounded-full bg-[var(--color-error-subtle)] text-[var(--color-error)] mx-auto flex items-center justify-center mb-3">
+    <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10"/>
+      <line x1="12" y1="8" x2="12" y2="12"/>
+      <line x1="12" y1="16" x2="12.01" y2="16"/>
+    </svg>
+  </div>
+
+  <h3 class="text-base font-semibold text-[var(--color-text)] mb-1">
+    {title}
+  </h3>
+  <p class="text-sm text-[var(--color-text-muted)] mb-5">
+    {message}
+  </p>
+
+  {actionHref && (
+    <Button href={actionHref} variant="outline" size="sm">
+      {actionText}
+    </Button>
+  )}
+</div>

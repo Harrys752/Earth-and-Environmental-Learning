@@ -1,0 +1,47 @@
+---
+export interface Props {
+  variant?:
+    | 'default'
+    | 'accent'
+    | 'secondary'
+    | 'interactive'
+    | 'beginner'
+    | 'intermediate'
+    | 'advanced'
+    | 'time'
+    | 'success'
+    | 'warning'
+    | 'info'
+    | 'outline';
+  size?: 'sm' | 'md';
+  class?: string;
+}
+
+const { variant = 'default', size = 'sm', class: className = '' } = Astro.props;
+
+const sizeStyles = {
+  sm: 'px-2 py-0.5 text-xs font-medium rounded-full',
+  md: 'px-2.5 py-1 text-xs font-semibold rounded-full',
+};
+
+const variantStyles = {
+  default: 'bg-[var(--color-surface-hover)] text-[var(--color-text)] border border-[var(--color-border)]',
+  accent: 'bg-[var(--color-accent-subtle)] text-[var(--color-accent)] border border-[var(--color-accent)]/30',
+  secondary: 'bg-[var(--color-secondary-subtle)] text-[var(--color-secondary)] border border-[var(--color-secondary)]/30',
+  interactive: 'bg-[var(--color-interactive-subtle)] text-[var(--color-interactive)] border border-[var(--color-interactive)]/30',
+  beginner: 'bg-emerald-50 text-emerald-700 border border-emerald-300 dark:bg-emerald-950/60 dark:text-emerald-300 dark:border-emerald-800',
+  intermediate: 'bg-amber-50 text-amber-800 border border-amber-300 dark:bg-amber-950/60 dark:text-amber-300 dark:border-amber-800',
+  advanced: 'bg-rose-50 text-rose-800 border border-rose-300 dark:bg-rose-950/60 dark:text-rose-300 dark:border-rose-800',
+  time: 'bg-stone-100 text-stone-700 border border-stone-300 dark:bg-stone-900 dark:text-stone-300 dark:border-stone-700',
+  success: 'bg-[var(--color-success-subtle)] text-[var(--color-success)] border border-[var(--color-success)]/30',
+  warning: 'bg-[var(--color-warning-subtle)] text-[var(--color-warning)] border border-[var(--color-warning)]/30',
+  info: 'bg-[var(--color-info-subtle)] text-[var(--color-info)] border border-[var(--color-info)]/30',
+  outline: 'border border-[var(--color-border)] text-[var(--color-text-muted)] bg-transparent',
+};
+
+const combinedClass = `inline-flex items-center gap-1 select-none ${sizeStyles[size]} ${variantStyles[variant]} ${className}`;
+---
+
+<span class={combinedClass}>
+  <slot />
+</span>

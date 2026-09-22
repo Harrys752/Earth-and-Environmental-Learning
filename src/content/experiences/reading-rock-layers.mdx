@@ -1,0 +1,166 @@
+---
+id: "reading-rock-layers"
+title: "Reading Rock Layers"
+tagline: "Stratigraphy, Deep Time, and Deciphering Earth's Written History"
+description: "Discover how sedimentary strata, Steno's laws of relative dating, and ancient subduction complexes like Karangsambung in Java allow geologists to read millions of years of planetary history."
+topic: "geology"
+difficulty: "beginner"
+estimatedTime: "10min"
+learningObjectives:
+  - "Apply Nicolaus Steno's stratigraphic laws: Superposition, Original Horizontality, and Cross-Cutting Relationships."
+  - "Explain what an unconformity is and why it represents missing time in the geological record."
+  - "Connect sedimentary rock textures (sandstone, shale, limestone) to ancient depositional environments."
+  - "Investigate Karangsambung Geopark as an exposed ancient subduction complex in Central Java."
+prerequisites: []
+interactiveElements:
+  - id: "rock-diagram"
+    type: "diagram"
+    title: "Stratigraphic Column & Cross-Cutting Relationships"
+    pedagogicalPurpose: "Interactive diagram for identifying relative age ordering of layered rocks and igneous dikes"
+    isIllustrativeModel: true
+    accessibleFallbackText: "A stratigraphic diagram showing horizontal sedimentary beds cut by a vertical basaltic dike and an angular unconformity."
+quiz:
+  quizId: "quiz-reading-rock-layers"
+  title: "Reading Rock Layers & Geological Stratigraphy"
+  questionCount: 3
+realWorldConnections:
+  - title: "Karangsambung Geopark: Ancient Subduction on Land"
+    locationName: "Kebumen, Central Java, Indonesia"
+    isIndonesiaFirst: true
+    coordinates:
+      lat: -7.5614
+      lng: 109.6814
+    description: "Karangsambung is an exposed Cretaceous-Paleogene tectonic mélange (accretionary complex) where ancient oceanic crust, pillow basalts, red chert, and high-pressure metamorphic rocks formed 100 km deep have been uplifted onto land."
+    phenomenon: "Ancient seafloor rocks dating back over 120 million years are exposed side-by-side with terrestrial sediments, preserving direct physical proof of ancient subduction preceding modern Java."
+    globalGeneralization: "Accretionary complexes occur at subduction zones globally, such as the Franciscan Complex of California and the Shimanto Belt of Japan."
+    geoMapSlug: "karangsambung-geopark"
+geoMapConnections:
+  - locationSlug: "karangsambung-geopark"
+    label: "Explore Karangsambung on GeoMap"
+    coordinates:
+      lat: -7.5614
+      lng: 109.6814
+    description: "Inspect geological outcrops, mélange zones, and river cuts preserving prehistoric subduction evidence."
+reflection:
+  - id: "refl-strata-observation"
+    prompt: "If you observe tilted or folded rock layers along a highway roadcut or coastal cliff, what planetary forces must have operated on those rocks after they were originally deposited?"
+    placeholder: "Consider tectonic compression, faulting, and horizontal deposition..."
+    category: "observation"
+nextExperiences:
+  - "why-volcanoes-form"
+  - "how-rain-forms"
+scientific:
+  source:
+    - "Tarbuck, E. J., Lutgens, F. K., & Tasa, D. (2017). Earth: An Introduction to Physical Geology. Pearson."
+    - "Asikin, S. (1974). The Geologic Structure of Karangsambung Area, Central Java. ITB Geological Papers."
+    - "Boggs, S. (2011). Principles of Sedimentology and Stratigraphy. Pearson."
+  sourceType: "textbook"
+  lastReviewed: "2026-09-08"
+  scientificLevel: "beginner"
+  confidence: "established"
+  references:
+    - title: "Earth: An Introduction to Physical Geology"
+      publisher: "Pearson"
+      year: 2017
+    - title: "Geological Evolution of the Karangsambung Complex, Central Java"
+      publisher: "Badan Geologi Indonesia"
+      year: 2020
+review:
+  reviewStatus: "published"
+  sourceList:
+    - "Pearson"
+    - "ITB Geological Papers"
+    - "Badan Geologi"
+  lastReviewed: "2026-09-08"
+  contentVersion: "1.0.0"
+featured: false
+---
+
+import Quiz from '../../components/quiz/Quiz';
+import ReflectionBox from '../../components/learning/ReflectionBox';
+import RealWorldExample from '../../components/learning/RealWorldExample.astro';
+import ObservationChallenge from '../../components/learning/ObservationChallenge.astro';
+import { readingRockLayersQuiz } from '../../data/quizzes/reading-rock-layers';
+
+## Beat 1: The Pages of Earth's History Book
+
+When you drive through a mountain pass or walk along a rocky coastline, you often see tall cliffs striped with parallel bands of colored rock: red sandstone, gray shale, and white limestone stacked one on top of another.
+
+To untrained eyes, these are just colorful stones. To an Earth scientist, **each layer is a preserved chapter of planetary history**.
+
+A layer of sandstone tells of an ancient desert of sand dunes or a tropical beach. A layer of black shale tells of an ancient quiet lake or oxygen-depleted ocean basin. A layer of limestone filled with shell fragments tells of a warm, sunlit coral reef.
+
+---
+
+## Beat 2: Nicolaus Steno and the Rules of Relative Dating
+
+In the 17th century, Danish polymath **Nicolaus Steno** realized that sedimentary rocks follow fundamental physical laws governing how particles settle under gravity:
+
+1. **Law of Superposition:** In an undisturbed sequence of sedimentary rocks, the oldest layer is at the bottom, and each overlying layer is progressively younger.
+2. **Principle of Original Horizontality:** Sedimentary layers settle out of water or air as horizontal sheets. If you see rock layers tilted at a 45-degree angle or bent into sharp folds, **tectonic forces buckled them after they formed**.
+3. **Principle of Cross-Cutting Relationships:** If an igneous intrusion (such as a volcanic magma dike) or a fault cuts across rock layers, **the intrusion or fault must be younger than the rocks it cuts through**.
+
+Using these three simple yet powerful rules, geologists can determine the chronological sequence of geological events without needing radioactive dating equipment.
+
+---
+
+## Beat 3: Unconformities — Missing Pages in Time
+
+What happens when rock layers are uplifted above sea level and exposed to rain, rivers, and wind? They erode away.
+
+When the land later sinks back beneath the ocean and new layers are deposited on top of the eroded surface, a gap in the geological record is preserved. This boundary is called an **unconformity**.
+
+An unconformity represents a missing interval of time—sometimes tens or hundreds of millions of years of Earth history that was stripped away by erosion before new sediments buried the ancient landscape.
+
+---
+
+## Beat 4: Indonesian Real-World Anchor — Karangsambung Geopark
+
+<RealWorldExample
+  title="Karangsambung: A Tectonic Mélange Preserved on Land"
+  locationName="Karangsambung, Kebumen, Central Java"
+  isIndonesiaFirst={true}
+  coordinates={{ lat: -7.5614, lng: 109.6814 }}
+  phenomenon="In the Luk Ulo riverbed at Karangsambung, geologists can walk directly across oceanic pillow basalts, blood-red radiolarian chert formed on abyssal ocean floors 4,000 meters deep, and high-pressure metamorphic blueschist and eclogite formed under extreme pressures 50–100 km inside an ancient Cretaceous subduction zone."
+  globalGeneralization="Karangsambung is what geologists call a tectonic mélange—a chaotic breccia of oceanic and continental rocks scraped off during subduction. It proves that subduction zones do not just destroy plates; they also scrape off and preserve ancient rock formations that later get uplifted into mountain ranges."
+  geoMapSlug="karangsambung-geopark"
+/>
+
+---
+
+## Beat 5: Field Observation Challenge
+
+<ObservationChallenge
+  title="Identifying Sedimentary Bedding in Roadcuts or River Valleys"
+  targetPhenomenon="Recognizing sedimentary bedding planes and grain sorting in natural or cut stone."
+  observationSteps={[
+    "Find an exposed rock face, roadcut, quarry wall, or riverbank cliff.",
+    "Look for parallel horizontal lines or color banding (bedding planes).",
+    "Inspect the grain size: does the rock feel gritty like sand (sandstone), smooth and easily scratched with a penny (shale/mudstone), or does it fizz when exposed to mild household vinegar (limestone)?",
+    "Check the orientation: are the layers perfectly flat, or have tectonic pressures tilted them?"
+  ]}
+  whatToLookFor="Look for fine laminations within a single layer (cross-bedding), which preserves the ancient direction of the water or wind current that deposited the sand grains millions of years ago."
+  experienceSlug="reading-rock-layers"
+/>
+
+---
+
+## Beat 6: Conceptual Verification & Assessment
+
+<Quiz
+  client:visible
+  quiz={readingRockLayersQuiz}
+  experienceSlug="reading-rock-layers"
+  experienceTitle="Reading Rock Layers"
+/>
+
+---
+
+## Beat 7: Scientific Reflection
+
+<ReflectionBox
+  client:idle
+  experienceSlug="reading-rock-layers"
+  prompt="If you observe tilted or folded rock layers along a highway roadcut or coastal cliff, what planetary forces must have operated on those rocks after they were originally deposited?"
+  category="observation"
+/>

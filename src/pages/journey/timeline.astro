@@ -1,0 +1,32 @@
+---
+import JourneyLayout from '../../layouts/JourneyLayout.astro';
+import JourneyTimeline from '../../components/journey/JourneyTimeline';
+import JourneyEntryForm from '../../components/journey/JourneyEntryForm';
+---
+
+<JourneyLayout
+  title="Journey Timeline & Activity Logs"
+  description="Chronological record of your completed inquiries, simulation explorations, field observations, and reflections."
+  activeTab="timeline"
+>
+  <div class="space-y-10">
+    <!-- Manual Entry Creator Form Island -->
+    <section>
+      <JourneyEntryForm client:idle />
+    </section>
+
+    <!-- Chronological Timeline Grouped by Month -->
+    <section class="space-y-4">
+      <div class="flex items-center justify-between border-b border-[var(--color-border)] pb-3">
+        <h2 class="text-lg font-bold text-[var(--color-text)]">
+          Activity Stream
+        </h2>
+        <span class="text-xs text-[var(--color-text-dim)] font-mono">
+          Learned • Applied • Built • Observed
+        </span>
+      </div>
+
+      <JourneyTimeline client:visible />
+    </section>
+  </div>
+</JourneyLayout>

@@ -1,0 +1,50 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/ui/Breadcrumb.astro';
+import LearningCard from '../../components/learning/LearningCard.astro';
+
+const experiences = await getCollection('experiences');
+
+const breadcrumbItems = [
+  { label: 'Explore', href: '/explore' },
+  { label: 'Experiences', current: true },
+];
+---
+
+<BaseLayout
+  title="All Learning Experiences"
+  description="Browse all interactive Earth & Environmental Sciences learning experiences with difficulty tiers and time estimates."
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-8">
+    <Breadcrumb items={breadcrumbItems} />
+
+    <header class="border-b border-[var(--color-border)] pb-6 space-y-2">
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-[var(--color-text)] tracking-tight">
+        All Learning Experiences
+      </h1>
+      <p class="text-sm sm:text-base text-[var(--color-text-muted)] max-w-2xl leading-relaxed">
+        Choose an inquiry based on available time, difficulty tier, or real-world phenomenon. Every experience connects theory to reality.
+      </p>
+    </header>
+
+    <!-- Experience Cards Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {experiences.map((exp) => (
+        <LearningCard
+          id={exp.data.id || exp.id}
+          slug={exp.data.id || exp.id}
+          title={exp.data.title}
+          tagline={exp.data.tagline}
+          description={exp.data.description}
+          topic={exp.data.topic}
+          difficulty={exp.data.difficulty}
+          estimatedTime={exp.data.estimatedTime}
+          isIndonesiaFirst={exp.data.realWorldConnections?.[0]?.isIndonesiaFirst}
+          hasInteractive={exp.data.interactiveElements?.length > 0}
+          hasGeoMap={exp.data.geoMapConnections?.length > 0}
+        />
+      ))}
+    </div>
+  </div>
+</BaseLayout>

@@ -1,0 +1,33 @@
+---
+import { getCollection, render } from 'astro:content';
+import LearningLayout from '../../layouts/LearningLayout.astro';
+
+export async function getStaticPaths() {
+  const experiences = await getCollection('experiences');
+  return experiences.map((entry) => ({
+    params: { slug: entry.data.id || entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+
+const topics = await getCollection('topics');
+const topic = topics.find((t) => (t.data.id || t.id) === entry.data.topic);
+const topicTitle = topic?.data.title || entry.data.topic;
+---
+
+<LearningLayout
+  title={entry.data.title}
+  tagline={entry.data.tagline}
+  description={entry.data.description}
+  experienceSlug={entry.data.id || entry.id}
+  topicTitle={topicTitle}
+  topicSlug={entry.data.topic}
+  difficulty={entry.data.difficulty}
+  estimatedTime={entry.data.estimatedTime}
+  scientific={entry.data.scientific}
+>
+  <Content />
+</LearningLayout>

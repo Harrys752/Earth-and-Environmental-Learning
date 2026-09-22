@@ -1,0 +1,138 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import ExperienceHeader from '../components/learning/ExperienceHeader.astro';
+import ProgressIndicator from '../components/journey/ProgressIndicator';
+import { getRelatedContent } from '../lib/contentGraph';
+import type { ScientificMetadata } from '../types/content';
+
+export interface Props {
+  title: string;
+  tagline?: string;
+  description: string;
+  experienceSlug: string;
+  topicTitle: string;
+  topicSlug: string;
+  difficulty: 'beginner' | 'intermediate' | 'advanced';
+  estimatedTime: '5min' | '10min' | '20min' | '30plus';
+  scientific?: ScientificMetadata;
+}
+
+const {
+  title,
+  tagline,
+  description,
+  experienceSlug,
+  topicTitle,
+  topicSlug,
+  difficulty,
+  estimatedTime,
+  scientific,
+} = Astro.props;
+
+const { relatedExperiences, relatedConcepts, relatedLocations } = getRelatedContent(experienceSlug);
+---
+
+<BaseLayout title={title} description={description}>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+    <!-- Experience Header with Meta & Scientific Source Badges -->
+    <ExperienceHeader
+      title={title}
+      tagline={tagline}
+      topicTitle={topicTitle}
+      topicSlug={topicSlug}
+      difficulty={difficulty}
+      estimatedTime={estimatedTime}
+      scientific={scientific}
+    />
+
+    <!-- Multi-Dimensional Progress Indicator Island -->
+    <div class="mb-10">
+      <ProgressIndicator client:idle experienceSlug={experienceSlug} />
+    </div>
+
+    <!-- Core Narrative & Pedagogical Content -->
+    <article class="prose prose-stone dark:prose-invert max-w-none space-y-8">
+      <slot />
+    </article>
+
+    <!-- Knowledge Network: Further Exploration (§4.5) -->
+    <footer class="mt-16 pt-12 border-t-2 border-[var(--color-border)] space-y-8">
+      <div>
+        <span class="text-xs font-mono uppercase tracking-widest text-[var(--color-accent)] font-bold block mb-1">
+          Knowledge Network
+        </span>
+        <h3 class="text-2xl font-extrabold text-[var(--color-text)] tracking-tight">
+          Continue Your Earth Exploration
+        </h3>
+        <p class="text-xs sm:text-sm text-[var(--color-text-muted)] mt-1">
+          Science is an interconnected system of processes, not a linear textbook chapter. Where will you branch next?
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {/* Connected Concepts */}
+        {relatedConcepts.length > 0 && (
+          <div class="rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-4 space-y-3">
+            <h4 class="text-xs font-mono uppercase tracking-wider text-[var(--color-text)] font-semibold flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-[var(--color-accent)]" />
+              <span>Core Concepts</span>
+            </h4>
+            <div class="space-y-2">
+              {relatedConcepts.map((c) => (
+                <a
+                  href={c.href}
+                  class="block p-2.5 rounded-lg bg-[var(--color-surface-hover)] hover:border-[var(--color-accent)] border border-transparent transition-all"
+                >
+                  <div class="text-xs font-bold text-[var(--color-text)]">{c.title}</div>
+                  <div class="text-[11px] text-[var(--color-text-muted)] line-clamp-2 mt-0.5">{c.summary}</div>
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Connected Experiences */}
+        {relatedExperiences.length > 0 && (
+          <div class="rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-4 space-y-3">
+            <h4 class="text-xs font-mono uppercase tracking-wider text-[var(--color-text)] font-semibold flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-[var(--color-secondary)]" />
+              <span>Related Experiences</span>
+            </h4>
+            <div class="space-y-2">
+              {relatedExperiences.map((e) => (
+                <a
+                  href={e.href}
+                  class="block p-2.5 rounded-lg bg-[var(--color-surface-hover)] hover:border-[var(--color-secondary)] border border-transparent transition-all"
+                >
+                  <div class="text-xs font-bold text-[var(--color-text)]">{e.title}</div>
+                  <div class="text-[11px] text-[var(--color-text-muted)] line-clamp-2 mt-0.5">{e.summary}</div>
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Connected Geological Locations */}
+        {relatedLocations.length > 0 && (
+          <div class="rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-4 space-y-3">
+            <h4 class="text-xs font-mono uppercase tracking-wider text-[var(--color-interactive)] font-semibold flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-[var(--color-interactive)]" />
+              <span>Field Locations</span>
+            </h4>
+            <div class="space-y-2">
+              {relatedLocations.map((l) => (
+                <a
+                  href={l.href}
+                  class="block p-2.5 rounded-lg bg-[var(--color-surface-hover)] hover:border-[var(--color-interactive)] border border-transparent transition-all"
+                >
+                  <div class="text-xs font-bold text-[var(--color-text)]">{l.title}</div>
+                  <div class="text-[11px] text-[var(--color-text-muted)] line-clamp-2 mt-0.5">{l.summary}</div>
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    </footer>
+  </div>
+</BaseLayout>

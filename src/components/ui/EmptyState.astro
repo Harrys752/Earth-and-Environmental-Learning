@@ -1,0 +1,64 @@
+---
+import Button from './Button.astro';
+
+export interface Props {
+  title: string;
+  description: string;
+  actionText?: string;
+  actionHref?: string;
+  icon?: string;
+  class?: string;
+}
+
+const {
+  title,
+  description,
+  actionText,
+  actionHref,
+  icon = 'compass',
+  class: className = '',
+} = Astro.props;
+---
+
+<div class={`rounded-2xl border border-dashed border-[var(--color-border)] bg-[var(--color-surface)]/60 p-8 sm:p-12 text-center max-w-lg mx-auto ${className}`}>
+  <div class="w-14 h-14 rounded-2xl bg-[var(--color-accent-subtle)] text-[var(--color-accent)] mx-auto flex items-center justify-center mb-4">
+    {icon === 'compass' && (
+      <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"/>
+        <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
+      </svg>
+    )}
+    {icon === 'search' && (
+      <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"/>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      </svg>
+    )}
+    {icon === 'book' && (
+      <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+      </svg>
+    )}
+    {icon === 'map' && (
+      <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/>
+        <line x1="9" y1="3" x2="9" y2="18"/>
+        <line x1="15" y1="6" x2="15" y2="21"/>
+      </svg>
+    )}
+  </div>
+
+  <h3 class="text-lg font-semibold text-[var(--color-text)] mb-2">
+    {title}
+  </h3>
+  <p class="text-sm text-[var(--color-text-muted)] mb-6 leading-relaxed">
+    {description}
+  </p>
+
+  {actionText && actionHref && (
+    <Button href={actionHref} variant="primary" size="md">
+      {actionText}
+    </Button>
+  )}
+</div>

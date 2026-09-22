@@ -1,0 +1,74 @@
+---
+export interface Props {
+  slug: string;
+  title: string;
+  tagline?: string;
+  description: string;
+  category: string;
+  experienceCount?: number;
+  class?: string;
+}
+
+const {
+  slug,
+  title,
+  tagline,
+  description,
+  category,
+  experienceCount = 0,
+  class: className = '',
+} = Astro.props;
+
+const categoryIcons: Record<string, string> = {
+  'plate-tectonics': 'M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5',
+  atmosphere: 'M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z',
+  geology: 'M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z',
+  'natural-hazards': 'M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0zM12 9v4m0 4h.01',
+  rocks: 'M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z',
+  hydrology: 'M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z',
+};
+
+const iconPath = categoryIcons[category] || categoryIcons['geology'];
+---
+
+<article
+  class={`group relative rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-6 transition-all duration-200 hover:border-[var(--color-secondary)] hover:shadow-lg flex flex-col justify-between ${className}`}
+>
+  <div>
+    <div class="flex items-center justify-between mb-4">
+      <div class="w-10 h-10 rounded-xl bg-[var(--color-secondary-subtle)] text-[var(--color-secondary)] flex items-center justify-center">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d={iconPath} />
+        </svg>
+      </div>
+
+      <span class="text-xs font-mono font-medium px-2.5 py-0.5 rounded-full bg-[var(--color-surface-hover)] border border-[var(--color-border)] text-[var(--color-text-muted)]">
+        {experienceCount} {experienceCount === 1 ? 'experience' : 'experiences'}
+      </span>
+    </div>
+
+    <h3 class="text-lg font-bold text-[var(--color-text)] group-hover:text-[var(--color-secondary)] transition-colors leading-snug mb-2">
+      <a href={`/explore/topics/${slug}`} class="focus:outline-none focus-visible:underline">
+        <span class="absolute inset-0" aria-hidden="true" />
+        {title}
+      </a>
+    </h3>
+
+    {tagline && (
+      <p class="text-xs font-medium text-[var(--color-secondary)] mb-2">
+        {tagline}
+      </p>
+    )}
+
+    <p class="text-xs sm:text-sm text-[var(--color-text-muted)] line-clamp-3 leading-relaxed mb-4">
+      {description}
+    </p>
+  </div>
+
+  <div class="pt-4 border-t border-[var(--color-border)] flex items-center justify-between text-xs text-[var(--color-secondary)] font-semibold">
+    <span>Explore Domain</span>
+    <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <polyline points="9 18 15 12 9 6" />
+    </svg>
+  </div>
+</article>

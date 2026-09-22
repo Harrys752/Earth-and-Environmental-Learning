@@ -1,0 +1,182 @@
+---
+id: "how-rain-forms"
+title: "How Does Rain Form?"
+tagline: "Atmospheric Moisture, Adiabatic Cooling, and Tropical Cloud Physics"
+description: "Follow the journey of water molecules as equatorial sunshine evaporates ocean water, atmospheric updrafts induce adiabatic cooling, and microscopic droplets coalesce into torrential tropical rainfall."
+topic: "atmosphere"
+difficulty: "beginner"
+estimatedTime: "10min"
+learningObjectives:
+  - "Understand the phase change of water from vapor to liquid droplets via condensation."
+  - "Explain adiabatic expansion cooling as air parcels ascend into lower atmospheric pressures."
+  - "Describe the essential role of cloud condensation nuclei (CCN) in droplet formation."
+  - "Contrast collision-coalescence (warm clouds) with the Bergeron-Findeisen ice process (cold clouds)."
+  - "Analyze orographic rainfall using the real-world case study of Bogor, Indonesia."
+prerequisites: []
+interactiveElements:
+  - id: "rain-simulation"
+    type: "simulation"
+    title: "Atmospheric Moisture & Lapse Rate Model"
+    pedagogicalPurpose: "Demonstrates adiabatic cooling curves and cloud base altitude (Lifting Condensation Level)"
+    isIllustrativeModel: true
+    accessibleFallbackText: "A 2D thermodynamic model displaying air parcel temperature decline with height."
+quiz:
+  quizId: "quiz-how-rain-forms"
+  title: "How Does Rain Form? Atmospheric Physics Quiz"
+  questionCount: 4
+realWorldConnections:
+  - title: "The Bogor Orographic Rain Belt"
+    locationName: "Bogor, West Java, Indonesia"
+    isIndonesiaFirst: true
+    coordinates:
+      lat: -6.5971
+      lng: 106.806
+    description: "Bogor experiences over 300 thunderstorm days per year, with average annual precipitation exceeding 4,000 millimeters, earning its title as Kota Hujan (City of Rain)."
+    phenomenon: "Warm maritime air moving south from the Java Sea meets the volcanic slopes of Mount Salak and Mount Gede-Pangrango, forcing rapid orographic ascent and intense afternoon cumulonimbus downpours."
+    globalGeneralization: "Orographic precipitation occurs wherever moist prevailing winds strike mountain barriers, from the windward slopes of the Western Ghats in India to the Olympic Mountains in Washington State."
+    geoMapSlug: "bogor-rain-belt"
+geoMapConnections:
+  - locationSlug: "bogor-rain-belt"
+    label: "Inspect Bogor Topography on GeoMap"
+    coordinates:
+      lat: -6.5971
+      lng: 106.806
+    description: "Explore the topographical elevation contours of Mount Salak and surrounding volcanic ranges funneling regional moisture."
+reflection:
+  - id: "refl-rain-observation"
+    prompt: "When you notice clouds darkening and wind picking up before a rain shower, what atmospheric energy changes are happening right above you?"
+    placeholder: "Reflect on temperature, downdrafts, and latent heat release..."
+    category: "observation"
+nextExperiences:
+  - "why-volcanoes-form"
+  - "reading-rock-layers"
+scientific:
+  source:
+    - "Rogers, R. R., & Yau, M. K. (1989). A Short Course in Cloud Physics. Pergamon Press."
+    - "BMKG (Badan Meteorologi, Klimatologi, dan Geofisika Indonesia) Climatological Atlas."
+    - "Wallace, J. M., & Hobbs, P. V. (2006). Atmospheric Science: An Introductory Survey. Academic Press."
+  sourceType: "peer-reviewed"
+  lastReviewed: "2026-09-05"
+  scientificLevel: "beginner"
+  confidence: "established"
+  references:
+    - title: "A Short Course in Cloud Physics"
+      publisher: "Pergamon Press"
+      year: 1989
+    - title: "Indonesian Tropical Meteorology and Monsoon Dynamics"
+      publisher: "BMKG Indonesia"
+      year: 2023
+review:
+  reviewStatus: "published"
+  sourceList:
+    - "BMKG Indonesia"
+    - "Academic Press"
+    - "WMO"
+  lastReviewed: "2026-09-05"
+  contentVersion: "1.0.0"
+featured: false
+---
+
+import Quiz from '../../components/quiz/Quiz';
+import ReflectionBox from '../../components/learning/ReflectionBox';
+import RealWorldExample from '../../components/learning/RealWorldExample.astro';
+import ObservationChallenge from '../../components/learning/ObservationChallenge.astro';
+import { howRainFormsQuiz } from '../../data/quizzes/how-rain-forms';
+
+## Beat 1: The Invisible Ocean Overhead
+
+Look up at a clear blue sky on a hot tropical afternoon. Even when no clouds are visible, the atmosphere is holding billions of liters of water in the form of transparent, gaseous water vapor.
+
+A single cubic kilometer of humid tropical air can carry over **20,000 tons of water vapor**. How does this invisible, weightless gas transform into millions of heavy liquid droplets that fall to the ground as rain?
+
+---
+
+## Beat 2: Adiabatic Cooling & The Lifting Condensation Level
+
+To turn vapor into liquid droplets, the air must be cooled. In nature, air is cooled most efficiently not by blowing cold wind into it, but by **lifting it upward**.
+
+### Why Rising Air Cools: The Physics of Expansion
+
+1. **Pressure Drop:** Atmospheric pressure decreases with altitude because less air mass sits overhead.
+2. **Expansion:** As a warm air parcel rises, it expands into the lower pressure environment.
+3. **Mechanical Work:** Expanding gas pushes against surrounding air molecules, doing work.
+4. **Temperature Decline:** This work expends internal thermal energy, causing the temperature of the air parcel to drop—a thermodynamic process known as **adiabatic cooling** (~9.8°C for every 1,000 meters of elevation gain for dry air).
+
+When the rising air cools to its **dew point temperature**, its relative humidity reaches 100%. This specific altitude in the sky is called the **Lifting Condensation Level (LCL)**, visible from the ground as the razor-sharp, flat base of cumulus clouds.
+
+---
+
+## Beat 3: The Secret Ingredient — Cloud Condensation Nuclei (CCN)
+
+Water vapor cannot easily condense in perfectly clean air. To form a droplet, water molecules need a microscopic solid or liquid surface to latch onto. These particles are called **Cloud Condensation Nuclei (CCN)**.
+
+Common natural CCN include:
+- **Sea salt spray:** Evaporated ocean spray creates sodium chloride crystals floating in marine air masses.
+- **Volcanic ash & sulfates:** Indonesian volcanic degassing produces abundant microscopic sulfur aerosols.
+- **Organic aerosols & pollen:** Released by equatorial rainforest canopies.
+
+Around these nuclei, water molecules condense, forming tiny cloud droplets approximately **10 to 20 micrometers** across—smaller than the thickness of a strand of spider silk.
+
+---
+
+## Beat 4: How Tiny Cloud Droplets Become Raindrops
+
+A typical cloud droplet is so light that even a gentle updraft keeps it suspended in the air. For rain to fall, that droplet must grow **nearly one million times in volume** to reach a diameter of 1 to 3 millimeters, where gravity overcomes the cloud's updrafts.
+
+In tropical clouds (where temperatures remain above freezing), droplets grow through the **Collision-Coalescence Process**:
+- Slightly larger droplets fall faster through the cloud than tiny droplets.
+- As the larger droplet falls, it sweeps through the smaller droplets, colliding and merging (coalescing) with them like a runaway snowball.
+- Once the droplet reaches a critical mass, its downward terminal velocity exceeds the rising cloud updraft, and it falls out of the cloud base as rain.
+
+---
+
+## Beat 5: Indonesian Real-World Anchor — Kota Hujan (Bogor)
+
+<RealWorldExample
+  title="The Bogor Orographic Rainfall Engine"
+  locationName="Bogor, West Java, Indonesia"
+  isIndonesiaFirst={true}
+  coordinates={{ lat: -6.5971, lng: 106.806 }}
+  phenomenon="Bogor experiences more than 300 thunderstorm days per year, with average annual precipitation exceeding 4,000 millimeters. This extreme rainfall is driven by the interaction between warm humid air from the Java Sea and the sudden topographical barrier formed by Mount Salak (2,211 m) and Mount Gede-Pangrango (3,008 m)."
+  globalGeneralization="This orographic lifting mechanism explains rainfall patterns across mountain ranges worldwide, including the windward slopes of the Hawaiian Islands, the Western Ghats of India, and the southern Andes of Chile."
+  geoMapSlug="bogor-rain-belt"
+/>
+
+---
+
+## Beat 6: Sky Observation Challenge
+
+<ObservationChallenge
+  title="Tracking Cloud Base & Inflow Winds Before a Storm"
+  targetPhenomenon="Identifying the Lifting Condensation Level and convective inflow before an afternoon rain shower."
+  observationSteps={[
+    "Look toward developing cumulus clouds during midday or early afternoon.",
+    "Observe the cloud base: note how all cumulus clouds in the area share an almost identical horizontal bottom elevation (the LCL).",
+    "Watch the cloud tops: observe whether billowy cauliflower-like towers (cumulus congestus) are shooting upward into cumulonimbus clouds.",
+    "Feel the ground-level wind: notice how the breeze initially blows toward the cloud base (inflow feeding the updraft), before suddenly shifting to a cool downdraft right as rain begins."
+  ]}
+  whatToLookFor="A sudden, cool gust of wind blowing away from the cloud indicates that falling rain is dragging chilled air down from aloft (the gust front), signaling that precipitation is imminent."
+  experienceSlug="how-rain-forms"
+/>
+
+---
+
+## Beat 7: Conceptual Verification & Assessment
+
+<Quiz
+  client:visible
+  quiz={howRainFormsQuiz}
+  experienceSlug="how-rain-forms"
+  experienceTitle="How Does Rain Form?"
+/>
+
+---
+
+## Beat 8: Reflection
+
+<ReflectionBox
+  client:idle
+  experienceSlug="how-rain-forms"
+  prompt="When you notice clouds darkening and wind picking up before a rain shower, what atmospheric energy changes are happening right above you?"
+  category="observation"
+/>

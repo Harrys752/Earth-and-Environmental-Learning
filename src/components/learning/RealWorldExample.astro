@@ -1,0 +1,96 @@
+---
+import GeoMapLink from '../geomap/GeoMapLink.astro';
+
+export interface Props {
+  title: string;
+  locationName: string;
+  isIndonesiaFirst?: boolean;
+  coordinates?: { lat: number; lng: number };
+  phenomenon: string;
+  globalGeneralization: string;
+  geoMapSlug?: string;
+  class?: string;
+}
+
+const {
+  title,
+  locationName,
+  isIndonesiaFirst = true,
+  coordinates,
+  phenomenon,
+  globalGeneralization,
+  geoMapSlug,
+  class: className = '',
+} = Astro.props;
+---
+
+<section
+  class={`rounded-2xl border border-[var(--color-secondary)]/30 bg-[var(--color-secondary-subtle)]/30 p-6 sm:p-8 space-y-5 my-8 ${className}`}
+  aria-labelledby="real-world-title"
+>
+  <div class="flex items-center justify-between flex-wrap gap-2 border-b border-[var(--color-secondary)]/20 pb-4">
+    <div class="flex items-center gap-2">
+      <div class="w-8 h-8 rounded-lg bg-[var(--color-secondary)] text-white flex items-center justify-center">
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10" />
+          <line x1="2" y1="12" x2="22" y2="12" />
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+        </svg>
+      </div>
+      <div>
+        <span class="text-xs font-mono uppercase tracking-wider text-[var(--color-secondary)] font-bold">
+          Real-World Geological Connection
+        </span>
+        <h3 id="real-world-title" class="text-lg font-bold text-[var(--color-text)]">
+          {title}
+        </h3>
+      </div>
+    </div>
+
+    {isIndonesiaFirst && (
+      <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-900 border border-emerald-300 dark:bg-emerald-950 dark:text-emerald-200 dark:border-emerald-800">
+        🇮🇩 Indonesia Anchor: {locationName}
+      </span>
+    )}
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+    {/* Local Phenomenon Observation */}
+    <div class="space-y-2">
+      <h4 class="text-xs font-mono uppercase tracking-wider text-[var(--color-text-dim)] font-semibold">
+        Observable Phenomenon
+      </h4>
+      <p class="text-sm text-[var(--color-text)] leading-relaxed">
+        {phenomenon}
+      </p>
+    </div>
+
+    {/* Generalization outward to Global Earth System */}
+    <div class="space-y-2 rounded-xl bg-[var(--color-surface)] p-4 border border-[var(--color-border)]">
+      <h4 class="text-xs font-mono uppercase tracking-wider text-[var(--color-accent)] font-semibold flex items-center gap-1.5">
+        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="15 3 21 3 21 9" />
+          <polyline points="9 21 3 21 3 15" />
+          <line x1="21" y1="3" x2="14" y2="10" />
+          <line x1="3" y1="21" x2="10" y2="14" />
+        </svg>
+        <span>Global Generalization</span>
+      </h4>
+      <p class="text-xs text-[var(--color-text-muted)] leading-relaxed">
+        {globalGeneralization}
+      </p>
+    </div>
+  </div>
+
+  {/* Contextual GeoMap Bridge */}
+  {geoMapSlug && (
+    <div class="pt-2">
+      <GeoMapLink
+        locationSlug={geoMapSlug}
+        label={`Explore ${locationName} on GeoMap`}
+        coordinates={coordinates}
+        description={`Inspect geological fault lines, volcanic hazard contours, and tectonic boundaries at ${locationName}.`}
+      />
+    </div>
+  )}
+</section>

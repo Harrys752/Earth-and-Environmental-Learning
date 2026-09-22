@@ -1,0 +1,112 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../components/ui/Breadcrumb.astro';
+import LearningCard from '../../../components/learning/LearningCard.astro';
+import EmptyState from '../../../components/ui/EmptyState.astro';
+
+export async function getStaticPaths() {
+  const topics = await getCollection('topics');
+  return topics.map((entry) => ({
+    params: { topic: entry.data.id || entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+
+const allExperiences = await getCollection('experiences');
+const topicExperiences = allExperiences.filter(
+  (exp) => exp.data.topic === (entry.data.id || entry.id)
+);
+
+const breadcrumbItems = [
+  { label: 'Explore', href: '/explore' },
+  { label: 'Topics', href: '/explore/topics' },
+  { label: entry.data.title, current: true },
+];
+---
+
+<BaseLayout
+  title={`${entry.data.title} — Earth Science Topic`}
+  description={entry.data.description}
+>
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+    <Breadcrumb items={breadcrumbItems} class="mb-6" />
+
+    <header class="border-b border-[var(--color-border)] pb-8 mb-10 space-y-4">
+      <div class="flex items-center gap-2">
+        <span class="px-2.5 py-0.5 rounded-full text-xs font-mono font-semibold bg-[var(--color-secondary-subtle)] text-[var(--color-secondary)] border border-[var(--color-secondary)]/30">
+          Scientific Domain: {entry.data.category}
+        </span>
+        <span class="text-xs text-[var(--color-text-dim)]">•</span>
+        <span class="text-xs font-mono text-[var(--color-text-muted)]">
+          {topicExperiences.length} {topicExperiences.length === 1 ? 'experience' : 'experiences'}
+        </span>
+      </div>
+
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[var(--color-text)] tracking-tight">
+        {entry.data.title}
+      </h1>
+
+      {entry.data.tagline && (
+        <p class="text-base sm:text-lg font-medium text-[var(--color-secondary)] leading-relaxed">
+          {entry.data.tagline}
+        </p>
+      )}
+
+      <p class="text-sm sm:text-base text-[var(--color-text-muted)] max-w-3xl leading-relaxed">
+        {entry.data.description}
+      </p>
+    </header>
+
+    <!-- Topic Framing Narrative -->
+    <div class="prose prose-stone dark:prose-invert max-w-none mb-12">
+      <Content />
+    </div>
+
+    <!-- Experiences in this Topic -->
+    <section class="space-y-6">
+      <div class="flex items-center justify-between">
+        <div>
+          <h2 class="text-xl font-bold text-[var(--color-text)]">
+            Learning Experiences in {entry.data.title}
+          </h2>
+          <p class="text-xs text-[var(--color-text-muted)] mt-0.5">
+            Step-by-step inquiries, interactive simulations, and real-world anchors.
+          </p>
+        </div>
+      </div>
+
+      {
+        topicExperiences.length > 0 ? (
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {topicExperiences.map((exp) => (
+              <LearningCard
+                id={exp.data.id || exp.id}
+                slug={exp.data.id || exp.id}
+                title={exp.data.title}
+                tagline={exp.data.tagline}
+                description={exp.data.description}
+                topic={entry.data.title}
+                difficulty={exp.data.difficulty}
+                estimatedTime={exp.data.estimatedTime}
+                isIndonesiaFirst={exp.data.realWorldConnections?.[0]?.isIndonesiaFirst}
+                hasInteractive={exp.data.interactiveElements?.length > 0}
+                hasGeoMap={exp.data.geoMapConnections?.length > 0}
+              />
+            ))}
+          </div>
+        ) : (
+          <EmptyState
+            title="More Experiences in Development"
+            description="We are actively expanding this scientific domain with new inquiry modules, simulations, and real-world field anchors."
+            actionText="Explore All Experiences"
+            actionHref="/explore/experiences"
+          />
+        )
+      }
+    </section>
+  </div>
+</BaseLayout>

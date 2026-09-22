@@ -1,0 +1,142 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumb from '../components/ui/Breadcrumb.astro';
+
+const GEOMAP_URL = 'https://harrys752.github.io/GeoMap-New/';
+
+const breadcrumbItems = [
+  { label: 'GeoMap Bridge', current: true },
+];
+
+const featuredLocations = [
+  {
+    slug: 'java-volcanic-arc',
+    name: 'Java Volcanic Arc & Mount Merapi',
+    coords: '-7.54°N, 110.45°E',
+    context: 'Active subduction zone, stratovolcanic chain, and high-density population hazard interface.',
+  },
+  {
+    slug: 'karangsambung-geopark',
+    name: 'Karangsambung Geopark (Luk Ulo River)',
+    coords: '-7.56°N, 109.68°E',
+    context: 'Ancient Cretaceous tectonic mélange with exposed pillow basalts, red chert, and high-pressure blueschist.',
+  },
+  {
+    slug: 'bogor-rain-belt',
+    name: 'Bogor Orographic Rain Belt',
+    coords: '-6.60°N, 106.81°E',
+    context: 'Equatorial maritime convection encountering volcanic terrain, generating over 4,000 mm of annual rainfall.',
+  },
+  {
+    slug: 'sangiran-valley',
+    name: 'Sangiran Early Man Valley',
+    coords: '-7.46°N, 110.83°E',
+    context: 'Continental sediment stratigraphy preserving 2 million years of Pleistocene hominid and mammalian fossils.',
+  },
+];
+---
+
+<BaseLayout
+  title="GeoMap Indonesia Bridge — Contextual Earth Exploration"
+  description="Bridge page connecting Earth & Environmental Sciences learning experiences to the external GeoMap Indonesia 2.0 exploration platform."
+>
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-10">
+    <Breadcrumb items={breadcrumbItems} />
+
+    <header class="border-b border-[var(--color-border)] pb-8 space-y-3">
+      <div class="flex items-center gap-2">
+        <span class="w-2.5 h-2.5 rounded-full bg-[var(--color-interactive)]" />
+        <span class="text-xs font-mono uppercase tracking-wider text-[var(--color-interactive)] font-bold">
+          External Platform Integration Point
+        </span>
+      </div>
+
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[var(--color-text)] tracking-tight">
+        GeoMap Indonesia 2.0 Bridge
+      </h1>
+
+      <p class="text-base sm:text-lg text-[var(--color-text-muted)] max-w-3xl leading-relaxed">
+        GeoMap Indonesia is an external, independently developed geospatial exploration platform. This Learning Platform links contextually to GeoMap coordinates without hard dependencies or embedded frames, preserving user privacy and platform independence.
+      </p>
+
+      <div class="pt-2">
+        <a
+          href={GEOMAP_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[var(--color-interactive)] text-white text-sm font-semibold hover:bg-[var(--color-interactive-hover)] transition-all shadow-sm"
+        >
+          <span>Launch GeoMap Indonesia 2.0 (External)</span>
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+            <polyline points="15 3 21 3 21 9" />
+            <line x1="10" y1="14" x2="21" y2="3" />
+          </svg>
+        </a>
+      </div>
+    </header>
+
+    <!-- Architecture & Integration Relationship Disclosure (§8.1) -->
+    <div class="p-6 rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] space-y-3">
+      <h3 class="text-sm font-bold uppercase tracking-wider font-mono text-[var(--color-text)]">
+        Technical Integration Architecture
+      </h3>
+      <p class="text-xs text-[var(--color-text-muted)] leading-relaxed">
+        In accordance with our core architectural principles, this learning platform operates completely without GeoMap present, and GeoMap operates completely without this platform. We connect solely through <strong class="text-[var(--color-text)]">contextual external links and standardized geospatial coordinate parameters</strong>.
+      </p>
+    </div>
+
+    <!-- Curated Field Localities Grid -->
+    <section class="space-y-6">
+      <div>
+        <h2 class="text-2xl font-bold text-[var(--color-text)]">
+          Curated Deep-Link Targets
+        </h2>
+        <p class="text-xs sm:text-sm text-[var(--color-text-muted)] mt-1">
+          Direct coordinates to Indonesian field sites explored within our learning experiences.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {featuredLocations.map((loc) => (
+          <div class="p-5 rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] hover:border-[var(--color-interactive)] transition-all space-y-3 flex flex-col justify-between">
+            <div class="space-y-1.5">
+              <span class="text-[10px] font-mono font-semibold text-[var(--color-interactive)] block">
+                {loc.coords}
+              </span>
+              <h4 class="text-base font-bold text-[var(--color-text)]">
+                {loc.name}
+              </h4>
+              <p class="text-xs text-[var(--color-text-muted)] leading-relaxed">
+                {loc.context}
+              </p>
+            </div>
+
+            <div class="pt-3 border-t border-[var(--color-border)] flex items-center justify-between">
+              <a
+                href={`/learn/why-volcanoes-form`}
+                class="text-xs text-[var(--color-text-dim)] hover:underline"
+              >
+                Related Concept →
+              </a>
+
+              <a
+                href={`${GEOMAP_URL}?location=${loc.slug}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-1 text-xs font-semibold text-[var(--color-interactive)] hover:underline"
+              >
+                <span>Inspect in GeoMap</span>
+                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                  <polyline points="15 3 21 3 21 9" />
+                  <line x1="10" y1="14" x2="21" y2="3" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  </div>
+</BaseLayout>

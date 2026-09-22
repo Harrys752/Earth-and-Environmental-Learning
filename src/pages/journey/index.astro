@@ -1,0 +1,82 @@
+---
+import JourneyLayout from '../../layouts/JourneyLayout.astro';
+import JourneyTimeline from '../../components/journey/JourneyTimeline';
+import Button from '../../components/ui/Button.astro';
+---
+
+<JourneyLayout
+  title="Your Scientific Journey"
+  description="Track your progress, review concept assessments, revisit field reflections, and inspect built models."
+  activeTab="overview"
+>
+  <div class="space-y-10">
+    <!-- Interactive Timeline & Milestone Preview Island -->
+    <section class="space-y-6">
+      <div class="flex items-center justify-between">
+        <div>
+          <h2 class="text-xl font-bold text-[var(--color-text)]">
+            Chronological Journey Activity
+          </h2>
+          <p class="text-xs text-[var(--color-text-muted)] mt-0.5">
+            Automatic completions and manual fieldwork logs organized by month.
+          </p>
+        </div>
+
+        <Button href="/journey/timeline" variant="outline" size="sm">
+          Full Timeline View
+        </Button>
+      </div>
+
+      <!-- Reactively renders user's entries or encouraging empty state -->
+      <JourneyTimeline client:visible />
+    </section>
+
+    <!-- Quick Navigation to Portfolio Sections -->
+    <section class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6 border-t border-[var(--color-border)]">
+      <a
+        href="/journey/timeline"
+        class="p-5 rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] hover:border-[var(--color-accent)] transition-all space-y-2 block"
+      >
+        <span class="text-xs font-mono uppercase tracking-wider text-[var(--color-accent)] font-semibold">
+          Activity Logs
+        </span>
+        <h3 class="text-base font-bold text-[var(--color-text)]">
+          Timeline & Logs →
+        </h3>
+        <p class="text-xs text-[var(--color-text-muted)] leading-relaxed">
+          Log outdoor rock observations, weather tracking, or independent reading.
+        </p>
+      </a>
+
+      <a
+        href="/journey/reflections"
+        class="p-5 rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] hover:border-[var(--color-secondary)] transition-all space-y-2 block"
+      >
+        <span class="text-xs font-mono uppercase tracking-wider text-[var(--color-secondary)] font-semibold">
+          Concept Notes
+        </span>
+        <h3 class="text-base font-bold text-[var(--color-text)]">
+          Reflections Archive →
+        </h3>
+        <p class="text-xs text-[var(--color-text-muted)] leading-relaxed">
+          Revisit questions, personal hypotheses, and conceptual insights you logged.
+        </p>
+      </a>
+
+      <a
+        href="/journey/projects"
+        class="p-5 rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] hover:border-[var(--color-interactive)] transition-all space-y-2 block"
+      >
+        <span class="text-xs font-mono uppercase tracking-wider text-[var(--color-interactive)] font-semibold">
+          Built Artifacts
+        </span>
+        <h3 class="text-base font-bold text-[var(--color-text)]">
+          Applied Projects →
+        </h3>
+        <p class="text-xs text-[var(--color-text-muted)] leading-relaxed">
+          Inspect synthesis deliverables, hazard maps, and constructed scientific models.
+        </p>
+      </a>
+    </section>
+  </div>
+</JourneyLayout>

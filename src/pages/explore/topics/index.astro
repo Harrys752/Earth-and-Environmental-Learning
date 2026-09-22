@@ -1,0 +1,50 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../components/ui/Breadcrumb.astro';
+import TopicCard from '../../../components/learning/TopicCard.astro';
+
+const topics = await getCollection('topics');
+const experiences = await getCollection('experiences');
+
+const breadcrumbItems = [
+  { label: 'Explore', href: '/explore' },
+  { label: 'Topics', current: true },
+];
+---
+
+<BaseLayout
+  title="All Earth Science Topics & Domains"
+  description="Explore geological, atmospheric, hydrological, and environmental science domains."
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-8">
+    <Breadcrumb items={breadcrumbItems} />
+
+    <header class="border-b border-[var(--color-border)] pb-6 space-y-2">
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-[var(--color-text)] tracking-tight">
+        Earth Science Domains
+      </h1>
+      <p class="text-sm sm:text-base text-[var(--color-text-muted)] max-w-2xl leading-relaxed">
+        Select a domain to study foundational planetary processes, examine tectonic interactions, and access connected learning experiences.
+      </p>
+    </header>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {topics.map((topic) => {
+        const count = experiences.filter(
+          (e) => e.data.topic === (topic.data.id || topic.id)
+        ).length;
+        return (
+          <TopicCard
+            slug={topic.data.id || topic.id}
+            title={topic.data.title}
+            tagline={topic.data.tagline}
+            description={topic.data.description}
+            category={topic.data.category}
+            experienceCount={count}
+          />
+        );
+      })}
+    </div>
+  </div>
+</BaseLayout>

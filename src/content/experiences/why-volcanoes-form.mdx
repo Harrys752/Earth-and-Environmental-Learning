@@ -1,0 +1,216 @@
+---
+id: "why-volcanoes-form"
+title: "Why Do Volcanoes Form?"
+tagline: "From Subducting Ocean Floors to Explosive Continental Arcs"
+description: "Investigate the planetary heat engine, subduction zones, flux melting in the mantle wedge, and how oceanic plates descending beneath Indonesia fuel active stratovolcanoes like Mount Merapi."
+topic: "plate-tectonics"
+difficulty: "intermediate"
+estimatedTime: "20min"
+learningObjectives:
+  - "Explain how oceanic-continental subduction triggers flux melting in the asthenospheric mantle wedge."
+  - "Distinguish between flux melting (subduction) and decompression melting (mid-ocean ridges)."
+  - "Understand why volcanic arcs are geometrically offset 100–300 km from oceanic trenches."
+  - "Analyze why volatile-rich, silica-rich arc magmas produce explosive eruptions rather than gentle basalt flows."
+  - "Connect Indonesia's high volcanic density to the convergence of the Indo-Australian and Sunda plates."
+prerequisites: []
+interactiveElements:
+  - id: "plate-simulation"
+    type: "simulation"
+    title: "Plate Boundary Simulator"
+    pedagogicalPurpose: "Allows learners to adjust plate kinematics and observe melting genesis"
+    isIllustrativeModel: true
+    accessibleFallbackText: "A 2D kinematic model demonstrating slab subduction, mantle wedge flux melting, and volcanic arc formation."
+  - id: "earth-layers"
+    type: "diagram"
+    title: "Lithospheric Cross-Section"
+    pedagogicalPurpose: "Inspect mechanical and chemical layers of the crust and mantle"
+    isIllustrativeModel: true
+    accessibleFallbackText: "A cross-section displaying continental crust, oceanic crust, lithospheric mantle, and asthenosphere."
+quiz:
+  quizId: "quiz-why-volcanoes-form"
+  title: "Why Do Volcanoes Form? Conceptual Verification"
+  questionCount: 6
+realWorldConnections:
+  - title: "The Java Volcanic Arc & Mount Merapi"
+    locationName: "Java Volcanic Arc, Indonesia"
+    isIndonesiaFirst: true
+    coordinates:
+      lat: -7.5407
+      lng: 110.4457
+    description: "Mount Merapi in Central Java is one of Earth's most active and hazardous stratovolcanoes, located ~300 km north of the deep Java Trench."
+    phenomenon: "Frequent viscous andesitic dome growth, collapse-driven pyroclastic density currents (wedhus gembel), and lahar flows following monsoon rains."
+    globalGeneralization: "The same subduction physics governs the entire Pacific Ring of Fire—from the Andes of South America to the Cascades of North America and the Kamchatka Peninsula."
+    geoMapSlug: "java-volcanic-arc"
+geoMapConnections:
+  - locationSlug: "java-volcanic-arc"
+    label: "Explore the Java Volcanic Arc on GeoMap"
+    coordinates:
+      lat: -7.5407
+      lng: 110.4457
+    description: "Inspect regional bathymetric trenches, volcanic hazard zones, and plate convergence vectors across Indonesia."
+reflection:
+  - id: "refl-volcano-field"
+    prompt: "If you stood on the volcanic slopes of Mount Merapi or another stratovolcano, what physical evidence of past pyroclastic flows or tephra fall would you look for in the landscape?"
+    placeholder: "Consider rock texture, sorting of volcanic deposits, layer coloration, or topography..."
+    category: "observation"
+nextExperiences:
+  - "reading-rock-layers"
+  - "how-rain-forms"
+scientific:
+  source:
+    - "Tatsumi, Y., & Eggins, S. (1995). Subduction Zone Magmatism. Blackwell Science."
+    - "USGS Volcano Hazards Program (2024)."
+    - "Badan Geologi & PVMBG (Center for Volcanology and Geological Hazard Mitigation, Indonesia)."
+  sourceType: "peer-reviewed"
+  lastReviewed: "2026-09-01"
+  scientificLevel: "intermediate"
+  confidence: "established"
+  references:
+    - title: "Subduction Zone Magmatism"
+      publisher: "Blackwell Science"
+      year: 1995
+    - title: "Volcanic Activity in Indonesia: Geotectonic Context and Hazard Mitigation"
+      publisher: "Badan Geologi Indonesia"
+      year: 2022
+review:
+  reviewStatus: "published"
+  sourceList:
+    - "USGS"
+    - "PVMBG Indonesia"
+    - "Blackwell Science"
+  lastReviewed: "2026-09-01"
+  contentVersion: "1.0.0"
+featured: true
+---
+
+import Simulation from '../../components/visualization/Simulation';
+import InteractiveDiagram from '../../components/visualization/InteractiveDiagram';
+import Quiz from '../../components/quiz/Quiz';
+import ReflectionBox from '../../components/learning/ReflectionBox';
+import RealWorldExample from '../../components/learning/RealWorldExample.astro';
+import ObservationChallenge from '../../components/learning/ObservationChallenge.astro';
+import { whyVolcanoesFormQuiz } from '../../data/quizzes/why-volcanoes-form';
+
+## Beat 1: The Opening Question
+
+> **Why do some mountains explode with catastrophic fury, while others gently ooze liquid stone—or never erupt at all?**
+
+To early human civilizations, volcanoes appeared as capricious gates to the underworld. Across Java, ancient communities built temples in the shadow of Mount Merapi, seeking harmony with an unpredictable giant that both nourished the soil with life-giving minerals and threatened catastrophic destruction with scorching clouds of gas and ash.
+
+In modern Earth Science, a volcano is neither a random anomaly nor a simple hole in the ground. It is the surface expression of a planetary cooling mechanism.
+
+---
+
+## Beat 2: Earth's Thermal Interior & Crustal Structure
+
+Beneath the thin, fragile crust where we build our cities lies over 2,900 kilometers of dense, hot rock: the mantle. A common misconception is that the mantle is a vast sea of boiling liquid magma. **In reality, almost the entire mantle is solid rock.** It remains solid despite temperatures exceeding 1,200°C to 3,500°C because the crushing overburden pressure from thousands of kilometers of overlying stone forces the atoms into rigid crystalline structures.
+
+To generate magma—liquid molten rock—Earth must somehow disrupt this high-pressure equilibrium.
+
+<InteractiveDiagram
+  client:visible
+  id="earth-layers"
+  title="Mechanical & Compositional Layers of the Lithosphere"
+  experienceSlug="why-volcanoes-form"
+  accessibleDescription="Interactive cross-section diagram showing the brittle crust (0 to 35 km), rigid lithospheric mantle (35 to 100 km), and ductile asthenosphere (100 to 410 km). Click each layer to inspect its temperature, pressure, and mineral state."
+/>
+
+---
+
+## Beat 3: The Subduction Mechanism & Flux Melting
+
+How does solid mantle rock turn into liquid magma beneath volcanic arcs like Indonesia?
+
+There are only three ways to melt solid rock within Earth:
+1. **Increase temperature** (thermal melting — relatively rare as a primary trigger except at mantle plumes/hotspots).
+2. **Decrease pressure** without losing heat (decompression melting — occurs at divergent mid-ocean ridges).
+3. **Add chemical volatiles** such as water to lower the melting point (flux melting — the engine of subduction zones).
+
+### The Subduction Factory: Step-by-Step
+
+```
+1. Oceanic lithosphere absorbs seawater over millions of years (serpentinization).
+                     ↓
+2. Plate converges and plunges into the oceanic trench (subduction).
+                     ↓
+3. Temperature and pressure climb past ~100 km depth; hydrous minerals break down.
+                     ↓
+4. Supercritical H₂O escapes upward into the hot asthenospheric mantle wedge.
+                     ↓
+5. Water disrupts silicate bonds, lowering peridotite melting point (Flux Melting).
+                     ↓
+6. Buoyant, less-dense magma diapirs ascend gravitationally through continental crust.
+                     ↓
+7. Magma pools in crustal chambers, assimilates silica, differentiates, and erupts.
+```
+
+When salt is tossed onto icy roads in winter, the ice melts not because the weather warmed, but because salt lowered the freezing/melting threshold of water. **Water acts in the exact same way on deep Earth peridotite.** In the mantle wedge at 100 km depth, adding just 0.5% to 2% dissolved water drops the melting point of rock by hundreds of degrees Celsius, instantly generating liquid magma.
+
+---
+
+## Beat 4: Interactive Simulation — Plate Boundary Kinematics
+
+Use the interactive scientific simulation below to test different tectonic boundaries. Select **Subduction Zone** to observe the descent of oceanic lithosphere, the release of volatile water, and the ascent of magma diapirs feeding a volcanic arc.
+
+<Simulation
+  client:visible
+  experienceSlug="why-volcanoes-form"
+  initialBoundary="convergent-subduction"
+/>
+
+---
+
+## Beat 5: Real-World Indonesian Anchor — The Java Volcanic Arc & Mount Merapi
+
+To understand how global subduction theory connects to concrete Earth geography, we turn to the island of Java, Indonesia.
+
+<RealWorldExample
+  title="The Java Volcanic Arc & Mount Merapi"
+  locationName="Mount Merapi, Central Java, Indonesia"
+  isIndonesiaFirst={true}
+  coordinates={{ lat: -7.5407, lng: 110.4457 }}
+  phenomenon="Mount Merapi is an active stratovolcano rising 2,910 meters above the Kedu Plain. It produces viscous andesitic magma (~57% SiO₂) that cannot flow freely, resulting in steep-sided lava domes that periodically collapse under gravity to generate deadly pyroclastic density currents (known locally as wedhus gembel) traveling at over 100 km/h."
+  globalGeneralization="The Java Arc is part of the 5,000-km-long Sunda Arc, which in turn forms the southern boundary of the Pacific Ring of Fire. Every stratovolcano along the Ring of Fire—from Mount Fuji in Japan to Mount St. Helens in the United States and Cotopaxi in Ecuador—operates under this exact same flux-melting subduction mechanism."
+  geoMapSlug="java-volcanic-arc"
+/>
+
+---
+
+## Beat 6: Field Observation Challenge
+
+<ObservationChallenge
+  title="Investigating Volcanic Rock Textures: Andesite vs. Basalt"
+  targetPhenomenon="Identifying volcanic rocks shaped by subduction arc volcanism versus oceanic basalt."
+  observationSteps={[
+    "Look for volcanic stones in local construction materials, river gravels, or decorative landscaping.",
+    "Examine the rock's color and texture under bright natural light.",
+    "Look for visible, distinct crystal grains (phenocrysts) embedded within a fine-grained background matrix (porphyritic texture).",
+    "Identify white, tabular crystals of plagioclase feldspar and dark, elongated prisms of hornblende (amphibole) or pyroxene."
+  ]}
+  whatToLookFor="Andesite (the signature subduction rock) is typically medium-gray with visible white plagioclase crystals. In contrast, oceanic basalt is very dark gray to black, denser, and finer-grained with fewer large phenocrysts."
+  experienceSlug="why-volcanoes-form"
+/>
+
+---
+
+## Beat 7: Conceptual Verification & Assessment
+
+Test your understanding of the physical processes governing volcanism. Every question provides detailed scientific explanations to clarify misconceptions.
+
+<Quiz
+  client:visible
+  quiz={whyVolcanoesFormQuiz}
+  experienceSlug="why-volcanoes-form"
+  experienceTitle="Why Do Volcanoes Form?"
+/>
+
+---
+
+## Beat 8: Scientific Reflection
+
+<ReflectionBox
+  client:idle
+  experienceSlug="why-volcanoes-form"
+  prompt="If you stood on the volcanic slopes of Mount Merapi or another stratovolcano, what physical evidence of past pyroclastic flows or tephra fall would you look for in the landscape?"
+  category="observation"
+/>

@@ -1,0 +1,107 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/ui/Breadcrumb.astro';
+import TopicCard from '../../components/learning/TopicCard.astro';
+import LearningCard from '../../components/learning/LearningCard.astro';
+import Button from '../../components/ui/Button.astro';
+
+const topics = await getCollection('topics');
+const experiences = await getCollection('experiences');
+
+const breadcrumbItems = [
+  { label: 'Explore', current: true },
+];
+---
+
+<BaseLayout
+  title="Explore Earth & Environmental Sciences"
+  description="Browse topics, interactive simulations, and real-world Earth phenomena across geology, atmosphere, and planetary geodynamics."
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-12">
+    <Breadcrumb items={breadcrumbItems} />
+
+    <header class="border-b border-[var(--color-border)] pb-8 space-y-3">
+      <span class="text-xs font-mono uppercase tracking-widest text-[var(--color-accent)] font-bold">
+        Exploration Catalog
+      </span>
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[var(--color-text)] tracking-tight">
+        Explore Earth Systems
+      </h1>
+      <p class="text-base sm:text-lg text-[var(--color-text-muted)] max-w-3xl leading-relaxed">
+        Choose a scientific domain to explore step-by-step processes, test parameterized models, and connect geological theory to tangible Indonesian landscapes.
+      </p>
+
+      <div class="flex items-center gap-2 pt-2 flex-wrap">
+        <Button href="/explore/experiences" variant="outline" size="sm">
+          Browse All Experiences ({experiences.length})
+        </Button>
+        <Button href="/explore/discoveries" variant="ghost" size="sm">
+          Field Discoveries & Observations
+        </Button>
+        <Button href="/geomap" variant="ghost" size="sm">
+          GeoMap Indonesia Connection
+        </Button>
+      </div>
+    </header>
+
+    <!-- Topics Grid -->
+    <section class="space-y-6">
+      <div class="flex items-center justify-between">
+        <h2 class="text-xl font-bold text-[var(--color-text)]">
+          Scientific Domains
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {topics.map((topic) => {
+          const count = experiences.filter(
+            (e) => e.data.topic === (topic.data.id || topic.id)
+          ).length;
+          return (
+            <TopicCard
+              slug={topic.data.id || topic.id}
+              title={topic.data.title}
+              tagline={topic.data.tagline}
+              description={topic.data.description}
+              category={topic.data.category}
+              experienceCount={count}
+            />
+          );
+        })}
+      </div>
+    </section>
+
+    <!-- All Available Learning Experiences -->
+    <section class="space-y-6 pt-6 border-t border-[var(--color-border)]">
+      <div class="flex items-center justify-between">
+        <div>
+          <h2 class="text-xl font-bold text-[var(--color-text)]">
+            All Learning Experiences
+          </h2>
+          <p class="text-xs text-[var(--color-text-muted)] mt-0.5">
+            Narrative-driven modules with interactive simulations and assessments.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {experiences.map((exp) => (
+          <LearningCard
+            id={exp.data.id || exp.id}
+            slug={exp.data.id || exp.id}
+            title={exp.data.title}
+            tagline={exp.data.tagline}
+            description={exp.data.description}
+            topic={exp.data.topic}
+            difficulty={exp.data.difficulty}
+            estimatedTime={exp.data.estimatedTime}
+            isIndonesiaFirst={exp.data.realWorldConnections?.[0]?.isIndonesiaFirst}
+            hasInteractive={exp.data.interactiveElements?.length > 0}
+            hasGeoMap={exp.data.geoMapConnections?.length > 0}
+          />
+        ))}
+      </div>
+    </section>
+  </div>
+</BaseLayout>
