@@ -1,5 +1,5 @@
 ---
-import { getLocalizedUrl, type Locale } from '../../lib/i18nUrl';
+import { getLocalizedUrl, isTopicTranslated, type Locale } from '../../lib/i18nUrl';
 import { useTranslations } from '../../i18n';
 
 export interface Props {
@@ -27,7 +27,7 @@ const {
 const currentLocale: Locale = (locale as Locale) || 'en';
 const t = useTranslations(currentLocale);
 
-const isUntranslated = currentLocale === 'id' && slug !== 'plate-tectonics';
+const isUntranslated = currentLocale === 'id' && !isTopicTranslated(slug);
 
 const categoryIcons: Record<string, string> = {
   'plate-tectonics': 'M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5',

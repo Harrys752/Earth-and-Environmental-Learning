@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'preact/hooks';
 import { useTranslations } from '../../i18n';
-import { parseLocalePath, getLocalizedUrl, type Locale } from '../../lib/i18nUrl';
+import { parseLocalePath, getLocalizedUrl, isExperienceTranslated, isTopicTranslated, type Locale } from '../../lib/i18nUrl';
 import { hasSeenOnboardingRoadmap, setHasSeenOnboardingRoadmap } from '../../lib/storage';
 
 export interface RoadmapExperience {
@@ -248,7 +248,7 @@ export default function RoadmapCard({ topics = [], isHomePage = false, locale: p
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
               {topics.map((top) => {
-                const isTopicUntranslated = currentLocale === 'id' && top.id !== 'plate-tectonics';
+                const isTopicUntranslated = currentLocale === 'id' && !isTopicTranslated(top.id);
                 return (
                   <div
                     key={top.id}
@@ -284,7 +284,7 @@ export default function RoadmapCard({ topics = [], isHomePage = false, locale: p
                       </span>
                       <ul class="space-y-1.5 text-xs">
                         {top.experiences.map((exp) => {
-                          const isExpUntranslated = currentLocale === 'id' && exp.id !== 'why-volcanoes-form';
+                          const isExpUntranslated = currentLocale === 'id' && !isExperienceTranslated(exp.id);
                           return (
                             <li key={exp.id}>
                               <a

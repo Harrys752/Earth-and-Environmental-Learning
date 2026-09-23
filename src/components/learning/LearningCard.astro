@@ -1,6 +1,6 @@
 ---
 import Badge from '../ui/Badge.astro';
-import { getLocalizedUrl, type Locale } from '../../lib/i18nUrl';
+import { getLocalizedUrl, isExperienceTranslated, type Locale } from '../../lib/i18nUrl';
 import { useTranslations } from '../../i18n';
 
 export interface Props {
@@ -37,7 +37,7 @@ const {
 const currentLocale: Locale = (locale as Locale) || 'en';
 const t = useTranslations(currentLocale);
 const expHref = getLocalizedUrl(`/learn/${slug}`, currentLocale);
-const isUntranslated = currentLocale === 'id' && slug !== 'why-volcanoes-form';
+const isUntranslated = currentLocale === 'id' && !isExperienceTranslated(slug);
 ---
 
 <article
