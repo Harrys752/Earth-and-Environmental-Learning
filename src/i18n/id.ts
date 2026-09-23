@@ -64,6 +64,11 @@ export const id: TranslationDictionary = {
     portfolioBannerTitle: 'Dokumentasikan Pengamatan & Penguasaan Sains Anda',
     portfolioBannerDesc: 'Progres, evaluasi kuis, catatan lapangan, dan refleksi Anda diatur otomatis ke dalam linimasa Jurnal Belajar pribadi.',
     openJourney: 'Buka Linimasa Jurnal',
+    globeCaption: 'Titik Investigasi Kebumian',
+    globeAriaLabel: 'Ilustrasi bola dunia dengan penanda lokasi geologis interaktif di wilayah Indonesia',
+    globeMerapiDesc: 'Busur Vulkanik & Subduksi',
+    globePaluDesc: 'Sesar Geser & Tektonik',
+    globeSangiranDesc: 'Stratigrafi & Fosil Purba',
   },
   cards: {
     inspect: 'Telusuri Topik →',

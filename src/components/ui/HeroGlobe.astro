@@ -1,0 +1,456 @@
+---
+import { NODE_REGISTRY, CONTENT_GRAPH } from '../../lib/contentGraph';
+import { getLocalizedUrl, type Locale } from '../../lib/i18nUrl';
+import { useTranslations } from '../../i18n';
+
+export interface Props {
+  locale?: Locale;
+  class?: string;
+}
+
+const { locale = 'en', class: className = '' } = Astro.props;
+const t = useTranslations(locale);
+
+// Dynamic resolution from content graph and node registry (Section 3.1)
+const merapiNode = NODE_REGISTRY['mount-merapi'];
+const paluNode = NODE_REGISTRY['palu-koro-fault'];
+const sangiranNode = NODE_REGISTRY['sangiran-early-man'];
+
+const merapiExpSlug = CONTENT_GRAPH['mount-merapi']?.relatedExperiences?.[0] || 'why-volcanoes-form';
+const paluExpSlug = CONTENT_GRAPH['palu-koro-fault']?.relatedExperiences?.[0] || 'why-do-earthquakes-happen';
+const sangiranExpSlug = CONTENT_GRAPH['sangiran-early-man']?.relatedExperiences?.[0] || 'what-fossils-tell-us';
+
+const merapiHref = getLocalizedUrl(`/learn/${merapiExpSlug}`, locale);
+const paluHref = getLocalizedUrl(`/learn/${paluExpSlug}`, locale);
+const sangiranHref = getLocalizedUrl(`/learn/${sangiranExpSlug}`, locale);
+
+const merapiTitle = locale === 'id' ? 'Gunung Merapi' : (merapiNode?.title || 'Mount Merapi');
+const paluTitle = locale === 'id' ? 'Sesar Palu-Koro' : (paluNode?.title || 'Palu-Koro Fault');
+const sangiranTitle = locale === 'id' ? 'Situs Sangiran' : (sangiranNode?.title || 'Sangiran Early Man Site');
+---
+
+<div class={`relative flex flex-col items-center justify-center select-none ${className}`}>
+  <!-- Decorative Background Glow -->
+  <div class="absolute w-72 h-72 rounded-full bg-[var(--color-accent-subtle)]/40 dark:bg-[var(--color-accent-subtle)]/20 blur-3xl pointer-events-none -z-10" />
+
+  <svg
+    viewBox="0 0 500 500"
+    class="w-full h-auto max-w-[440px] overflow-visible"
+    aria-label={t.home.globeAriaLabel}
+    role="img"
+  >
+    <defs>
+      <!-- Radial gradient for inner globe translucency -->
+      <radialGradient id="hero-globe-sphere-grad" cx="40%" cy="40%" r="60%">
+        <stop offset="0%" stop-color="var(--color-surface-hover)" stop-opacity="0.8" />
+        <stop offset="60%" stop-color="var(--color-surface)" stop-opacity="0.4" />
+        <stop offset="100%" stop-color="var(--color-surface-hover)" stop-opacity="0.1" />
+      </radialGradient>
+
+      <!-- Filter for subtle drop-shadow on label capsules -->
+      <filter id="pill-shadow" x="-10%" y="-10%" width="130%" height="130%">
+        <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.08" />
+      </filter>
+    </defs>
+
+    <!-- Wireframe Sphere Group (Tilted on axis) -->
+    <g transform="rotate(-14 250 250)">
+      <!-- Spherical translucent backdrop -->
+      <circle
+        cx="250"
+        cy="250"
+        r="170"
+        fill="url(#hero-globe-sphere-grad)"
+      />
+
+      <!-- Outer Boundary Ring -->
+      <circle
+        cx="250"
+        cy="250"
+        r="170"
+        fill="none"
+        stroke="var(--color-border)"
+        stroke-width="1.5"
+        class="dark:stroke-[var(--color-border)]"
+      />
+
+      <!-- Latitude Parallels -->
+      <!-- 60° N -->
+      <ellipse
+        cx="250"
+        cy="130"
+        rx="118"
+        ry="22"
+        fill="none"
+        stroke="var(--color-border-subtle)"
+        stroke-width="1"
+        stroke-dasharray="3 3"
+      />
+      <!-- 30° N -->
+      <ellipse
+        cx="250"
+        cy="185"
+        rx="155"
+        ry="30"
+        fill="none"
+        stroke="var(--color-border)"
+        stroke-width="1"
+        opacity="0.75"
+      />
+      <!-- Equator (Highlighted) -->
+      <ellipse
+        cx="250"
+        cy="250"
+        rx="170"
+        ry="36"
+        fill="none"
+        stroke="var(--color-text-dim)"
+        stroke-width="1.2"
+        stroke-dasharray="4 3"
+        opacity="0.85"
+      />
+      <!-- 30° S -->
+      <ellipse
+        cx="250"
+        cy="315"
+        rx="155"
+        ry="30"
+        fill="none"
+        stroke="var(--color-border)"
+        stroke-width="1"
+        opacity="0.75"
+      />
+      <!-- 60° S -->
+      <ellipse
+        cx="250"
+        cy="370"
+        rx="118"
+        ry="22"
+        fill="none"
+        stroke="var(--color-border-subtle)"
+        stroke-width="1"
+        stroke-dasharray="3 3"
+      />
+
+      <!-- Longitude Meridians -->
+      <!-- Central Meridian -->
+      <ellipse
+        cx="250"
+        cy="250"
+        rx="40"
+        ry="170"
+        fill="none"
+        stroke="var(--color-text-dim)"
+        stroke-width="1"
+        opacity="0.65"
+      />
+      <!-- Mid-East Meridian -->
+      <ellipse
+        cx="250"
+        cy="250"
+        rx="95"
+        ry="170"
+        fill="none"
+        stroke="var(--color-border)"
+        stroke-width="1"
+        opacity="0.7"
+      />
+      <!-- Far-East Meridian -->
+      <ellipse
+        cx="250"
+        cy="250"
+        rx="140"
+        ry="170"
+        fill="none"
+        stroke="var(--color-border-subtle)"
+        stroke-width="1"
+        opacity="0.5"
+      />
+
+      <!-- Abstract Sunda Arc tectonic curve hint (Illustrative reference, not a map) -->
+      <path
+        d="M 160 262 Q 215 252 250 248 T 325 230"
+        fill="none"
+        stroke="var(--color-accent)"
+        stroke-width="1.5"
+        stroke-dasharray="2 4"
+        opacity="0.45"
+      />
+    </g>
+
+    <!-- =======================================================
+         INTERACTIVE LOCATION MARKERS (Pulsing Dots + Leader Lines)
+         ======================================================= -->
+
+    <!-- 1. MOUNT MERAPI (Volcanic Arc Anchor) -->
+    <a
+      href={merapiHref}
+      class="marker-interactive group focus:outline-none"
+      aria-label={`${merapiTitle} — ${t.home.globeMerapiDesc}`}
+      tabindex="0"
+    >
+      <!-- Leader Line -->
+      <path
+        d="M 205 264 L 140 305 L 35 305"
+        fill="none"
+        stroke="var(--color-border)"
+        stroke-width="1.2"
+        class="transition-colors duration-200 group-hover:stroke-[var(--color-accent)] group-focus-visible:stroke-[var(--color-accent)]"
+      />
+      <circle cx="35" cy="305" r="2.5" fill="var(--color-accent)" />
+
+      <!-- Pulse Animation Rings -->
+      <circle
+        cx="205"
+        cy="264"
+        r="4.5"
+        fill="none"
+        stroke="var(--color-accent)"
+        class="pulse-ring pulse-ring-1 pointer-events-none"
+      />
+      <!-- Marker Core Dot -->
+      <circle
+        cx="205"
+        cy="264"
+        r="4.5"
+        fill="var(--color-accent)"
+        class="transition-transform duration-200 group-hover:scale-125 origin-[205px_264px]"
+      />
+
+      <!-- Label Capsule -->
+      <g transform="translate(18, 260)" class="transition-transform duration-200 group-hover:-translate-y-0.5">
+        <rect
+          x="0"
+          y="0"
+          width="135"
+          height="40"
+          rx="8"
+          fill="var(--color-surface)"
+          stroke="var(--color-border)"
+          stroke-width="1.2"
+          filter="url(#pill-shadow)"
+          class="transition-all duration-200 group-hover:stroke-[var(--color-accent)] group-focus-visible:stroke-[var(--color-accent)]"
+        />
+        <circle cx="12" cy="14" r="3" fill="var(--color-accent)" />
+        <text
+          x="20"
+          y="16"
+          font-size="11"
+          font-weight="bold"
+          fill="var(--color-text)"
+          class="font-sans"
+        >
+          {merapiTitle}
+        </text>
+        <text
+          x="20"
+          y="30"
+          font-size="9"
+          font-family="var(--font-mono)"
+          fill="var(--color-text-dim)"
+        >
+          {t.home.globeMerapiDesc}
+        </text>
+      </g>
+    </a>
+
+    <!-- 2. PALU-KORO FAULT (Active Slip Tectonics) -->
+    <a
+      href={paluHref}
+      class="marker-interactive group focus:outline-none"
+      aria-label={`${paluTitle} — ${t.home.globePaluDesc}`}
+      tabindex="0"
+    >
+      <!-- Leader Line -->
+      <path
+        d="M 288 226 L 350 178 L 465 178"
+        fill="none"
+        stroke="var(--color-border)"
+        stroke-width="1.2"
+        class="transition-colors duration-200 group-hover:stroke-[var(--color-interactive)] group-focus-visible:stroke-[var(--color-interactive)]"
+      />
+      <circle cx="465" cy="178" r="2.5" fill="var(--color-interactive)" />
+
+      <!-- Pulse Animation Rings -->
+      <circle
+        cx="288"
+        cy="226"
+        r="4.5"
+        fill="none"
+        stroke="var(--color-interactive)"
+        class="pulse-ring pulse-ring-2 pointer-events-none"
+      />
+      <!-- Marker Core Dot -->
+      <circle
+        cx="288"
+        cy="226"
+        r="4.5"
+        fill="var(--color-interactive)"
+        class="transition-transform duration-200 group-hover:scale-125 origin-[288px_226px]"
+      />
+
+      <!-- Label Capsule -->
+      <g transform="translate(325, 134)" class="transition-transform duration-200 group-hover:-translate-y-0.5">
+        <rect
+          x="0"
+          y="0"
+          width="145"
+          height="40"
+          rx="8"
+          fill="var(--color-surface)"
+          stroke="var(--color-border)"
+          stroke-width="1.2"
+          filter="url(#pill-shadow)"
+          class="transition-all duration-200 group-hover:stroke-[var(--color-interactive)] group-focus-visible:stroke-[var(--color-interactive)]"
+        />
+        <circle cx="12" cy="14" r="3" fill="var(--color-interactive)" />
+        <text
+          x="20"
+          y="16"
+          font-size="11"
+          font-weight="bold"
+          fill="var(--color-text)"
+          class="font-sans"
+        >
+          {paluTitle}
+        </text>
+        <text
+          x="20"
+          y="30"
+          font-size="9"
+          font-family="var(--font-mono)"
+          fill="var(--color-text-dim)"
+        >
+          {t.home.globePaluDesc}
+        </text>
+      </g>
+    </a>
+
+    <!-- 3. SANGIRAN SITE (Stratigraphy & Deep Time) -->
+    <a
+      href={sangiranHref}
+      class="marker-interactive group focus:outline-none"
+      aria-label={`${sangiranTitle} — ${t.home.globeSangiranDesc}`}
+      tabindex="0"
+    >
+      <!-- Leader Line -->
+      <path
+        d="M 242 284 L 305 358 L 445 358"
+        fill="none"
+        stroke="var(--color-border)"
+        stroke-width="1.2"
+        class="transition-colors duration-200 group-hover:stroke-[var(--color-secondary)] group-focus-visible:stroke-[var(--color-secondary)]"
+      />
+      <circle cx="445" cy="358" r="2.5" fill="var(--color-secondary)" />
+
+      <!-- Pulse Animation Rings -->
+      <circle
+        cx="242"
+        cy="284"
+        r="4.5"
+        fill="none"
+        stroke="var(--color-secondary)"
+        class="pulse-ring pulse-ring-3 pointer-events-none"
+      />
+      <!-- Marker Core Dot -->
+      <circle
+        cx="242"
+        cy="284"
+        r="4.5"
+        fill="var(--color-secondary)"
+        class="transition-transform duration-200 group-hover:scale-125 origin-[242px_284px]"
+      />
+
+      <!-- Label Capsule -->
+      <g transform="translate(300, 314)" class="transition-transform duration-200 group-hover:-translate-y-0.5">
+        <rect
+          x="0"
+          y="0"
+          width="145"
+          height="40"
+          rx="8"
+          fill="var(--color-surface)"
+          stroke="var(--color-border)"
+          stroke-width="1.2"
+          filter="url(#pill-shadow)"
+          class="transition-all duration-200 group-hover:stroke-[var(--color-secondary)] group-focus-visible:stroke-[var(--color-secondary)]"
+        />
+        <circle cx="12" cy="14" r="3" fill="var(--color-secondary)" />
+        <text
+          x="20"
+          y="16"
+          font-size="11"
+          font-weight="bold"
+          fill="var(--color-text)"
+          class="font-sans"
+        >
+          {sangiranTitle}
+        </text>
+        <text
+          x="20"
+          y="30"
+          font-size="9"
+          font-family="var(--font-mono)"
+          fill="var(--color-text-dim)"
+        >
+          {t.home.globeSangiranDesc}
+        </text>
+      </g>
+    </a>
+  </svg>
+
+  <!-- Bottom Visual Caption -->
+  <div class="mt-2 text-center">
+    <span class="text-[11px] font-mono font-semibold uppercase tracking-wider text-[var(--color-text-dim)] flex items-center justify-center gap-1.5">
+      <span class="w-1.5 h-1.5 rounded-full bg-[var(--color-accent)] animate-pulse"></span>
+      {t.home.globeCaption}
+    </span>
+  </div>
+</div>
+
+<style>
+  @keyframes markerPulse {
+    0% {
+      r: 4.5px;
+      opacity: 0.95;
+      stroke-width: 2px;
+    }
+    60% {
+      r: 18px;
+      opacity: 0;
+      stroke-width: 1px;
+    }
+    100% {
+      r: 18px;
+      opacity: 0;
+      stroke-width: 0px;
+    }
+  }
+
+  /* Looping pulse animation on staggered delays (Section 4) */
+  @media (prefers-reduced-motion: no-preference) {
+    .pulse-ring-1 {
+      animation: markerPulse 2.4s cubic-bezier(0.2, 0.8, 0.4, 1) infinite;
+    }
+    .pulse-ring-2 {
+      animation: markerPulse 2.4s cubic-bezier(0.2, 0.8, 0.4, 1) infinite 0.8s;
+    }
+    .pulse-ring-3 {
+      animation: markerPulse 2.4s cubic-bezier(0.2, 0.8, 0.4, 1) infinite 1.6s;
+    }
+  }
+
+  /* Respect prefers-reduced-motion (Section 4 & 6) */
+  @media (prefers-reduced-motion: reduce) {
+    .pulse-ring {
+      display: none !important;
+    }
+  }
+
+  /* Keyboard focus outline for SVG link elements (Section 3.2 & 7) */
+  a.marker-interactive:focus-visible rect {
+    stroke-width: 2px;
+    stroke: var(--color-accent);
+    filter: drop-shadow(0 0 6px var(--color-accent));
+  }
+</style>

@@ -62,6 +62,11 @@ export const en = {
     portfolioBannerTitle: 'Document Your Observations & Scientific Mastery',
     portfolioBannerDesc: 'Your progress, quiz evaluations, field notes, and reflections are automatically organized into your private chronological Journey timeline.',
     openJourney: 'Open Journey Timeline',
+    globeCaption: 'Dynamic Crustal Anchors',
+    globeAriaLabel: 'Stylized wireframe globe with interactive geological location markers across Indonesia',
+    globeMerapiDesc: 'Volcanic Arc & Subduction',
+    globePaluDesc: 'Strike-Slip Fault & Tectonics',
+    globeSangiranDesc: 'Stratigraphy & Fossils',
   },
   cards: {
     inspect: 'Inspect Topic →',
