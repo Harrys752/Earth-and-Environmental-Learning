@@ -1,0 +1,57 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../../components/ui/Breadcrumb.astro';
+import TopicCard from '../../../../components/learning/TopicCard.astro';
+
+const rawTopics = await getCollection('topics');
+const rawExperiences = await getCollection('experiences');
+
+const topics = rawTopics.filter((topic) => {
+  const isId = topic.id.startsWith('id/');
+  return isId || !rawTopics.some((t) => t.id === `id/${topic.id}`);
+});
+
+const breadcrumbItems = [
+  { label: 'Jelajahi', href: '/id/explore' },
+  { label: 'Topik', current: true },
+];
+---
+
+<BaseLayout
+  title="Semua Topik & Domain Ilmu Kebumian"
+  description="Jelajahi domain geologi, atmosfer, hidrologi, dan ilmu lingkungan."
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-8">
+    <Breadcrumb items={breadcrumbItems} />
+
+    <header class="border-b border-[var(--color-border)] pb-6 space-y-2">
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-[var(--color-text)] tracking-tight">
+        Domain Ilmu Kebumian
+      </h1>
+      <p class="text-sm sm:text-base text-[var(--color-text-muted)] max-w-2xl leading-relaxed">
+        Pilih domain untuk mempelajari proses keplanetan dasar, dinamika tektonik, dan pengalaman belajar terkait.
+      </p>
+    </header>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {topics.map((topic) => {
+        const topicSlug = (topic.data.id || topic.id).replace(/^id\//, '');
+        const count = rawExperiences.filter(
+          (e) => e.data.topic === topicSlug
+        ).length;
+        return (
+          <TopicCard
+            slug={topicSlug}
+            title={topic.data.title}
+            tagline={topic.data.tagline}
+            description={topic.data.description}
+            category={topic.data.category}
+            experienceCount={count}
+            locale="id"
+          />
+        );
+      })}
+    </div>
+  </div>
+</BaseLayout>

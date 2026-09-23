@@ -9,20 +9,24 @@ import {
   addJourneyEntry,
 } from '../../lib/storage';
 import { getMasteryLabel } from '../../lib/progress';
-import { withBase } from '../../lib/url';
+import { useTranslations } from '../../i18n';
+import { getLocalizedUrl, type Locale } from '../../lib/i18nUrl';
 
 export interface QuizProps {
   quiz: QuizType;
   experienceSlug: string;
   experienceTitle?: string;
+  locale?: Locale;
 }
 
-export default function Quiz({ quiz, experienceSlug, experienceTitle }: QuizProps) {
+export default function Quiz({ quiz, experienceSlug, experienceTitle, locale = 'en' }: QuizProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<string, unknown>>({});
   const [feedbacks, setFeedbacks] = useState<Record<string, QuestionFeedback>>({});
   const [evaluationResult, setEvaluationResult] = useState<QuizEvaluationResult | null>(null);
   const [pastAttemptsCount, setPastAttemptsCount] = useState(0);
+
+  const t = useTranslations(locale);
 
   useEffect(() => {
     const progress = getProgress(experienceSlug);
@@ -77,8 +81,10 @@ export default function Quiz({ quiz, experienceSlug, experienceTitle }: QuizProp
     addJourneyEntry({
       type: 'learned',
       source: 'automatic',
-      title: `Completed Assessment: ${quiz.title}`,
-      description: `Scored ${result.scorePercentage}% (${result.correctCount}/${result.totalQuestions} questions correct). Mastery indicator: ${result.masteryContribution}.`,
+      title: locale === 'id' ? `Menyelesaikan Evaluasi: ${quiz.title}` : `Completed Assessment: ${quiz.title}`,
+      description: locale === 'id'
+        ? `Skor ${result.scorePercentage}% (${result.correctCount}/${result.totalQuestions} pertanyaan benar). Tingkat penguasaan: ${result.masteryContribution}.`
+        : `Scored ${result.scorePercentage}% (${result.correctCount}/${result.totalQuestions} questions correct). Mastery indicator: ${result.masteryContribution}.`,
       relatedExperienceSlug: experienceSlug,
       metadata: {
         quizScore: result.scorePercentage,
@@ -98,7 +104,7 @@ export default function Quiz({ quiz, experienceSlug, experienceTitle }: QuizProp
   if (!quiz || !quiz.questions || quiz.questions.length === 0) {
     return (
       <div class="rounded-xl border border-[var(--color-border)] p-6 text-center text-sm text-[var(--color-text-muted)]">
-        No assessment questions configured for this experience.
+        {locale === 'id' ? 'Tidak ada pertanyaan evaluasi untuk pengalaman belajar ini.' : 'No assessment questions configured for this experience.'}
       </div>
     );
   }
@@ -121,7 +127,7 @@ export default function Quiz({ quiz, experienceSlug, experienceTitle }: QuizProp
           </div>
 
           <h3 class="text-xl font-bold text-[var(--color-text)]">
-            {evaluationResult.passed ? 'Understanding Verified!' : 'Practice Reinforcement Recommended'}
+            {evaluationResult.passed ? t.quiz.passedTitle : t.quiz.reviewTitle}
           </h3>
 
           {experienceTitle && (
@@ -131,8 +137,10 @@ export default function Quiz({ quiz, experienceSlug, experienceTitle }: QuizProp
           )}
 
           <p class="text-sm text-[var(--color-text-muted)]">
-            You answered {evaluationResult.correctCount} of {evaluationResult.totalQuestions} questions correctly.
-            {pastAttemptsCount > 0 && ` (Attempt #${pastAttemptsCount + 1})`}
+            {locale === 'id'
+              ? `Anda menjawab ${evaluationResult.correctCount} dari ${evaluationResult.totalQuestions} pertanyaan dengan benar.`
+              : `You answered ${evaluationResult.correctCount} of ${evaluationResult.totalQuestions} questions correctly.`}
+            {pastAttemptsCount > 0 && ` (${locale === 'id' ? 'Percobaan ke-' : 'Attempt #'}${pastAttemptsCount + 1})`}
           </p>
 
           <div class="pt-2">
@@ -141,14 +149,16 @@ export default function Quiz({ quiz, experienceSlug, experienceTitle }: QuizProp
             >
               <span>{masteryInfo.label}</span>
             </span>
-            <p class="text-xs text-[var(--color-text-dim)] mt-1.5">{masteryInfo.description}</p>
+            <p class="text-xs text-[var(--color-text-dim)] mt-1.5">
+              {evaluationResult.passed ? t.quiz.passedMsg : t.quiz.reviewMsg}
+            </p>
           </div>
         </div>
 
         {/* Detailed Question Review */}
         <div class="border-t border-[var(--color-border)] pt-6 space-y-4">
           <h4 class="text-sm font-semibold text-[var(--color-text)] tracking-wide uppercase">
-            Review Answers & Scientific Explanations
+            {locale === 'id' ? 'Tinjauan Jawaban & Penjelasan Ilmiah' : 'Review Answers & Scientific Explanations'}
           </h4>
           <div class="space-y-3">
             {evaluationResult.questionFeedbacks.map((fb, idx) => {
@@ -173,7 +183,7 @@ export default function Quiz({ quiz, experienceSlug, experienceTitle }: QuizProp
                           : 'bg-rose-100 text-rose-800 dark:bg-rose-900 dark:text-rose-200'
                       }`}
                     >
-                      {fb.isCorrect ? 'Correct' : 'Needs Review'}
+                      {fb.isCorrect ? t.quiz.correct : t.quiz.incorrect}
                     </span>
                   </div>
                   <p class="text-[var(--color-text-muted)] leading-relaxed">{fb.explanation}</p>
@@ -194,14 +204,14 @@ export default function Quiz({ quiz, experienceSlug, experienceTitle }: QuizProp
               <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
               <path d="M3 3v5h5" />
             </svg>
-            <span>Retake Assessment</span>
+            <span>{t.quiz.retryQuiz}</span>
           </button>
 
           <a
-            href={withBase('/journey')}
+            href={getLocalizedUrl('/journey', locale)}
             class="px-5 py-2 rounded-xl bg-[var(--color-accent)] text-white text-xs font-semibold hover:bg-[var(--color-accent-hover)] transition-colors inline-flex items-center gap-1.5 shadow-sm"
           >
-            <span>View Journey Progress</span>
+            <span>{t.home.openJourney}</span>
             <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <line x1="5" y1="12" x2="19" y2="12" />
               <polyline points="12 5 19 12 12 19" />

@@ -1,35 +1,46 @@
 ---
 import { getCollection, render } from 'astro:content';
-import BaseLayout from '../../../layouts/BaseLayout.astro';
-import Breadcrumb from '../../../components/ui/Breadcrumb.astro';
-import LearningCard from '../../../components/learning/LearningCard.astro';
-import EmptyState from '../../../components/ui/EmptyState.astro';
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../../components/ui/Breadcrumb.astro';
+import LearningCard from '../../../../components/learning/LearningCard.astro';
+import EmptyState from '../../../../components/ui/EmptyState.astro';
 
 export async function getStaticPaths() {
-  const topics = (await getCollection('topics')).filter((t) => !t.id.startsWith('id/'));
-  return topics.map((entry) => ({
-    params: { topic: entry.data.id || entry.id },
-    props: { entry },
-  }));
+  const topics = await getCollection('topics');
+  // Generate routes for Indonesian topics
+  const idTopics = topics.filter((t) => t.id.startsWith('id/'));
+
+  return idTopics.map((entry) => {
+    const slug = (entry.data.id || entry.id).replace(/^id\//, '');
+    return {
+      params: { topic: slug },
+      props: { entry },
+    };
+  });
 }
 
 const { entry } = Astro.props;
 const { Content } = await render(entry);
 
+const topicSlug = (entry.data.id || entry.id).replace(/^id\//, '');
 const allExperiences = await getCollection('experiences');
-const topicExperiences = allExperiences.filter(
-  (exp) => exp.data.topic === (entry.data.id || entry.id)
-);
+
+// Filter Indonesian experiences for this topic
+const topicExperiences = allExperiences.filter((exp) => {
+  const expTopic = exp.data.topic;
+  const isId = exp.id.startsWith('id/');
+  return expTopic === topicSlug && isId;
+});
 
 const breadcrumbItems = [
-  { label: 'Explore', href: '/explore' },
-  { label: 'Topics', href: '/explore/topics' },
+  { label: 'Jelajahi', href: '/id/explore' },
+  { label: 'Topik', href: '/id/explore/topics' },
   { label: entry.data.title, current: true },
 ];
 ---
 
 <BaseLayout
-  title={`${entry.data.title} — Earth Science Topic`}
+  title={`${entry.data.title} — Topik Ilmu Kebumian`}
   description={entry.data.description}
 >
   <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
@@ -38,11 +49,11 @@ const breadcrumbItems = [
     <header class="border-b border-[var(--color-border)] pb-8 mb-10 space-y-4">
       <div class="flex items-center gap-2">
         <span class="px-2.5 py-0.5 rounded-full text-xs font-mono font-semibold bg-[var(--color-secondary-subtle)] text-[var(--color-secondary)] border border-[var(--color-secondary)]/30">
-          Scientific Domain: {entry.data.category}
+          Domain Sains: {entry.data.category}
         </span>
         <span class="text-xs text-[var(--color-text-dim)]">•</span>
         <span class="text-xs font-mono text-[var(--color-text-muted)]">
-          {topicExperiences.length} {topicExperiences.length === 1 ? 'experience' : 'experiences'}
+          {topicExperiences.length} pengalaman belajar
         </span>
       </div>
 
@@ -71,10 +82,10 @@ const breadcrumbItems = [
       <div class="flex items-center justify-between">
         <div>
           <h2 class="text-xl font-bold text-[var(--color-text)]">
-            Learning Experiences in {entry.data.title}
+            Pengalaman Belajar dalam {entry.data.title}
           </h2>
           <p class="text-xs text-[var(--color-text-muted)] mt-0.5">
-            Step-by-step inquiries, interactive simulations, and real-world anchors.
+            Inkuiri langkah demi langkah, simulasi interaktif, dan kajian lapangan nyata.
           </p>
         </div>
       </div>
@@ -84,8 +95,8 @@ const breadcrumbItems = [
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             {topicExperiences.map((exp) => (
               <LearningCard
-                id={exp.data.id || exp.id}
-                slug={exp.data.id || exp.id}
+                id={(exp.data.id || exp.id).replace(/^id\//, '')}
+                slug={(exp.data.id || exp.id).replace(/^id\//, '')}
                 title={exp.data.title}
                 tagline={exp.data.tagline}
                 description={exp.data.description}
@@ -95,15 +106,16 @@ const breadcrumbItems = [
                 isIndonesiaFirst={exp.data.realWorldConnections?.[0]?.isIndonesiaFirst}
                 hasInteractive={exp.data.interactiveElements?.length > 0}
                 hasGeoMap={exp.data.geoMapConnections?.length > 0}
+                locale="id"
               />
             ))}
           </div>
         ) : (
           <EmptyState
-            title="More Experiences in Development"
-            description="We are actively expanding this scientific domain with new inquiry modules, simulations, and real-world field anchors."
-            actionText="Explore All Experiences"
-            actionHref="/explore/experiences"
+            title="Pengalaman Belajar Lain Sedang Dikembangkan"
+            description="Kami secara bertahap memperluas domain sains ini dengan modul inkuiri, simulasi, dan kajian fenomena lapangan baru."
+            actionText="Jelajahi Semua Pengalaman"
+            actionHref="/id/explore/experiences"
           />
         )
       }

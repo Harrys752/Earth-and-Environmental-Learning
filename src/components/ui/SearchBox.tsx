@@ -1,11 +1,19 @@
 import { useState, useEffect } from 'preact/hooks';
 import { searchKnowledgeBase, type SearchResult } from '../../lib/search';
 import { withBase } from '../../lib/url';
+import { useTranslations } from '../../i18n';
+import type { Locale } from '../../lib/i18nUrl';
 
-export default function SearchBox() {
+export interface SearchBoxProps {
+  locale?: Locale;
+}
+
+export default function SearchBox({ locale = 'en' }: SearchBoxProps) {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState<SearchResult[]>([]);
   const [hasSearched, setHasSearched] = useState(false);
+
+  const t = useTranslations(locale);
 
   useEffect(() => {
     // Check URL parameters for query
@@ -33,6 +41,10 @@ export default function SearchBox() {
     setHasSearched(true);
   };
 
+  const suggestedTerms = locale === 'id'
+    ? ['Subduksi', 'Gunung Merapi', 'Pembentukan hujan', 'Karangsambung', 'Stratigrafi', 'Gempa Palu']
+    : ['Subduction', 'Mount Merapi', 'Rain formation', 'Karangsambung', 'Stratigraphy', 'Earthquakes'];
+
   return (
     <div class="space-y-6">
       {/* Search Input Field */}
@@ -47,9 +59,9 @@ export default function SearchBox() {
           type="text"
           value={query}
           onInput={(e) => handleInput((e.target as HTMLInputElement).value)}
-          placeholder="Search volcanoes, subduction, stratigraphy, rain formation, Merapi, Karangsambung..."
+          placeholder={t.search.placeholder}
           class="w-full pl-12 pr-4 py-3.5 rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text)] placeholder-[var(--color-text-dim)] text-base focus:ring-2 focus:ring-[var(--color-accent)] focus:outline-none shadow-sm transition-all"
-          aria-label="Search earth sciences platform"
+          aria-label={t.nav.search}
           autofocus
         />
         {query && (
@@ -58,7 +70,7 @@ export default function SearchBox() {
             onClick={() => handleInput('')}
             class="absolute inset-y-0 right-0 pr-4 flex items-center text-xs text-[var(--color-text-dim)] hover:text-[var(--color-text)] cursor-pointer"
           >
-            Clear
+            {t.search.clear}
           </button>
         )}
       </div>
@@ -66,8 +78,8 @@ export default function SearchBox() {
       {/* Suggested Quick Searches */}
       {!hasSearched && (
         <div class="flex items-center gap-2 flex-wrap text-xs text-[var(--color-text-muted)]">
-          <span class="font-semibold">Suggested Inquiries:</span>
-          {['Subduction', 'Mount Merapi', 'Rain formation', 'Karangsambung', 'Stratigraphy'].map((term) => (
+          <span class="font-semibold">{t.search.recentSearches}:</span>
+          {suggestedTerms.map((term) => (
             <button
               key={term}
               type="button"
@@ -85,7 +97,7 @@ export default function SearchBox() {
         <div class="space-y-4">
           <div class="flex items-center justify-between text-xs text-[var(--color-text-muted)] border-b border-[var(--color-border)] pb-2">
             <span>
-              Found <strong>{results.length}</strong> matching items for "{query}"
+              {t.search.resultsCount.replace('{count}', results.length.toString()).replace('{query}', query)}
             </span>
             <span class="font-mono text-[var(--color-text-dim)]">Priority Ranked</span>
           </div>
@@ -128,7 +140,7 @@ export default function SearchBox() {
                       href={withBase(item.href)}
                       class="font-semibold text-[var(--color-accent)] hover:underline inline-flex items-center gap-1"
                     >
-                      <span>Open {item.type}</span>
+                      <span>{t.cards.openExperience}</span>
                       <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <polyline points="9 18 15 12 9 6" />
                       </svg>
@@ -140,17 +152,17 @@ export default function SearchBox() {
           ) : (
             <div class="rounded-2xl border border-dashed border-[var(--color-border)] p-8 text-center max-w-md mx-auto space-y-3">
               <h4 class="text-base font-bold text-[var(--color-text)]">
-                No Direct Matches Found
+                {t.search.noResults}
               </h4>
               <p class="text-xs text-[var(--color-text-muted)] leading-relaxed">
-                We couldn't find matches for "{query}". Try broader geological terms like "tectonics", "rain", or "volcano".
+                {t.search.noResultsHint}
               </p>
               <div class="pt-2">
                 <a
-                  href={withBase('/explore/topics')}
+                  href={withBase(locale === 'id' ? '/id/explore/topics' : '/explore/topics')}
                   class="text-xs font-semibold text-[var(--color-accent)] hover:underline"
                 >
-                  Browse all topics instead →
+                  {t.home.viewAllTopics} →
                 </a>
               </div>
             </div>

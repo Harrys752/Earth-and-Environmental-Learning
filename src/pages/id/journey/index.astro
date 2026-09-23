@@ -1,0 +1,83 @@
+---
+import JourneyLayout from '../../../layouts/JourneyLayout.astro';
+import JourneyTimeline from '../../../components/journey/JourneyTimeline';
+import Button from '../../../components/ui/Button.astro';
+import { withBase } from '../../../lib/url';
+---
+
+<JourneyLayout
+  title="Jurnal Belajar Sains Anda"
+  description="Pantau progres belajar, tinjau evaluasi konsep, buka kembali refleksi lapangan, dan lihat model yang telah dibuat."
+  activeTab="overview"
+>
+  <div class="space-y-10">
+    <!-- Interactive Timeline & Milestone Preview Island -->
+    <section class="space-y-6">
+      <div class="flex items-center justify-between">
+        <div>
+          <h2 class="text-xl font-bold text-[var(--color-text)]">
+            Aktivitas Jurnal Kronologis
+          </h2>
+          <p class="text-xs text-[var(--color-text-muted)] mt-0.5">
+            Penyelesaian modul otomatis dan catatan lapangan manual yang dikelompokkan per bulan.
+          </p>
+        </div>
+
+        <Button href="/id/journey/timeline" variant="outline" size="sm">
+          Tampilan Linimasa Penuh
+        </Button>
+      </div>
+
+      <!-- Reactively renders user's entries or encouraging empty state -->
+      <JourneyTimeline client:visible />
+    </section>
+
+    <!-- Quick Navigation to Portfolio Sections -->
+    <section class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6 border-t border-[var(--color-border)]">
+      <a
+        href={withBase('/id/journey/timeline')}
+        class="p-5 rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] hover:border-[var(--color-accent)] transition-all space-y-2 block"
+      >
+        <span class="text-xs font-mono uppercase tracking-wider text-[var(--color-accent)] font-semibold">
+          Catatan Aktivitas
+        </span>
+        <h3 class="text-base font-bold text-[var(--color-text)]">
+          Linimasa & Log →
+        </h3>
+        <p class="text-xs text-[var(--color-text-muted)] leading-relaxed">
+          Catat pengamatan batuan luar ruangan, pemantauan cuaca, atau bacaan mandiri.
+        </p>
+      </a>
+
+      <a
+        href={withBase('/id/journey/reflections')}
+        class="p-5 rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] hover:border-[var(--color-secondary)] transition-all space-y-2 block"
+      >
+        <span class="text-xs font-mono uppercase tracking-wider text-[var(--color-secondary)] font-semibold">
+          Catatan Konsep
+        </span>
+        <h3 class="text-base font-bold text-[var(--color-text)]">
+          Arsip Refleksi →
+        </h3>
+        <p class="text-xs text-[var(--color-text-muted)] leading-relaxed">
+          Tinjau kembali pertanyaan, hipotesis pribadi, dan wawasan konseptual yang Anda catat.
+        </p>
+      </a>
+
+      <a
+        href={withBase('/id/journey/projects')}
+        class="p-5 rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] hover:border-[var(--color-interactive)] transition-all space-y-2 block"
+      >
+        <span class="text-xs font-mono uppercase tracking-wider text-[var(--color-interactive)] font-semibold">
+          Hasil Karya
+        </span>
+        <h3 class="text-base font-bold text-[var(--color-text)]">
+          Proyek Terapan →
+        </h3>
+        <p class="text-xs text-[var(--color-text-muted)] leading-relaxed">
+          Lihat produk sintesis, peta bahaya, dan model sains yang telah dibangun.
+        </p>
+      </a>
+    </section>
+  </div>
+</JourneyLayout>

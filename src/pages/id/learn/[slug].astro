@@ -1,0 +1,42 @@
+---
+import { getCollection, render } from 'astro:content';
+import LearningLayout from '../../../layouts/LearningLayout.astro';
+
+export async function getStaticPaths() {
+  const experiences = await getCollection('experiences');
+  // For Indonesian route, generate paths for experiences that have an id/ version or all fallback to available content
+  const idExperiences = experiences.filter((e) => e.id.startsWith('id/'));
+
+  return idExperiences.map((entry) => {
+    const slug = (entry.data.id || entry.id).replace(/^id\//, '');
+    return {
+      params: { slug },
+      props: { entry },
+    };
+  });
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+
+const rawTopics = await getCollection('topics');
+const idTopics = rawTopics.filter((t) => t.id.startsWith('id/'));
+const topic = idTopics.find((t) => (t.data.id || t.id).replace(/^id\//, '') === entry.data.topic) ||
+  rawTopics.find((t) => (t.data.id || t.id).replace(/^id\//, '') === entry.data.topic);
+
+const topicTitle = topic?.data.title || entry.data.topic;
+---
+
+<LearningLayout
+  title={entry.data.title}
+  tagline={entry.data.tagline}
+  description={entry.data.description}
+  experienceSlug={(entry.data.id || entry.id).replace(/^id\//, '')}
+  topicTitle={topicTitle}
+  topicSlug={entry.data.topic}
+  difficulty={entry.data.difficulty}
+  estimatedTime={entry.data.estimatedTime}
+  scientific={entry.data.scientific}
+>
+  <Content />
+</LearningLayout>

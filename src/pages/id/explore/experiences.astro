@@ -1,0 +1,59 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../components/ui/Breadcrumb.astro';
+import LearningCard from '../../../components/learning/LearningCard.astro';
+
+const rawExperiences = await getCollection('experiences');
+
+const experiences = rawExperiences.filter((exp) => {
+  const isId = exp.id.startsWith('id/');
+  return isId || !rawExperiences.some((e) => e.id === `id/${exp.id}`);
+});
+
+const breadcrumbItems = [
+  { label: 'Jelajahi', href: '/id/explore' },
+  { label: 'Pengalaman Belajar', current: true },
+];
+---
+
+<BaseLayout
+  title="Semua Pengalaman Belajar"
+  description="Telusuri seluruh pengalaman belajar interaktif Ilmu Kebumian & Lingkungan dengan tingkatan kesulitan dan estimasi waktu."
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-8">
+    <Breadcrumb items={breadcrumbItems} />
+
+    <header class="border-b border-[var(--color-border)] pb-6 space-y-2">
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-[var(--color-text)] tracking-tight">
+        Semua Pengalaman Belajar
+      </h1>
+      <p class="text-sm sm:text-base text-[var(--color-text-muted)] max-w-2xl leading-relaxed">
+        Pilih inkuiri berdasarkan waktu yang tersedia, tingkatan kesulitan, atau fenomena alam nyata. Setiap pengalaman menghubungkan teori dengan realitas.
+      </p>
+    </header>
+
+    <!-- Experience Cards Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {experiences.map((exp) => {
+        const expSlug = (exp.data.id || exp.id).replace(/^id\//, '');
+        return (
+          <LearningCard
+            id={expSlug}
+            slug={expSlug}
+            title={exp.data.title}
+            tagline={exp.data.tagline}
+            description={exp.data.description}
+            topic={exp.data.topic}
+            difficulty={exp.data.difficulty}
+            estimatedTime={exp.data.estimatedTime}
+            isIndonesiaFirst={exp.data.realWorldConnections?.[0]?.isIndonesiaFirst}
+            hasInteractive={exp.data.interactiveElements?.length > 0}
+            hasGeoMap={exp.data.geoMapConnections?.length > 0}
+            locale="id"
+          />
+        );
+      })}
+    </div>
+  </div>
+</BaseLayout>

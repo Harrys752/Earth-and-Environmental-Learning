@@ -9,6 +9,13 @@ export default defineConfig({
   site: 'https://harrys752.github.io/Earth-and-Environmental-Learning/',
   base: '/Earth-and-Environmental-Learning/',
   output: 'static',
+  i18n: {
+    defaultLocale: 'en',
+    locales: ['en', 'id'],
+    routing: {
+      prefixDefaultLocale: false,
+    },
+  },
   integrations: [
     preact({ compat: false }),
     mdx(),

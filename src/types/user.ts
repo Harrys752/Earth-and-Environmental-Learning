@@ -63,6 +63,7 @@ export interface UserPreferences {
   soundEffects: boolean;
   fontSize: 'standard' | 'large';
   hasSeenOnboardingRoadmap?: boolean;
+  locale?: 'en' | 'id';
 }
 
 export interface LocalState {

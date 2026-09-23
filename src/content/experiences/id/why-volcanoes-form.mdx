@@ -1,0 +1,218 @@
+---
+id: "why-volcanoes-form"
+title: "Mengapa Gunung Api Terbentuk?"
+tagline: "Dari Penunjaman Kerak Samudra hingga Busur Vulkanik Eksplosif"
+description: "Pelajari mesin termal keplanetan, zona subduksi, pelelehan fluks pada baji mantel, dan bagaimana penunjaman lempeng samudra di bawah Indonesia menyuplai energi bagi stratovulkan aktif seperti Gunung Merapi."
+topic: "plate-tectonics"
+difficulty: "intermediate"
+estimatedTime: "20min"
+learningObjectives:
+  - "Menjelaskan bagaimana subduksi samudra-benua memicu pelelehan fluks (flux melting) pada baji mantel astenosfer."
+  - "Membedakan pelelehan fluks (subduksi) dengan pelelehan dekompresi (punggung tengah samudra)."
+  - "Memahami alasan mengapa jajaran busur gunung api berjarak 100–300 km dari palung samudra."
+  - "Menganalisis mengapa magma busur yang kaya silika dan gas memicu erupsi eksplosif dibandingkan aliran basal yang tenang."
+  - "Menghubungkan tingginya kerapatan gunung api di Indonesia dengan konvergensi lempeng Indo-Australia dan Sunda."
+prerequisites: []
+interactiveElements:
+  - id: "plate-simulation"
+    type: "simulation"
+    title: "Simulasi Batas Lempeng"
+    pedagogicalPurpose: "Memungkinkan pembelajar mengatur kinematika lempeng dan mengamati genesis pembentukan magma"
+    isIllustrativeModel: true
+    accessibleFallbackText: "Model kinematik 2D yang mendemonstrasikan penunjaman lempeng, pelelehan fluks baji mantel, dan pembentukan busur vulkanik."
+  - id: "earth-layers"
+    type: "diagram"
+    title: "Penampang Melintang Litosfer"
+    pedagogicalPurpose: "Menginspeksi lapisan mekanis dan kimiawi kerak serta mantel Bumi"
+    isIllustrativeModel: true
+    accessibleFallbackText: "Penampang yang menampilkan kerak benua, kerak samudra, mantel litosferik, dan astenosfer."
+quiz:
+  quizId: "quiz-why-volcanoes-form"
+  title: "Mengapa Gunung Api Terbentuk? Evaluasi Konseptual"
+  questionCount: 6
+realWorldConnections:
+  - title: "Busur Vulkanik Jawa & Gunung Merapi"
+    locationName: "Busur Vulkanik Jawa, Indonesia"
+    isIndonesiaFirst: true
+    coordinates:
+      lat: -7.5407
+      lng: 110.4457
+    description: "Gunung Merapi di Jawa Tengah adalah salah satu stratovulkan paling aktif dan berbahaya di dunia, terletak ~300 km di utara Palung Jawa yang dalam."
+    phenomenon: "Pertumbuhan kubah lava andesitik kental, guguran awan panas (wedhus gembel), dan aliran lahar setelah hujan lebat."
+    globalGeneralization: "Fisika subduksi yang sama mengatur seluruh kawasan Cincin Api Pasifik—dari Pegunungan Andes di Amerika Selatan, Pegunungan Cascade di Amerika Utara, hingga Semenanjung Kamchatka."
+    geoMapSlug: "java-volcanic-arc"
+geoMapConnections:
+  - locationSlug: "java-volcanic-arc"
+    label: "Jelajahi Busur Vulkanik Jawa di GeoMap"
+    coordinates:
+      lat: -7.5407
+      lng: 110.4457
+    description: "Inspeksi palung batimetri regional, zona bahaya gunung api, dan vektor konvergensi lempeng di Indonesia."
+reflection:
+  - id: "refl-volcano-field"
+    prompt: "Jika Anda berada di lereng Gunung Merapi atau gunung api stratovulkan lainnya, bukti fisik apa dari endapan awan panas atau tefra masa lalu yang akan Anda amati di lanskap sekitar?"
+    placeholder: "Pertimbangkan tekstur batuan, sortasi endapan vulkanik, warna lapisan, atau geomorfologi..."
+    category: "observation"
+nextExperiences:
+  - "reading-rock-layers"
+  - "how-rain-forms"
+scientific:
+  source:
+    - "Tatsumi, Y., & Eggins, S. (1995). Subduction Zone Magmatism. Blackwell Science."
+    - "USGS Volcano Hazards Program (2024)."
+    - "Badan Geologi & PVMBG (Pusat Vulkanologi dan Mitigasi Bencana Geologi Indonesia)."
+  sourceType: "peer-reviewed"
+  lastReviewed: "2026-09-23"
+  scientificLevel: "intermediate"
+  confidence: "established"
+  references:
+    - title: "Subduction Zone Magmatism"
+      publisher: "Blackwell Science"
+      year: 1995
+    - title: "Aktivitas Vulkanik di Indonesia: Konteks Geotektonik dan Mitigasi Bencana"
+      publisher: "Badan Geologi Indonesia"
+      year: 2022
+review:
+  reviewStatus: "published"
+  sourceList:
+    - "USGS"
+    - "PVMBG Indonesia"
+    - "Blackwell Science"
+  lastReviewed: "2026-09-23"
+  contentVersion: "1.0.0"
+featured: true
+---
+
+import Simulation from '../../../components/visualization/Simulation';
+import InteractiveDiagram from '../../../components/visualization/InteractiveDiagram';
+import Quiz from '../../../components/quiz/Quiz';
+import ReflectionBox from '../../../components/learning/ReflectionBox';
+import RealWorldExample from '../../../components/learning/RealWorldExample.astro';
+import ObservationChallenge from '../../../components/learning/ObservationChallenge.astro';
+import { whyVolcanoesFormQuizId } from '../../../data/quizzes/id/why-volcanoes-form';
+
+## Bagian 1: Pertanyaan Pemantik
+
+> **Mengapa sebagian gunung api meletus dengan kedahsyatan eksplosif yang mematikan, sementara yang lain melelehkan lava dengan tenang—atau bahkan tidak pernah meletus sama sekali?**
+
+Bagi peradaban kuno, gunung api sering dipandang sebagai gerbang misterius menuju inti Bumi. Di Pulau Jawa, masyarakat masa lampau mendirikan candi-candi megah di bawah bayang-bayang Gunung Merapi, hidup berdampingan dengan raksasa yang menyuburkan tanah dengan abu vulkanik kaya mineral sekaligus mengancam dengan awan panas yang membakar.
+
+Dalam ilmu kebumian modern, gunung api bukanlah fenomena acak ataupun sekadar lubang di tanah. Gunung api adalah manifestasi permukaan dari mekanisme pelepasan panas internal planet Bumi.
+
+---
+
+## Bagian 2: Interior Termal Bumi & Struktur Kerak
+
+Di bawah kerak tipis tempat kita membangun peradaban terbentang lapisan batuan padat dan panas setebal lebih dari 2.900 kilometer: **mantel Bumi**. Salah satu kesalahpahaman umum adalah menganggap mantel sebagai lautan magma cair yang mendidih. **Kenyataannya, hampir seluruh mantel Bumi berwujud batuan padat.** Mantel tetap berwujud padat meskipun suhunya mencapai 1.200°C hingga 3.500°C karena tekanan beban ribuan kilometer batuan di atasnya menekan atom-atom mineral ke dalam struktur kisi kristal yang sangat rapat.
+
+Agar magma (batuan cair) dapat terbentuk, kondisi kesetimbangan tekanan-suhu tinggi ini harus terganggu.
+
+<InteractiveDiagram
+  client:visible
+  id="earth-layers"
+  title="Lapisan Mekanis & Komposisional Litosfer"
+  experienceSlug="why-volcanoes-form"
+  accessibleDescription="Diagram penampang interaktif yang menampilkan kerak rapuh (0–35 km), mantel litosferik kaku (35–100 km), dan astenosfer plastis (100–410 km). Klik tiap lapisan untuk melihat temperatur, tekanan, dan fase mineralnya."
+/>
+
+---
+
+## Bagian 3: Mekanisme Subduksi & Pelelehan Fluks (Flux Melting)
+
+Bagaimana batuan mantel yang padat bisa meleleh menjadi magma cair di bawah busur vulkanik Indonesia?
+
+Secara termodinamika, hanya ada tiga cara untuk melelehkan batuan padat di dalam Bumi:
+1. **Menaikkan temperatur** (pelelehan termal — relatif jarang sebagai pemicu utama kecuali pada titik panas/mantle plume).
+2. **Menurunkan tekanan** tanpa kehilangan panas (pelelehan dekompresi — terjadi pada punggung tengah samudra / mid-ocean ridges).
+3. **Menambahkan zat volatil kimia** seperti air untuk menurunkan titik leleh batuan (pelelehan fluks / *flux melting* — mesin utama zona subduksi).
+
+### Pabrik Magma Subduksi: Langkah demi Langkah
+
+```
+1. Kerak samudra menyerap air laut selama puluhan juta tahun (serpentinisasi).
+                     ↓
+2. Lempeng berkonvergensi dan menunjam ke dalam palung samudra (subduksi).
+                     ↓
+3. Temperatur dan tekanan meningkat melampaui kedalaman ~100 km; mineral hidrous terurai.
+                     ↓
+4. Air superkritis (H₂O) lepas dan naik ke baji mantel (mantle wedge) astenosfer yang panas.
+                     ↓
+5. Air memutuskan ikatan silikat, menurunkan titik leleh batuan peridotit (Pelelehan Fluks).
+                     ↓
+6. Diapir magma yang kurang padat naik ke atas menembus kerak benua karena gaya apung.
+                     ↓
+7. Magma berkumpul di kantung magma, mengalami diferensiasi silika, lalu meletus.
+```
+
+Saat garam ditaburkan ke atas es di musim dingin, es mencair bukan karena suhu udara memanas, melainkan karena garam menurunkan titik beku/leleh air. **Air bekerja dengan cara yang persis sama terhadap batuan peridotit di dalam mantel Bumi.** Pada kedalaman 100 km, penambahan hanya 0,5% hingga 2% air terlarut mampu menurunkan titik leleh batuan hingga ratusan derajat Celsius, secara spontan menghasilkan magma cair.
+
+---
+
+## Bagian 4: Simulasi Interaktif — Kinematika Batas Lempeng
+
+Gunakan simulasi ilmiah interaktif di bawah ini untuk menguji berbagai jenis batas tektonik. Pilih **Zona Subduksi** untuk mengamati penunjaman litosfer samudra, pelepasan fluida air volatil, dan naiknya diapir magma yang memberi makan busur vulkanik.
+
+<Simulation
+  client:visible
+  experienceSlug="why-volcanoes-form"
+  initialBoundary="convergent-subduction"
+/>
+
+---
+
+## Bagian 5: Fenomena Nyata Indonesia — Busur Vulkanik Jawa & Gunung Merapi
+
+Untuk melihat bagaimana teori subduksi global bekerja pada lanskap nyata, kita menengok Pulau Jawa di Indonesia.
+
+<RealWorldExample
+  title="Busur Vulkanik Jawa & Gunung Merapi"
+  locationName="Gunung Merapi, Jawa Tengah, Indonesia"
+  isIndonesiaFirst={true}
+  coordinates={{ lat: -7.5407, lng: 110.4457 }}
+  phenomenon="Gunung Merapi adalah stratovulkan aktif berketinggian 2.910 meter di atas Dataran Kedu. Merapi menghasilkan magma andesitik kental (~57% SiO₂) yang tidak dapat mengalir dengan mudah, membentuk kubah lava terjal yang secara berkala runtuh akibat gravitasi dan menghasilkan awan panas guguran (dikenal masyarakat lokal sebagai wedhus gembel) yang meluncur dengan kecepatan lebih dari 100 km/jam."
+  globalGeneralization="Busur Jawa adalah bagian dari Busur Sunda sepanjang 5.000 km, yang merupakan batas selatan dari Cincin Api Pasifik. Setiap stratovulkan di sepanjang Cincin Api—dari Gunung Fuji di Jepang, Gunung St. Helens di Amerika Serikat, hingga Cotopaxi di Ekuador—beroperasi dengan mekanisme pelelehan fluks subduksi yang sama persis."
+  geoMapSlug="java-volcanic-arc"
+/>
+
+---
+
+## Bagian 6: Tantangan Pengamatan Lapangan
+
+<ObservationChallenge
+  title="Mengidentifikasi Tekstur Batuan Vulkanik: Andesit vs Basal"
+  targetPhenomenon="Mengenali batuan beku vulkanik hasil subduksi kepulauan dibandingkan basal lantai samudra."
+  observationSteps={[
+    "Cari batu vulkanik pada material pondasi bangunan lokal, kerikil sungai, atau ornamen taman.",
+    "Periksa warna dan tekstur batuan di bawah pencahayaan alami yang terang.",
+    "Perhatikan butiran kristal mineral yang tampak jelas (fenokris) yang tertanam di dalam massa dasar berbutir halus (tekstur porfiritik).",
+    "Kenali kristal putih plagioklas feldspar dan prisma gelap memanjang hornblenda (amfibol) atau piroksen."
+  ]}
+  whatToLookFor="Andesit (batuan khas busur subduksi) umumnya berwarna abu-abu sedang dengan bintik kristal plagioklas putih yang terlihat jelas. Sebaliknya, basal samudra berwarna abu-abu sangat gelap hingga hitam pekat, lebih padat, dan butirannya sangat halus."
+  experienceSlug="why-volcanoes-form"
+/>
+
+---
+
+## Bagian 7: Evaluasi Konseptual & Pemahaman
+
+Uji pemahaman Anda tentang proses-proses fisik yang mengatur pembentukan gunung api. Setiap pertanyaan dilengkapi dengan penjelasan ilmiah mendalam.
+
+<Quiz
+  client:visible
+  quiz={whyVolcanoesFormQuizId}
+  experienceSlug="why-volcanoes-form"
+  experienceTitle="Mengapa Gunung Api Terbentuk?"
+  locale="id"
+/>
+
+---
+
+## Bagian 8: Refleksi Ilmiah
+
+<ReflectionBox
+  client:idle
+  experienceSlug="why-volcanoes-form"
+  prompt="Jika Anda berdiri di lereng Gunung Merapi atau stratovulkan lainnya, bukti fisik apa dari endapan awan panas atau tefra masa lalu yang akan Anda cari di lanskap sekitar?"
+  category="observation"
+  locale="id"
+/>

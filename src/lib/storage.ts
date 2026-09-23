@@ -21,6 +21,7 @@ const DEFAULT_PREFERENCES: UserPreferences = {
   soundEffects: false,
   fontSize: 'standard',
   hasSeenOnboardingRoadmap: false,
+  locale: 'en',
 };
 
 export function getDefaultState(): LocalState {

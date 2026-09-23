@@ -3,7 +3,10 @@ import '../styles/global.css';
 import { getCollection } from 'astro:content';
 import ThemeToggle from '../components/ui/ThemeToggle';
 import RoadmapCard from '../components/ui/RoadmapCard';
+import LanguageSwitcher from '../components/ui/LanguageSwitcher';
 import { withBase } from '../lib/url';
+import { useTranslations } from '../i18n';
+import { parseLocalePath, hasTranslation, getLocalizedUrl, type Locale } from '../lib/i18nUrl';
 
 export interface Props {
   title: string;
@@ -11,6 +14,7 @@ export interface Props {
   ogType?: string;
   canonicalUrl?: string;
   class?: string;
+  locale?: Locale;
 }
 
 const {
@@ -19,19 +23,27 @@ const {
   ogType = 'website',
   canonicalUrl,
   class: className = '',
+  locale: propLocale,
 } = Astro.props;
 
-const fullTitle = title.includes('Earth Learning')
-  ? title
-  : `${title} | Earth & Environmental Sciences`;
-
-const base = import.meta.env.BASE_URL;
 const currentPath = Astro.url.pathname;
-const isHome = currentPath === base || currentPath === base.slice(0, -1) || currentPath === '/' || currentPath === '';
+const { locale: detectedLocale, canonicalPath } = parseLocalePath(currentPath);
+const locale: Locale = propLocale || (Astro.currentLocale as Locale) || detectedLocale || 'en';
+const t = useTranslations(locale);
+
+const fullTitle = title.includes('Earth Learning') || title.includes('Bumi & Lingkungan')
+  ? title
+  : `${title} | ${t.nav.brandName}`;
+
+const siteOrigin = 'https://harrys752.github.io';
+const enUrl = `${siteOrigin}${getLocalizedUrl(canonicalPath, 'en')}`;
+const idUrl = `${siteOrigin}${getLocalizedUrl(canonicalPath, 'id')}`;
+const idTranslationExists = hasTranslation(canonicalPath, 'id');
+
+const isHome = canonicalPath === '/' || canonicalPath === '';
 const isActive = (path: string) => {
-  const target = withBase(path);
   if (path === '/' && isHome) return true;
-  if (path !== '/' && currentPath.startsWith(target)) return true;
+  if (path !== '/' && canonicalPath.startsWith(path)) return true;
   return false;
 };
 
@@ -39,26 +51,41 @@ const isActive = (path: string) => {
 const rawTopics = await getCollection('topics');
 const rawExperiences = await getCollection('experiences');
 
-const roadmapTopics = rawTopics.map((t) => ({
-  id: t.data.id || t.id,
-  title: t.data.title,
-  tagline: t.data.tagline || '',
-  description: t.data.description,
-  category: t.data.category,
-  experiences: rawExperiences
-    .filter((e) => e.data.topic === (t.data.id || t.id))
-    .map((e) => ({
-      id: e.data.id || e.id,
-      title: e.data.title,
-      difficulty: e.data.difficulty,
-      estimatedTime: e.data.estimatedTime,
-      featured: e.data.featured || (e.data.id || e.id) === 'why-volcanoes-form',
-    })),
-}));
+// Filter experiences and topics appropriate for the locale
+const roadmapTopics = rawTopics
+  .filter((topic) => {
+    // If topic is in a subfolder like id/, only include if matching locale
+    const isId = topic.id.startsWith('id/');
+    return locale === 'id' ? isId || !rawTopics.some(t => t.id === `id/${topic.id}`) : !isId;
+  })
+  .map((t) => {
+    const topicSlug = (t.data.id || t.id).replace(/^id\//, '');
+    return {
+      id: topicSlug,
+      title: t.data.title,
+      tagline: t.data.tagline || '',
+      description: t.data.description,
+      category: t.data.category,
+      experiences: rawExperiences
+        .filter((e) => {
+          const expTopic = e.data.topic;
+          const isId = e.id.startsWith('id/');
+          const matchesLocale = locale === 'id' ? (isId || !rawExperiences.some(x => x.id === `id/${e.id}`)) : !isId;
+          return expTopic === topicSlug && matchesLocale;
+        })
+        .map((e) => ({
+          id: (e.data.id || e.id).replace(/^id\//, ''),
+          title: e.data.title,
+          difficulty: e.data.difficulty,
+          estimatedTime: e.data.estimatedTime,
+          featured: e.data.featured || (e.data.id || e.id).includes('why-volcanoes-form'),
+        })),
+    };
+  });
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={locale}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -71,6 +98,11 @@ const roadmapTopics = rawTopics.map((t) => ({
     <meta property="og:description" content={description} />
     <meta property="og:type" content={ogType} />
     {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+
+    <!-- Hreflang Alternates (§5) -->
+    <link rel="alternate" hreflang="en" href={enUrl} />
+    {idTranslationExists && <link rel="alternate" hreflang="id" href={idUrl} />}
+    <link rel="alternate" hreflang="x-default" href={enUrl} />
 
     <title>{fullTitle}</title>
 
@@ -98,7 +130,7 @@ const roadmapTopics = rawTopics.map((t) => ({
       href="#main-content"
       class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 z-50 px-4 py-2 rounded-lg bg-[var(--color-accent)] text-white font-semibold text-xs shadow-lg"
     >
-      Skip to main content
+      {t.nav.skipContent}
     </a>
 
     <!-- Global Navigation Header -->
@@ -106,7 +138,7 @@ const roadmapTopics = rawTopics.map((t) => ({
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
         {/* Brand Logo & Tagline */}
         <div class="flex items-center gap-3">
-          <a href={withBase('/')} class="flex items-center gap-2.5 group focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] rounded-lg p-1">
+          <a href={getLocalizedUrl('/', locale)} class="flex items-center gap-2.5 group focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] rounded-lg p-1">
             <div class="w-8 h-8 rounded-xl bg-[var(--color-accent)] text-white flex items-center justify-center font-bold text-sm shadow-sm group-hover:scale-105 transition-transform">
               <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                 <circle cx="12" cy="12" r="10" />
@@ -116,10 +148,10 @@ const roadmapTopics = rawTopics.map((t) => ({
             </div>
             <div class="flex flex-col">
               <span class="font-extrabold text-sm sm:text-base text-[var(--color-text)] tracking-tight leading-none group-hover:text-[var(--color-accent)] transition-colors">
-                Earth & Environment
+                {t.nav.brandName}
               </span>
               <span class="text-[10px] font-mono text-[var(--color-text-dim)] leading-tight hidden sm:block">
-                Inquiry • Process • Reality
+                {t.nav.brandTagline}
               </span>
             </div>
           </a>
@@ -128,74 +160,77 @@ const roadmapTopics = rawTopics.map((t) => ({
         {/* Primary Desktop Navigation Links (§3.2) */}
         <nav class="hidden md:flex items-center gap-1 text-sm font-medium" aria-label="Main Navigation">
           <a
-            href={withBase('/')}
+            href={getLocalizedUrl('/', locale)}
             class={`px-3 py-1.5 rounded-lg transition-colors ${
               isActive('/')
                 ? 'text-[var(--color-accent)] font-semibold bg-[var(--color-accent-subtle)]'
                 : 'text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:bg-[var(--color-surface-hover)]'
             }`}
           >
-            Home
+            {t.nav.home}
           </a>
           <a
-            href={withBase('/explore')}
+            href={getLocalizedUrl('/explore', locale)}
             class={`px-3 py-1.5 rounded-lg transition-colors ${
               isActive('/explore')
                 ? 'text-[var(--color-accent)] font-semibold bg-[var(--color-accent-subtle)]'
                 : 'text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:bg-[var(--color-surface-hover)]'
             }`}
           >
-            Explore
+            {t.nav.explore}
           </a>
           <a
-            href={withBase('/learn')}
+            href={getLocalizedUrl('/learn', locale)}
             class={`px-3 py-1.5 rounded-lg transition-colors ${
               isActive('/learn')
                 ? 'text-[var(--color-accent)] font-semibold bg-[var(--color-accent-subtle)]'
                 : 'text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:bg-[var(--color-surface-hover)]'
             }`}
           >
-            Learn
+            {t.nav.learn}
           </a>
           <a
-            href={withBase('/journey')}
+            href={getLocalizedUrl('/journey', locale)}
             class={`px-3 py-1.5 rounded-lg transition-colors ${
               isActive('/journey')
                 ? 'text-[var(--color-accent)] font-semibold bg-[var(--color-accent-subtle)]'
                 : 'text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:bg-[var(--color-surface-hover)]'
             }`}
           >
-            Journey
+            {t.nav.journey}
           </a>
           <a
-            href={withBase('/geomap')}
+            href={getLocalizedUrl('/geomap', locale)}
             class={`px-3 py-1.5 rounded-lg transition-colors ${
               isActive('/geomap')
                 ? 'text-[var(--color-interactive)] font-semibold bg-[var(--color-interactive-subtle)]'
                 : 'text-[var(--color-text-muted)] hover:text-[var(--color-interactive)] hover:bg-[var(--color-surface-hover)]'
             }`}
           >
-            GeoMap Bridge
+            {t.nav.geomap}
           </a>
           <a
-            href={withBase('/about')}
+            href={getLocalizedUrl('/about', locale)}
             class={`px-3 py-1.5 rounded-lg transition-colors ${
               isActive('/about')
                 ? 'text-[var(--color-accent)] font-semibold bg-[var(--color-accent-subtle)]'
                 : 'text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:bg-[var(--color-surface-hover)]'
             }`}
           >
-            About
+            {t.nav.about}
           </a>
         </nav>
 
-        {/* Global Utilities: Search Icon, Theme Toggle & Roadmap Trigger Island */}
+        {/* Global Utilities: Language Switcher, Search Icon, Theme Toggle & Roadmap Trigger Island */}
         <div class="flex items-center gap-2">
+          {/* Language Switcher */}
+          <LanguageSwitcher client:idle currentLocale={locale} />
+
           <a
-            href={withBase('/search')}
+            href={getLocalizedUrl('/search', locale)}
             class="w-9 h-9 rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:bg-[var(--color-surface-hover)] flex items-center justify-center transition-colors focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
-            title="Search topics, experiences, and concepts"
-            aria-label="Search earth sciences knowledge base"
+            title={t.nav.searchTitle}
+            aria-label={t.nav.search}
           >
             <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <circle cx="11" cy="11" r="8" />
@@ -210,8 +245,8 @@ const roadmapTopics = rawTopics.map((t) => ({
             type="button"
             id="roadmap-navbar-trigger"
             class="w-9 h-9 rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:bg-[var(--color-surface-hover)] flex items-center justify-center transition-colors cursor-pointer select-none focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
-            title="Show learning roadmap & curriculum structure"
-            aria-label="Show learning roadmap"
+            title={t.nav.roadmapTitle}
+            aria-label={t.nav.roadmap}
             onclick="window.dispatchEvent(new CustomEvent('earth-learning:open-roadmap', { detail: { triggerId: 'roadmap-navbar-trigger' } }))"
           >
             <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -224,10 +259,10 @@ const roadmapTopics = rawTopics.map((t) => ({
           {/* Mobile Menu Trigger */}
           <div class="md:hidden flex items-center">
             <a
-              href={withBase('/explore')}
+              href={getLocalizedUrl('/explore', locale)}
               class="px-2.5 py-1.5 rounded-lg border border-[var(--color-border)] text-xs font-semibold text-[var(--color-text-muted)]"
             >
-              Menu
+              {t.nav.menu}
             </a>
           </div>
         </div>
@@ -249,48 +284,48 @@ const roadmapTopics = rawTopics.map((t) => ({
           <div class="space-y-3 md:col-span-2">
             <div class="flex items-center gap-2 font-bold text-sm text-[var(--color-text)]">
               <span class="w-2.5 h-2.5 rounded-full bg-[var(--color-accent)]" />
-              <span>Earth & Environmental Sciences Learning Platform</span>
+              <span>{t.footer.platformTitle}</span>
             </div>
             <p class="leading-relaxed max-w-md">
-              A narrative-driven, inquiry-based web platform turning planetary processes into interactive experiences. Built with zero required server runtimes, hostable entirely on static infrastructure.
+              {t.footer.platformDesc}
             </p>
             <div class="text-[11px] font-mono text-[var(--color-text-dim)]">
-              Guest-First Architecture • Progress stored 100% locally in your browser.
+              {t.footer.guestNotice}
             </div>
           </div>
 
           <div class="space-y-2">
             <h4 class="font-bold uppercase tracking-wider text-[var(--color-text)] text-[11px] font-mono">
-              Exploration
+              {t.footer.colExploration}
             </h4>
             <ul class="space-y-1.5 list-none p-0 m-0">
-              <li><a href={withBase('/explore/topics')} class="hover:text-[var(--color-text)]">All Topics</a></li>
-              <li><a href={withBase('/explore/experiences')} class="hover:text-[var(--color-text)]">Learning Experiences</a></li>
-              <li><a href={withBase('/learn/why-volcanoes-form')} class="hover:text-[var(--color-text)]">Volcanism Flagship</a></li>
-              <li><a href={withBase('/geomap')} class="hover:text-[var(--color-interactive)]">GeoMap Bridge</a></li>
+              <li><a href={getLocalizedUrl('/explore/topics', locale)} class="hover:text-[var(--color-text)]">{t.footer.allTopics}</a></li>
+              <li><a href={getLocalizedUrl('/explore/experiences', locale)} class="hover:text-[var(--color-text)]">{t.footer.learningExperiences}</a></li>
+              <li><a href={getLocalizedUrl('/learn/why-volcanoes-form', locale)} class="hover:text-[var(--color-text)]">{t.footer.volcanoFlagship}</a></li>
+              <li><a href={getLocalizedUrl('/geomap', locale)} class="hover:text-[var(--color-interactive)]">{t.nav.geomap}</a></li>
             </ul>
           </div>
 
           <div class="space-y-2">
             <h4 class="font-bold uppercase tracking-wider text-[var(--color-text)] text-[11px] font-mono">
-              Scientific Ethics
+              {t.footer.colEthics}
             </h4>
             <ul class="space-y-1.5 list-none p-0 m-0">
-              <li><a href={withBase('/about')} class="hover:text-[var(--color-text)]">Sources & Pedagogy</a></li>
-              <li><a href={withBase('/about#illustrative-models')} class="hover:text-[var(--color-text)]">Model Disclosures</a></li>
-              <li><a href={withBase('/journey')} class="hover:text-[var(--color-text)]">Personal Journey</a></li>
-              <li><a href={withBase('/search')} class="hover:text-[var(--color-text)]">Knowledge Search</a></li>
+              <li><a href={getLocalizedUrl('/about', locale)} class="hover:text-[var(--color-text)]">{t.footer.sourcesPedagogy}</a></li>
+              <li><a href={getLocalizedUrl('/about#illustrative-models', locale)} class="hover:text-[var(--color-text)]">{t.footer.modelDisclosures}</a></li>
+              <li><a href={getLocalizedUrl('/journey', locale)} class="hover:text-[var(--color-text)]">{t.footer.personalJourney}</a></li>
+              <li><a href={getLocalizedUrl('/search', locale)} class="hover:text-[var(--color-text)]">{t.footer.knowledgeSearch}</a></li>
             </ul>
           </div>
         </div>
 
         <div class="pt-6 border-t border-[var(--color-border)] flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-[var(--color-text-dim)]">
           <div>
-            Earth Science Learning Platform (V1). Open scientific education.
+            {t.footer.copyright}
           </div>
           <div class="flex items-center gap-4">
-            <a href={withBase('/about')} class="hover:underline">About</a>
-            <a href={withBase('/geomap')} class="hover:underline">GeoMap Indonesia 2.0 (External)</a>
+            <a href={getLocalizedUrl('/about', locale)} class="hover:underline">{t.nav.about}</a>
+            <a href={getLocalizedUrl('/geomap', locale)} class="hover:underline">{t.footer.geoMapExternal}</a>
           </div>
         </div>
       </div>

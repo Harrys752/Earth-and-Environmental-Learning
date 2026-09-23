@@ -3,7 +3,7 @@ import { getCollection, render } from 'astro:content';
 import LearningLayout from '../../layouts/LearningLayout.astro';
 
 export async function getStaticPaths() {
-  const experiences = await getCollection('experiences');
+  const experiences = (await getCollection('experiences')).filter((e) => !e.id.startsWith('id/'));
   return experiences.map((entry) => ({
     params: { slug: entry.data.id || entry.id },
     props: { entry },

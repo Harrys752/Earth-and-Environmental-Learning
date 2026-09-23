@@ -1,0 +1,30 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/ui/Breadcrumb.astro';
+import SearchBox from '../../components/ui/SearchBox';
+
+const breadcrumbItems = [
+  { label: 'Beranda', href: '/id' },
+  { label: 'Pencarian', current: true },
+];
+---
+
+<BaseLayout
+  title="Pencarian Basis Pengetahuan — Ilmu Kebumian & Lingkungan"
+  description="Pencarian instan sisi klien di seluruh topik, pengalaman belajar, konsep sains, dan lokasi lapangan di Indonesia."
+>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-8">
+    <Breadcrumb items={breadcrumbItems} />
+
+    <header class="border-b border-[var(--color-border)] pb-6 space-y-2">
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-[var(--color-text)] tracking-tight">
+        Cari Pengetahuan Kebumian
+      </h1>
+      <p class="text-sm sm:text-base text-[var(--color-text-muted)] max-w-2xl leading-relaxed">
+        Temukan informasi berdasarkan kata kunci ilmiah, formasi geologi, kajian lapangan Indonesia, atau proses fisik.
+      </p>
+    </header>
+
+    <SearchBox client:load locale="id" />
+  </div>
+</BaseLayout>
