@@ -7,36 +7,47 @@ export interface Props {
   title: string;
   description?: string;
   activeTab?: 'overview' | 'timeline' | 'reflections' | 'projects';
+  locale?: 'en' | 'id';
 }
 
 const {
   title,
   description = 'Your personal Earth & Environmental Sciences learning timeline, reflections, and field observations.',
   activeTab = 'overview',
+  locale = 'en',
 } = Astro.props;
 
-const tabs = [
-  { id: 'overview', label: 'Overview Dashboard', href: '/journey' },
-  { id: 'timeline', label: 'Timeline & Logs', href: '/journey/timeline' },
-  { id: 'reflections', label: 'Reflections', href: '/journey/reflections' },
-  { id: 'projects', label: 'Built Projects', href: '/journey/projects' },
-];
+const isId = locale === 'id';
+
+const tabs = isId
+  ? [
+      { id: 'overview', label: 'Ringkasan Dasbor', href: '/id/journey' },
+      { id: 'timeline', label: 'Linimasa & Log', href: '/id/journey/timeline' },
+      { id: 'reflections', label: 'Refleksi', href: '/id/journey/reflections' },
+      { id: 'projects', label: 'Proyek Terapan', href: '/id/journey/projects' },
+    ]
+  : [
+      { id: 'overview', label: 'Overview Dashboard', href: '/journey' },
+      { id: 'timeline', label: 'Timeline & Logs', href: '/journey/timeline' },
+      { id: 'reflections', label: 'Reflections', href: '/journey/reflections' },
+      { id: 'projects', label: 'Built Projects', href: '/journey/projects' },
+    ];
 
 const breadcrumbItems: BreadcrumbItem[] = [
-  { label: 'Journey', href: '/journey', current: activeTab === 'overview' },
+  { label: isId ? 'Jurnal' : 'Journey', href: isId ? '/id/journey' : '/journey', current: activeTab === 'overview' },
 ];
 
 if (activeTab !== 'overview') {
   const activeObj = tabs.find((t) => t.id === activeTab);
   breadcrumbItems.push({
-    label: activeObj?.label || 'Section',
+    label: activeObj?.label || (isId ? 'Bagian' : 'Section'),
     href: activeObj?.href,
     current: true,
   });
 }
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout title={title} description={description} locale={locale}>
   <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
     <Breadcrumb items={breadcrumbItems} class="mb-4" />
 

@@ -31,7 +31,7 @@ const { locale: detectedLocale, canonicalPath } = parseLocalePath(currentPath);
 const locale: Locale = propLocale || (Astro.currentLocale as Locale) || detectedLocale || 'en';
 const t = useTranslations(locale);
 
-const fullTitle = title.includes('Earth Learning') || title.includes('Bumi & Lingkungan')
+const fullTitle = title.includes('Earth & Environment') || title.includes('Earth Learning')
   ? title
   : `${title} | ${t.nav.brandName}`;
 

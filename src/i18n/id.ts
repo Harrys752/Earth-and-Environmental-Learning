@@ -5,7 +5,7 @@ import type { TranslationDictionary } from './en';
  */
 export const id: TranslationDictionary = {
   nav: {
-    brandName: 'Bumi & Lingkungan',
+    brandName: 'Earth & Environment',
     brandTagline: 'Inkuiri • Proses • Realitas',
     home: 'Beranda',
     explore: 'Jelajahi',
@@ -23,7 +23,7 @@ export const id: TranslationDictionary = {
     langCurrent: 'Bahasa Indonesia',
   },
   footer: {
-    platformTitle: 'Platform Pembelajaran Ilmu Kebumian & Lingkungan',
+    platformTitle: 'Earth & Environment Learning Platform',
     platformDesc: 'Platform web interaktif berbasis narasi dan inkuiri yang mengubah proses keplanetan menjadi pengalaman belajar langsung. Dibuat tanpa runtime server, di-host sepenuhnya di infrastruktur statis.',
     guestNotice: 'Arsitektur Ramah Tamu • Progres tersimpan 100% lokal di browser Anda.',
     colExploration: 'Eksplorasi',
@@ -35,7 +35,7 @@ export const id: TranslationDictionary = {
     modelDisclosures: 'Keterbukaan Model',
     personalJourney: 'Jurnal Belajar Pribadi',
     knowledgeSearch: 'Pencarian Pengetahuan',
-    copyright: 'Platform Pembelajaran Ilmu Kebumian (V1). Pendidikan sains terbuka.',
+    copyright: 'Earth & Environment Learning Platform (V1). Pendidikan sains terbuka.',
     geoMapExternal: 'GeoMap Indonesia 2.0 (Eksternal)',
   },
   home: {
