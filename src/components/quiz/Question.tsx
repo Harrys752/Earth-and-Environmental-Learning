@@ -1,4 +1,4 @@
-import { useState } from 'preact/hooks';
+import { useState, useEffect } from 'preact/hooks';
 import type { Question as QuestionType, QuestionFeedback } from '../../types/quiz';
 import AnswerOption from './AnswerOption';
 import FeedbackPanel from './FeedbackPanel';
@@ -10,10 +10,29 @@ export interface QuestionProps {
   questionNumber: number;
   totalQuestions: number;
   onAnswerSubmit: (questionId: string, answer: unknown) => void;
+  onRetryQuestion?: (questionId: string) => void;
   onNextQuestion: () => void;
   isLastQuestion: boolean;
   activeFeedback?: QuestionFeedback;
   locale?: Locale;
+}
+
+function getInitialOrdering(question: QuestionType): string[] {
+  if (!question.orderingItems || question.orderingItems.length === 0) return [];
+  const ids = question.orderingItems.map((o) => o.id);
+  if (ids.length <= 1) return ids;
+
+  const correct = Array.isArray(question.correctAnswer) ? (question.correctAnswer as string[]) : [];
+
+  // Reverse items as default non-revealing order
+  let initial = [...ids].reverse();
+
+  // If reversing happens to match the correct order, shift by 1 to ensure scrambled initial order
+  if (correct.length > 0 && JSON.stringify(initial) === JSON.stringify(correct)) {
+    initial = [...initial.slice(1), initial[0]];
+  }
+
+  return initial;
 }
 
 export default function Question({
@@ -21,20 +40,37 @@ export default function Question({
   questionNumber,
   totalQuestions,
   onAnswerSubmit,
+  onRetryQuestion,
   onNextQuestion,
   isLastQuestion,
   activeFeedback,
   locale = 'en',
 }: QuestionProps) {
   const t = useTranslations(locale);
+
   // Internal selection state depending on question type
   const [singleAnswer, setSingleAnswer] = useState<string>('');
   const [multiAnswers, setMultiAnswers] = useState<string[]>([]);
   const [matchingAnswers, setMatchingAnswers] = useState<Record<string, string>>({});
-  const [orderedItems, setOrderedItems] = useState<string[]>(
-    question.orderingItems ? question.orderingItems.map((o) => o.id) : []
-  );
+  const [orderedItems, setOrderedItems] = useState<string[]>(() => getInitialOrdering(question));
+  const [hasInteractedOrdering, setHasInteractedOrdering] = useState<boolean>(false);
   const [calcAnswer, setCalcAnswer] = useState<string>('');
+  const [draggedIdx, setDraggedIdx] = useState<number | null>(null);
+
+  const resetQuestionState = (targetQuestion: QuestionType = question) => {
+    setSingleAnswer('');
+    setMultiAnswers([]);
+    setMatchingAnswers({});
+    setOrderedItems(getInitialOrdering(targetQuestion));
+    setHasInteractedOrdering(false);
+    setCalcAnswer('');
+    setDraggedIdx(null);
+  };
+
+  // Synchronize internal state when the active question changes
+  useEffect(() => {
+    resetQuestionState(question);
+  }, [question.id]);
 
   const isAnswered = !!activeFeedback;
 
@@ -64,6 +100,46 @@ export default function Question({
     updated[index] = updated[targetIdx];
     updated[targetIdx] = temp;
     setOrderedItems(updated);
+    setHasInteractedOrdering(true);
+  };
+
+  const handleDragStart = (e: DragEvent, idx: number) => {
+    if (isAnswered) return;
+    setDraggedIdx(idx);
+    if (e.dataTransfer) {
+      e.dataTransfer.effectAllowed = 'move';
+      e.dataTransfer.setData('text/plain', String(idx));
+    }
+  };
+
+  const handleDragOver = (e: DragEvent) => {
+    if (isAnswered) return;
+    e.preventDefault();
+    if (e.dataTransfer) {
+      e.dataTransfer.dropEffect = 'move';
+    }
+  };
+
+  const handleDrop = (e: DragEvent, toIdx: number) => {
+    if (isAnswered) return;
+    e.preventDefault();
+    if (draggedIdx === null || draggedIdx === toIdx) {
+      setDraggedIdx(null);
+      return;
+    }
+    const updated = [...orderedItems];
+    const [moved] = updated.splice(draggedIdx, 1);
+    updated.splice(toIdx, 0, moved);
+    setOrderedItems(updated);
+    setHasInteractedOrdering(true);
+    setDraggedIdx(null);
+  };
+
+  const handleRetry = () => {
+    resetQuestionState(question);
+    if (onRetryQuestion) {
+      onRetryQuestion(question.id);
+    }
   };
 
   const handleSubmit = (e?: Event) => {
@@ -111,7 +187,7 @@ export default function Question({
       case 'matching':
         return Object.keys(matchingAnswers).length === (question.matchingPairs?.length || 0);
       case 'ordering':
-        return orderedItems.length > 0;
+        return orderedItems.length > 0 && hasInteractedOrdering;
       case 'calculation':
         return calcAnswer.trim().length > 0;
       case 'interactive':
@@ -236,33 +312,48 @@ export default function Question({
             <div class="text-xs text-[var(--color-text-muted)] italic">
               {t.quizComponent.orderingHint}
             </div>
-            <div class="space-y-2">
+            <div
+              class="space-y-2.5"
+              role="list"
+              aria-label={`Ordering sequence for question ${questionNumber}`}
+            >
               {orderedItems.map((itemId, idx) => {
                 const item = question.orderingItems?.find((o) => o.id === itemId);
                 if (!item) return null;
+                const isDragging = draggedIdx === idx;
                 return (
                   <div
                     key={itemId}
-                    class="flex items-center justify-between p-3.5 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] gap-3"
+                    role="listitem"
+                    draggable={!isAnswered}
+                    onDragStart={(e) => handleDragStart(e, idx)}
+                    onDragOver={handleDragOver}
+                    onDrop={(e) => handleDrop(e, idx)}
+                    class={`flex items-center justify-between p-3.5 sm:p-4 rounded-xl border transition-all duration-150 gap-3 ${
+                      isDragging
+                        ? 'border-[var(--color-accent)] bg-[var(--color-surface-hover)] opacity-50 shadow-md'
+                        : 'border-[var(--color-border)] bg-[var(--color-surface)] hover:border-[var(--color-text-dim)]/40'
+                    }`}
                   >
-                    <div class="flex items-center gap-3">
-                      <span class="w-6 h-6 rounded-full bg-[var(--color-surface-hover)] text-xs font-mono font-bold flex items-center justify-center text-[var(--color-text-muted)]">
+                    <div class="flex items-center gap-3 flex-1 min-w-0">
+                      <span class="w-7 h-7 rounded-lg bg-[var(--color-surface-hover)] border border-[var(--color-border)] text-xs font-mono font-bold flex items-center justify-center text-[var(--color-text-muted)] shrink-0">
                         {idx + 1}
                       </span>
-                      <span class="text-sm font-medium text-[var(--color-text)]">
+                      <span class="text-sm font-medium text-[var(--color-text)] leading-snug">
                         {item.label}
                       </span>
                     </div>
                     {!isAnswered && (
-                      <div class="flex items-center gap-1">
+                      <div class="flex items-center gap-1 shrink-0">
                         <button
                           type="button"
                           disabled={idx === 0}
                           onClick={() => moveOrderItem(idx, 'up')}
-                          class="p-1.5 rounded-md hover:bg-[var(--color-surface-hover)] disabled:opacity-30 cursor-pointer disabled:cursor-not-allowed text-[var(--color-text-muted)]"
+                          class="p-2 min-w-[36px] min-h-[36px] rounded-lg hover:bg-[var(--color-surface-hover)] disabled:opacity-25 cursor-pointer disabled:cursor-not-allowed text-[var(--color-text-muted)] hover:text-[var(--color-text)] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] flex items-center justify-center"
                           aria-label={t.quizComponent.moveUp.replace('{label}', item.label)}
+                          title={t.quizComponent.moveUp.replace('{label}', item.label)}
                         >
-                          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                             <polyline points="18 15 12 9 6 15" />
                           </svg>
                         </button>
@@ -270,10 +361,11 @@ export default function Question({
                           type="button"
                           disabled={idx === orderedItems.length - 1}
                           onClick={() => moveOrderItem(idx, 'down')}
-                          class="p-1.5 rounded-md hover:bg-[var(--color-surface-hover)] disabled:opacity-30 cursor-pointer disabled:cursor-not-allowed text-[var(--color-text-muted)]"
+                          class="p-2 min-w-[36px] min-h-[36px] rounded-lg hover:bg-[var(--color-surface-hover)] disabled:opacity-25 cursor-pointer disabled:cursor-not-allowed text-[var(--color-text-muted)] hover:text-[var(--color-text)] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] flex items-center justify-center"
                           aria-label={t.quizComponent.moveDown.replace('{label}', item.label)}
+                          title={t.quizComponent.moveDown.replace('{label}', item.label)}
                         >
-                          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                             <polyline points="6 9 12 15 18 9" />
                           </svg>
                         </button>
@@ -328,10 +420,7 @@ export default function Question({
       {isAnswered && activeFeedback && (
         <FeedbackPanel
           feedback={activeFeedback}
-          onRetry={() => {
-            // Re-enable editing
-            setSingleAnswer('');
-          }}
+          onRetry={handleRetry}
           onNext={onNextQuestion}
           isLastQuestion={isLastQuestion}
           locale={locale}

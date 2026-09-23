@@ -46,6 +46,19 @@ export default function Quiz({ quiz, experienceSlug, experienceTitle, locale = '
     setFeedbacks((prev) => ({ ...prev, [questionId]: feedback }));
   };
 
+  const handleRetryQuestion = (questionId: string) => {
+    setFeedbacks((prev) => {
+      const next = { ...prev };
+      delete next[questionId];
+      return next;
+    });
+    setAnswers((prev) => {
+      const next = { ...prev };
+      delete next[questionId];
+      return next;
+    });
+  };
+
   const handleNextQuestion = () => {
     if (isLastQuestion) {
       finishQuiz();
@@ -246,6 +259,7 @@ export default function Quiz({ quiz, experienceSlug, experienceTitle, locale = '
         questionNumber={currentIndex + 1}
         totalQuestions={quiz.questions.length}
         onAnswerSubmit={handleAnswerSubmit}
+        onRetryQuestion={handleRetryQuestion}
         onNextQuestion={handleNextQuestion}
         isLastQuestion={isLastQuestion}
         activeFeedback={currentFeedback}
