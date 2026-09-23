@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { getRelatedContent, CONTENT_GRAPH, NODE_REGISTRY } from '../../src/lib/contentGraph';
+import { getRelatedContent, NODE_REGISTRY } from '../../src/lib/contentGraph';
 
 describe('Knowledge Content Graph Resolver', () => {
   it('resolves related concepts, experiences, and locations for flagship experience', () => {

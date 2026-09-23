@@ -1,4 +1,6 @@
 ---
+import { withBase } from '../../lib/url';
+
 export interface Props {
   variant?: 'primary' | 'secondary' | 'accent' | 'outline' | 'ghost';
   size?: 'sm' | 'md' | 'lg';
@@ -47,7 +49,7 @@ const combinedClass = `${baseStyles} ${sizeStyles[size]} ${variantStyles[variant
 {
   href ? (
     <a
-      href={href}
+      href={href ? withBase(href) : undefined}
       class={combinedClass}
       id={id}
       aria-label={ariaLabel}

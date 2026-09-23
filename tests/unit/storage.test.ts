@@ -1,9 +1,7 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import {
   loadState,
-  persistState,
   getProgress,
-  saveProgress,
   updateExperienceStatus,
   recordExploration,
   addJourneyEntry,
