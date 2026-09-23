@@ -4,7 +4,8 @@ import JourneyLayout from '../../layouts/JourneyLayout.astro';
 import Badge from '../../components/ui/Badge.astro';
 import { withBase } from '../../lib/url';
 
-const projects = await getCollection('projects');
+const allProjects = await getCollection('projects');
+const projects = allProjects.filter((p) => !p.id.startsWith('id/'));
 ---
 
 <JourneyLayout

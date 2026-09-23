@@ -1,10 +1,16 @@
 import { useState, useEffect } from 'preact/hooks';
 import type { Reflection } from '../../types/journey';
 import { getReflections } from '../../lib/storage';
-import { withBase } from '../../lib/url';
+import { useTranslations } from '../../i18n';
+import { getLocalizedUrl, type Locale } from '../../lib/i18nUrl';
 
-export default function ReflectionsViewer() {
+export interface ReflectionsViewerProps {
+  locale?: Locale;
+}
+
+export default function ReflectionsViewer({ locale = 'en' }: ReflectionsViewerProps) {
   const [reflections, setReflections] = useState<Reflection[]>([]);
+  const t = useTranslations(locale);
 
   const loadReflections = () => {
     setReflections(getReflections());
@@ -26,16 +32,16 @@ export default function ReflectionsViewer() {
           </svg>
         </div>
         <h3 class="text-base font-bold text-[var(--color-text)] mb-2">
-          No Reflections Logged Yet
+          {t.reflectionsViewer.emptyTitle}
         </h3>
         <p class="text-xs sm:text-sm text-[var(--color-text-muted)] mb-6 leading-relaxed">
-          At the end of each learning experience, you can record short reflections, personal questions, or outdoor observations.
+          {t.reflectionsViewer.emptyDesc}
         </p>
         <a
-          href={withBase('/learn/why-volcanoes-form')}
+          href={getLocalizedUrl('/learn/why-volcanoes-form', locale)}
           class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[var(--color-accent)] text-white text-xs font-semibold hover:bg-[var(--color-accent-hover)] transition-all"
         >
-          Explore Why Do Volcanoes Form?
+          {t.reflectionsViewer.exploreButton}
         </a>
       </div>
     );
@@ -45,7 +51,8 @@ export default function ReflectionsViewer() {
     <div class="space-y-4">
       {reflections.map((refl) => {
         const d = new Date(refl.timestamp);
-        const dateStr = d.toLocaleDateString('en-US', {
+        const dateLocale = locale === 'id' ? 'id-ID' : 'en-US';
+        const dateStr = d.toLocaleDateString(dateLocale, {
           month: 'short',
           day: 'numeric',
           year: 'numeric',
@@ -58,7 +65,7 @@ export default function ReflectionsViewer() {
           >
             <div class="flex items-center justify-between gap-2 flex-wrap text-xs">
               <span class="font-mono font-semibold uppercase tracking-wider text-[var(--color-accent)]">
-                {refl.promptCategory || 'Scientific Insight'}
+                {refl.promptCategory || t.reflectionsViewer.defaultCategory}
               </span>
               <span class="font-mono text-[var(--color-text-dim)]">{dateStr}</span>
             </div>
@@ -73,13 +80,13 @@ export default function ReflectionsViewer() {
 
             <div class="pt-2 flex items-center justify-between text-xs">
               <span class="text-[var(--color-text-dim)]">
-                Recorded locally in browser
+                {t.reflectionsViewer.localNotice}
               </span>
               <a
-                href={withBase(`/learn/${refl.experienceSlug}`)}
+                href={getLocalizedUrl(`/learn/${refl.experienceSlug}`, locale)}
                 class="font-semibold text-[var(--color-accent)] hover:underline inline-flex items-center gap-1"
               >
-                <span>Revisit Source Experience</span>
+                <span>{t.reflectionsViewer.revisit}</span>
                 <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <polyline points="9 18 15 12 9 6" />
                 </svg>

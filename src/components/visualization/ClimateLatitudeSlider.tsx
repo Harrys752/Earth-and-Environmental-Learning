@@ -1,9 +1,17 @@
 import { useState } from 'preact/hooks';
 import { recordExploration } from '../../lib/storage';
 import InteractiveSlider from './InteractiveSlider';
+import type { Locale } from '../../lib/i18nUrl';
 
-export default function ClimateLatitudeSlider({ experienceSlug = 'why-are-there-climate-zones' }: { experienceSlug?: string }) {
+export default function ClimateLatitudeSlider({
+  experienceSlug = 'why-are-there-climate-zones',
+  locale = 'en',
+}: {
+  experienceSlug?: string;
+  locale?: Locale;
+}) {
   const [latitude, setLatitude] = useState<number>(0); // 0 = Equator (Indonesia), 45 = Mid-latitude, 80 = Polar
+  const isId = locale === 'id';
 
   const handleSliderChange = (val: number) => {
     setLatitude(val);
@@ -22,21 +30,33 @@ export default function ClimateLatitudeSlider({ experienceSlug = 'why-are-there-
   const beamSpread = (1 / Math.sin((sunAngle * Math.PI) / 180)).toFixed(2);
 
   // Climate classification zone
-  let zoneName = 'Tropical / Equatorial Zone';
+  let zoneName = isId ? 'Zona Tropis / Ekuator' : 'Tropical / Equatorial Zone';
   let zoneColor = 'text-amber-500 bg-amber-500/10 border-amber-500/30';
-  let zoneDescription = 'Direct high-angle solar radiation year-round. High temperature, high humidity, convective rainfall, and no thermal winter.';
-  let regionalExample = 'Indonesia (0° to 10°S): Pontianak, Jakarta, Bogor, Bali.';
+  let zoneDescription = isId
+    ? 'Penyinaran matahari bersudut tinggi sepanjang tahun. Suhu dan kelembapan tinggi, curah hujan konvektif lebat, tanpa musim dingin termal.'
+    : 'Direct high-angle solar radiation year-round. High temperature, high humidity, convective rainfall, and no thermal winter.';
+  let regionalExample = isId
+    ? 'Indonesia (0° hingga 10°LS): Pontianak, Jakarta, Bogor, Bali.'
+    : 'Indonesia (0° to 10°S): Pontianak, Jakarta, Bogor, Bali.';
 
   if (latitude >= 23.5 && latitude < 66.5) {
-    zoneName = 'Temperate / Mid-Latitude Zone';
+    zoneName = isId ? 'Zona Sedang / Lintang Menengah' : 'Temperate / Mid-Latitude Zone';
     zoneColor = 'text-emerald-500 bg-emerald-500/10 border-emerald-500/30';
-    zoneDescription = 'Moderate solar angle with marked seasonal variation in day length and temperature (spring, summer, autumn, winter).';
-    regionalExample = 'Japan, Southern Australia, Mediterranean Europe, North America.';
+    zoneDescription = isId
+      ? 'Sudut datang matahari moderat dengan pergantian 4 musim yang tegas (semi, panas, gugur, dingin) serta variasi panjang siang-malam.'
+      : 'Moderate solar angle with marked seasonal variation in day length and temperature (spring, summer, autumn, winter).';
+    regionalExample = isId
+      ? 'Jepang, Australia Selatan, Eropa Mediterania, Amerika Utara.'
+      : 'Japan, Southern Australia, Mediterranean Europe, North America.';
   } else if (latitude >= 66.5) {
-    zoneName = 'Polar / High-Latitude Zone';
+    zoneName = isId ? 'Zona Kutub / Lintang Tinggi' : 'Polar / High-Latitude Zone';
     zoneColor = 'text-cyan-400 bg-cyan-500/10 border-cyan-500/30';
-    zoneDescription = 'Low glancing sun angles. Extreme seasonal illumination contrasts (midnight sun vs polar night) and persistent ice/tundra biomes.';
-    regionalExample = 'Antarctica, Greenland, Northern Scandinavia, Arctic Basin.';
+    zoneDescription = isId
+      ? 'Sudut datang sinar matahari sangat miring. Kontras pencahayaan ekstrem (matahari tengah malam vs malam kutub) dan lanskap es/tundra abadi.'
+      : 'Low glancing sun angles. Extreme seasonal illumination contrasts (midnight sun vs polar night) and persistent ice/tundra biomes.';
+    regionalExample = isId
+      ? 'Antarktika, Greenland, Skandinavia Utara, Cekungan Arktik.'
+      : 'Antarctica, Greenland, Northern Scandinavia, Arctic Basin.';
   }
 
   return (
@@ -44,14 +64,16 @@ export default function ClimateLatitudeSlider({ experienceSlug = 'why-are-there-
       <div class="border-b border-[var(--color-border)] pb-4 space-y-1">
         <div class="flex items-center gap-2">
           <h4 class="text-base sm:text-lg font-bold text-[var(--color-text)]">
-            Solar Irradiance & Latitude Climate Simulator
+            {isId ? 'Simulator Radiasi Matahari & Zona Iklim Lintang' : 'Solar Irradiance & Latitude Climate Simulator'}
           </h4>
           <span class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-amber-100 text-amber-900 border border-amber-300 dark:bg-amber-950 dark:text-amber-200 dark:border-amber-800">
-            Physical Model
+            {isId ? 'Model Fisik' : 'Physical Model'}
           </span>
         </div>
         <p class="text-xs text-[var(--color-text-muted)]">
-          Adjust the latitude slider to observe how Earth’s curvature spreads incoming solar rays across different surface areas.
+          {isId
+            ? 'Geser lintang geografis untuk mengamati bagaimana kelengkungan Bumi menyebarkan berkas sinar matahari pada luas permukaan yang berbeda.'
+            : 'Adjust the latitude slider to observe how Earth’s curvature spreads incoming solar rays across different surface areas.'}
         </p>
       </div>
 
@@ -59,13 +81,13 @@ export default function ClimateLatitudeSlider({ experienceSlug = 'why-are-there-
       <div class="p-4 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface-hover)]">
         <InteractiveSlider
           id="climate-latitude"
-          label="Planetary Latitude"
+          label={isId ? 'Lintang Planet' : 'Planetary Latitude'}
           value={latitude}
           min={0}
           max={85}
           step={5}
-          unit="° North/South"
-          description="0° represents the Equator (Indonesia); 85° represents High Polar Glaciers."
+          unit={isId ? '° LU/LS' : '° North/South'}
+          description={isId ? '0° mewakili Ekuator (Indonesia); 85° mewakili Gletser Kutub Tinggi.' : '0° represents the Equator (Indonesia); 85° represents High Polar Glaciers.'}
           onChange={handleSliderChange}
         />
       </div>
@@ -74,13 +96,13 @@ export default function ClimateLatitudeSlider({ experienceSlug = 'why-are-there-
       <div class="rounded-xl border border-[var(--color-border)] bg-slate-950 text-slate-100 p-5 space-y-4 select-none">
         <div class="flex items-center justify-between flex-wrap gap-2 text-xs font-mono border-b border-slate-800 pb-3">
           <span class="text-amber-400 font-bold">
-            Sun Elevation Angle: {sunAngle}°
+            {isId ? 'Sudut Elevasi Matahari: ' : 'Sun Elevation Angle: '}{sunAngle}°
           </span>
           <span class="text-slate-400">
-            Solar Intensity per m²: <strong class="text-white">{intensityPct}%</strong>
+            {isId ? 'Intensitas Surya per m²: ' : 'Solar Intensity per m²: '}<strong class="text-white">{intensityPct}%</strong>
           </span>
           <span class="text-slate-400">
-            Beam Surface Footprint: <strong class="text-cyan-300">{beamSpread}×</strong>
+            {isId ? 'Penyebaran Berkas Cahaya: ' : 'Beam Surface Footprint: '}<strong class="text-cyan-300">{beamSpread}×</strong>
           </span>
         </div>
 
@@ -90,7 +112,7 @@ export default function ClimateLatitudeSlider({ experienceSlug = 'why-are-there-
             {/* Ground Surface */}
             <line x1="50" y1="160" x2="450" y2="160" stroke="#64748b" stroke-width="4" stroke-linecap="round" />
             <text x="200" y="185" fill="#94a3b8" font-size="11" font-family="monospace">
-              Earth's Surface Horizon
+              {isId ? 'Horizon Permukaan Bumi' : "Earth's Surface Horizon"}
             </text>
 
             {/* Sun Icon */}
@@ -145,7 +167,7 @@ export default function ClimateLatitudeSlider({ experienceSlug = 'why-are-there-
                     font-family="monospace"
                     font-weight="bold"
                   >
-                    Footprint: {beamSpread}× Area
+                    {isId ? `Jejak Sinar: ${beamSpread}× Luas` : `Footprint: ${beamSpread}× Area`}
                   </text>
                 </g>
               );
@@ -161,7 +183,7 @@ export default function ClimateLatitudeSlider({ experienceSlug = 'why-are-there-
             {zoneName}
           </span>
           <span class="text-xs font-mono text-[var(--color-text-dim)]">
-            Latitude: {latitude}°
+            {isId ? 'Lintang: ' : 'Latitude: '}{latitude}°
           </span>
         </div>
 
@@ -170,7 +192,7 @@ export default function ClimateLatitudeSlider({ experienceSlug = 'why-are-there-
         </p>
 
         <div class="text-xs text-[var(--color-text-muted)] pt-2 border-t border-[var(--color-border)]">
-          <strong class="text-[var(--color-text)]">Regional Reference: </strong>
+          <strong class="text-[var(--color-text)]">{isId ? 'Referensi Wilayah: ' : 'Regional Reference: '}</strong>
           {regionalExample}
         </div>
       </div>

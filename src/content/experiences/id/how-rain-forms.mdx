@@ -1,0 +1,186 @@
+---
+id: "how-rain-forms"
+title: "Bagaimana Hujan Terbentuk?"
+tagline: "Kelembapan Atmosfer, Pendinginan Adiabatik, dan Fisika Awan Tropis"
+description: "Ikuti perjalanan molekul air saat sinar matahari khatulistiwa menguapkan air laut, arus udara ke atas memicu pendinginan adiabatik, dan tetesan mikroskopis bergabung menjadi hujan lebat tropis."
+topic: "atmosphere"
+difficulty: "beginner"
+estimatedTime: "10min"
+learningObjectives:
+  - "Memahami perubahan fase air dari uap menjadi tetesan cair melalui proses kondensasi."
+  - "Menjelaskan pendinginan ekspansi adiabatik saat parsel udara membumbung ke lapisan bertekanan atmosfer lebih rendah."
+  - "Menguraikan peran penting inti kondensasi awan (CCN) dalam pembentukan tetesan air."
+  - "Membedakan proses tumbukan-koalesensi (awan hangat) dengan proses es Bergeron-Findeisen (awan dingin)."
+  - "Menganalisis hujan orografis dengan studi kasus nyata Kota Bogor, Indonesia."
+prerequisites: []
+interactiveElements:
+  - id: "rain-simulation"
+    type: "simulation"
+    title: "Model Kelembapan Atmosfer & Laju Penurunan Suhu"
+    pedagogicalPurpose: "Mendemonstrasikan kurva pendinginan adiabatik dan ketinggian dasar awan (Tingkat Kondensasi Terangkat / LCL)"
+    isIllustrativeModel: true
+    accessibleFallbackText: "Model termodinamika 2D yang menampilkan penurunan suhu parsel udara seiring bertambahnya ketinggian."
+quiz:
+  quizId: "quiz-how-rain-forms"
+  title: "Bagaimana Hujan Terbentuk? Kuis Fisika Atmosfer"
+  questionCount: 4
+realWorldConnections:
+  - title: "Sabuk Hujan Orografis Bogor"
+    locationName: "Bogor, Jawa Barat, Indonesia"
+    isIndonesiaFirst: true
+    coordinates:
+      lat: -6.5971
+      lng: 106.806
+    description: "Bogor mengalami lebih dari 300 hari badai petir per tahun dengan curah hujan tahunan rata-rata melebihi 4.000 milimeter, sehingga menyandang gelar Kota Hujan."
+    phenomenon: "Udara maritim hangat yang bergerak ke selatan dari Laut Jawa bertemu dengan lereng vulkanik Gunung Salak dan Gunung Gede-Pangrango, memicu kenaikan orografis cepat dan hujan lebat kumulonimbus di sore hari."
+    globalGeneralization: "Presipitasi orografis terjadi di mana pun angin bertiup menabrak penghalang pegunungan, dari lereng Ghats Barat di India hingga Pegunungan Olympic di Negara Bagian Washington."
+    geoMapSlug: "bogor-rain-belt"
+geoMapConnections:
+  - locationSlug: "bogor-rain-belt"
+    label: "Periksa Topografi Bogor di GeoMap"
+    coordinates:
+      lat: -6.5971
+      lng: 106.806
+    description: "Jelajahi kontur elevasi topografi Gunung Salak dan jajaran vulkanik di sekitarnya yang memusatkan kelembapan regional."
+reflection:
+  - id: "refl-rain-observation"
+    prompt: "Ketika Anda melihat awan menggelap dan angin bertiup kencang sebelum hujan turun, perubahan energi atmosfer apa yang sedang terjadi tepat di atas Anda?"
+    placeholder: "Renungkan tentang suhu, aliran udara turun (downdraft), dan pelepasan panas laten..."
+    category: "observation"
+nextExperiences:
+  - "why-volcanoes-form"
+  - "reading-rock-layers"
+scientific:
+  source:
+    - "Rogers, R. R., & Yau, M. K. (1989). A Short Course in Cloud Physics. Pergamon Press."
+    - "BMKG (Badan Meteorologi, Klimatologi, dan Geofisika Indonesia) Atlas Klimatologi."
+    - "Wallace, J. M., & Hobbs, P. V. (2006). Atmospheric Science: An Introductory Survey. Academic Press."
+  sourceType: "peer-reviewed"
+  lastReviewed: "2026-09-23"
+  scientificLevel: "beginner"
+  confidence: "established"
+  references:
+    - title: "A Short Course in Cloud Physics"
+      publisher: "Pergamon Press"
+      year: 1989
+    - title: "Indonesian Tropical Meteorology and Monsoon Dynamics"
+      publisher: "BMKG Indonesia"
+      year: 2023
+review:
+  reviewStatus: "published"
+  sourceList:
+    - "BMKG Indonesia"
+    - "Academic Press"
+    - "WMO"
+  lastReviewed: "2026-09-23"
+  contentVersion: "1.0.0"
+featured: false
+---
+
+import Quiz from '../../../components/quiz/Quiz';
+import ReflectionBox from '../../../components/learning/ReflectionBox';
+import RealWorldExample from '../../../components/learning/RealWorldExample.astro';
+import ObservationChallenge from '../../../components/learning/ObservationChallenge.astro';
+import { howRainFormsQuiz } from '../../../data/quizzes/id/how-rain-forms';
+
+## Bagian 1: Samudra Tak Kasat Mata di Atas Kepala
+
+Tengadahkan pandangan Anda ke langit biru yang cerah pada siang hari yang terik di daerah tropis. Bahkan ketika tidak ada awan yang terlihat, atmosfer menyimpan miliaran liter air dalam bentuk gas uap air yang transparan.
+
+Satu kilometer kubik udara tropis yang lembap dapat memuat lebih dari **20.000 ton uap air**. Bagaimana gas tak kasat mata yang ringan ini berubah menjadi jutaan tetesan air cair yang berat dan jatuh ke tanah sebagai hujan?
+
+---
+
+## Bagian 2: Pendinginan Adiabatik & Tingkat Kondensasi Terangkat (LCL)
+
+Untuk mengubah uap air menjadi tetesan cairan, udara harus didinginkan. Di alam, pendinginan udara paling efektif terjadi bukan karena tiupan angin dingin dari luar, melainkan dengan **mengangkat parsel udara ke atas**.
+
+### Mengapa Udara yang Naik Mendingin: Fisika Ekspansi
+
+1. **Penurunan Tekanan:** Tekanan atmosfer berkurang seiring bertambahnya ketinggian karena massa udara di atasnya semakin sedikit.
+2. **Ekspansi (Pemuaian):** Saat parsel udara hangat naik, ia memuai ke lingkungan yang bertekanan lebih rendah.
+3. **Kerja Mekanis:** Gas yang memuai mendorong molekul udara di sekitarnya, melakukan kerja fisik.
+4. **Penurunan Temperatur:** Kerja ini menguras energi termal internal, menyebabkan suhu parsel udara turun—suatu proses termodinamika yang dikenal sebagai **pendinginan adiabatik** (~9,8°C untuk setiap kenaikan ketinggian 1.000 meter pada udara kering).
+
+Ketika udara yang naik mendingin hingga mencapai **suhu titik embunnya**, kelembapan relatifnya mencapai 100%. Ketinggian tertentu di langit ini disebut **Tingkat Kondensasi Terangkat (Lifting Condensation Level / LCL)**, yang tampak dari permukaan tanah sebagai dasar awan kumulus yang rata dan tajam.
+
+---
+
+## Bagian 3: Bahan Rahasia — Inti Kondensasi Awan (CCN)
+
+Uap air tidak dapat berkondensasi dengan mudah di udara yang benar-benar bersih. Untuk membentuk tetesan air, molekul air memerlukan permukaan padat atau cair mikroskopis tempat mereka dapat menempel. Partikel-partikel ini disebut **Inti Kondensasi Awan (Cloud Condensation Nuclei / CCN)**.
+
+Contoh CCN alami yang umum meliputi:
+- **Semprotan garam laut:** Percikan buih laut yang menguap menghasilkan kristal natrium klorida yang melayang di massa udara maritim.
+- **Abu vulkanik & sulfat:** Emisi gas gunung berapi di Indonesia menghasilkan aerosol belerang mikroskopis yang melimpah.
+- **Aerosol organik & serbuk sari:** Dilepaskan oleh kanopi hutan hujan tropis khatulistiwa.
+
+Di sekeliling inti-inti ini, molekul air mengembun membentuk tetesan awan kecil berukuran sekitar **10 hingga 20 mikrometer**—lebih tipis dari sehelai benang jaring laba-laba.
+
+---
+
+## Bagian 4: Bagaimana Tetesan Awan Mikro Menjadi Tetesan Hujan
+
+Tetesan awan biasa sangatlah ringan sehingga hembusan arus udara ke atas yang lembut sekalipun sanggup menahannya melayang di udara. Agar hujan dapat jatuh, tetesan tersebut harus bertambah besar **hingga hampir satu juta kali lipat volumenya** hingga mencapai diameter 1 sampai 3 milimeter, saat gravitasi melampaui gaya angkat arus udara awan.
+
+Pada awan tropis (di mana suhunya tetap berada di atas titik beku), tetesan air membesar melalui **Proses Tumbukan-Koalesensi (Collision-Coalescence)**:
+- Tetesan yang sedikit lebih besar jatuh lebih cepat melintasi awan daripada tetesan mikro kecil.
+- Saat tetesan yang lebih besar jatuh menyapu tetesan yang lebih kecil di jalurnya, keduanya bertumbukan dan menyatu (koalesensi) seperti bola salju yang menggelinding.
+- Begitu tetesan mencapai massa kritis, kecepatan terminal jatuhnya melampaui arus udara yang naik, lalu tetesan tersebut jatuh menembus dasar awan sebagai butiran air hujan.
+
+---
+
+## Bagian 5: Fenomena Nyata Indonesia — Kota Hujan (Bogor)
+
+<RealWorldExample
+  title="Mesin Curah Hujan Orografis Bogor"
+  locationName="Bogor, Jawa Barat, Indonesia"
+  isIndonesiaFirst={true}
+  coordinates={{ lat: -6.5971, lng: 106.806 }}
+  phenomenon="Bogor mengalami lebih dari 300 hari badai petir per tahun, dengan curah hujan tahunan rata-rata melebihi 4.000 milimeter. Curah hujan ekstrem ini dipicu oleh interaksi antara udara lembap hangat dari Laut Jawa dan rintangan topografi terjal yang dibentuk oleh Gunung Salak (2.211 m) dan Gunung Gede-Pangrango (3.008 m)."
+  globalGeneralization="Mekanisme pengangkatan orografis ini menjelaskan pola curah hujan di pegunungan di seluruh dunia, termasuk lereng kepulauan Hawaii, Ghats Barat di India, dan Andes selatan di Chili."
+  geoMapSlug="bogor-rain-belt"
+  locale="id"
+/>
+
+---
+
+## Bagian 6: Tantangan Pengamatan Langit
+
+<ObservationChallenge
+  title="Melacak Dasar Awan & Angin Masuk Sebelum Badai Hujan"
+  targetPhenomenon="Mengidentifikasi Tingkat Kondensasi Terangkat (LCL) dan arus konveksi sebelum hujan sore hari."
+  observationSteps={[
+    "Amati perkembangan awan kumulus pada siang menjelang sore hari.",
+    "Perhatikan dasar awan: cermati bagaimana semua awan kumulus di area sekitar memiliki ketinggian horizontal bawah yang hampir seragam (LCL).",
+    "Amati puncak awan: perhatikan apakah menara awan yang menyerupai kembang kol (cumulus congestus) membumbung tinggi menjadi awan kumulonimbus.",
+    "Rasakan angin di permukaan tanah: perhatikan bagaimana hembusan angin awalnya bertiup ke arah dasar awan (inflow pengisi arus ke atas), sebelum mendadak berganti menjadi angin dingin yang bertiup ke luar tepat saat hujan mulai turun."
+  ]}
+  whatToLookFor="Hembusan angin dingin mendadak yang bertiup menjauhi awan menandakan bahwa air hujan yang jatuh sedang menyeret udara dingin dari atas (gust front), pertanda bahwa hujan lebat akan segera mengguyur."
+  experienceSlug="how-rain-forms"
+  locale="id"
+/>
+
+---
+
+## Bagian 7: Evaluasi Konseptual & Pemahaman
+
+<Quiz
+  client:visible
+  quiz={howRainFormsQuiz}
+  experienceSlug="how-rain-forms"
+  experienceTitle="Bagaimana Hujan Terbentuk?"
+  locale="id"
+/>
+
+---
+
+## Bagian 8: Refleksi Ilmiah
+
+<ReflectionBox
+  client:idle
+  experienceSlug="how-rain-forms"
+  prompt="Ketika Anda melihat awan menggelap dan angin bertiup kencang sebelum hujan turun, perubahan energi atmosfer apa yang sedang terjadi tepat di atas Anda?"
+  category="observation"
+  locale="id"
+/>

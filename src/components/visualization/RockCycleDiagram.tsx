@@ -1,5 +1,6 @@
 import { useState } from 'preact/hooks';
 import { recordExploration } from '../../lib/storage';
+import type { Locale } from '../../i18n';
 
 export type RockStage = 'igneous' | 'sedimentary' | 'metamorphic';
 
@@ -13,7 +14,7 @@ interface RockStageInfo {
   simplifiedNote: string;
 }
 
-const ROCK_STAGES: Record<RockStage, RockStageInfo> = {
+const ROCK_STAGES_EN: Record<RockStage, RockStageInfo> = {
   igneous: {
     title: 'Igneous Rocks',
     category: 'Formed from Molten Rock (Magma / Lava)',
@@ -76,11 +77,81 @@ const ROCK_STAGES: Record<RockStage, RockStageInfo> = {
   },
 };
 
-export default function RockCycleDiagram({ experienceSlug = 'the-rock-cycle' }: { experienceSlug?: string }) {
+const ROCK_STAGES_ID: Record<RockStage, RockStageInfo> = {
+  igneous: {
+    title: 'Batuan Beku',
+    category: 'Terbentuk dari Batuan Cair (Magma / Lava)',
+    formationProcess: 'Pendinginan dan kristalisasi lelehan silikat baik di kedalaman bawah tanah (intrusif / plutonik, mis. granit, gabro) atau meletus di permukaan (ekstrusif / vulkanik, mis. andesit, basal).',
+    indonesiaExample: 'Kubah lava andesit dan endapan piroklastik Gunung Merapi, Jawa Tengah.',
+    keyMinerals: 'Plagioklas felspar, piroksen, amfibol, kuarsa, olivin.',
+    nextTransitions: [
+      {
+        label: 'Pelapukan, Erosi & Litifikasi',
+        process: 'Terpapar hujan tropis dan sungai, pelapukan fisik menghasilkan sedimen yang terkompaksi menjadi batuan.',
+        target: 'sedimentary',
+      },
+      {
+        label: 'Panas Ekstrem & Tekanan Tektonik',
+        process: 'Terkubur jauh di dalam zona tabrakan subduksi tanpa meleleh, mineral mengalami rekristalisasi menjadi batuan berfoliasi.',
+        target: 'metamorphic',
+      },
+    ],
+    simplifiedNote: 'Laju kristalisasi batuan beku menentukan ukuran kristal: pendinginan cepat di permukaan menghasilkan tekstur afanitik halus, sedangkan pendinginan lambat di dapur magma menghasilkan tekstur faneritik kasar.',
+  },
+  sedimentary: {
+    title: 'Batuan Sedimen',
+    category: 'Terbentuk dari Partikel yang Terkompaksi & Tersementasi',
+    formationProcess: 'Pecahan mineral terlapuk, puing-puing organik, atau endapan kimia yang terakumulasi dalam lapisan horizontal dan terlitifikasi melalui kompaksi dan sementasi mineral.',
+    indonesiaExample: 'Batulempung laut berlapis, batupasir, dan lapisan tuf vulkanik di Sungai Luk Ulo, Karangsambung.',
+    keyMinerals: 'Butiran kuarsa, mineral lempung, kalsit, klasta felspar, fragmen fosil.',
+    nextTransitions: [
+      {
+        label: 'Penimbunan Tektonik Dalam & Metamorfisme',
+        process: 'Mengalami tekanan litostatik tinggi dan panas geotermal di sepanjang batas lempeng, berubah menjadi sekis atau marmer.',
+        target: 'metamorphic',
+      },
+      {
+        label: 'Subduksi Dalam & Pelelehan Total',
+        process: 'Menghunjam melewati kedalaman 100+ km ke dalam astenosfer, meleleh sempurna kembali menjadi magma silikat.',
+        target: 'igneous',
+      },
+    ],
+    simplifiedNote: 'Prinsip Superposisi menyatakan bahwa pada lapisan sedimen yang belum terganggu, lapisan yang lebih muda terendapkan secara berurutan di atas lapisan yang lebih tua.',
+  },
+  metamorphic: {
+    title: 'Batuan Metamorf',
+    category: 'Ditransformasikan oleh Panas & Tekanan Diferensial',
+    formationProcess: 'Rekristalisasi keadaan padat dari batuan induk (beku, sedimen, atau metamorf yang lebih tua) di bawah suhu tinggi dan tegangan geser terarah tanpa pelelehan menyeluruh.',
+    indonesiaExample: 'Sekis biru dan eklogit bertekanan tinggi-suhu rendah yang terangkat di bancuh (mélange) tektonik Karangsambung.',
+    keyMinerals: 'Glaukofan, garnet, mika, kianit, kuarsa, klorit.',
+    nextTransitions: [
+      {
+        label: 'Pengangkatan, Pelapukan & Erosi',
+        process: 'Terangkat oleh proses pembentukan pegunungan dan terkikis oleh hujan tropis, hancur menjadi butiran pasir mineral.',
+        target: 'sedimentary',
+      },
+      {
+        label: 'Pelelehan Termal Berlebih (Anateksis)',
+        process: 'Pemanasan melampaui titik leleh batuan mengubah batuan metamorf menjadi magma granit atau andesit segar.',
+        target: 'igneous',
+      },
+    ],
+    simplifiedNote: 'Metamorfisme terjadi sepenuhnya dalam keadaan padat. Jika batuan meleleh sempurna, batuan tersebut masuk ke ranah batuan beku.',
+  },
+};
+
+export default function RockCycleDiagram({
+  experienceSlug = 'the-rock-cycle',
+  locale = 'en',
+}: {
+  experienceSlug?: string;
+  locale?: Locale;
+}) {
   const [selectedStage, setSelectedStage] = useState<RockStage>('igneous');
   const [showDetails, setShowDetails] = useState(false);
-
-  const stage = ROCK_STAGES[selectedStage];
+  const isId = locale === 'id';
+  const stages = isId ? ROCK_STAGES_ID : ROCK_STAGES_EN;
+  const stage = stages[selectedStage];
 
   const handleSelect = (s: RockStage) => {
     setSelectedStage(s);
@@ -95,14 +166,16 @@ export default function RockCycleDiagram({ experienceSlug = 'the-rock-cycle' }: 
         <div>
           <div class="flex items-center gap-2">
             <h4 class="text-base sm:text-lg font-bold text-[var(--color-text)]">
-              Continuous Rock Cycle Transformation Explorer
+              {isId ? 'Penjelajah Transformasi Siklus Batuan Berkelanjutan' : 'Continuous Rock Cycle Transformation Explorer'}
             </h4>
             <span class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-amber-100 text-amber-900 border border-amber-300 dark:bg-amber-950 dark:text-amber-200 dark:border-amber-800">
-              Interactive Model
+              {isId ? 'Model Interaktif' : 'Interactive Model'}
             </span>
           </div>
           <p class="text-xs text-[var(--color-text-muted)] mt-1">
-            Click any rock class to trace how temperature, pressure, weathering, and plate tectonics continuously transform materials.
+            {isId
+              ? 'Klik kelas batuan mana pun untuk melacak bagaimana suhu, tekanan, pelapukan, dan tektonik lempeng secara terus-menerus mentransformasikan materi bumi.'
+              : 'Click any rock class to trace how temperature, pressure, weathering, and plate tectonics continuously transform materials.'}
           </p>
         </div>
 
@@ -111,19 +184,25 @@ export default function RockCycleDiagram({ experienceSlug = 'the-rock-cycle' }: 
           onClick={() => setShowDetails(!showDetails)}
           class="text-xs font-semibold px-3 py-1.5 rounded-lg border border-[var(--color-border)] hover:bg-[var(--color-surface-hover)] text-[var(--color-interactive)] transition-colors self-start sm:self-auto cursor-pointer"
         >
-          {showDetails ? 'Hide Model Notes' : 'How the Cycle Functions'}
+          {showDetails
+            ? (isId ? 'Sembunyikan Catatan Model' : 'Hide Model Notes')
+            : (isId ? 'Bagaimana Siklus Berjalan' : 'How the Cycle Functions')}
         </button>
       </div>
 
       {showDetails && (
         <div class="rounded-xl p-4 bg-[var(--color-surface-hover)] border border-[var(--color-border)] text-xs space-y-2">
           <p class="text-[var(--color-text)]">
-            <strong class="font-semibold">Core Principle: </strong>
-            The rock cycle has <strong>no single starting point and no final destination</strong>. Any rock can transform into any other rock class given appropriate geological conditions.
+            <strong class="font-semibold">{isId ? 'Prinsip Utama: ' : 'Core Principle: '}</strong>
+            {isId
+              ? <>Siklus batuan <strong>tidak memiliki titik awal tunggal dan tidak memiliki tujuan akhir</strong>. Batuan mana pun dapat berubah menjadi kelas batuan lain jika kondisi geologisnya terpenuhi.</>
+              : <>The rock cycle has <strong>no single starting point and no final destination</strong>. Any rock can transform into any other rock class given appropriate geological conditions.</>}
           </p>
           <p class="text-[var(--color-text-muted)]">
-            <strong class="font-semibold text-[var(--color-text)]">Indonesian Context: </strong>
-            In Indonesia, young subduction volcanoes continuously create fresh igneous andesite, which weathers in the equatorial climate to create rich sedimentary soils, while tectonic subduction drags older crust down to produce high-pressure metamorphic blueschist.
+            <strong class="font-semibold text-[var(--color-text)]">{isId ? 'Konteks Indonesia: ' : 'Indonesian Context: '}</strong>
+            {isId
+              ? 'Di Indonesia, gunung berapi subduksi muda terus menciptakan andesit beku baru, yang melapuk di iklim khatulistiwa membentuk tanah sedimen yang subur, sementara subduksi tektonik menyeret kerak yang lebih tua ke bawah untuk menghasilkan sekis biru metamorf bertekanan tinggi.'
+              : 'In Indonesia, young subduction volcanoes continuously create fresh igneous andesite, which weathers in the equatorial climate to create rich sedimentary soils, while tectonic subduction drags older crust down to produce high-pressure metamorphic blueschist.'}
           </p>
         </div>
       )}
@@ -132,6 +211,7 @@ export default function RockCycleDiagram({ experienceSlug = 'the-rock-cycle' }: 
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
         {(['igneous', 'sedimentary', 'metamorphic'] as RockStage[]).map((st) => {
           const isSelected = selectedStage === st;
+          const stageItem = stages[st];
           return (
             <button
               key={st}
@@ -145,16 +225,16 @@ export default function RockCycleDiagram({ experienceSlug = 'the-rock-cycle' }: 
             >
               <div>
                 <span class="text-[10px] font-mono uppercase font-bold tracking-wider opacity-75">
-                  Rock Class
+                  {isId ? 'Kelas Batuan' : 'Rock Class'}
                 </span>
                 <div class="text-sm font-bold text-[var(--color-text)] capitalize mt-0.5">
-                  {st} Rocks
+                  {stageItem.title}
                 </div>
               </div>
               <div class="text-[11px] opacity-80 mt-2">
-                {st === 'igneous' && 'Cooling of Magma/Lava'}
-                {st === 'sedimentary' && 'Compacted Sediment & Clasts'}
-                {st === 'metamorphic' && 'Heat & Pressure Alteration'}
+                {st === 'igneous' && (isId ? 'Pendinginan Magma/Lava' : 'Cooling of Magma/Lava')}
+                {st === 'sedimentary' && (isId ? 'Sedimen & Klasta Terkompaksi' : 'Compacted Sediment & Clasts')}
+                {st === 'metamorphic' && (isId ? 'Perubahan Panas & Tekanan' : 'Heat & Pressure Alteration')}
               </div>
             </button>
           );
@@ -165,7 +245,7 @@ export default function RockCycleDiagram({ experienceSlug = 'the-rock-cycle' }: 
       <div class="rounded-xl border border-[var(--color-border)] bg-stone-900 text-stone-100 p-5 select-none space-y-4">
         <div class="flex items-center justify-between flex-wrap gap-2 text-xs font-mono border-b border-stone-800 pb-3">
           <span class="text-amber-400 font-bold uppercase tracking-wider">
-            Active Focus: {stage.title}
+            {isId ? `Fokus Aktif: ${stage.title}` : `Active Focus: ${stage.title}`}
           </span>
           <span class="text-stone-400">
             {stage.category}
@@ -179,12 +259,16 @@ export default function RockCycleDiagram({ experienceSlug = 'the-rock-cycle' }: 
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
             <div class="p-3 rounded-lg bg-stone-800/80 border border-stone-700 text-xs space-y-1">
-              <span class="text-stone-400 text-[10px] uppercase font-mono block">Indonesian Field Setting</span>
+              <span class="text-stone-400 text-[10px] uppercase font-mono block">
+                {isId ? 'Kondisi Lapangan di Indonesia' : 'Indonesian Field Setting'}
+              </span>
               <div class="text-stone-100 font-semibold">{stage.indonesiaExample}</div>
             </div>
 
             <div class="p-3 rounded-lg bg-stone-800/80 border border-stone-700 text-xs space-y-1">
-              <span class="text-stone-400 text-[10px] uppercase font-mono block">Diagnostic Mineral Assemblage</span>
+              <span class="text-stone-400 text-[10px] uppercase font-mono block">
+                {isId ? 'Himpunan Mineral Diagnostik' : 'Diagnostic Mineral Assemblage'}
+              </span>
               <div class="text-stone-100 font-mono text-[11px]">{stage.keyMinerals}</div>
             </div>
           </div>
@@ -193,7 +277,7 @@ export default function RockCycleDiagram({ experienceSlug = 'the-rock-cycle' }: 
         {/* Transformation Paths Out of this Rock Class */}
         <div class="pt-4 border-t border-stone-800 space-y-2">
           <span class="text-[11px] font-mono uppercase text-amber-300 font-bold block">
-            Where Can This Rock Go Next in the Cycle?
+            {isId ? 'Ke Mana Batuan Ini Dapat Bertransformasi Selanjutnya?' : 'Where Can This Rock Go Next in the Cycle?'}
           </span>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -204,8 +288,12 @@ export default function RockCycleDiagram({ experienceSlug = 'the-rock-cycle' }: 
                 class="p-3 rounded-xl bg-stone-800 border border-stone-700 hover:border-amber-400 transition-all cursor-pointer space-y-1 group"
               >
                 <div class="flex items-center justify-between text-xs font-bold text-amber-300 group-hover:text-amber-200">
-                  <span>→ Transform to {trans.target.toUpperCase()}</span>
-                  <span class="text-[10px] font-mono">Click to inspect</span>
+                  <span>
+                    {isId
+                      ? `→ Berubah menjadi ${stages[trans.target].title.toUpperCase()}`
+                      : `→ Transform to ${trans.target.toUpperCase()}`}
+                  </span>
+                  <span class="text-[10px] font-mono">{isId ? 'Klik untuk memeriksa' : 'Click to inspect'}</span>
                 </div>
                 <div class="text-[11px] text-stone-300 leading-relaxed">
                   <strong class="text-stone-100">{trans.label}: </strong>

@@ -1,5 +1,7 @@
 ---
 import GeoMapLink from '../geomap/GeoMapLink.astro';
+import { useTranslations } from '../../i18n';
+import type { Locale } from '../../lib/i18nUrl';
 
 export interface Props {
   title: string;
@@ -9,6 +11,7 @@ export interface Props {
   phenomenon: string;
   globalGeneralization: string;
   geoMapSlug?: string;
+  locale?: Locale;
   class?: string;
 }
 
@@ -20,8 +23,13 @@ const {
   phenomenon,
   globalGeneralization,
   geoMapSlug,
+  locale = 'en',
   class: className = '',
 } = Astro.props;
+
+const t = useTranslations(locale);
+const geoMapLabel = t.realWorldExample.inspectGeoMap.replace('{location}', locationName);
+const geoMapDesc = t.realWorldExample.inspectGeoMapDesc.replace('{location}', locationName);
 ---
 
 <section
@@ -39,7 +47,7 @@ const {
       </div>
       <div>
         <span class="text-xs font-mono uppercase tracking-wider text-[var(--color-secondary)] font-bold">
-          Real-World Geological Connection
+          {t.realWorldExample.heading}
         </span>
         <h3 id="real-world-title" class="text-lg font-bold text-[var(--color-text)]">
           {title}
@@ -49,7 +57,7 @@ const {
 
     {isIndonesiaFirst && (
       <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-900 border border-emerald-300 dark:bg-emerald-950 dark:text-emerald-200 dark:border-emerald-800">
-        🇮🇩 Indonesia Anchor: {locationName}
+        {t.realWorldExample.indonesiaAnchor} {locationName}
       </span>
     )}
   </div>
@@ -58,7 +66,7 @@ const {
     {/* Local Phenomenon Observation */}
     <div class="space-y-2">
       <h4 class="text-xs font-mono uppercase tracking-wider text-[var(--color-text-dim)] font-semibold">
-        Observable Phenomenon
+        {t.realWorldExample.observablePhenomenon}
       </h4>
       <p class="text-sm text-[var(--color-text)] leading-relaxed">
         {phenomenon}
@@ -74,7 +82,7 @@ const {
           <line x1="21" y1="3" x2="14" y2="10" />
           <line x1="3" y1="21" x2="10" y2="14" />
         </svg>
-        <span>Global Generalization</span>
+        <span>{t.realWorldExample.globalGeneralization}</span>
       </h4>
       <p class="text-xs text-[var(--color-text-muted)] leading-relaxed">
         {globalGeneralization}
@@ -87,9 +95,9 @@ const {
     <div class="pt-2">
       <GeoMapLink
         locationSlug={geoMapSlug}
-        label={`Explore ${locationName} on GeoMap`}
+        label={geoMapLabel}
         coordinates={coordinates}
-        description={`Inspect geological fault lines, volcanic hazard contours, and tectonic boundaries at ${locationName}.`}
+        description={geoMapDesc}
       />
     </div>
   )}

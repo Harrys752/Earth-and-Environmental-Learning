@@ -2,8 +2,41 @@ import { withBase } from './url';
 
 export type Locale = 'en' | 'id';
 
+export const TRANSLATED_EXPERIENCE_SLUGS = new Set([
+  'why-volcanoes-form',
+  'how-rain-forms',
+  'reading-rock-layers',
+  'the-rock-cycle',
+  'what-fossils-tell-us',
+  'why-are-there-climate-zones',
+  'why-do-earthquakes-happen',
+  'why-do-landslides-happen',
+]);
+
+export const TRANSLATED_TOPIC_SLUGS = new Set([
+  'plate-tectonics',
+  'atmosphere',
+  'climate',
+  'geology',
+  'natural-hazards',
+  'paleontology',
+]);
+
+export const TRANSLATED_CONCEPT_SLUGS = new Set([
+  'atmospheric-pressure',
+  'condensation',
+  'plate-tectonics-process',
+  'stratigraphy',
+  'subduction',
+  'volcanic-arcs',
+]);
+
+export const TRANSLATED_PROJECT_SLUGS = new Set([
+  'volcanic-hazard-map',
+]);
+
 /**
- * List of paths known to have full Indonesian translations in Phase 1.
+ * List of paths known to have full Indonesian translations.
  */
 export const PHASE_1_TRANSLATED_PATHS = new Set([
   '/',
@@ -13,15 +46,17 @@ export const PHASE_1_TRANSLATED_PATHS = new Set([
   '/search',
   '/explore',
   '/explore/topics',
-  '/explore/topics/plate-tectonics',
   '/explore/experiences',
   '/explore/discoveries',
   '/learn',
-  '/learn/why-volcanoes-form',
   '/journey',
   '/journey/timeline',
   '/journey/reflections',
   '/journey/projects',
+  ...Array.from(TRANSLATED_TOPIC_SLUGS).map((s) => `/explore/topics/${s}`),
+  ...Array.from(TRANSLATED_EXPERIENCE_SLUGS).map((s) => `/learn/${s}`),
+  ...Array.from(TRANSLATED_CONCEPT_SLUGS).map((s) => `/learn/concepts/${s}`),
+  ...Array.from(TRANSLATED_PROJECT_SLUGS).map((s) => `/projects/${s}`),
 ]);
 
 /**
@@ -29,7 +64,7 @@ export const PHASE_1_TRANSLATED_PATHS = new Set([
  */
 export function isExperienceTranslated(slug: string): boolean {
   const cleanSlug = slug.replace(/^id\//, '');
-  return cleanSlug === 'why-volcanoes-form';
+  return TRANSLATED_EXPERIENCE_SLUGS.has(cleanSlug);
 }
 
 /**
@@ -37,7 +72,7 @@ export function isExperienceTranslated(slug: string): boolean {
  */
 export function isTopicTranslated(slug: string): boolean {
   const cleanSlug = slug.replace(/^id\//, '');
-  return cleanSlug === 'plate-tectonics';
+  return TRANSLATED_TOPIC_SLUGS.has(cleanSlug);
 }
 
 /**

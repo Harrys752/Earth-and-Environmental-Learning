@@ -2,6 +2,8 @@ import { useState } from 'preact/hooks';
 import type { Question as QuestionType, QuestionFeedback } from '../../types/quiz';
 import AnswerOption from './AnswerOption';
 import FeedbackPanel from './FeedbackPanel';
+import { useTranslations } from '../../i18n';
+import type { Locale } from '../../lib/i18nUrl';
 
 export interface QuestionProps {
   question: QuestionType;
@@ -11,6 +13,7 @@ export interface QuestionProps {
   onNextQuestion: () => void;
   isLastQuestion: boolean;
   activeFeedback?: QuestionFeedback;
+  locale?: Locale;
 }
 
 export default function Question({
@@ -21,7 +24,9 @@ export default function Question({
   onNextQuestion,
   isLastQuestion,
   activeFeedback,
+  locale = 'en',
 }: QuestionProps) {
+  const t = useTranslations(locale);
   // Internal selection state depending on question type
   const [singleAnswer, setSingleAnswer] = useState<string>('');
   const [multiAnswers, setMultiAnswers] = useState<string[]>([]);
@@ -121,7 +126,7 @@ export default function Question({
       {/* Question Header & Meta */}
       <div class="flex items-center justify-between border-b border-[var(--color-border)] pb-3">
         <span class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-dim)]">
-          Question {questionNumber} of {totalQuestions}
+          {t.quizComponent.questionProgress.replace('{current}', String(questionNumber)).replace('{total}', String(totalQuestions))}
         </span>
         <span class="text-xs px-2 py-0.5 rounded-full bg-[var(--color-surface-hover)] border border-[var(--color-border)] text-[var(--color-text-muted)] capitalize">
           {question.type.replace('-', ' ')}
@@ -173,7 +178,7 @@ export default function Question({
             aria-label={`Options for Question ${questionNumber} (multiple choice)`}
           >
             <div class="text-xs text-[var(--color-text-muted)] mb-2 italic">
-              Select all options that apply:
+              {t.quizComponent.multipleChoiceHint}
             </div>
             {question.options.map((opt) => (
               <AnswerOption
@@ -192,7 +197,7 @@ export default function Question({
         {question.type === 'matching' && question.matchingPairs && (
           <div class="space-y-3">
             <div class="text-xs text-[var(--color-text-muted)] italic">
-              Match each geological feature on the left with its description on the right:
+              {t.quizComponent.matchingHint}
             </div>
             <div class="space-y-2.5">
               {question.matchingPairs.map((pair) => (
@@ -212,7 +217,7 @@ export default function Question({
                     class="sm:w-2/3 px-3 py-2 text-xs rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text)] focus:ring-2 focus:ring-[var(--color-accent)] focus:outline-none"
                     aria-label={`Match for ${pair.left}`}
                   >
-                    <option value="">-- Select corresponding match --</option>
+                    <option value="">{t.quizComponent.matchingSelectDefault}</option>
                     {question.matchingPairs?.map((p) => (
                       <option key={p.right} value={p.right}>
                         {p.right}
@@ -229,7 +234,7 @@ export default function Question({
         {question.type === 'ordering' && question.orderingItems && (
           <div class="space-y-3">
             <div class="text-xs text-[var(--color-text-muted)] italic">
-              Arrange these chronological stages from earliest (top) to latest (bottom):
+              {t.quizComponent.orderingHint}
             </div>
             <div class="space-y-2">
               {orderedItems.map((itemId, idx) => {
@@ -255,7 +260,7 @@ export default function Question({
                           disabled={idx === 0}
                           onClick={() => moveOrderItem(idx, 'up')}
                           class="p-1.5 rounded-md hover:bg-[var(--color-surface-hover)] disabled:opacity-30 cursor-pointer disabled:cursor-not-allowed text-[var(--color-text-muted)]"
-                          aria-label={`Move ${item.label} up`}
+                          aria-label={t.quizComponent.moveUp.replace('{label}', item.label)}
                         >
                           <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <polyline points="18 15 12 9 6 15" />
@@ -266,7 +271,7 @@ export default function Question({
                           disabled={idx === orderedItems.length - 1}
                           onClick={() => moveOrderItem(idx, 'down')}
                           class="p-1.5 rounded-md hover:bg-[var(--color-surface-hover)] disabled:opacity-30 cursor-pointer disabled:cursor-not-allowed text-[var(--color-text-muted)]"
-                          aria-label={`Move ${item.label} down`}
+                          aria-label={t.quizComponent.moveDown.replace('{label}', item.label)}
                         >
                           <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <polyline points="6 9 12 15 18 9" />
@@ -289,7 +294,7 @@ export default function Question({
                 type="number"
                 step="any"
                 disabled={isAnswered}
-                placeholder="Enter value"
+                placeholder={t.quizComponent.calcPlaceholder}
                 value={calcAnswer}
                 onInput={(e) => setCalcAnswer((e.target as HTMLInputElement).value)}
                 class="w-full px-4 py-2.5 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text)] font-mono text-sm focus:ring-2 focus:ring-[var(--color-accent)] focus:outline-none"
@@ -314,7 +319,7 @@ export default function Question({
             onClick={() => handleSubmit()}
             class="px-5 py-2.5 rounded-xl bg-[var(--color-accent)] text-white text-sm font-semibold hover:bg-[var(--color-accent-hover)] transition-all cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
           >
-            Verify Understanding
+            {t.quizComponent.verifyButton}
           </button>
         </div>
       )}
@@ -329,6 +334,7 @@ export default function Question({
           }}
           onNext={onNextQuestion}
           isLastQuestion={isLastQuestion}
+          locale={locale}
         />
       )}
     </div>

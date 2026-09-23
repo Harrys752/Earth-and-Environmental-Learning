@@ -34,16 +34,20 @@ describe('i18nUrl helper functions', () => {
     });
   });
 
-  it('hasTranslation returns true for translated Phase 1 content and false for untranslated', () => {
+  it('hasTranslation returns true for translated content and false for untranslated', () => {
     expect(hasTranslation('/learn/why-volcanoes-form', 'id')).toBe(true);
     expect(hasTranslation('/explore/topics/plate-tectonics', 'id')).toBe(true);
     expect(hasTranslation('/about', 'id')).toBe(true);
     expect(hasTranslation('/geomap', 'id')).toBe(true);
 
-    // Untranslated Phase 2 items
-    expect(hasTranslation('/learn/how-rain-forms', 'id')).toBe(false);
-    expect(hasTranslation('/learn/the-rock-cycle', 'id')).toBe(false);
-    expect(hasTranslation('/explore/topics/atmosphere', 'id')).toBe(false);
+    // Fully translated experiences & topics
+    expect(hasTranslation('/learn/how-rain-forms', 'id')).toBe(true);
+    expect(hasTranslation('/learn/the-rock-cycle', 'id')).toBe(true);
+    expect(hasTranslation('/explore/topics/atmosphere', 'id')).toBe(true);
+
+    // Untranslated / future items
+    expect(hasTranslation('/learn/future-experience', 'id')).toBe(false);
+    expect(hasTranslation('/explore/topics/future-topic', 'id')).toBe(false);
 
     // English always has all translations
     expect(hasTranslation('/learn/how-rain-forms', 'en')).toBe(true);
@@ -51,9 +55,13 @@ describe('i18nUrl helper functions', () => {
 
   it('isExperienceTranslated and isTopicTranslated accurately identify translated content', () => {
     expect(isExperienceTranslated('why-volcanoes-form')).toBe(true);
-    expect(isExperienceTranslated('how-rain-forms')).toBe(false);
+    expect(isExperienceTranslated('how-rain-forms')).toBe(true);
+    expect(isExperienceTranslated('the-rock-cycle')).toBe(true);
+    expect(isExperienceTranslated('future-experience')).toBe(false);
+
     expect(isTopicTranslated('plate-tectonics')).toBe(true);
-    expect(isTopicTranslated('atmosphere')).toBe(false);
+    expect(isTopicTranslated('atmosphere')).toBe(true);
+    expect(isTopicTranslated('future-topic')).toBe(false);
   });
 
   it('getLocalizedUrl prefixes with base and id/ appropriately', () => {
@@ -70,12 +78,16 @@ describe('i18nUrl helper functions', () => {
     expect(directResult.isDirectTranslation).toBe(true);
     expect(directResult.url).toBe(withBase('id/learn/why-volcanoes-form'));
 
-    // Untranslated item keeps exact same slug under /id/ with fallback flag
-    const fallbackResult = getSwitchTargetUrl('/learn/how-rain-forms', 'id');
-    expect(fallbackResult.isDirectTranslation).toBe(false);
-    expect(fallbackResult.url).toBe(withBase('id/learn/how-rain-forms'));
+    const directRain = getSwitchTargetUrl('/learn/how-rain-forms', 'id');
+    expect(directRain.isDirectTranslation).toBe(true);
+    expect(directRain.url).toBe(withBase('id/learn/how-rain-forms'));
 
-    // Switching from Indonesian fallback page back to English
+    // Untranslated hypothetical future item keeps exact same slug under /id/ with fallback flag
+    const fallbackResult = getSwitchTargetUrl('/learn/future-untranslated-exp', 'id');
+    expect(fallbackResult.isDirectTranslation).toBe(false);
+    expect(fallbackResult.url).toBe(withBase('id/learn/future-untranslated-exp'));
+
+    // Switching from Indonesian page back to English
     const enSwitch = getSwitchTargetUrl('/id/learn/how-rain-forms', 'en');
     expect(enSwitch.isDirectTranslation).toBe(true);
     expect(enSwitch.url).toBe(withBase('learn/how-rain-forms'));

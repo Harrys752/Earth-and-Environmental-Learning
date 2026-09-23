@@ -1,6 +1,7 @@
 import { useState } from 'preact/hooks';
 import { recordExploration } from '../../lib/storage';
 import InteractiveSlider from './InteractiveSlider';
+import type { Locale } from '../../lib/i18nUrl';
 
 export type BoundaryType =
   | 'convergent-subduction'
@@ -11,6 +12,7 @@ export type BoundaryType =
 export interface SimulationProps {
   experienceSlug?: string;
   initialBoundary?: BoundaryType;
+  locale?: Locale;
 }
 
 interface BoundaryModelData {
@@ -25,7 +27,7 @@ interface BoundaryModelData {
   whatModelSimplifies: string;
 }
 
-const BOUNDARY_MODELS: Record<BoundaryType, BoundaryModelData> = {
+const BOUNDARY_MODELS_EN: Record<BoundaryType, BoundaryModelData> = {
   'convergent-subduction': {
     title: 'Oceanic-Continental Subduction',
     subheading: 'Dense oceanic lithosphere sinks beneath continental crust',
@@ -72,16 +74,65 @@ const BOUNDARY_MODELS: Record<BoundaryType, BoundaryModelData> = {
   },
 };
 
+const BOUNDARY_MODELS_ID: Record<BoundaryType, BoundaryModelData> = {
+  'convergent-subduction': {
+    title: 'Subduksi Samudra-Benua',
+    subheading: 'Litosfer samudra padat menunjam ke bawah kerak benua',
+    indonesiaExample: 'Palung Jawa & Busur Sunda (Lempeng Indo-Australia menunjam di bawah Lempeng Sunda)',
+    meltingMechanism: 'Pelelehan Fluks: Pelepasan air dari lempeng samudra ke baji mantel astenosfer menurunkan titik leleh peridotit.',
+    volcanicActivity: 'Tinggi. Stratovulkan komposit eksplosif (andesit/dasit) membentuk busur vulkanik melengkung.',
+    earthquakeProfile: 'Seismisitas zona Wadati-Benioff dari gempa dangkal dekat palung hingga gempa mantel dalam >600 km.',
+    rockTypes: 'Andesit, Dasit, Riolit, Diorit, Granodiorit.',
+    modelDescription: 'Lempeng samudra menekuk ke dalam palung subduksi. Pada kedalaman >100 km, pelepasan fluida memicu pelelehan parsial baji mantel dan pembentukan magma busur vulkanik.',
+    whatModelSimplifies: 'Daya apung termal dan dinamika fluida 3D disederhanakan menjadi kinematika 2D berkecepatan tinggi.',
+  },
+  'convergent-collision': {
+    title: 'Tabrakan Benua-Benua',
+    subheading: 'Dua kerak benua bertubrukan tanpa penunjaman ke mantel dalam',
+    indonesiaExample: 'Tubrukan tepi benua Australia dengan Busur Banda (wilayah Timor)',
+    meltingMechanism: 'Sangat Sedikit/Tidak Ada: Kerak benua mengapung dan terdeformasi tebal tanpa penunjaman mantel dalam.',
+    volcanicActivity: 'Sangat Rendah / Tidak Ada (tidak ada vulkanisme subduksi aktif).',
+    earthquakeProfile: 'Gempa sesar anjak kerak dangkal-menengah bermagnitudo besar di zona deformasi luas.',
+    rockTypes: 'Gneis, Sekis, Granit hasil anateksis kerak benua.',
+    modelDescription: 'Karena densitas kerak benua ringan (~2.7 g/cm³), tubrukan menghasilkan pelipatan kerak, sesar sungkup, dan akar pegunungan yang tebal.',
+    whatModelSimplifies: 'Kompleksitas sesar sungkup dan metamorfisme regional disederhanakan menjadi pemendekan lateral.',
+  },
+  'divergent-oceanic': {
+    title: 'Batas Divergen Samudra (Punggung Tengah Samudra)',
+    subheading: 'Lempeng bergerak menjauh, memicu naiknya mantel dan pembentukan kerak baru',
+    indonesiaExample: 'Analogi global: Punggung Samudra Hindia; regional: Pemekaran purba Laut Sulawesi',
+    meltingMechanism: 'Pelelehan Dekompresi: Mantel astenosfer naik dan kehilangan tekanan secara adiabatik sehingga meleleh.',
+    volcanicActivity: 'Non-eksplosif, lelehan efusif celah membentuk basal bantal (pillow basalt) di dasar laut.',
+    earthquakeProfile: 'Gempa sesar normal dangkal bermagnitudo rendah-sedang di lembah celah pemekaran.',
+    rockTypes: 'Basal, Gabro, Serpentin, Dunit.',
+    modelDescription: 'Regangan tektonik menarik lempeng saling menjauh. Mantel astenosfer naik mengisi celah dan membeku menjadi kerak samudra baru.',
+    whatModelSimplifies: 'Sirkulasi hidrotermal dan rekahan transform disederhanakan dalam model 2D.',
+  },
+  'transform-fault': {
+    title: 'Batas Transform (Sesar Geser Mendatar)',
+    subheading: 'Lempeng bergeser mendatar tanpa pembentukan atau pemusnahan kerak',
+    indonesiaExample: 'Sesar Besar Sumatra (Sesar Semangko) yang membelah Pulau Sumatra',
+    meltingMechanism: 'Tidak Ada: Litosfer bergeser lateral tanpa dekompresi vertikal atau penambahan fluida.',
+    volcanicActivity: 'Tidak ada vulkanisme langsung dari sesar mendatar murni.',
+    earthquakeProfile: 'Gempa dangkal kuat di sepanjang bidang sesar dengan kerusakan lokal signifikan.',
+    rockTypes: 'Milonit, Kataklasit, Breksi sesar.',
+    modelDescription: 'Lempeng saling bergesekan pada bidang vertikal. Gaya gesek mengunci lempeng hingga tegangan terlepas mendadak sebagai gempa bumi.',
+    whatModelSimplifies: 'Geometri cekungan pull-apart lokal disederhanakan menjadi garis sesar planar.',
+  },
+};
+
 export default function Simulation({
   experienceSlug = 'why-volcanoes-form',
   initialBoundary = 'convergent-subduction',
+  locale = 'en',
 }: SimulationProps) {
   const [boundary, setBoundary] = useState<BoundaryType>(initialBoundary);
   const [subductionRate, setSubductionRate] = useState<number>(6); // cm/year
   const [slabWaterContent, setSlabWaterContent] = useState<number>(5); // percent hydrous mineral breakdown
   const [showExplanation, setShowExplanation] = useState<boolean>(false);
 
-  const model = BOUNDARY_MODELS[boundary];
+  const models = locale === 'id' ? BOUNDARY_MODELS_ID : BOUNDARY_MODELS_EN;
+  const model = models[boundary];
 
   const handleBoundaryChange = (type: BoundaryType) => {
     setBoundary(type);
@@ -90,6 +141,8 @@ export default function Simulation({
     }
   };
 
+  const isId = locale === 'id';
+
   return (
     <div class="rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-5 sm:p-7 space-y-6 shadow-sm">
       {/* Simulation Header */}
@@ -97,14 +150,16 @@ export default function Simulation({
         <div>
           <div class="flex items-center gap-2">
             <h4 class="text-base sm:text-lg font-bold text-[var(--color-text)]">
-              Plate Boundary & Magma Genesis Simulator
+              {isId ? 'Simulator Batas Lempeng & Genesis Magma' : 'Plate Boundary & Magma Genesis Simulator'}
             </h4>
             <span class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-amber-100 text-amber-900 border border-amber-300 dark:bg-amber-950 dark:text-amber-200 dark:border-amber-800">
-              Illustrative Scientific Model
+              {isId ? 'Model Sains Ilustratif' : 'Illustrative Scientific Model'}
             </span>
           </div>
           <p class="text-xs text-[var(--color-text-muted)] mt-1">
-            Manipulate boundary kinematics and observing resulting melting mechanisms, seismicity, and volcanism.
+            {isId
+              ? 'Atur kinematika batas lempeng dan amati mekanisme pelelehan, kegempaan, serta vulkanisme yang dihasilkan.'
+              : 'Manipulate boundary kinematics and observing resulting melting mechanisms, seismicity, and volcanism.'}
           </p>
         </div>
 
@@ -113,7 +168,9 @@ export default function Simulation({
           onClick={() => setShowExplanation(!showExplanation)}
           class="text-xs font-semibold px-3 py-1.5 rounded-lg border border-[var(--color-border)] hover:bg-[var(--color-surface-hover)] text-[var(--color-interactive)] transition-colors self-start sm:self-auto cursor-pointer"
         >
-          {showExplanation ? 'Hide Scientific Model Details' : 'What this Model Represents'}
+          {showExplanation
+            ? isId ? 'Sembunyikan Detail Model Sains' : 'Hide Scientific Model Details'
+            : isId ? 'Penjelasan Model Sains' : 'What this Model Represents'}
         </button>
       </div>
 
@@ -121,11 +178,11 @@ export default function Simulation({
       {showExplanation && (
         <div class="rounded-xl p-4 bg-[var(--color-surface-hover)] border border-[var(--color-border)] text-xs space-y-2">
           <p class="text-[var(--color-text)]">
-            <strong class="font-semibold">Model Scope: </strong>
+            <strong class="font-semibold">{isId ? 'Cakupan Model: ' : 'Model Scope: '}</strong>
             {model.modelDescription}
           </p>
           <p class="text-[var(--color-text-muted)]">
-            <strong class="font-semibold text-[var(--color-text)]">Simplifications & Limitations: </strong>
+            <strong class="font-semibold text-[var(--color-text)]">{isId ? 'Penyederhanaan & Batasan: ' : 'Simplifications & Limitations: '}</strong>
             {model.whatModelSimplifies}
           </p>
         </div>
@@ -142,8 +199,8 @@ export default function Simulation({
               : 'border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text-muted)] hover:bg-[var(--color-surface-hover)]'
           }`}
         >
-          <div class="font-bold text-[var(--color-text)]">Subduction Zone</div>
-          <div class="text-[10px] opacity-80 mt-0.5">Oceanic → Continental</div>
+          <div class="font-bold text-[var(--color-text)]">{isId ? 'Zona Subduksi' : 'Subduction Zone'}</div>
+          <div class="text-[10px] opacity-80 mt-0.5">{isId ? 'Samudra → Benua' : 'Oceanic → Continental'}</div>
         </button>
 
         <button
@@ -155,8 +212,8 @@ export default function Simulation({
               : 'border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text-muted)] hover:bg-[var(--color-surface-hover)]'
           }`}
         >
-          <div class="font-bold text-[var(--color-text)]">Continental Collision</div>
-          <div class="text-[10px] opacity-80 mt-0.5">Continent → Continent</div>
+          <div class="font-bold text-[var(--color-text)]">{isId ? 'Tubrukan Benua' : 'Continental Collision'}</div>
+          <div class="text-[10px] opacity-80 mt-0.5">{isId ? 'Benua → Benua' : 'Continent → Continent'}</div>
         </button>
 
         <button
@@ -168,8 +225,8 @@ export default function Simulation({
               : 'border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text-muted)] hover:bg-[var(--color-surface-hover)]'
           }`}
         >
-          <div class="font-bold text-[var(--color-text)]">Mid-Ocean Ridge</div>
-          <div class="text-[10px] opacity-80 mt-0.5">Seafloor Spreading</div>
+          <div class="font-bold text-[var(--color-text)]">{isId ? 'Punggung Samudra' : 'Mid-Ocean Ridge'}</div>
+          <div class="text-[10px] opacity-80 mt-0.5">{isId ? 'Pemekaran Dasar Laut' : 'Seafloor Spreading'}</div>
         </button>
 
         <button
@@ -181,8 +238,8 @@ export default function Simulation({
               : 'border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text-muted)] hover:bg-[var(--color-surface-hover)]'
           }`}
         >
-          <div class="font-bold text-[var(--color-text)]">Transform Fault</div>
-          <div class="text-[10px] opacity-80 mt-0.5">Strike-Slip Shearing</div>
+          <div class="font-bold text-[var(--color-text)]">{isId ? 'Sesar Transform' : 'Transform Fault'}</div>
+          <div class="text-[10px] opacity-80 mt-0.5">{isId ? 'Pergeseran Mendatar' : 'Strike-Slip Shearing'}</div>
         </button>
       </div>
 
@@ -191,13 +248,13 @@ export default function Simulation({
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 p-4 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface-hover)]">
           <InteractiveSlider
             id="subduction-rate"
-            label="Convergence Rate"
+            label={isId ? 'Laju Konvergensi' : 'Convergence Rate'}
             value={subductionRate}
             min={2}
             max={12}
             step={1}
             unit="cm/year"
-            description="Java Trench convergence rate is approximately 6-7 cm/yr."
+            description={isId ? 'Laju konvergensi Palung Jawa berkisar 6-7 cm/tahun.' : 'Java Trench convergence rate is approximately 6-7 cm/yr.'}
             onChange={(val) => {
               setSubductionRate(val);
               if (experienceSlug) recordExploration(experienceSlug, 'simulation', `rate:${val}`);
@@ -205,13 +262,13 @@ export default function Simulation({
           />
           <InteractiveSlider
             id="slab-water"
-            label="Slab Hydration"
+            label={isId ? 'Hidrasi Lempeng' : 'Slab Hydration'}
             value={slabWaterContent}
             min={1}
             max={10}
             step={1}
             unit="wt %"
-            description="Hydrous serpentinite & clay minerals breaking down at depth."
+            description={isId ? 'Mineral lempung dan serpentinit terurai melepas air di kedalaman.' : 'Hydrous serpentinite & clay minerals breaking down at depth.'}
             onChange={(val) => {
               setSlabWaterContent(val);
               if (experienceSlug) recordExploration(experienceSlug, 'simulation', `hydration:${val}`);
@@ -374,33 +431,33 @@ export default function Simulation({
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-5">
         <div class="space-y-2">
           <span class="text-[11px] font-mono uppercase tracking-wider text-[var(--color-accent)] font-semibold">
-            Primary Geological Process
+            {isId ? 'Proses Geologi Utama' : 'Primary Geological Process'}
           </span>
           <h5 class="text-sm font-bold text-[var(--color-text)]">{model.subheading}</h5>
           <p class="text-xs text-[var(--color-text-muted)] leading-relaxed">
-            <strong class="text-[var(--color-text)]">Melting Mechanism: </strong>
+            <strong class="text-[var(--color-text)]">{isId ? 'Mekanisme Pelelehan: ' : 'Melting Mechanism: '}</strong>
             {model.meltingMechanism}
           </p>
           <p class="text-xs text-[var(--color-text-muted)] leading-relaxed">
-            <strong class="text-[var(--color-text)]">Volcanic Activity: </strong>
+            <strong class="text-[var(--color-text)]">{isId ? 'Aktivitas Vulkanik: ' : 'Volcanic Activity: '}</strong>
             {model.volcanicActivity}
           </p>
         </div>
 
         <div class="space-y-2 border-t md:border-t-0 md:border-l border-[var(--color-border)] pt-3 md:pt-0 md:pl-4">
           <span class="text-[11px] font-mono uppercase tracking-wider text-[var(--color-secondary)] font-semibold">
-            Regional Anchor & Seismicity
+            {isId ? 'Studi Regional & Kegempaan' : 'Regional Anchor & Seismicity'}
           </span>
           <p class="text-xs text-[var(--color-text)] leading-relaxed">
-            <strong class="text-[var(--color-secondary)]">Indonesian Example: </strong>
+            <strong class="text-[var(--color-secondary)]">{isId ? 'Contoh di Indonesia: ' : 'Indonesian Example: '}</strong>
             {model.indonesiaExample}
           </p>
           <p class="text-xs text-[var(--color-text-muted)] leading-relaxed">
-            <strong class="text-[var(--color-text)]">Earthquake Signature: </strong>
+            <strong class="text-[var(--color-text)]">{isId ? 'Karakteristik Gempa: ' : 'Earthquake Signature: '}</strong>
             {model.earthquakeProfile}
           </p>
           <p class="text-xs text-[var(--color-text-muted)] leading-relaxed">
-            <strong class="text-[var(--color-text)]">Typical Rock Types: </strong>
+            <strong class="text-[var(--color-text)]">{isId ? 'Jenis Batuan Khas: ' : 'Typical Rock Types: '}</strong>
             {model.rockTypes}
           </p>
         </div>

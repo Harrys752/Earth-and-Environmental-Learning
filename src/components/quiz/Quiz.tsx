@@ -249,6 +249,7 @@ export default function Quiz({ quiz, experienceSlug, experienceTitle, locale = '
         onNextQuestion={handleNextQuestion}
         isLastQuestion={isLastQuestion}
         activeFeedback={currentFeedback}
+        locale={locale}
       />
     </div>
   );

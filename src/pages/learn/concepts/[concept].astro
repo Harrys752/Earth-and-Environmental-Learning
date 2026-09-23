@@ -7,8 +7,9 @@ import GeoMapLink from '../../../components/geomap/GeoMapLink.astro';
 
 export async function getStaticPaths() {
   const concepts = await getCollection('concepts');
-  return concepts.map((entry) => ({
-    params: { concept: entry.data.id || entry.id },
+  const enConcepts = concepts.filter((c) => !c.id.startsWith('id/'));
+  return enConcepts.map((entry) => ({
+    params: { concept: (entry.data.id || entry.id).replace(/^id\//, '') },
     props: { entry },
   }));
 }

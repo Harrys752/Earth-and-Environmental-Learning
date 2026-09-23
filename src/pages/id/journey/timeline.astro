@@ -13,7 +13,7 @@ import JourneyEntryForm from '../../../components/journey/JourneyEntryForm';
   <div class="space-y-10">
     <!-- Manual Entry Creator Form Island -->
     <section>
-      <JourneyEntryForm client:idle />
+      <JourneyEntryForm client:idle locale="id" />
     </section>
 
     <!-- Chronological Timeline Grouped by Month -->
@@ -27,7 +27,7 @@ import JourneyEntryForm from '../../../components/journey/JourneyEntryForm';
         </span>
       </div>
 
-      <JourneyTimeline client:visible />
+      <JourneyTimeline client:visible locale="id" />
     </section>
   </div>
 </JourneyLayout>

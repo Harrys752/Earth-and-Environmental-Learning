@@ -74,7 +74,7 @@ const { relatedExperiences, relatedConcepts, relatedLocations } = getRelatedCont
 
     <!-- Multi-Dimensional Progress Indicator Island -->
     <div class="mb-10">
-      <ProgressIndicator client:idle experienceSlug={experienceSlug} />
+      <ProgressIndicator client:idle experienceSlug={experienceSlug} locale={locale} />
     </div>
 
     <!-- Core Narrative & Pedagogical Content -->
@@ -86,13 +86,13 @@ const { relatedExperiences, relatedConcepts, relatedLocations } = getRelatedCont
     <footer class="mt-16 pt-12 border-t-2 border-[var(--color-border)] space-y-8">
       <div>
         <span class="text-xs font-mono uppercase tracking-widest text-[var(--color-accent)] font-bold block mb-1">
-          Knowledge Network
+          {t.learningLayout.knowledgeNetwork}
         </span>
         <h3 class="text-2xl font-extrabold text-[var(--color-text)] tracking-tight">
-          Continue Your Earth Exploration
+          {t.learningLayout.continueHeader}
         </h3>
         <p class="text-xs sm:text-sm text-[var(--color-text-muted)] mt-1">
-          Science is an interconnected system of processes, not a linear textbook chapter. Where will you branch next?
+          {t.learningLayout.continueSub}
         </p>
       </div>
 
@@ -102,7 +102,7 @@ const { relatedExperiences, relatedConcepts, relatedLocations } = getRelatedCont
           <div class="rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-4 space-y-3">
             <h4 class="text-xs font-mono uppercase tracking-wider text-[var(--color-text)] font-semibold flex items-center gap-1.5">
               <span class="w-2 h-2 rounded-full bg-[var(--color-accent)]" />
-              <span>Core Concepts</span>
+              <span>{t.learningLayout.coreConcepts}</span>
             </h4>
             <div class="space-y-2">
               {relatedConcepts.map((c) => (
@@ -123,7 +123,7 @@ const { relatedExperiences, relatedConcepts, relatedLocations } = getRelatedCont
           <div class="rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-4 space-y-3">
             <h4 class="text-xs font-mono uppercase tracking-wider text-[var(--color-text)] font-semibold flex items-center gap-1.5">
               <span class="w-2 h-2 rounded-full bg-[var(--color-secondary)]" />
-              <span>Related Experiences</span>
+              <span>{t.learningLayout.relatedExperiences}</span>
             </h4>
             <div class="space-y-2">
               {relatedExperiences.map((e) => (
@@ -144,7 +144,7 @@ const { relatedExperiences, relatedConcepts, relatedLocations } = getRelatedCont
           <div class="rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-4 space-y-3">
             <h4 class="text-xs font-mono uppercase tracking-wider text-[var(--color-interactive)] font-semibold flex items-center gap-1.5">
               <span class="w-2 h-2 rounded-full bg-[var(--color-interactive)]" />
-              <span>Field Locations</span>
+              <span>{t.learningLayout.fieldLocations}</span>
             </h4>
             <div class="space-y-2">
               {relatedLocations.map((l) => (

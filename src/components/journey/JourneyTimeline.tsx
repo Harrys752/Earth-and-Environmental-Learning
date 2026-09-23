@@ -1,11 +1,17 @@
 import { useState, useEffect } from 'preact/hooks';
 import type { JourneyEntry } from '../../types/journey';
 import { getJourneyEntries } from '../../lib/storage';
-import { withBase } from '../../lib/url';
+import { useTranslations } from '../../i18n';
+import { getLocalizedUrl, type Locale } from '../../lib/i18nUrl';
 
-export default function JourneyTimeline() {
+export interface JourneyTimelineProps {
+  locale?: Locale;
+}
+
+export default function JourneyTimeline({ locale = 'en' }: JourneyTimelineProps) {
   const [entries, setEntries] = useState<JourneyEntry[]>([]);
   const [filterType, setFilterType] = useState<string>('all');
+  const t = useTranslations(locale);
 
   const loadEntries = () => {
     setEntries(getJourneyEntries());
@@ -20,10 +26,11 @@ export default function JourneyTimeline() {
 
   const filtered = filterType === 'all' ? entries : entries.filter((e) => e.type === filterType);
 
-  // Group entries by Month Year (e.g. September 2026)
+  // Group entries by Month Year
   const groupedByMonth = filtered.reduce((acc, entry) => {
     const d = new Date(entry.timestamp);
-    const monthYear = d.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+    const dateLocale = locale === 'id' ? 'id-ID' : 'en-US';
+    const monthYear = d.toLocaleDateString(dateLocale, { month: 'long', year: 'numeric' });
     if (!acc[monthYear]) acc[monthYear] = [];
     acc[monthYear].push(entry);
     return acc;
@@ -33,37 +40,37 @@ export default function JourneyTimeline() {
     switch (type) {
       case 'learned':
         return {
-          label: 'Learned',
+          label: t.journeyTimeline.types.learned,
           class: 'bg-emerald-100 text-emerald-900 border-emerald-300 dark:bg-emerald-950 dark:text-emerald-200 dark:border-emerald-800',
         };
       case 'applied':
         return {
-          label: 'Applied',
+          label: t.journeyTimeline.types.applied,
           class: 'bg-blue-100 text-blue-900 border-blue-300 dark:bg-blue-950 dark:text-blue-200 dark:border-blue-800',
         };
       case 'built':
         return {
-          label: 'Built',
+          label: t.journeyTimeline.types.built,
           class: 'bg-purple-100 text-purple-900 border-purple-300 dark:bg-purple-950 dark:text-purple-200 dark:border-purple-800',
         };
       case 'reflection':
         return {
-          label: 'Reflected',
+          label: t.journeyTimeline.types.reflection,
           class: 'bg-amber-100 text-amber-900 border-amber-300 dark:bg-amber-950 dark:text-amber-200 dark:border-amber-800',
         };
       case 'observation':
         return {
-          label: 'Observed',
+          label: t.journeyTimeline.types.observation,
           class: 'bg-teal-100 text-teal-900 border-teal-300 dark:bg-teal-950 dark:text-teal-200 dark:border-teal-800',
         };
       case 'milestone':
         return {
-          label: 'Milestone',
+          label: t.journeyTimeline.types.milestone,
           class: 'bg-rose-100 text-rose-900 border-rose-300 dark:bg-rose-950 dark:text-rose-200 dark:border-rose-800',
         };
       default:
         return {
-          label: 'Activity',
+          label: t.journeyTimeline.types.activity,
           class: 'bg-stone-100 text-stone-800 border-stone-200 dark:bg-stone-800 dark:text-stone-300 dark:border-stone-700',
         };
     }
@@ -79,16 +86,16 @@ export default function JourneyTimeline() {
           </svg>
         </div>
         <h3 class="text-lg font-bold text-[var(--color-text)] mb-2">
-          Your Scientific Journey Begins Here
+          {t.journeyTimeline.emptyTitle}
         </h3>
         <p class="text-xs sm:text-sm text-[var(--color-text-muted)] mb-6 leading-relaxed">
-          As you investigate experiences, manipulate plate boundary simulations, and record field observations, your personal timeline will document your growing understanding of Earth systems.
+          {t.journeyTimeline.emptyDesc}
         </p>
         <a
-          href={withBase('/learn/why-volcanoes-form')}
+          href={getLocalizedUrl('/learn/why-volcanoes-form', locale)}
           class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[var(--color-accent)] text-white text-xs font-semibold hover:bg-[var(--color-accent-hover)] transition-all shadow-sm"
         >
-          <span>Start Flagship Experience: Why Do Volcanoes Form?</span>
+          <span>{t.journeyTimeline.startFlagship}</span>
           <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <polyline points="9 18 15 12 9 6" />
           </svg>
@@ -98,23 +105,24 @@ export default function JourneyTimeline() {
   }
 
   const months = Object.keys(groupedByMonth);
+  const filterKeys: (keyof typeof t.journeyTimeline.filters)[] = ['all', 'learned', 'applied', 'built', 'reflection', 'observation'];
 
   return (
     <div class="space-y-6">
       {/* Filter Tabs */}
       <div class="flex items-center gap-1.5 flex-wrap border-b border-[var(--color-border)] pb-3">
-        {['all', 'learned', 'applied', 'built', 'reflection', 'observation'].map((type) => (
+        {filterKeys.map((type) => (
           <button
             key={type}
             type="button"
             onClick={() => setFilterType(type)}
-            class={`px-3 py-1.5 rounded-lg text-xs font-semibold capitalize transition-all cursor-pointer ${
+            class={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
               filterType === type
                 ? 'bg-[var(--color-accent)] text-white shadow-sm'
                 : 'bg-[var(--color-surface-hover)] text-[var(--color-text-muted)] hover:text-[var(--color-text)]'
             }`}
           >
-            {type}
+            {t.journeyTimeline.filters[type]}
           </button>
         ))}
       </div>
@@ -134,7 +142,8 @@ export default function JourneyTimeline() {
               {groupedByMonth[month].map((entry) => {
                 const badge = getTypeBadge(entry.type);
                 const d = new Date(entry.timestamp);
-                const dateStr = d.toLocaleDateString('en-US', {
+                const dateLocale = locale === 'id' ? 'id-ID' : 'en-US';
+                const dateStr = d.toLocaleDateString(dateLocale, {
                   month: 'short',
                   day: 'numeric',
                 });
@@ -173,10 +182,10 @@ export default function JourneyTimeline() {
                     {entry.relatedExperienceSlug && (
                       <div class="mt-3 pt-2 border-t border-[var(--color-border)]/60 text-xs">
                         <a
-                          href={withBase(`/learn/${entry.relatedExperienceSlug}`)}
+                          href={getLocalizedUrl(`/learn/${entry.relatedExperienceSlug}`, locale)}
                           class="inline-flex items-center gap-1 text-[var(--color-accent)] font-semibold hover:underline"
                         >
-                          <span>Revisit Experience</span>
+                          <span>{t.journeyTimeline.revisit}</span>
                           <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <polyline points="9 18 15 12 9 6" />
                           </svg>

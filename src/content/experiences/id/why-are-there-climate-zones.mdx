@@ -1,0 +1,190 @@
+---
+id: "why-are-there-climate-zones"
+title: "Mengapa Ada Zona Iklim?"
+tagline: "Geometri Insolasi Matahari, Garis Lintang, dan Rezim Termal Bumi"
+description: "Pelajari bagaimana kelengkungan bola Bumi mendistribusikan energi matahari secara tidak merata di berbagai garis lintang, menciptakan zona iklim tropis, subtropis, sedang, dan kutub, serta mengapa Indonesia di khatulistiwa selalu hangat sepanjang tahun."
+topic: "climate"
+difficulty: "beginner"
+estimatedTime: "20min"
+learningObjectives:
+  - "Menjelaskan mengapa insolasi matahari per satuan luas permukaan bervariasi secara dramatis menurut garis lintang akibat penyebaran berkas sinar pada planet yang melengkung."
+  - "Membedakan karakteristik zona iklim utama Bumi: Tropis, Subtropis, Sedang, dan Kutub."
+  - "Memahami mengapa kawasan khatulistiwa seperti Indonesia mempertahankan suhu hangat dan panjang siang hari ~12 jam sepanjang tahun."
+  - "Membedakan antara fluktuasi cuaca jangka pendek dan norma iklim statistik multi-dekade."
+prerequisites: []
+interactiveElements:
+  - id: "climate-latitude-slider"
+    type: "slider"
+    title: "Simulator Insolasi Matahari & Sudut Lintang"
+    pedagogicalPurpose: "Memungkinkan pembelajar menyesuaikan garis lintang dari 0° (Khatulistiwa) ke 90° (Kutub) untuk mengamati konsentrasi berkas surya, penyebaran luas permukaan, dan intensitas insolasi."
+    isIllustrativeModel: true
+    accessibleFallbackText: "Slider interaktif yang mendemonstrasikan bahwa sinar matahari langsung 90° di khatulistiwa menghasilkan energi maksimum per meter persegi, sedangkan sinar miring di kutub menyebarkan energi ke area yang lebih luas."
+quiz:
+  quizId: "quiz-why-are-there-climate-zones"
+  title: "Mengapa Ada Zona Iklim? Kuis Verifikasi"
+  questionCount: 4
+realWorldConnections:
+  - title: "Iklim Khatulistiwa di Kepulauan Indonesia"
+    locationName: "Sabuk Khatulistiwa, Indonesia (Lintang 0°)"
+    isIndonesiaFirst: true
+    coordinates:
+      lat: 0.0000
+      lng: 109.3333
+    description: "Dibelah tepat oleh garis Khatulistiwa melintasi Sumatra, Kalimantan (Pontianak), Sulawesi, dan Maluku, Indonesia menerima sinar matahari tengah hari yang hampir vertikal sepanjang tahun, menghasilkan suhu rata-rata yang tinggi (26–28°C) dan panjang siang 12 jam yang konstan."
+    phenomenon: "Energi termal khatulistiwa yang stabil mendorong penguapan samudra sepanjang tahun, kelembapan tinggi, dan pola curah hujan yang didominasi angin monsun."
+    globalGeneralization: "Semua daratan khatulistiwa—termasuk Cekungan Amazon di Amerika Selatan dan Cekungan Kongo di Afrika—berbagi rezim tropis berinsolasi tinggi yang serupa."
+geoMapConnections: []
+reflection:
+  - id: "refl-climate-latitude"
+    prompt: "Apa yang akan berubah dalam kehidupan sehari-hari, pertanian, pakaian, dan ekosistem alam di daerah Anda jika kota Anda tiba-tiba dipindahkan ke garis lintang 65° Lintang Utara?"
+    placeholder: "Pertimbangkan suhu musiman, panjang siang di musim panas vs musim dingin, salju, musim tanam pertanian..."
+    category: "observation"
+nextExperiences:
+  - "how-rain-forms"
+  - "why-do-landslides-happen"
+scientific:
+  source:
+    - "NOAA National Centers for Environmental Information (2023). Earth's Climate Zones."
+    - "BMKG (Badan Meteorologi, Klimatologi, dan Geofisika Indonesia). Atlas Iklim Indonesia."
+    - "Ahrens, C. D., & Henson, R. (2021). Meteorology Today (13th ed.). Cengage Learning."
+  sourceType: "textbook"
+  lastReviewed: "2026-09-23"
+  scientificLevel: "beginner"
+  confidence: "established"
+  references:
+    - title: "Meteorology Today: An Introduction to Weather, Climate, and the Environment"
+      publisher: "Cengage Learning"
+      year: 2021
+    - title: "Climate of Indonesia: Climatological Normals and Monsoonal Dynamics"
+      publisher: "BMKG Indonesia"
+      year: 2023
+review:
+  reviewStatus: "published"
+  sourceList:
+    - "BMKG Indonesia"
+    - "NOAA"
+    - "Cengage Learning"
+  lastReviewed: "2026-09-23"
+  contentVersion: "1.0.0"
+featured: false
+---
+
+import ClimateLatitudeSlider from '../../../components/visualization/ClimateLatitudeSlider';
+import Quiz from '../../../components/quiz/Quiz';
+import ReflectionBox from '../../../components/learning/ReflectionBox';
+import RealWorldExample from '../../../components/learning/RealWorldExample.astro';
+import ObservationChallenge from '../../../components/learning/ObservationChallenge.astro';
+import { whyAreThereClimateZonesQuiz } from '../../../data/quizzes/id/why-are-there-climate-zones';
+
+## Bagian 1: Pertanyaan Pembuka
+
+> **Indonesia berada tepat di garis Khatulistiwa dan tidak pernah mengalami musim dingin yang membeku. Mengapa Matahari yang sama yang menghangatkan Asia Tenggara dapat menghasilkan badai salju di bawah nol derajat dan kegelapan berbulan-bulan di kawasan Skandinavia?**
+
+Miskonsepsi yang umum terjadi adalah anggapan bahwa khatulistiwa panas karena posisinya "lebih dekat ke matahari." Faktanya, jarak Matahari ke Bumi sekitar 150 juta kilometer—perbedaan beberapa ribu kilometer dari diameter Bumi sama sekali tidak berpengaruh.
+
+Penyebab utama dari keberadaan zona iklim di Bumi terletak pada **geometri**: Bumi berbentuk bulat, dan sinar matahari menyinari berbagai belahan permukaannya yang melengkung pada sudut yang sangat berbeda.
+
+---
+
+## Bagian 2: Geometri Insolasi Matahari & Penyebaran Berkas Cahaya
+
+Karena Bumi berbentuk melengkung:
+1. **Di Khatulistiwa (0°):** Berkas sinar matahari jatuh hampir tegak lurus (pada sudut 90°). Energi matahari terkonsentrasi pada tapak permukaan yang paling sempit, menghantarkan panas maksimum per meter persegi.
+2. **Di Garis Lintang Sedang (45°):** Berkas sinar mengenai permukaan pada sudut miring, menyebarkan energi cahaya yang sama ke area berbentuk oval yang lebih luas.
+3. **Di Dekat Kutub (90°):** Sinar matahari menyapu permukaan pada sudut yang sangat dangkal. Energi tersebar di atas hamparan tanah yang sangat luas, sembari menembus lapisan atmosfer yang jauh lebih tebal yang menyerap dan menghamburkan radiasi.
+
+```
+Radiasi Matahari yang Masuk (Berkas Paralel):
+===================================================
+Khatulistiwa (Tegak Lurus): [===] → Mengenai area sempit (Panas Terkonsentrasi: TINGGI)
+Lintang Sedang (Miring):    [===] → Mengenai area sedang (Panas Sedang)
+Kutub (Sangat Miring):      [===] → Mengenai area sangat luas (Panas Tereduksi: RENDAH)
+===================================================
+```
+
+---
+
+## Bagian 3: Zona Iklim Utama di Bumi
+
+Gradien penyinaran matahari berdasarkan garis lintang ini membagi Bumi menjadi tiga sabuk iklim utama:
+
+1. **Zona Tropis (0° hingga 23,5° LU/LS):**
+   - Dibatasi oleh Garis Balik Utara (Tropic of Cancer) dan Garis Balik Selatan (Tropic of Capricorn).
+   - Ditandai dengan insolasi matahari yang tinggi sepanjang tahun, variasi suhu musiman yang minimal, serta kelembapan dan curah hujan yang tinggi.
+2. **Zona Iklim Sedang (23,5° hingga 66,5° LU/LS):**
+   - Mengalami empat musim yang jelas (semi, panas, gugur, dingin) akibat kombinasi garis lintang dan kemiringan sumbu rotasi Bumi 23,5° saat mengitari Matahari.
+3. **Zona Kutub (66,5° hingga 90° LU/LS):**
+   - Menerima energi matahari tahunan yang sangat rendah, diselimuti es/tundra abadi, dan mengalami perubahan ekstrem antara siang 24 jam di musim panas (Midnight Sun) dan malam kutub total di musim dingin.
+
+---
+
+## Bagian 4: Simulasi Interaktif — Sudut Matahari & Slider Lintang
+
+Geser slider garis lintang di bawah ini dari Khatulistiwa (0°) ke Kutub (90°) untuk melihat bagaimana penyebaran berkas matahari memengaruhi intensitas energi panas radiasi yang diterima permukaan.
+
+<ClimateLatitudeSlider
+  client:visible
+  id="climate-slider"
+  experienceSlug="why-are-there-climate-zones"
+  locale="id"
+/>
+
+---
+
+## Bagian 5: Fenomena Nyata Indonesia — Kehidupan di Khatulistiwa
+
+Indonesia berada tepat di jantung zona tropis khatulistiwa dunia.
+
+<RealWorldExample
+  title="Dinamika Iklim Khatulistiwa: Pontianak & Kepulauan Indonesia"
+  locationName="Pontianak, Kalimantan Barat, Indonesia (0°0' LU/LS)"
+  isIndonesiaFirst={true}
+  coordinates={{ lat: 0.0000, lng: 109.3333 }}
+  phenomenon="Di kota seperti Pontianak, matahari tengah hari melintas hampir tepat di atas kepala sepanjang tahun. Akibatnya, suhu rata-rata bulanan hanya bervariasi kurang dari 2°C di sepanjang 12 bulan. Alih-alih musim suhu (panas/dingin), Indonesia mengalami pergantian musim yang diatur oleh pergeseran angin monsun yang berganti antara musim hujan dan musim kemarau."
+  globalGeneralization="Setiap wilayah yang berada di palung khatulistiwa Bumi mengalami kondisi atmosfer berenergi tinggi ini, yang menggerakkan Zona Konvergensi Antartropis (ITCZ) dan memicu sel sirkulasi atmosfer planet (Sel Hadley)."
+  locale="id"
+/>
+
+---
+
+## Bagian 6: Tantangan Pengamatan Lapangan
+
+<ObservationChallenge
+  title="Melacak Elevasi Matahari dan Panjang Bayangan"
+  targetPhenomenon="Mengamati bagaimana sudut matahari menentukan intensitas pemanasan tanah."
+  observationSteps={[
+    "Tancapkan tongkat lurus atau meteran kayu secara tegak lurus di area terbuka yang terpapar sinar matahari langsung.",
+    "Ukur panjang bayangan tongkat tepat pada tengah hari matahari (sekitar pukul 11.45 hingga 12.15 waktu lokal surya).",
+    "Perhatikan betapa pendeknya bayangan tersebut dibandingkan pengukuran yang dilakukan di negara-negara lintang tinggi pada waktu yang sama dalam setahun.",
+    "Amati bagaimana suhu udara mencapai puncaknya saat posisi sudut matahari berada paling tinggi dan bayangan menjadi paling pendek."
+  ]}
+  whatToLookFor="Di dekat khatulistiwa, bayangan tengah hari sangat pendek atau berada tepat di bawah benda, membuktikan insolasi matahari terkonsentrasi kuat dengan penyebaran berkas cahaya yang minimal."
+  experienceSlug="why-are-there-climate-zones"
+  locale="id"
+/>
+
+---
+
+## Bagian 7: Evaluasi Konseptual & Pemahaman
+
+Uji pemahaman Anda tentang geometri matahari, zona lintang, dan penyebab fisik dari pola iklim Bumi.
+
+<Quiz
+  client:visible
+  quiz={whyAreThereClimateZonesQuiz}
+  experienceSlug="why-are-there-climate-zones"
+  experienceTitle="Mengapa Ada Zona Iklim?"
+  locale="id"
+/>
+
+---
+
+## Bagian 8: Refleksi Ilmiah
+
+<ReflectionBox
+  client:idle
+  experienceSlug="why-are-there-climate-zones"
+  prompt="Apa yang akan berubah dalam kehidupan sehari-hari di daerah Anda jika wilayah Anda terletak di garis lintang 60° dan bukan di lokasi Anda saat ini?"
+  category="observation"
+  locale="id"
+/>

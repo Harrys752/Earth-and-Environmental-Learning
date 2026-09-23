@@ -1,23 +1,30 @@
 import { useState, useEffect } from 'preact/hooks';
 import { getReflections, saveReflection } from '../../lib/storage';
+import { useTranslations } from '../../i18n';
+import type { Locale } from '../../lib/i18nUrl';
 
 export interface ReflectionBoxProps {
   experienceSlug: string;
   prompt: string;
   placeholder?: string;
   category?: 'surprise' | 'observation' | 'clarity' | 'connection';
+  locale?: Locale;
 }
 
 export default function ReflectionBox({
   experienceSlug,
   prompt,
-  placeholder = 'Type your thoughts, real-world observations, or open questions here...',
+  placeholder,
   category = 'observation',
+  locale = 'en',
 }: ReflectionBoxProps) {
   const [response, setResponse] = useState('');
   const [savedReflections, setSavedReflections] = useState<string[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [justSaved, setJustSaved] = useState(false);
+  const t = useTranslations(locale);
+
+  const effectivePlaceholder = placeholder || t.reflectionBox.defaultPlaceholder;
 
   useEffect(() => {
     const existing = getReflections(experienceSlug);
@@ -52,7 +59,7 @@ export default function ReflectionBox({
         <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
         </svg>
-        <span>Scientific Reflection & Real-World Query</span>
+        <span>{t.reflectionBox.heading}</span>
       </div>
 
       <h4 class="text-base sm:text-lg font-bold text-[var(--color-text)] leading-snug">
@@ -64,14 +71,14 @@ export default function ReflectionBox({
           rows={3}
           value={response}
           onInput={(e) => setResponse((e.target as HTMLTextAreaElement).value)}
-          placeholder={placeholder}
+          placeholder={effectivePlaceholder}
           class="w-full p-3.5 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface-hover)] text-sm text-[var(--color-text)] placeholder-[var(--color-text-dim)] focus:ring-2 focus:ring-[var(--color-accent)] focus:outline-none transition-all resize-y"
           aria-label={prompt}
         />
 
         <div class="flex items-center justify-between">
           <span class="text-xs text-[var(--color-text-muted)]">
-            Saved privately to your local browser Journey log.
+            {t.reflectionBox.localNotice}
           </span>
 
           <button
@@ -79,7 +86,7 @@ export default function ReflectionBox({
             disabled={!response.trim() || isSubmitting}
             class="px-4 py-2 rounded-xl bg-[var(--color-secondary)] text-white text-xs font-semibold hover:opacity-95 transition-all cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed shadow-sm focus-visible:ring-2 focus-visible:ring-[var(--color-secondary)]"
           >
-            {justSaved ? 'Saved to Journey!' : 'Log Reflection'}
+            {justSaved ? t.reflectionBox.savedButton : t.reflectionBox.submitButton}
           </button>
         </div>
       </form>
@@ -88,7 +95,7 @@ export default function ReflectionBox({
       {savedReflections.length > 0 && (
         <div class="border-t border-[var(--color-border)] pt-4 space-y-2.5">
           <span class="text-[11px] font-mono text-[var(--color-text-dim)] uppercase tracking-wider block">
-            Your Logged Reflections ({savedReflections.length})
+            {t.reflectionBox.priorReflections} ({savedReflections.length})
           </span>
           <div class="space-y-2">
             {savedReflections.map((r, i) => (

@@ -1,11 +1,19 @@
 import { useState } from 'preact/hooks';
 import { recordExploration } from '../../lib/storage';
 import InteractiveSlider from './InteractiveSlider';
+import type { Locale } from '../../i18n';
 
-export default function SlopeStabilitySimulator({ experienceSlug = 'why-do-landslides-happen' }: { experienceSlug?: string }) {
+export default function SlopeStabilitySimulator({
+  experienceSlug = 'why-do-landslides-happen',
+  locale = 'en',
+}: {
+  experienceSlug?: string;
+  locale?: Locale;
+}) {
   const [slopeAngle, setSlopeAngle] = useState<number>(30); // degrees
   const [saturation, setSaturation] = useState<number>(40); // percent soil water saturation
   const [vegetationCover, setVegetationCover] = useState<number>(70); // percent root cover
+  const isId = locale === 'id';
 
   const handleAngleChange = (val: number) => {
     setSlopeAngle(val);
@@ -41,14 +49,16 @@ export default function SlopeStabilitySimulator({ experienceSlug = 'why-do-lands
       <div class="border-b border-[var(--color-border)] pb-4 space-y-1">
         <div class="flex items-center gap-2">
           <h4 class="text-base sm:text-lg font-bold text-[var(--color-text)]">
-            Slope Stability & Factor of Safety Simulator
+            {isId ? 'Simulator Stabilitas Lereng & Faktor Keamanan (FoS)' : 'Slope Stability & Factor of Safety Simulator'}
           </h4>
           <span class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-amber-100 text-amber-900 border border-amber-300 dark:bg-amber-950 dark:text-amber-200 dark:border-amber-800">
-            Geomechanical Model
+            {isId ? 'Model Geomekanika' : 'Geomechanical Model'}
           </span>
         </div>
         <p class="text-xs text-[var(--color-text-muted)]">
-          Manipulate hill slope angle, pore-water rainfall saturation, and root cohesion to test when driving gravitational forces overcome soil shear resistance.
+          {isId
+            ? 'Atur sudut kemiringan lereng, kejenuhan air hujan pori tanah, dan kohesi akar vegetasi untuk menguji kapan gaya gravitasi pendorong melampaui ketahanan geser tanah.'
+            : 'Manipulate hill slope angle, pore-water rainfall saturation, and root cohesion to test when driving gravitational forces overcome soil shear resistance.'}
         </p>
       </div>
 
@@ -56,37 +66,37 @@ export default function SlopeStabilitySimulator({ experienceSlug = 'why-do-lands
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 p-4 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface-hover)]">
         <InteractiveSlider
           id="slope-angle"
-          label="Slope Incline"
+          label={isId ? 'Kemiringan Lereng' : 'Slope Incline'}
           value={slopeAngle}
           min={10}
           max={60}
           step={2}
-          unit="° degrees"
-          description="Angle of hillside terrain."
+          unit={isId ? '° derajat' : '° degrees'}
+          description={isId ? 'Sudut kemiringan medan lereng bukit.' : 'Angle of hillside terrain.'}
           onChange={handleAngleChange}
         />
 
         <InteractiveSlider
           id="water-saturation"
-          label="Monsoon Saturation"
+          label={isId ? 'Kejenuhan Air Hujan' : 'Monsoon Saturation'}
           value={saturation}
           min={0}
           max={100}
           step={5}
-          unit="% pore water"
-          description="Pore pressure reduces friction."
+          unit={isId ? '% air pori' : '% pore water'}
+          description={isId ? 'Tekanan pori mengurangi friksi/gesekan antartanah.' : 'Pore pressure reduces friction.'}
           onChange={handleSatChange}
         />
 
         <InteractiveSlider
           id="vegetation-roots"
-          label="Root Vegetation Cover"
+          label={isId ? 'Tutupan Vegetasi & Akar' : 'Root Vegetation Cover'}
           value={vegetationCover}
           min={0}
           max={100}
           step={5}
-          unit="% tree canopy"
-          description="Root systems bind loose soil."
+          unit={isId ? '% kanopi pohon' : '% tree canopy'}
+          description={isId ? 'Sistem perakaran mengikat tanah yang gembur.' : 'Root systems bind loose soil.'}
           onChange={handleVegChange}
         />
       </div>
@@ -95,7 +105,7 @@ export default function SlopeStabilitySimulator({ experienceSlug = 'why-do-lands
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <div class="p-4 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] space-y-1 text-center">
           <span class="text-[10px] font-mono uppercase text-[var(--color-text-dim)] font-semibold">
-            Driving Gravity Force (Downslope)
+            {isId ? 'Gaya Gravitasi Pendorong (Menuruni Lereng)' : 'Driving Gravity Force (Downslope)'}
           </span>
           <div class="text-xl font-mono font-bold text-[var(--color-text)]">
             {drivingForce.toFixed(2)}
@@ -104,7 +114,7 @@ export default function SlopeStabilitySimulator({ experienceSlug = 'why-do-lands
 
         <div class="p-4 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] space-y-1 text-center">
           <span class="text-[10px] font-mono uppercase text-[var(--color-text-dim)] font-semibold">
-            Resisting Shear Strength (Friction + Cohesion)
+            {isId ? 'Kekuatan Geser Penahan (Friksi + Kohesi)' : 'Resisting Shear Strength (Friction + Cohesion)'}
           </span>
           <div class="text-xl font-mono font-bold text-[var(--color-text)]">
             {resistingForce.toFixed(2)}
@@ -121,13 +131,17 @@ export default function SlopeStabilitySimulator({ experienceSlug = 'why-do-lands
           }`}
         >
           <span class="text-[10px] font-mono uppercase font-bold tracking-wider">
-            Factor of Safety (FoS)
+            {isId ? 'Faktor Keamanan (Factor of Safety / FoS)' : 'Factor of Safety (FoS)'}
           </span>
           <div class="text-2xl font-mono font-extrabold">
             {factorOfSafety.toFixed(2)}
           </div>
           <div class="text-[10px] font-semibold uppercase">
-            {isUnstable ? '⚠️ CRITICAL FAILURE / LANDSLIDE' : isMarginal ? '⚡ MARGINALLY STABLE' : '✓ STABLE SLOPE'}
+            {isUnstable
+              ? (isId ? '⚠️ KEGAGALAN KRITIS / LONGSOR' : '⚠️ CRITICAL FAILURE / LANDSLIDE')
+              : isMarginal
+              ? (isId ? '⚡ STABIL MARGINAL' : '⚡ MARGINALLY STABLE')
+              : (isId ? '✓ LERENG STABIL' : '✓ STABLE SLOPE')}
           </div>
         </div>
       </div>
@@ -135,11 +149,15 @@ export default function SlopeStabilitySimulator({ experienceSlug = 'why-do-lands
       {/* Narrative Scientific Breakdown */}
       <div class="rounded-xl p-4 bg-[var(--color-surface-hover)] border border-[var(--color-border)] text-xs space-y-2">
         <p class="text-[var(--color-text)]">
-          <strong class="font-semibold">Factor of Safety Rule: </strong>
-          When <strong>FoS &lt; 1.0</strong>, gravity exceeds the shear strength of soil and a mass wasting event occurs.
+          <strong class="font-semibold">{isId ? 'Aturan Faktor Keamanan: ' : 'Factor of Safety Rule: '}</strong>
+          {isId
+            ? <>Ketika <strong>FoS &lt; 1,0</strong>, gaya gravitasi melampaui kekuatan geser tanah dan terjadi peristiwa gerakan massa tanah (longsor).</>
+            : <>When <strong>FoS &lt; 1.0</strong>, gravity exceeds the shear strength of soil and a mass wasting event occurs.</>}
         </p>
         <p class="text-[var(--color-text-muted)]">
-          In Indonesia’s rainy season (December–February), heavy rainfall simultaneously increases driving weight and creates positive pore-water pressure that pushes soil grains apart, causing catastrophic landslides in deforested hillside communities (such as the 2021 Cimanggung landslide in Sumedang, West Java).
+          {isId
+            ? 'Pada musim hujan di Indonesia (Desember–Februari), curah hujan tinggi secara bersamaan meningkatkan beban air dan menciptakan tekanan air pori positif yang merenggangkan butiran tanah, memicu tanah longsor di pemukiman lereng bukit yang terdeforestasi (seperti longsor Cimanggung 2021 di Sumedang, Jawa Barat).'
+            : 'In Indonesia’s rainy season (December–February), heavy rainfall simultaneously increases driving weight and creates positive pore-water pressure that pushes soil grains apart, causing catastrophic landslides in deforested hillside communities (such as the 2021 Cimanggung landslide in Sumedang, West Java).'}
         </p>
       </div>
     </div>

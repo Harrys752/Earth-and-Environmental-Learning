@@ -1,0 +1,216 @@
+---
+id: "why-do-earthquakes-happen"
+title: "Mengapa Gempa Bumi Terjadi?"
+tagline: "Lentingan Elastis, Kinematika Sesar, dan Bahaya Pesisir Sekunder"
+description: "Pelajari bagaimana tegasan tektonik terakumulasi sebagai regangan elastis di sepanjang sesar yang terkunci, mengapa patahan melepaskan energi seismik yang merusak, dan bagaimana gempa sesar geser Palu Mw 7,5 tahun 2018 memicu tsunami tak terduga dan likuefaksi dahsyat."
+topic: "natural-hazards"
+difficulty: "intermediate"
+estimatedTime: "20min"
+learningObjectives:
+  - "Menjelaskan bagaimana tegasan menumpuk dan terlepas di sepanjang sesar sebagai regangan elastis menurut teori lentingan elastis (elastic rebound)."
+  - "Membedakan tiga tipe batas lempeng dan sesar utama: konvergen (megathrust), transform (sesar geser), dan divergen (sesar turun/rift)."
+  - "Memahami bagaimana gempa bumi sesar geser dangkal dapat memicu bahaya sekunder seperti likuefaksi tanah dan tsunami akibat longsor bawah laut lokal."
+  - "Menganalisis patahan Sesar Palu-Koro tahun 2018 di Sulawesi Tengah sebagai studi kasus bencana multi-bahaya bertingkat."
+prerequisites:
+  - "why-volcanoes-form"
+interactiveElements:
+  - id: "fault-simulation"
+    type: "simulation"
+    title: "Simulator Kinematika Sesar & Batas Lempeng"
+    pedagogicalPurpose: "Memungkinkan pembelajar mengatur mekanisme batas tektonik (transform, konvergen, divergen) dan mengamati akumulasi tegasan serta pelepasan seismik."
+    isIllustrativeModel: true
+    accessibleFallbackText: "Model kinematik interaktif yang mendemonstrasikan regangan geser sesar transform, bidang asperity yang terkunci, dan perambatan gelombang seismik."
+quiz:
+  quizId: "quiz-why-do-earthquakes-happen"
+  title: "Mengapa Gempa Bumi Terjadi? Kuis Verifikasi"
+  questionCount: 4
+realWorldConnections:
+  - title: "Gempa Palu 2018 & Sistem Sesar Palu-Koro"
+    locationName: "Sesar Palu-Koro, Sulawesi Tengah, Indonesia"
+    isIndonesiaFirst: true
+    coordinates:
+      lat: -0.9000
+      lng: 119.8500
+    description: "Pada 28 September 2018, gempa dangkal Mw 7,5 merobek Sesar Palu-Koro yang bergerak cepat di Sulawesi Tengah, memicu aliran likuefaksi tanah yang dahsyat dan tsunami lokal di Teluk Palu."
+    phenomenon: "Patahan sesar mendatar supershear, likuefaksi masif di Balaroa dan Petobo, serta runtuhan sedimen bawah laut yang memicu tsunami cepat di Teluk Palu."
+    globalGeneralization: "Bahaya sesar transform ada di sepanjang sesar geser utama di dunia, termasuk Sesar San Andreas (California), Sesar Anatolia Utara (Turki), dan Sesar Besar Sumatra (Indonesia)."
+    geoMapSlug: "palu-koro-fault"
+geoMapConnections:
+  - locationSlug: "palu-koro-fault"
+    label: "Jelajahi Sesar Palu-Koro di GeoMap"
+    coordinates:
+      lat: -0.9000
+      lng: 119.8500
+    description: "Inspeksi jejak aktif sistem sesar mendatar Palu-Koro yang membelah Sulawesi Tengah dan Teluk Palu."
+reflection:
+  - id: "refl-earthquake-soil"
+    prompt: "Jika Anda menilai risiko gempa bumi untuk sebuah kota pesisir di Indonesia, apa yang ingin Anda ketahui tentang kondisi tanah dan air tanah di bawahnya, bukan hanya jarak ke sesar aktif terdekat?"
+    placeholder: "Pertimbangkan ukuran butir sedimen, kedalaman muka air tanah, batimetri lereng pantai, atau saluran irigasi..."
+    category: "observation"
+nextExperiences:
+  - "why-do-landslides-happen"
+  - "why-volcanoes-form"
+scientific:
+  source:
+    - "Springer, Landslides journal (2018). Field reconnaissance of the 2018 Palu earthquake and tsunami."
+    - "Journal of Geoscience, Engineering, Environment, and Technology (JGEET) (2018). Palu disaster geological analysis."
+    - "Journal of Engineering and Technological Sciences, ITB (2024). Liquefaction susceptibility in Central Sulawesi."
+    - "Nature Geoscience / NTU Singapore (2019). Irrigation-driven liquefaction mechanisms during the 2018 Palu earthquake."
+  sourceType: "peer-reviewed"
+  lastReviewed: "2026-09-23"
+  scientificLevel: "intermediate"
+  confidence: "well-supported"
+  references:
+    - title: "The 28 September 2018 Mw 7.5 Palu earthquake: preliminary field observations and multi-hazard analysis"
+      publisher: "Springer (Landslides)"
+      year: 2018
+    - title: "Disaster Analysis of the 2018 Sulawesi Earthquake and Tsunami"
+      publisher: "Journal of Geoscience, Engineering, Environment, and Technology (JGEET)"
+      year: 2018
+    - title: "Geotechnical Evaluation of Massive Liquefaction in Palu Valley"
+      publisher: "ITB Journal of Engineering and Technological Sciences"
+      year: 2024
+    - title: "Irrigation-driven soil liquefaction during the 2018 Mw 7.5 Palu earthquake"
+      publisher: "Nature Geoscience (NTU Singapore)"
+      year: 2019
+review:
+  reviewStatus: "published"
+  sourceList:
+    - "Springer Landslides"
+    - "JGEET"
+    - "ITB"
+    - "Nature Geoscience"
+  lastReviewed: "2026-09-23"
+  contentVersion: "1.0.0"
+featured: true
+---
+
+import Simulation from '../../../components/visualization/Simulation';
+import Quiz from '../../../components/quiz/Quiz';
+import ReflectionBox from '../../../components/learning/ReflectionBox';
+import RealWorldExample from '../../../components/learning/RealWorldExample.astro';
+import ObservationChallenge from '../../../components/learning/ObservationChallenge.astro';
+import { whyDoEarthquakesHappenQuiz } from '../../../data/quizzes/id/why-do-earthquakes-happen';
+
+## Bagian 1: Misteri Bencana Palu 2018
+
+> **Mengapa sebuah gempa bumi tunggal di Sulawesi Tengah pada tahun 2018 mampu memicu tsunami mematikan dan mengubah pemukiman padat menjadi lumpur cair yang mengalir—dari jenis sesar yang menurut buku teks geologi klasik jarang memicu tsunami?**
+
+Pada petang hari **28 September 2018**, gempa bumi dangkal berkekuatan **Magnitudo Momen (Mw) 7,5** mengguncang Sulawesi Tengah, Indonesia. Dalam hitungan menit, lebih dari **4.300 korban jiwa melayang**, seluruh kawasan perumahan bergeser ratusan meter sebagai lumpur likuefaksi, dan gelombang tsunami setinggi 2 hingga 6 meter menyapu pesisir sempit Teluk Palu.
+
+Pusat gempa terletak di sepanjang **Sesar Palu-Koro**, sebuah **sesar geser mendatar (transform / strike-slip)** utama. Menurut seismologi konvensional, sesar geser bergeser secara horizontal melewati satu sama lain dan tidak memindahkan kolom air laut vertikal raksasa untuk menghasilkan tsunami. Mengapa bencana di Palu melampaui teori buku teks sederhana?
+
+Untuk menjawabnya, kita harus memahami mekanisme fisik utama terjadinya gempa: **teori lentingan elastis (elastic rebound)**.
+
+---
+
+## Bagian 2: Mesin Fisik — Teori Lentingan Elastis (Elastic Rebound)
+
+Kerak padat Bumi dipenuhi oleh rekahan geologis yang disebut **sesar (fault)**. Pergerakan lempeng tektonik terus mendorong blok-blok kerak saling berhimpitan dengan kecepatan beberapa sentimeter per tahun.
+
+Namun, bidang sesar tidak bergeser secara mulus. Hambatan gesekan di sepanjang permukaan kontak yang kasar (disebut **asperity**) menahan sesar tetap terkunci rapat di tempatnya.
+
+```
+1. Tegasan Tektonik Berkelanjutan → Sesar tetap terkunci rapat oleh friksi.
+                ↓
+2. Akumulasi Regangan Elastis → Batuan melengkung dan menyimpan energi potensial elastis.
+                ↓
+3. Ambang Batas Friksi Terlampaui → Bidang asperity patah; sesar mendadak bergeser cepat.
+                ↓
+4. Pelepasan Energi Seismik → Batuan melenting kembali, melepaskan gelombang seismik P dan S.
+```
+
+Ketika tegasan mekanis yang tersimpan melampaui kekuatan geser bidang sesar yang terkunci, batuan patah dalam hitungan milidetik. Batuan yang terdeformasi melenting kembali ke bentuk semula tanpa regangan—sebuah fenomena yang dirumuskan oleh Harry Fielding Reid sebagai **Teori Lentingan Elastis (Elastic Rebound Theory)**. Gelombang kejut ini merambat ke seluruh kerak sebagai gelombang seismik yang mengguncang permukaan tanah.
+
+---
+
+## Bagian 3: Tiga Tipe Sesar & Batas Lempeng Utama
+
+Konfigurasi batas tektonik yang berbeda menghasilkan kinematika sesar, rezim tegasan, dan kedalaman gempa yang khas:
+
+1. **Sesar Geser Mendatar / Transform (Tegasan Geser):**
+   - Blok kerak bergeser secara horizontal satu sama lain (misalnya Sesar Palu-Koro di Sulawesi, Sesar Besar Sumatra, Sesar San Andreas di California).
+   - Gempa umumnya dangkal (kedalaman < 20 km), menghasilkan guncangan permukaan lokal yang sangat hebat.
+2. **Sesar Naik / Konvergen & Megathrust (Tegasan Kompresi):**
+   - Satu lempeng menindih lempeng lain (misalnya Palung Subduksi Jawa, Megathrust Sunda).
+   - Mampu menghasilkan deformasi vertikal dasar laut masif dan megatsunami samudra lepas (misalnya Gempa Samudra Hindia 2004 Mw 9,1–9,3).
+3. **Sesar Turun / Divergen (Tegasan Ekstensi / Tarikan):**
+   - Kerak saling menjauh dan amblas ke bawah membentuk celah graben (misalnya Punggung Tengah Atlantik, Retakan Afrika Timur).
+
+---
+
+## Bagian 4: Simulasi Interaktif — Kinematika Batas Sesar
+
+Jelajahi bagaimana batas lempeng mendeformasi batuan kerak. Amati bagaimana tegasan geser terakumulasi di sepanjang sesar geser hingga kegagalan friksional memicu pelepasan gelombang seismik.
+
+<Simulation
+  client:visible
+  experienceSlug="why-do-earthquakes-happen"
+  initialBoundary="transform-fault"
+  locale="id"
+/>
+
+---
+
+## Bagian 5: Fenomena Nyata Indonesia — Bencana Palu Mw 7,5 Tahun 2018
+
+Gempa Palu menjadi salah satu rangkaian bencana alam multi-bahaya yang paling lengkap terdokumentasi dalam ilmu kebumian modern.
+
+<RealWorldExample
+  title="Robekan Sesar Geser Palu-Koro 2018 & Rangkaian Bahaya Bertingkat"
+  locationName="Sesar Palu-Koro, Sulawesi Tengah, Indonesia"
+  isIndonesiaFirst={true}
+  coordinates={{ lat: -0.9000, lng: 119.8500 }}
+  phenomenon="Robekan Mw 7,5 terjadi pada kedalaman ~10–11 km di sepanjang Sesar Palu-Koro yang memiliki laju pergeseran sangat tinggi ~7 cm per tahun. Patahan tersebut merambat dengan kecepatan supershear (lebih cepat dari kecepatan gelombang-S), menghasilkan guncangan frekuensi tinggi yang sangat dahsyat yang memicu likuefaksi aliran masif pada sedimen aluvial jenuh air (Balaroa, Petobo, Jono Oge) serta memicu longsoran pesisir bawah laut yang membangkitkan tsunami cepat di Teluk Palu."
+  globalGeneralization="Pelajaran dari Palu mengubah mitigasi bencana gempa global: sesar geser berkecepatan tinggi dapat menghasilkan likuefaksi aliran mematikan dan tsunami akibat longsoran bawah laut bahkan tanpa adanya pengangkatan dasar laut megathrust tradisional."
+  geoMapSlug="palu-koro-fault"
+  locale="id"
+/>
+
+### Mengapa Palu Mengalami Likuefaksi dan Tsunami:
+- **Likuefaksi Tanah Masif:** Sedimen aluvial jenuh air di Lembah Palu kehilangan seluruh kekuatan gesernya selama guncangan berlangsung lama. Air tanah bertekanan tinggi merenggangkan butiran pasir, mengubah tanah padat menjadi bubur cair kental yang mengalir menuruni lereng landai 1–2° sejauh lebih dari 1,5 kilometer. Studi ilmiah (NTU / Nature Geoscience, 2019) menunjukkan bahwa saluran irigasi pertanian tanpa lapisan kedap air telah menaikkan muka air tanah hingga dekat permukaan, melipatgandakan keparahan likuefaksi.
+- **Mekanisme Tsunami Sekunder:** Peneliti dari Springer *Landslides* (2018) dan JGEET memverifikasi bahwa tsunami di Palu terutama dibangkitkan oleh runtuhnya lereng sedimen bawah laut dan pesisir terjal ke dalam Teluk Palu, bukan semata-mata dari pergeseran sesar vertikal.
+
+---
+
+## Bagian 6: Tantangan Pengamatan Lapangan
+
+<ObservationChallenge
+  title="Mengidentifikasi Geomorfologi Jejak Sesar Aktif"
+  targetPhenomenon="Mengamati jejak permukaan, pergeseran aliran sungai, dan lembah sesar linier."
+  observationSteps={[
+    "Cari lembah sesar linier yang lurus memanjang atau tebing garis sesar di peta satelit maupun topografi.",
+    "Periksa aliran sungai yang memotong jalur sesar: perhatikan apakah sungai berbelok tajam 90 derajat (offset stream) akibat pergeseran mendatar sesar.",
+    "Identifikasi faset segitiga (triangular facets) di lereng bukit tempat pergerakan sesar berulang memotong punggungan topografi.",
+    "Cari kolam amblasan (sag ponds) atau mata air yang berderet sejajar di sepanjang depresi linier zona sesar."
+  ]}
+  whatToLookFor="Di sepanjang sesar geser aktif seperti Sesar Palu-Koro atau Sesar Besar Sumatra, aliran sungai tampak bergeser hingga puluhan hingga ratusan meter, dan lembah lurus panjang menandai zona hancuran batuan sesar."
+  experienceSlug="why-do-earthquakes-happen"
+  locale="id"
+/>
+
+---
+
+## Bagian 7: Evaluasi Konseptual & Pemahaman
+
+Uji pemahaman Anda tentang lentingan elastis, batas sesar, dan dinamika multi-bahaya gempa Palu.
+
+<Quiz
+  client:visible
+  quiz={whyDoEarthquakesHappenQuiz}
+  experienceSlug="why-do-earthquakes-happen"
+  experienceTitle="Mengapa Gempa Bumi Terjadi?"
+  locale="id"
+/>
+
+---
+
+## Bagian 8: Refleksi Ilmiah
+
+<ReflectionBox
+  client:idle
+  experienceSlug="why-do-earthquakes-happen"
+  prompt="Jika Anda menilai risiko gempa bumi untuk sebuah kota pesisir di Indonesia, apa yang ingin Anda ketahui tentang kondisi tanah dan air tanah di bawahnya, bukan hanya jarak ke sesar aktif terdekat?"
+  category="observation"
+  locale="id"
+/>

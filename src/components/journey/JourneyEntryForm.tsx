@@ -1,14 +1,22 @@
 import { useState } from 'preact/hooks';
 import type { JourneyEntryType } from '../../types/journey';
 import { addJourneyEntry } from '../../lib/storage';
+import { useTranslations } from '../../i18n';
+import type { Locale } from '../../lib/i18nUrl';
 
-export default function JourneyEntryForm() {
+export interface JourneyEntryFormProps {
+  locale?: Locale;
+}
+
+export default function JourneyEntryForm({ locale = 'en' }: JourneyEntryFormProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [title, setTitle] = useState('');
   const [type, setType] = useState<JourneyEntryType>('observation');
   const [description, setDescription] = useState('');
   const [locationName, setLocationName] = useState('');
   const [isSuccess, setIsSuccess] = useState(false);
+
+  const t = useTranslations(locale);
 
   const handleSubmit = (e: Event) => {
     e.preventDefault();
@@ -41,10 +49,10 @@ export default function JourneyEntryForm() {
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <h4 class="text-base font-bold text-[var(--color-text)]">
-              Document Real-World Fieldwork or Learning Achievement
+              {t.journeyForm.bannerTitle}
             </h4>
             <p class="text-xs text-[var(--color-text-muted)] mt-1">
-              Add a manual entry for outdoor rock observations, cloud logs, reading notes, or independent projects.
+              {t.journeyForm.bannerDesc}
             </p>
           </div>
           <button
@@ -56,49 +64,49 @@ export default function JourneyEntryForm() {
               <line x1="12" y1="5" x2="12" y2="19" />
               <line x1="5" y1="12" x2="19" y2="12" />
             </svg>
-            <span>Log Field Entry</span>
+            <span>{t.journeyForm.logButton}</span>
           </button>
         </div>
       ) : (
         <form onSubmit={handleSubmit} class="space-y-4">
           <div class="flex items-center justify-between border-b border-[var(--color-border)] pb-3">
             <h4 class="text-sm font-bold text-[var(--color-text)] uppercase tracking-wider font-mono">
-              New Scientific Journey Log
+              {t.journeyForm.formTitle}
             </h4>
             <button
               type="button"
               onClick={() => setIsOpen(false)}
               class="text-xs text-[var(--color-text-dim)] hover:text-[var(--color-text)] cursor-pointer"
             >
-              Cancel
+              {t.journeyForm.cancel}
             </button>
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label class="block text-xs font-semibold text-[var(--color-text)] mb-1">
-                Entry Category
+                {t.journeyForm.categoryLabel}
               </label>
               <select
                 value={type}
                 onChange={(e) => setType((e.target as HTMLSelectElement).value as JourneyEntryType)}
                 class="w-full px-3 py-2 text-xs rounded-xl border border-[var(--color-border)] bg-[var(--color-surface-hover)] text-[var(--color-text)] focus:ring-2 focus:ring-[var(--color-accent)] focus:outline-none"
               >
-                <option value="observation">Real-World Field Observation</option>
-                <option value="applied">Applied Scientific Practice</option>
-                <option value="built">Constructed Model / Project Output</option>
-                <option value="reflection">Personal Concept Reflection</option>
-                <option value="external-achievement">External Reading / Field Trip</option>
+                <option value="observation">{t.journeyForm.categories.observation}</option>
+                <option value="applied">{t.journeyForm.categories.applied}</option>
+                <option value="built">{t.journeyForm.categories.built}</option>
+                <option value="reflection">{t.journeyForm.categories.reflection}</option>
+                <option value="external-achievement">{t.journeyForm.categories.externalAchievement}</option>
               </select>
             </div>
 
             <div>
               <label class="block text-xs font-semibold text-[var(--color-text)] mb-1">
-                Field Location (Optional)
+                {t.journeyForm.locationLabel}
               </label>
               <input
                 type="text"
-                placeholder="e.g. Mount Merapi overlook, Kaliurang, or Local riverbed"
+                placeholder={t.journeyForm.locationPlaceholder}
                 value={locationName}
                 onInput={(e) => setLocationName((e.target as HTMLInputElement).value)}
                 class="w-full px-3 py-2 text-xs rounded-xl border border-[var(--color-border)] bg-[var(--color-surface-hover)] text-[var(--color-text)] focus:ring-2 focus:ring-[var(--color-accent)] focus:outline-none"
@@ -108,12 +116,12 @@ export default function JourneyEntryForm() {
 
           <div>
             <label class="block text-xs font-semibold text-[var(--color-text)] mb-1">
-              Title / Focus *
+              {t.journeyForm.titleLabel}
             </label>
             <input
               type="text"
               required
-              placeholder="e.g. Examined andesite porphyry with plagioclase phenocrysts"
+              placeholder={t.journeyForm.titlePlaceholder}
               value={title}
               onInput={(e) => setTitle((e.target as HTMLInputElement).value)}
               class="w-full px-3 py-2 text-xs rounded-xl border border-[var(--color-border)] bg-[var(--color-surface-hover)] text-[var(--color-text)] focus:ring-2 focus:ring-[var(--color-accent)] focus:outline-none"
@@ -122,11 +130,11 @@ export default function JourneyEntryForm() {
 
           <div>
             <label class="block text-xs font-semibold text-[var(--color-text)] mb-1">
-              Observation Details / Scientific Notes
+              {t.journeyForm.notesLabel}
             </label>
             <textarea
               rows={3}
-              placeholder="Describe physical features, stratigraphy, weather conditions, or experimental findings..."
+              placeholder={t.journeyForm.notesPlaceholder}
               value={description}
               onInput={(e) => setDescription((e.target as HTMLTextAreaElement).value)}
               class="w-full px-3 py-2 text-xs rounded-xl border border-[var(--color-border)] bg-[var(--color-surface-hover)] text-[var(--color-text)] focus:ring-2 focus:ring-[var(--color-accent)] focus:outline-none resize-y"
@@ -135,7 +143,7 @@ export default function JourneyEntryForm() {
 
           <div class="flex items-center justify-between pt-2">
             <span class="text-xs text-[var(--color-text-muted)]">
-              {isSuccess ? '✓ Successfully saved to your timeline!' : 'Stored privately in local storage.'}
+              {isSuccess ? t.journeyForm.successMsg : t.journeyForm.storageNotice}
             </span>
 
             <button
@@ -143,7 +151,7 @@ export default function JourneyEntryForm() {
               disabled={!title.trim()}
               class="px-5 py-2 rounded-xl bg-[var(--color-accent)] text-white text-xs font-semibold hover:bg-[var(--color-accent-hover)] transition-all cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed shadow-sm"
             >
-              Save to Journey
+              {t.journeyForm.submit}
             </button>
           </div>
         </form>

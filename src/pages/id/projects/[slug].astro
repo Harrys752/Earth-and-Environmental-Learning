@@ -7,10 +7,15 @@ import Button from '../../../components/ui/Button.astro';
 
 export async function getStaticPaths() {
   const projects = await getCollection('projects');
-  return projects.map((entry) => ({
-    params: { slug: entry.data.id || entry.id },
-    props: { entry },
-  }));
+  const enProjects = projects.filter((p) => !p.id.startsWith('id/'));
+  return enProjects.map((enEntry) => {
+    const slug = (enEntry.data.id || enEntry.id).replace(/^id\//, '');
+    const idEntry = projects.find((p) => p.id === `id/${slug}` || p.id === `id/${enEntry.id}`);
+    return {
+      params: { slug },
+      props: { entry: idEntry || enEntry },
+    };
+  });
 }
 
 const { entry } = Astro.props;
@@ -60,7 +65,7 @@ const breadcrumbItems = [
       </div>
     </header>
 
-    <!-- Objectives & Instructions Grid -->
+    <!-- Kisi Tujuan & Instruksi -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       <div class="p-6 rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] space-y-3">
         <h3 class="text-sm font-bold uppercase tracking-wider font-mono text-[var(--color-secondary)]">
@@ -85,12 +90,12 @@ const breadcrumbItems = [
       </div>
     </div>
 
-    <!-- Narrative Content -->
+    <!-- Konten Naratif -->
     <article class="prose prose-stone dark:prose-invert max-w-none pt-4 border-t border-[var(--color-border)]">
       <Content />
     </article>
 
-    <!-- Log into Journey Built Dimension -->
+    <!-- Catat ke Dimensi Terapan Jurnal -->
     <div class="p-6 rounded-2xl border border-[var(--color-interactive)]/30 bg-[var(--color-interactive-subtle)]/30 space-y-4">
       <div class="flex items-center gap-2">
         <div class="w-7 h-7 rounded-lg bg-[var(--color-interactive)] text-white flex items-center justify-center font-bold">

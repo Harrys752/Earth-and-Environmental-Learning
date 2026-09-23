@@ -1,0 +1,215 @@
+---
+id: "the-rock-cycle"
+title: "Apa Itu Siklus Batuan?"
+tagline: "Transformasi Kerak Bumi: Batuan Beku, Sedimen, dan Metamorf"
+description: "Pelajari bagaimana panas internal planet, pelapukan permukaan, dan gaya tektonik terus-menerus mendaur ulang kerak Bumi selama jutaan tahun, mengubah lava gunung api menjadi sedimen sungai dan batuan metamorf yang terkubur dalam."
+topic: "geology"
+difficulty: "beginner"
+estimatedTime: "20min"
+learningObjectives:
+  - "Mengidentifikasi tiga keluarga batuan utama: batuan beku, batuan sedimen, dan batuan metamorf."
+  - "Menjelaskan proses geologis transformatif: pendinginan dan kristalisasi, pelapukan, erosi, pengendapan, litifikasi, metamorfisme, dan pelelehan."
+  - "Memahami siklus batuan sebagai sistem dinamis non-linear yang berkelanjutan tanpa titik awal atau akhir tunggal."
+  - "Menghubungkan siklus batuan dengan lanskap vulkanik aktif di Indonesia tempat batuan beku baru melapuk cepat menjadi tanah sedimen yang subur."
+prerequisites: []
+interactiveElements:
+  - id: "rock-cycle-interactive"
+    type: "diagram"
+    title: "Penjelajah Transformasi Siklus Batuan Interaktif"
+    pedagogicalPurpose: "Memungkinkan pembelajar mengklik kelas batuan dan jalur transformatif untuk mengamati proses geologis dan mekanisme fisiknya."
+    isIllustrativeModel: true
+    accessibleFallbackText: "Diagram interaktif yang menampilkan transisi antara Magma, Batuan Beku, Sedimen, Batuan Sedimen, dan Batuan Metamorf."
+quiz:
+  quizId: "quiz-the-rock-cycle"
+  title: "Apa Itu Siklus Batuan? Kuis Verifikasi"
+  questionCount: 4
+realWorldConnections:
+  - title: "Siklus Batuan dalam Aksi: Dari Busur Vulkanik Jawa ke Cekungan Sedimen"
+    locationName: "Busur Vulkanik Jawa, Indonesia"
+    isIndonesiaFirst: true
+    coordinates:
+      lat: -7.5407
+      lng: 110.4457
+    description: "Pulau Jawa menyediakan laboratorium hidup bagi siklus batuan: subduksi menyuplai gunung api aktif yang menghasilkan andesit beku, hujan tropis melapukkan batuan dengan cepat menjadi sedimen subur, yang kemudian diendapkan sungai ke cekungan sedimen yang suatu hari nanti akan terkubur dan mengalami metamorfisme."
+    phenomenon: "Pelapukan tropis yang cepat dari tefra vulkanik dan aliran lava andesit menjadi tanah aluvial subur dan kerikil sungai."
+    globalGeneralization: "Setiap benua di Bumi tersusun dari batuan yang terus bergerak melalui mesin daur ulang global ini sepanjang waktu geologis."
+    geoMapSlug: "java-volcanic-arc"
+geoMapConnections:
+  - locationSlug: "java-volcanic-arc"
+    label: "Lihat tempat batuan ini terbentuk di GeoMap"
+    coordinates:
+      lat: -7.5407
+      lng: 110.4457
+    description: "Jelajahi jajaran gunung api di Jawa tempat kerak beku baru terus meletus dan mengalami pelapukan."
+reflection:
+  - id: "refl-rock-pebble"
+    prompt: "Pilihlah sebuah batu atau kerikil yang pernah Anda lihat di lingkungan sekitar Anda—jalur geologis apa yang menurut Anda telah dilaluinya hingga mencapai wujud saat ini, dan ke mana ia dapat bertransformasi selanjutnya dalam siklus batuan?"
+    placeholder: "Pertimbangkan apakah batu tersebut memiliki kristal yang terlihat, lapisan sedimen, tepi halus tergerus air, atau tanda-tanda panas/tekanan..."
+    category: "observation"
+nextExperiences:
+  - "reading-rock-layers"
+  - "why-volcanoes-form"
+  - "why-do-earthquakes-happen"
+scientific:
+  source:
+    - "USGS Educational Resources (2023). The Rock Cycle and Rock Classification."
+    - "Tarbuck, E. J., Lutgens, F. K., & Tasa, D. (2020). Earth: An Introduction to Physical Geology (13th ed.). Pearson."
+    - "Badan Geologi Indonesia (2022). Ringkasan Geologi Kepulauan Indonesia."
+  sourceType: "textbook"
+  lastReviewed: "2026-09-23"
+  scientificLevel: "beginner"
+  confidence: "established"
+  references:
+    - title: "Earth: An Introduction to Physical Geology"
+      publisher: "Pearson"
+      year: 2020
+    - title: "USGS Geology and the Rock Cycle"
+      publisher: "USGS"
+      year: 2023
+review:
+  reviewStatus: "published"
+  sourceList:
+    - "USGS"
+    - "Pearson Education"
+    - "Badan Geologi Indonesia"
+  lastReviewed: "2026-09-23"
+  contentVersion: "1.0.0"
+featured: false
+---
+
+import RockCycleDiagram from '../../../components/visualization/RockCycleDiagram';
+import Quiz from '../../../components/quiz/Quiz';
+import ReflectionBox from '../../../components/learning/ReflectionBox';
+import RealWorldExample from '../../../components/learning/RealWorldExample.astro';
+import ObservationChallenge from '../../../components/learning/ObservationChallenge.astro';
+import { theRockCycleQuiz } from '../../../data/quizzes/id/the-rock-cycle';
+
+## Bagian 1: Pertanyaan Pembuka
+
+> **Sebutir pasir kuarsa atau mineral vulkanik di tepi sungai di Pulau Jawa mungkin dahulu pernah meletus dari stratovulkan yang membara, dan jutaan tahun dari sekarang bisa menjadi bagian dari pegunungan metamorf yang menjulang tinggi. Bagaimana Bumi terus-menerus mendaur ulang kerak padatnya?**
+
+Bagi penglihatan manusia, batu tampak abadi dan tidak pernah berubah. Namun tanah di bawah kaki kita sesungguhnya merupakan bagian dari sistem daur ulang keplanetan yang berlangsung terus-menerus dalam gerak lambat: **siklus batuan (the rock cycle)**.
+
+Digerakkan oleh dua mesin termal raksasa—mesin panas radioaktif internal Bumi dan energi radiasi matahari dari luar—setiap batuan di planet kita terus-menerus dibentuk, dipecah, dideformasi, dan dilahirkan kembali.
+
+---
+
+## Bagian 2: Tiga Kelas Batuan Utama
+
+Ahli geologi mengklasifikasikan semua batuan kerak Bumi menjadi tiga keluarga mendasar berdasarkan asal-usul genetiknya:
+
+1. **Batuan Beku (Igneous Rocks - Terbentuk dari Panas Cair):**
+   - Terbentuk ketika magma cair (di bawah tanah) atau lava (di permukaan) mendingin dan mengkristal.
+   - *Intrusif (Plutonik):* Mendingin perlahan jauh di dalam kerak, menghasilkan kristal besar yang saling mengunci dan tampak jelas (misalnya Granit, Diorit).
+   - *Ekstrusif (Vulkanik):* Mendingin cepat di permukaan Bumi, menghasilkan tekstur berbutir halus atau kaca (misalnya Basal, Andesit, Obsidian).
+
+2. **Batuan Sedimen (Sedimentary Rocks - Berlapis & Terlitifikasi):**
+   - Terbentuk di permukaan Bumi ketika batuan yang sudah ada sebelumnya terurai menjadi sedimen melalui pelapukan, diangkut oleh air atau angin, diendapkan di cekungan, serta terkompaksi dan tersementasi melalui **litifikasi** (misalnya Batupasir, Serpih, Batugamping).
+
+3. **Batuan Metamorf (Metamorphic Rocks - Ditransformasikan oleh Panas & Tekanan):**
+   - Terbentuk dalam keadaan padat ketika batuan yang sudah ada mengalami suhu tinggi dan tekanan litostatik/diferensial tanpa meleleh sempurna. Butiran mineral mengalami rekristalisasi menjadi tekstur padat yang sering kali berfoliasi/berlapis (misalnya Marmer dari batugamping, Sekis, Gneis).
+
+---
+
+## Bagian 3: Jalur Geologis Transformatif
+
+Siklus batuan bukanlah lintasan lingkaran satu arah yang kaku. Siklus ini adalah jaringan yang saling terhubung di mana setiap keluarga batuan dapat berubah menjadi jenis apa pun:
+
+```
+                  [ Magma / Lava ]
+                     /         \
+       Pendinginan  /           \ Pelelehan
+    & Kristalisasi /             \
+                  ↓               \
+          [ Batuan Beku ]          \
+             /          \           \
+   Pelapukan/            \ Panas &   \
+   & Erosi /              \ Tekanan   \
+          ↓                ↓           \
+     [ Sedimen ]     [   Batuan    ]    \
+          |           [  Metamorf  ] ←--+
+   Litifikasi         /          ↑
+  (Kompaksi)         / Panas &   | Panas &
+          ↓         /  Tekanan   | Tekanan
+   [   Batuan    ]-/             |
+   [   Sedimen   ]---------------+
+```
+
+- **Pelapukan & Erosi:** Pemuaian termal fisik dan reaksi kimia dengan air hujan memecah batuan permukaan menjadi butiran mineral dan ion.
+- **Litifikasi:** Tekanan penimbunan mengompakkan sedimen, sementara air tanah berpelarut mineral mengendapkan perekat kalsit atau silika, menyatukan partikel menjadi batuan padat.
+- **Metamorfisme:** Tumbukan tektonik atau penimbunan dalam memanaskan batuan hingga 300°C–800°C, memicu rekristalisasi keadaan padat.
+- **Pelelehan:** Ketika suhu melampaui kurva pelelehan, batuan kembali menjadi magma cair, memulai kembali siklus dari awal.
+
+---
+
+## Bagian 4: Eksplorasi Interaktif — Penjelajah Siklus Batuan
+
+Klik kelas batuan atau jalur transformasi mana pun pada diagram interaktif di bawah ini untuk mempelajari bagaimana proses geologis mengubah struktur kristal dan komposisi mineral.
+
+<RockCycleDiagram
+  client:visible
+  id="rock-cycle-diagram"
+  experienceSlug="the-rock-cycle"
+  locale="id"
+/>
+
+---
+
+## Bagian 5: Fenomena Nyata Indonesia — Dari Puncak Vulkanik ke Dataran Sungai
+
+Indonesia memberikan contoh nyata yang luar biasa dari bekerjanya siklus batuan secara langsung dalam kehidupan nyata.
+
+<RealWorldExample
+  title="Siklus Batuan yang Bergerak: Busur Vulkanik Jawa"
+  locationName="Dari Gunung Merapi hingga Cekungan Sungai Progo, Jawa Tengah, Indonesia"
+  isIndonesiaFirst={true}
+  coordinates={{ lat: -7.5407, lng: 110.4457 }}
+  phenomenon="Subduksi Lempeng Indo-Australia menghasilkan magma andesitik yang meletus sebagai batuan beku segar di Gunung Merapi. Musim hujan tropis yang intens melapukkan batuan vulkanik ini dengan sangat cepat, mengikis abu dan lava ke dalam sistem sungai seperti Sungai Progo dan Opak. Sungai-sungai ini mengangkut dan mengendapkan sedimen mineral ke dataran rendah dan cekungan pesisir, mengawali tahap pertama dari lapisan sedimen baru."
+  globalGeneralization="Transisi berkesinambungan ini—mulai dari letusan batuan beku hingga pelapukan, transportasi sedimen, dan litifikasi sedimen pada akhirnya—merupakan mesin utama pembentukan dan pembaruan kerak benua di seluruh planet Bumi."
+  geoMapSlug="java-volcanic-arc"
+  locale="id"
+/>
+
+---
+
+## Bagian 6: Tantangan Pengamatan Lapangan
+
+<ObservationChallenge
+  title="Membedakan Tekstur Batuan Beku, Sedimen, dan Metamorf"
+  targetPhenomenon="Menganalisis tekstur batuan pada sampel tangan dan batu bangunan lokal."
+  observationSteps={[
+    "Temukan permukaan batu yang bersih atau kerikil sungai di lingkungan sekitar Anda.",
+    "Periksa lapisan perlapisan: apakah terdapat garis horizontal sejajar atau lapisan butiran yang jelas? (Ciri khas batuan sedimen).",
+    "Periksa kristal yang saling mengunci: apakah kristal mineral yang berorientasi acak tersusun rapat menyerupai mosaik? (Ciri khas batuan beku).",
+    "Periksa foliasi atau kelengkungan: apakah pita mineral tampak tertekan, bergelombang, atau tersusun sejajar seperti lembaran berkilau? (Ciri khas batuan metamorf)."
+  ]}
+  whatToLookFor="Batuan sedimen sering kali mudah tergores dan terasa berpasir; batuan beku memperlihatkan bintik-bintik kristal tanpa pita sejajar; batuan metamorf memperlihatkan penjajaran mineral yang terlipat atau berkilau (seperti serpihan mika)."
+  experienceSlug="the-rock-cycle"
+  locale="id"
+/>
+
+---
+
+## Bagian 7: Evaluasi Konseptual & Pemahaman
+
+Uji pemahaman Anda tentang keluarga batuan, proses genetik, dan jalur dinamis dari siklus batuan.
+
+<Quiz
+  client:visible
+  quiz={theRockCycleQuiz}
+  experienceSlug="the-rock-cycle"
+  experienceTitle="Apa Itu Siklus Batuan?"
+  locale="id"
+/>
+
+---
+
+## Bagian 8: Refleksi Ilmiah
+
+<ReflectionBox
+  client:idle
+  experienceSlug="the-rock-cycle"
+  prompt="Pilihlah sebuah batu atau kerikil yang pernah Anda lihat baru-baru ini—menurut Anda, berada di bagian mana dalam siklus batuan ia saat ini, dan gaya geologis apa yang mungkin mentransformasikannya di masa depan?"
+  category="observation"
+  locale="id"
+/>

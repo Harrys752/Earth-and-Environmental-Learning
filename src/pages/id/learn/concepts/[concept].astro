@@ -7,10 +7,15 @@ import GeoMapLink from '../../../../components/geomap/GeoMapLink.astro';
 
 export async function getStaticPaths() {
   const concepts = await getCollection('concepts');
-  return concepts.map((entry) => ({
-    params: { concept: entry.data.id || entry.id },
-    props: { entry },
-  }));
+  const enConcepts = concepts.filter((c) => !c.id.startsWith('id/'));
+  return enConcepts.map((enEntry) => {
+    const slug = (enEntry.data.id || enEntry.id).replace(/^id\//, '');
+    const idEntry = concepts.find((c) => c.id === `id/${slug}` || c.id === `id/${enEntry.id}`);
+    return {
+      params: { concept: slug },
+      props: { entry: idEntry || enEntry },
+    };
+  });
 }
 
 const { entry } = Astro.props;

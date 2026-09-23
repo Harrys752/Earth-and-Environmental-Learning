@@ -1,0 +1,216 @@
+---
+id: "why-do-landslides-happen"
+title: "Mengapa Tanah Longsor Terjadi?"
+tagline: "Fisika Stabilitas Lereng, Tekanan Air Pori, dan Pemicu Monsun Tropis"
+description: "Pahami keseimbangan mekanis lereng bukit, bagaimana curah hujan monsun yang lebat dan deforestasi merusak kohesi tanah, serta mengapa kawasan dataran tinggi vulkanik Indonesia menghadapi bahaya tanah longsor berulang."
+topic: "natural-hazards"
+difficulty: "beginner"
+estimatedTime: "20min"
+learningObjectives:
+  - "Menjelaskan stabilitas lereng sebagai keseimbangan mekanis antara gaya pendorong (tegasan geser gravitasi) dan gaya penahan (kekuatan geser friksional dan kohesi)."
+  - "Menguraikan bagaimana infiltrasi air menambah berat tanah dan meningkatkan tekanan air pori, yang secara drastis menurunkan gesekan efektif di sepanjang bidang gelincir."
+  - "Mengidentifikasi pemicu utama tanah longsor lingkungan dan antropogenik: curah hujan monsun tinggi, geometri lereng curam, hilangnya perakaran akibat deforestasi, dan guncangan gempa."
+  - "Menganalisis catatan bencana BNPB dan studi kasus nyata di Jawa Barat (seperti longsor Sumedang 2021) untuk menghubungkan fisika lereng dengan mitigasi bencana."
+prerequisites: []
+interactiveElements:
+  - id: "slope-stability-simulator"
+    type: "simulation"
+    title: "Simulator Stabilitas Lereng & Faktor Keamanan Interaktif"
+    pedagogicalPurpose: "Memungkinkan pembelajar menyesuaikan sudut lereng, kejenuhan curah hujan, dan tutupan vegetasi untuk mengamati perubahan seketika pada Faktor Keamanan (gaya penahan vs pendorong) serta memicu keruntuhan lereng."
+    isIllustrativeModel: true
+    accessibleFallbackText: "Model lereng interaktif yang mendemonstrasikan bagaimana peningkatan kejenuhan air hujan dan pengurangan vegetasi mendorong lereng melampaui ambang batas keruntuhan kritis."
+quiz:
+  quizId: "quiz-why-do-landslides-happen"
+  title: "Mengapa Tanah Longsor Terjadi? Kuis Verifikasi"
+  questionCount: 4
+realWorldConnections:
+  - title: "Tanah Longsor Dipicu Hujan di Dataran Tinggi Jawa Barat"
+    locationName: "Cimanggung, Kabupaten Sumedang, Jawa Barat, Indonesia"
+    isIndonesiaFirst: true
+    coordinates:
+      lat: -6.8580
+      lng: 107.9240
+    description: "Pada Januari 2021, curah hujan monsun musiman yang intens memicu longsor beruntun di Cimanggung, Kabupaten Sumedang, Jawa Barat, membuktikan bagaimana tanah vulkanik jenuh air di lereng terbangun dapat runtuh secara mendadak."
+    phenomenon: "Curah hujan lebat meresap ke dalam breksi vulkanik berpori dan lapisan lempung lapuk, menciptakan tekanan air pori yang tinggi dan keruntuhan bidang gelincir."
+    globalGeneralization: "Kawasan pegunungan tropis di seluruh dunia—dari Andes di Kolombia hingga Himalaya di Nepal dan Filipina—mengalami ketidakstabilan lereng akibat hujan yang serupa selama puncak siklus monsun."
+    geoMapSlug: "sumedang-landslides"
+geoMapConnections:
+  - locationSlug: "sumedang-landslides"
+    label: "Lihat wilayah rawan longsor di GeoMap"
+    coordinates:
+      lat: -6.8580
+      lng: 107.9240
+    description: "Jelajahi medan perbukitan vulkanik curam di Kabupaten Sumedang dan dataran tinggi Jawa Barat di GeoMap."
+reflection:
+  - id: "refl-landslide-warning"
+    prompt: "Tanda-tanda peringatan lingkungan apa yang mungkin mengindikasikan bahwa lereng bukit di belakang area pemukiman mulai tidak stabil sebelum longsor dahsyat terjadi?"
+    placeholder: "Pertimbangkan pohon yang miring, retakan mendadak di tanah atau jalan aspal, air sumur yang keruh, atau mata air yang muncul di tempat baru..."
+    category: "observation"
+nextExperiences:
+  - "why-do-earthquakes-happen"
+  - "the-rock-cycle"
+scientific:
+  source:
+    - "BNPB (Badan Nasional Penanggulangan Bencana Indonesia). Laporan Informasi Bencana dan Peta Rawan Longsor."
+    - "Cruden, D. M., & Varnes, D. J. (1996). Landslide types and processes. Transportation Research Board Special Report 247."
+    - "ReliefWeb / UN OCHA (2021). Indonesia: Laporan Situasi Tanah Longsor Jawa Barat."
+  sourceType: "government-agency"
+  lastReviewed: "2026-09-23"
+  scientificLevel: "beginner"
+  confidence: "well-supported"
+  references:
+    - title: "Indonesia Disaster Profile & Landslide Vulnerability Analysis"
+      publisher: "BNPB (Badan Nasional Penanggulangan Bencana)"
+      year: 2022
+    - title: "Landslide Types and Processes: Special Report 247"
+      publisher: "Transportation Research Board, National Academy of Sciences"
+      year: 1996
+    - title: "West Java Landslide Field Assessment (Cimanggung, Sumedang)"
+      publisher: "ReliefWeb / UN OCHA"
+      year: 2021
+review:
+  reviewStatus: "published"
+  sourceList:
+    - "BNPB Indonesia"
+    - "UN OCHA"
+    - "Transportation Research Board"
+  lastReviewed: "2026-09-23"
+  contentVersion: "1.0.0"
+featured: false
+---
+
+import SlopeStabilitySimulator from '../../../components/visualization/SlopeStabilitySimulator';
+import Quiz from '../../../components/quiz/Quiz';
+import ReflectionBox from '../../../components/learning/ReflectionBox';
+import RealWorldExample from '../../../components/learning/RealWorldExample.astro';
+import ObservationChallenge from '../../../components/learning/ObservationChallenge.astro';
+import { whyDoLandslidesHappenQuiz } from '../../../data/quizzes/id/why-do-landslides-happen';
+
+## Bagian 1: Pertanyaan Pembuka
+
+> **Mengapa curah hujan tropis yang menyuburkan lahan pertanian di Indonesia juga menjadikannya salah satu negara paling rawan tanah longsor di planet ini?**
+
+Setiap tahun antara bulan **Desember dan Februari**, awan hujan monsun yang lebat mengguyur kepulauan Indonesia. Meskipun curah hujan ini mengisi waduk dan mengairi persawahan, air tersebut juga mendestabilisasi ribuan lereng bukit di Sumatra, Jawa, Bali, dan Sulawesi.
+
+Menurut data yang dirilis oleh Badan Nasional Penanggulangan Bencana (**BNPB**), lebih dari **41 juta penduduk Indonesia tinggal di kawasan rawan bencana tanah longsor**. Mengapa air hujan dapat mengubah lereng bukit yang padat menjadi longsoran lumpur dan puing bebatuan yang menghancurkan?
+
+Jawabannya terletak pada fisika **kestabilan lereng (slope stability)** dan gaya-gaya tak kasat mata yang bekerja di dalam tanah yang basah.
+
+---
+
+## Bagian 2: Keseimbangan Fisik — Gaya Penahan vs Gaya Pendorong
+
+Setiap lereng bukit berada dalam tarik-menarik terus-menerus antara dua gaya fisik yang saling berlawanan:
+
+1. **Gaya Pendorong (Tegasan Geser Gravitasi / Shear Stress):**
+   - Gravitasi menarik massa tanah dan batuan ke bawah. Pada lereng yang miring, salah satu komponen gravitasi bekerja sejajar dengan permukaan bukit, menarik material menuruni lereng.
+2. **Gaya Penahan (Kekuatan Geser / Shear Strength):**
+   - **Friksi Internal:** Saling menguncinya butiran mineral dan fragmen batuan secara mikroskopis.
+   - **Kohesi:** Tarikan elektrostatik kimia antaran partikel mineral lempung dan pengikatan mekanis oleh jaringan perakaran tanaman yang dalam.
+
+```
+                      [ Massa Tanah Lereng ]
+                           /          \
+   Gaya Pendorong (Tegasan Geser)    Gaya Penahan (Kekuatan Geser)
+   • Komponen gravitasi ke bawah     • Friksi butiran internal
+   • Berat air hujan tambahan        • Kohesi jaringan akar
+   • Kemiringan sudut lereng         • Ikatan antarpartikel
+```
+
+Ahli geoteknik mengukur keseimbangan ini menggunakan **Faktor Keamanan (Factor of Safety / FoS)**:
+
+```
+Faktor Keamanan (FoS) = Gaya Penahan (Kekuatan Geser) / Gaya Pendorong (Tegasan Geser)
+```
+
+- Ketika `FoS > 1,0`, gaya penahan mendominasi dan lereng berada dalam kondisi stabil.
+- Ketika `FoS <= 1,0`, tegasan pendorong melampaui kekuatan penahan, dan terjadilah keruntuhan lereng (tanah longsor).
+
+---
+
+## Bagian 3: Peran Air & Tekanan Air Pori
+
+Air adalah pemicu utama keruntuhan lereng di seluruh dunia karena dua alasan fisik kritis:
+1. **Penambahan Beban Gravitasi:** Saat air hujan mengisi ruang pori udara di dalam tanah kering, massa total yang mendorong ke bawah lereng bertambah drastis.
+2. **Peningkatan Tekanan Air Pori:** Air yang terperangkap di dalam pori tanah memberikan tekanan hidrolik ke luar terhadap butiran mineral di sekitarnya. Tekanan ini merenggangkan kontak friksi antarpartikel (menurunkan tegangan normal efektif), bertindak bagai bantalan pelumas di sepanjang bidang gelincir potensial.
+
+Ketika dikombinasikan dengan deforestasi (hilangnya perakaran pengikat) atau pemotongan lereng buatan untuk jalan dan pemukiman, hujan lebat dengan cepat menekan nilai FoS hingga di bawah 1,0.
+
+---
+
+## Bagian 4: Simulasi Interaktif — Simulator Stabilitas Lereng
+
+Ujilah model interaktif di bawah ini. Atur **Kemiringan Lereng**, **Kejenuhan Air Hujan**, dan **Tutupan Vegetasi** untuk mengamati bagaimana nilai Faktor Keamanan berubah dan temukan titik kritis terjadinya longsor.
+
+<SlopeStabilitySimulator
+  client:visible
+  id="slope-simulator"
+  experienceSlug="why-do-landslides-happen"
+  locale="id"
+/>
+
+---
+
+## Bagian 5: Fenomena Nyata Indonesia — Dataran Tinggi Jawa Barat
+
+Pedalaman pegunungan Jawa Barat merupakan salah satu koridor longsor paling aktif di Asia Tenggara karena topografinya yang curam, lapisan abu vulkanik lapuk yang tebal, dan musim hujan yang lebat.
+
+<RealWorldExample
+  title="Keruntuhan Lereng Akibat Monsun di Kabupaten Sumedang, Jawa Barat"
+  locationName="Cimanggung, Kabupaten Sumedang, Jawa Barat, Indonesia"
+  isIndonesiaFirst={true}
+  coordinates={{ lat: -6.8580, lng: 107.9240 }}
+  phenomenon="Pada Januari 2021, hujan monsun berkelanjutan menjenuhkan lereng terjal berpemukiman di Cimanggung, Sumedang. Terjadi longsor primer, yang beberapa jam kemudian disusul longsor susulan sekunder yang mematikan saat tim evakuasi sedang bekerja di lokasi, mengakibatkan 19 korban jiwa. Peristiwa ini menyoroti kerentanan lapisan breksi vulkanik lapuk yang menumpang di atas bidang gelincir lempung kedap air."
+  globalGeneralization="Tanah longsor di busur kepulauan vulkanik mengikuti pola karakteristik ini: tanah vulkanik muda yang belum terkonsolidasi menyerap air monsun dengan cepat hingga batas geser dengan batuan kedap air di bawahnya runtuh."
+  geoMapSlug="sumedang-landslides"
+  locale="id"
+/>
+
+### Tanah Longsor vs. Likuefaksi Gempa Bumi:
+Penting untuk memahami kaitan fisika antar-bahaya alam:
+- **Tanah Longsor Akibat Hujan:** Terjadi pada lereng yang curam saat air hujan menaikkan tekanan air pori dan gravitasi menarik massa tanah jenuh ke bawah.
+- **Likuefaksi Ko-Seismik (mis. Palu 2018):** Terjadi bahkan pada lereng landai 1–2° atau dataran datar ketika guncangan gempa bumi secara mendadak menekan air tanah, mengubah pasir lepas menjadi bubur cair tanpa memerlukan topografi yang curam.
+
+---
+
+## Bagian 6: Tantangan Pengamatan Lapangan & Tanda Peringatan BNPB
+
+<ObservationChallenge
+  title="Mengenali Tanda-Tanda Dini Ketidakstabilan Lereng"
+  targetPhenomenon="Mengidentifikasi indikator fisik pergerakan tanah sebelum terjadi keruntuhan mendadak."
+  observationSteps={[
+    "Amati pohon dan tiang listrik di lereng bukit: apakah batangnya miring atau melengkung (batang pohon yang melengkung menyerupai gagang pistol menandakan rayapan tanah lambat)?",
+    "Periksa dinding penahan tanah dan jalan beraspal untuk melihat retakan tarikan baru yang sejajar dengan kontur lereng.",
+    "Periksa sumur warga dan saluran drainase: apakah air sumur yang biasanya jernih mendadak berubah menjadi keruh atau berlumpur?",
+    "Cari rembesan mata air baru atau area tanah becek yang muncul secara tak terduga di kaki lereng bukit."
+  ]}
+  whatToLookFor="Retakan tarikan di puncak lereng (mahkota) dan tanah yang menggembung di dasar lereng (kaki) adalah tanda klasik bahwa keruntuhan geser lereng sudah di ambang terjadi."
+  experienceSlug="why-do-landslides-happen"
+  locale="id"
+/>
+
+---
+
+## Bagian 7: Evaluasi Konseptual & Pemahaman
+
+Uji pemahaman Anda tentang gaya-gaya kestabilan lereng, mekanika tekanan air pori, dan manajemen bahaya tanah longsor di Indonesia.
+
+<Quiz
+  client:visible
+  quiz={whyDoLandslidesHappenQuiz}
+  experienceSlug="why-do-landslides-happen"
+  experienceTitle="Mengapa Tanah Longsor Terjadi?"
+  locale="id"
+/>
+
+---
+
+## Bagian 8: Refleksi Ilmiah
+
+<ReflectionBox
+  client:idle
+  experienceSlug="why-do-landslides-happen"
+  prompt="Tanda-tanda peringatan lingkungan apa yang mungkin mengindikasikan bahwa lereng bukit di belakang area pemukiman mulai tidak stabil sebelum longsor dahsyat terjadi?"
+  category="observation"
+  locale="id"
+/>

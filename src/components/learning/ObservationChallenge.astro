@@ -1,5 +1,7 @@
 ---
 import Button from '../ui/Button.astro';
+import { useTranslations } from '../../i18n';
+import { getLocalizedUrl, type Locale } from '../../lib/i18nUrl';
 
 export interface Props {
   title: string;
@@ -7,6 +9,7 @@ export interface Props {
   observationSteps: string[];
   whatToLookFor: string;
   experienceSlug: string;
+  locale?: Locale;
   class?: string;
 }
 
@@ -16,8 +19,12 @@ const {
   observationSteps,
   whatToLookFor,
   experienceSlug,
+  locale = 'en',
   class: className = '',
 } = Astro.props;
+
+const t = useTranslations(locale);
+const logHref = getLocalizedUrl(`/journey/timeline?action=new&type=observation&experience=${experienceSlug}&title=${encodeURIComponent(title)}`, locale);
 ---
 
 <div
@@ -33,7 +40,7 @@ const {
     </div>
     <div>
       <span class="text-xs font-mono uppercase tracking-wider text-[var(--color-warning)] font-bold">
-        Field Observation Challenge
+        {t.observationChallenge.heading}
       </span>
       <h3 class="text-base sm:text-lg font-bold text-[var(--color-text)]">
         {title}
@@ -42,13 +49,13 @@ const {
   </div>
 
   <p class="text-xs sm:text-sm text-[var(--color-text-muted)] leading-relaxed">
-    <strong class="text-[var(--color-text)] font-semibold">Target Phenomenon: </strong>
+    <strong class="text-[var(--color-text)] font-semibold">{t.observationChallenge.targetPhenomenon} </strong>
     {targetPhenomenon}
   </p>
 
   <div class="space-y-2 pt-1">
     <span class="text-xs font-semibold text-[var(--color-text)] block">
-      Observational Protocol:
+      {t.observationChallenge.observationalProtocol}
     </span>
     <ol class="space-y-1.5 list-decimal list-inside text-xs text-[var(--color-text-muted)]">
       {observationSteps.map((step) => (
@@ -58,20 +65,20 @@ const {
   </div>
 
   <div class="rounded-xl bg-[var(--color-surface)] p-3.5 border border-[var(--color-border)] text-xs text-[var(--color-text)]">
-    <strong class="text-[var(--color-warning)] font-semibold">Diagnostic Clue: </strong>
+    <strong class="text-[var(--color-warning)] font-semibold">{t.observationChallenge.diagnosticClue} </strong>
     {whatToLookFor}
   </div>
 
   <div class="pt-2 flex items-center justify-between flex-wrap gap-2 text-xs">
     <span class="text-[var(--color-text-dim)]">
-      Develops real-world scientific noticing habits.
+      {t.observationChallenge.habitNotice}
     </span>
     <Button
-      href={`/journey/timeline?action=new&type=observation&experience=${experienceSlug}&title=${encodeURIComponent(title)}`}
+      href={logHref}
       variant="outline"
       size="sm"
     >
-      Log Observation in Journey
+      {t.observationChallenge.logButton}
     </Button>
   </div>
 </div>

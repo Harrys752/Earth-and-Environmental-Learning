@@ -1,10 +1,13 @@
 import type { QuestionFeedback } from '../../types/quiz';
+import { useTranslations } from '../../i18n';
+import { getLocalizedUrl, type Locale } from '../../lib/i18nUrl';
 
 export interface FeedbackPanelProps {
   feedback: QuestionFeedback;
   onRetry?: () => void;
   onNext?: () => void;
   isLastQuestion?: boolean;
+  locale?: Locale;
 }
 
 export default function FeedbackPanel({
@@ -12,8 +15,10 @@ export default function FeedbackPanel({
   onRetry,
   onNext,
   isLastQuestion = false,
+  locale = 'en',
 }: FeedbackPanelProps) {
   const { isCorrect, explanation, relatedConceptSlug, nextExplorationSlug } = feedback;
+  const t = useTranslations(locale);
 
   return (
     <div
@@ -55,13 +60,13 @@ export default function FeedbackPanel({
                   : 'text-rose-900 dark:text-rose-200'
               }`}
             >
-              {isCorrect ? 'Accurate Understanding!' : 'Concept Clarification Needed'}
+              {isCorrect ? t.quizComponent.correctTitle : t.quizComponent.incorrectTitle}
             </span>
           </div>
 
           <div class="text-sm text-[var(--color-text)] leading-relaxed space-y-2 mt-2">
             <p class="font-normal text-[var(--color-text-muted)] dark:text-stone-300">
-              <strong class="text-[var(--color-text)] font-semibold">Scientific Explanation: </strong>
+              <strong class="text-[var(--color-text)] font-semibold">{t.quizComponent.explanationTitle} </strong>
               {explanation}
             </p>
           </div>
@@ -71,10 +76,10 @@ export default function FeedbackPanel({
             <div class="mt-3 pt-3 border-t border-[var(--color-border)]/60 flex flex-wrap gap-2 text-xs">
               {relatedConceptSlug && (
                 <a
-                  href={`/learn/concepts/${relatedConceptSlug}`}
+                  href={getLocalizedUrl(`/learn/concepts/${relatedConceptSlug}`, locale)}
                   class="inline-flex items-center gap-1 text-[var(--color-interactive)] hover:underline font-medium"
                 >
-                  <span>Review concept: {relatedConceptSlug}</span>
+                  <span>{t.quizComponent.reviewConcept.replace('{slug}', relatedConceptSlug)}</span>
                   <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M7 17l9.2-9.2M17 17V7H7" />
                   </svg>
@@ -95,7 +100,7 @@ export default function FeedbackPanel({
                   <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
                   <path d="M3 3v5h5" />
                 </svg>
-                <span>Re-examine Question</span>
+                <span>{t.quizComponent.reexamineButton}</span>
               </button>
             )}
 
@@ -105,7 +110,7 @@ export default function FeedbackPanel({
                 onClick={onNext}
                 class="px-4 py-1.5 rounded-lg bg-[var(--color-accent)] text-white text-xs font-semibold hover:bg-[var(--color-accent-hover)] transition-colors cursor-pointer inline-flex items-center gap-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] shadow-sm ml-auto"
               >
-                <span>{isLastQuestion ? 'Complete Assessment' : 'Next Question'}</span>
+                <span>{isLastQuestion ? t.quizComponent.completeButton : t.quizComponent.nextButton}</span>
                 <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <polyline points="9 18 15 12 9 6" />
                 </svg>

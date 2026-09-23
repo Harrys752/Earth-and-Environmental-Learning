@@ -2,17 +2,22 @@ import { useState, useEffect } from 'preact/hooks';
 import type { ExperienceProgress } from '../../types/user';
 import { getProgress, setAppliedState } from '../../lib/storage';
 import { getMasteryLabel } from '../../lib/progress';
+import { useTranslations } from '../../i18n';
+import type { Locale } from '../../lib/i18nUrl';
 
 export interface ProgressIndicatorProps {
   experienceSlug: string;
+  locale?: Locale;
   class?: string;
 }
 
 export default function ProgressIndicator({
   experienceSlug,
+  locale = 'en',
   class: className = '',
 }: ProgressIndicatorProps) {
   const [progress, setProgress] = useState<ExperienceProgress | null>(null);
+  const t = useTranslations(locale);
 
   const loadProgress = () => {
     setProgress(getProgress(experienceSlug));
@@ -44,7 +49,7 @@ export default function ProgressIndicator({
     >
       <div class="flex items-center justify-between border-b border-[var(--color-border)] pb-3">
         <span class="text-xs font-mono uppercase tracking-wider text-[var(--color-text-dim)] font-semibold">
-          Your Scientific Progress Dimensions
+          {t.progress.dimensionsTitle}
         </span>
         <span
           class={`text-xs px-2.5 py-0.5 rounded-full font-semibold border ${
@@ -55,7 +60,7 @@ export default function ProgressIndicator({
               : 'bg-gray-100 text-gray-700 border-gray-200 dark:bg-gray-800 dark:text-gray-300'
           }`}
         >
-          {isCompleted ? 'Core Experience Completed' : isStarted ? 'Inquiry Started' : 'Not Yet Started'}
+          {isCompleted ? t.progress.completedBadge : isStarted ? t.progress.startedBadge : t.progress.notStartedBadge}
         </span>
       </div>
 
@@ -70,8 +75,8 @@ export default function ProgressIndicator({
           }`}
         >
           <div class="text-base font-bold">{isStarted ? '✓' : '○'}</div>
-          <div class="text-[11px] font-bold">Started</div>
-          <div class="text-[10px] text-[var(--color-text-muted)] font-mono">Inquiry</div>
+          <div class="text-[11px] font-bold">{t.progress.dimStarted}</div>
+          <div class="text-[10px] text-[var(--color-text-muted)] font-mono">{t.progress.dimInquiry}</div>
         </div>
 
         {/* Dimension 2: Explored */}
@@ -85,8 +90,8 @@ export default function ProgressIndicator({
           <div class="text-base font-bold font-mono">
             {progress.exploration?.interactionsCount || 0}
           </div>
-          <div class="text-[11px] font-bold">Explored</div>
-          <div class="text-[10px] text-[var(--color-text-muted)] font-mono">Simulations</div>
+          <div class="text-[11px] font-bold">{t.progress.dimExplored}</div>
+          <div class="text-[10px] text-[var(--color-text-muted)] font-mono">{t.progress.dimSimulations}</div>
         </div>
 
         {/* Dimension 3: Mastery / Assessment */}
@@ -101,9 +106,9 @@ export default function ProgressIndicator({
           <div class="text-base font-bold">
             {progress.highestQuizScore !== undefined ? `${progress.highestQuizScore}%` : '—'}
           </div>
-          <div class="text-[11px] font-bold">Mastery</div>
+          <div class="text-[11px] font-bold">{t.progress.dimMastery}</div>
           <div class="text-[10px] truncate max-w-[80px] text-[var(--color-text-muted)] font-mono">
-            {progress.masterySignal}
+            {progress.masterySignal === 'none' ? t.progress.none : progress.masterySignal}
           </div>
         </div>
 
@@ -116,12 +121,12 @@ export default function ProgressIndicator({
               ? 'border-[var(--color-secondary)] bg-[var(--color-secondary-subtle)] text-[var(--color-secondary)] shadow-sm'
               : 'border-[var(--color-border)] bg-[var(--color-surface-hover)] text-[var(--color-text-dim)] hover:border-[var(--color-text-muted)]'
           }`}
-          title="Click to toggle applied status (e.g. real-world observation completed)"
+          title={t.progress.applyTooltip}
         >
           <div class="text-base font-bold">{progress.isApplied ? '✓' : '+'}</div>
-          <div class="text-[11px] font-bold">Applied</div>
+          <div class="text-[11px] font-bold">{t.progress.dimApplied}</div>
           <div class="text-[10px] text-[var(--color-text-muted)] font-mono">
-            {progress.isApplied ? 'Logged' : 'Click to Log'}
+            {progress.isApplied ? t.progress.logged : t.progress.clickToLog}
           </div>
         </button>
 
@@ -134,8 +139,8 @@ export default function ProgressIndicator({
           }`}
         >
           <div class="text-base font-bold">{progress.isBuilt ? '★' : '○'}</div>
-          <div class="text-[11px] font-bold">Built</div>
-          <div class="text-[10px] text-[var(--color-text-muted)] font-mono">Project</div>
+          <div class="text-[11px] font-bold">{t.progress.dimBuilt}</div>
+          <div class="text-[10px] text-[var(--color-text-muted)] font-mono">{t.progress.dimProject}</div>
         </div>
       </div>
     </div>

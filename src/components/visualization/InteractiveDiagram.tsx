@@ -1,5 +1,6 @@
 import { useState } from 'preact/hooks';
 import { recordExploration } from '../../lib/storage';
+import type { Locale } from '../../i18n';
 
 export interface DiagramLayer {
   id: string;
@@ -16,6 +17,7 @@ export interface InteractiveDiagramProps {
   experienceSlug?: string;
   accessibleDescription: string;
   layers?: DiagramLayer[];
+  locale?: Locale;
 }
 
 export default function InteractiveDiagram({
@@ -23,6 +25,7 @@ export default function InteractiveDiagram({
   title,
   experienceSlug,
   accessibleDescription,
+  locale = 'en',
   layers = [
     {
       id: 'crust',
@@ -59,6 +62,7 @@ export default function InteractiveDiagram({
   ],
 }: InteractiveDiagramProps) {
   const [selectedLayerId, setSelectedLayerId] = useState<string>(layers[0]?.id || '');
+  const isId = locale === 'id';
 
   const activeLayer = layers.find((l) => l.id === selectedLayerId) || layers[0];
 
@@ -75,18 +79,24 @@ export default function InteractiveDiagram({
         <div>
           <h4 class="text-base font-bold text-[var(--color-text)]">{title}</h4>
           <span class="text-xs text-[var(--color-text-dim)]">
-            Interactive Cross-Section Diagram • Click layers to inspect
+            {isId
+              ? 'Diagram Penampang Interaktif • Klik lapisan untuk memeriksa'
+              : 'Interactive Cross-Section Diagram • Click layers to inspect'}
           </span>
         </div>
         <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-[var(--color-surface-hover)] border border-[var(--color-border)] text-[var(--color-text-muted)] self-start sm:self-auto">
-          Illustrative Schematic
+          {isId ? 'Skema Ilustrasi' : 'Illustrative Schematic'}
         </span>
       </div>
 
       {/* Visually accessible text fallback for screen readers */}
       <div class="sr-only" aria-live="polite">
         <p>{accessibleDescription}</p>
-        <p>Currently inspecting layer: {activeLayer.name}. {activeLayer.description} Composition: {activeLayer.composition}.</p>
+        <p>
+          {isId
+            ? `Sedang memeriksa lapisan: ${activeLayer.name}. ${activeLayer.description} Komposisi: ${activeLayer.composition}.`
+            : `Currently inspecting layer: ${activeLayer.name}. ${activeLayer.description} Composition: ${activeLayer.composition}.`}
+        </p>
       </div>
 
       {/* Grid: Diagram visual + Detail card */}
@@ -118,7 +128,7 @@ export default function InteractiveDiagram({
                     </div>
                     {layer.depthKm && (
                       <div class="text-[11px] font-mono text-[var(--color-text-muted)]">
-                        Depth: {layer.depthKm}
+                        {isId ? 'Kedalaman: ' : 'Depth: '}{layer.depthKm}
                       </div>
                     )}
                   </div>
@@ -143,7 +153,7 @@ export default function InteractiveDiagram({
         <div class="md:col-span-6 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface-hover)] p-5 space-y-4">
           <div class="flex items-center justify-between">
             <span class="text-xs font-mono uppercase tracking-wider text-[var(--color-accent)] font-semibold">
-              Layer Inspection
+              {isId ? 'Pemeriksaan Lapisan' : 'Layer Inspection'}
             </span>
             {activeLayer.depthKm && (
               <span class="text-xs font-mono px-2 py-0.5 rounded bg-[var(--color-surface)] border border-[var(--color-border)] text-[var(--color-text)]">
@@ -163,7 +173,7 @@ export default function InteractiveDiagram({
 
           <div class="border-t border-[var(--color-border)] pt-3 text-xs space-y-1">
             <strong class="text-[var(--color-text)] block font-semibold">
-              Mineral Composition & State:
+              {isId ? 'Komposisi Mineral & Keadaan:' : 'Mineral Composition & State:'}
             </strong>
             <span class="text-[var(--color-text-muted)] leading-normal block">
               {activeLayer.composition}
@@ -173,7 +183,10 @@ export default function InteractiveDiagram({
       </div>
 
       <div class="text-[11px] text-[var(--color-text-dim)] border-t border-[var(--color-border)] pt-3">
-        <strong>Accessibility Note:</strong> This interactive diagram demonstrates structural layering. All scientific properties are fully described in plain text above.
+        <strong>{isId ? 'Catatan Aksesibilitas: ' : 'Accessibility Note: '}</strong>
+        {isId
+          ? 'Diagram interaktif ini mendemonstrasikan pelapisan struktural. Semua properti ilmiah dijelaskan secara lengkap dalam teks di atas.'
+          : 'This interactive diagram demonstrates structural layering. All scientific properties are fully described in plain text above.'}
       </div>
     </div>
   );

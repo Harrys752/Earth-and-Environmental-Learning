@@ -7,8 +7,9 @@ import Button from '../../components/ui/Button.astro';
 
 export async function getStaticPaths() {
   const projects = await getCollection('projects');
-  return projects.map((entry) => ({
-    params: { slug: entry.data.id || entry.id },
+  const enProjects = projects.filter((p) => !p.id.startsWith('id/'));
+  return enProjects.map((entry) => ({
+    params: { slug: (entry.data.id || entry.id).replace(/^id\//, '') },
     props: { entry },
   }));
 }

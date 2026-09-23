@@ -1,0 +1,170 @@
+---
+id: "reading-rock-layers"
+title: "Membaca Lapisan Batuan"
+tagline: "Stratigrafi, Waktu Geologis Dalam, dan Menyingkap Sejarah Tertulis Bumi"
+description: "Pelajari bagaimana lapisan sedimen, hukum penanggalan relatif Steno, dan kompleks subduksi purba seperti Karangsambung di Jawa memungkinkan para ahli geologi membaca jutaan tahun sejarah keplanetan."
+topic: "geology"
+difficulty: "beginner"
+estimatedTime: "10min"
+learningObjectives:
+  - "Menerapkan hukum stratigrafi Nicolaus Steno: Superposisi, Horizontalitas Asli, dan Hubungan Pemotongan (Cross-Cutting Relationships)."
+  - "Menjelaskan apa itu ketidakselarasan (unconformity) dan mengapa ketidakselarasan mewakili waktu yang hilang dalam catatan geologi."
+  - "Menghubungkan tekstur batuan sedimen (batupasir, serpih, batugamping) dengan lingkungan pengendapan purba."
+  - "Menyelidiki Geopark Karangsambung sebagai kompleks subduksi purba yang terangkat ke daratan di Jawa Tengah."
+prerequisites: []
+interactiveElements:
+  - id: "rock-diagram"
+    type: "diagram"
+    title: "Kolom Stratigrafi & Hubungan Pemotongan"
+    pedagogicalPurpose: "Diagram interaktif untuk mengidentifikasi urutan umur relatif batuan berlapis dan retas beku"
+    isIllustrativeModel: true
+    accessibleFallbackText: "Diagram stratigrafi yang menampilkan lapisan sedimen horizontal yang dipotong oleh retas basaltik vertikal dan ketidakselarasan bersudut."
+quiz:
+  quizId: "quiz-reading-rock-layers"
+  title: "Membaca Lapisan Batuan & Stratigrafi Geologi"
+  questionCount: 3
+realWorldConnections:
+  - title: "Geopark Karangsambung: Subduksi Purba di Atas Daratan"
+    locationName: "Kebumen, Jawa Tengah, Indonesia"
+    isIndonesiaFirst: true
+    coordinates:
+      lat: -7.5614
+      lng: 109.6814
+    description: "Karangsambung adalah bancuh tektonik (kompleks akresi) Zaman Kapur-Paleogen yang tersingkap, tempat kerak samudra purba, lava bantal, rijang merah, dan batuan metamorf bertekanan tinggi yang terbentuk di kedalaman 100 km terangkat ke daratan."
+    phenomenon: "Batuan dasar laut purba berusia lebih dari 120 juta tahun tersingkap berdampingan dengan sedimen darat, menyimpan bukti fisik langsung dari proses subduksi purba sebelum terbentuknya Pulau Jawa modern."
+    globalGeneralization: "Kompleks akresi terbentuk di zona subduksi secara global, seperti Franciscan Complex di California dan Shimanto Belt di Jepang."
+    geoMapSlug: "karangsambung-geopark"
+geoMapConnections:
+  - locationSlug: "karangsambung-geopark"
+    label: "Jelajahi Karangsambung di GeoMap"
+    coordinates:
+      lat: -7.5614
+      lng: 109.6814
+    description: "Inspeksi singkapan geologi, zona bancuh tektonik, dan torehan sungai yang melestarikan bukti subduksi prasejarah."
+reflection:
+  - id: "refl-strata-observation"
+    prompt: "Jika Anda mengamati lapisan batuan yang miring atau terlipat di tebing jalan atau tebing pantai, gaya keplanetan apa yang pasti telah bekerja pada batuan tersebut setelah awalnya terendapkan mendatar?"
+    placeholder: "Pertimbangkan kompresi tektonik, sesar, dan pengendapan horizontal..."
+    category: "observation"
+nextExperiences:
+  - "why-volcanoes-form"
+  - "how-rain-forms"
+scientific:
+  source:
+    - "Tarbuck, E. J., Lutgens, F. K., & Tasa, D. (2017). Earth: An Introduction to Physical Geology. Pearson."
+    - "Asikin, S. (1974). The Geologic Structure of Karangsambung Area, Central Java. ITB Geological Papers."
+    - "Boggs, S. (2011). Principles of Sedimentology and Stratigraphy. Pearson."
+  sourceType: "textbook"
+  lastReviewed: "2026-09-23"
+  scientificLevel: "beginner"
+  confidence: "established"
+  references:
+    - title: "Earth: An Introduction to Physical Geology"
+      publisher: "Pearson"
+      year: 2017
+    - title: "Geological Evolution of the Karangsambung Complex, Central Java"
+      publisher: "Badan Geologi Indonesia"
+      year: 2020
+review:
+  reviewStatus: "published"
+  sourceList:
+    - "Pearson"
+    - "ITB Geological Papers"
+    - "Badan Geologi"
+  lastReviewed: "2026-09-23"
+  contentVersion: "1.0.0"
+featured: false
+---
+
+import Quiz from '../../../components/quiz/Quiz';
+import ReflectionBox from '../../../components/learning/ReflectionBox';
+import RealWorldExample from '../../../components/learning/RealWorldExample.astro';
+import ObservationChallenge from '../../../components/learning/ObservationChallenge.astro';
+import { readingRockLayersQuiz } from '../../../data/quizzes/id/reading-rock-layers';
+
+## Bagian 1: Halaman-Halaman Buku Sejarah Bumi
+
+Saat Anda berkendara melintasi lereng pegunungan atau berjalan di sepanjang garis pantai berbatu, Anda kerap melihat tebing-tebing tinggi bergaris-garis lapisan batuan beraneka warna: batupasir kemerahan, serpih abu-abu, dan batugamping keputihan yang tertumpuk rapi satu di atas yang lain.
+
+Bagi mata orang awam, tumpukan itu hanyalah batu berwarna-warni biasa. Namun bagi seorang ilmuwan kebumian, **setiap lapisan adalah bab tersimpan dari sejarah planet kita**.
+
+Lapisan batupasir menceritakan keberadaan gurun pasir purba atau pantai tropis masa lampau. Lapisan serpih hitam menceritakan danau purba yang tenang atau cekungan samudra yang miskin oksigen. Lapisan batugamping yang penuh dengan pecahan cangkang menceritakan terumbu karang tropis purba yang bermandikan sinar matahari.
+
+---
+
+## Bagian 2: Nicolaus Steno & Aturan Penanggalan Relatif
+
+Pada abad ke-17, ilmuwan Denmark **Nicolaus Steno** menyadari bahwa batuan sedimen terbentuk mengikuti hukum-hukum fisika dasar tentang bagaimana partikel mengendap di bawah pengaruh gravitasi:
+
+1. **Hukum Superposisi:** Dalam urutan batuan sedimen yang belum terganggu, lapisan tertua berada di bagian paling bawah, dan setiap lapisan di atasnya berangsur-angsur lebih muda.
+2. **Prinsip Horizontalitas Asli (Original Horizontality):** Lapisan sedimen mengendap dari air atau udara sebagai lembaran mendatar. Jika Anda melihat lapisan batuan miring bersudut 45 derajat atau melengkung terlipat, **gaya tektonik telah mendeformasikannya setelah batuan tersebut terbentuk**.
+3. **Prinsip Hubungan Pemotongan (Cross-Cutting Relationships):** Jika suatu intrusi batuan beku (seperti retas magma vulkanik) atau sesar memotong lapisan batuan, **intrusi atau sesar tersebut harus berusia lebih muda daripada batuan yang diterobosnya**.
+
+Melalui tiga aturan sederhana namun fundamental ini, para ahli geologi dapat menyusun kronologi urutan peristiwa geologis tanpa memerlukan peralatan penanggalan radioaktif yang rumit.
+
+---
+
+## Bagian 3: Ketidakselarasan — Halaman Waktu yang Hilang
+
+Apa yang terjadi jika lapisan batuan terangkat ke atas permukaan laut dan terpapar hujan, aliran sungai, serta angin kencang? Lapisan tersebut akan terkikis dan tererosi.
+
+Ketika daratan tersebut kemudian tenggelam kembali ke bawah permukaan laut dan lapisan baru terendapkan di atas permukaan yang telah tererosi tadi, terbentuklah celah dalam catatan geologi. Batas ini disebut **ketidakselarasan (unconformity)**.
+
+Sebuah ketidakselarasan mewakili interval waktu yang hilang—terkadang mencakup rentang puluhan hingga ratusan juta tahun sejarah Bumi yang musnah terkikis oleh erosi sebelum sedimen baru menimbun lanskap purba tersebut.
+
+---
+
+## Bagian 4: Fenomena Nyata Indonesia — Geopark Karangsambung
+
+<RealWorldExample
+  title="Karangsambung: Bancuh Tektonik Purba yang Tersingkap di Daratan"
+  locationName="Karangsambung, Kebumen, Jawa Tengah"
+  isIndonesiaFirst={true}
+  coordinates={{ lat: -7.5614, lng: 109.6814 }}
+  phenomenon="Di dasar Sungai Luk Ulo di Karangsambung, para geolog dapat berjalan langsung di atas lava bantal samudra, rijang radiolaria merah darah yang terbentuk di dasar abisal samudra sedalam 4.000 meter, serta sekis biru dan eklogit metamorf bertekanan tinggi yang terbentuk di bawah tekanan ekstrem 50–100 km di dalam zona subduksi Zaman Kapur purba."
+  globalGeneralization="Karangsambung adalah apa yang disebut para ahli geologi sebagai bancuh (mélange) tektonik—breksi kacau dari batuan samudra dan benua yang terkeruk selama subduksi. Ini membuktikan bahwa zona subduksi tidak hanya menghancurkan lempeng, tetapi juga mengeruk dan melestarikan formasi batuan purba yang kemudian terangkat menjadi pegunungan."
+  geoMapSlug="karangsambung-geopark"
+  locale="id"
+/>
+
+---
+
+## Bagian 5: Tantangan Pengamatan Lapangan
+
+<ObservationChallenge
+  title="Mengidentifikasi Perlapisan Sedimen pada Tebing Jalan atau Lembah Sungai"
+  targetPhenomenon="Mengenali bidang perlapisan sedimen dan sortasi butiran pada batu alam."
+  observationSteps={[
+    "Temukan singkapan batuan terbuka, tebing pemotongan jalan, dinding tambang, atau tebing bantaran sungai.",
+    "Cari garis-garis horizontal paralel atau pita gradasi warna (bidang perlapisan).",
+    "Periksa ukuran butiran: apakah batuan terasa berpasir kasar (batupasir), halus dan mudah tergores koin (serpih/batulempung), atau mendesis berbusa saat ditetesi cuka dapur encer (batugamping)?",
+    "Periksa orientasi lapisannya: apakah lapisannya masih mendatar sempurna, ataukah tekanan tektonik telah memiringkannya?"
+  ]}
+  whatToLookFor="Cari laminasi halus di dalam satu lapisan tunggal (perlapisan silang-siur / cross-bedding), yang merekam arah arus air atau angin purba yang mengendapkan butiran pasir jutaan tahun silam."
+  experienceSlug="reading-rock-layers"
+  locale="id"
+/>
+
+---
+
+## Bagian 6: Evaluasi Konseptual & Pemahaman
+
+<Quiz
+  client:visible
+  quiz={readingRockLayersQuiz}
+  experienceSlug="reading-rock-layers"
+  experienceTitle="Membaca Lapisan Batuan"
+  locale="id"
+/>
+
+---
+
+## Bagian 7: Refleksi Ilmiah
+
+<ReflectionBox
+  client:idle
+  experienceSlug="reading-rock-layers"
+  prompt="Jika Anda mengamati lapisan batuan yang miring atau terlipat di tebing jalan atau tebing pantai, gaya keplanetan apa yang pasti telah bekerja pada batuan tersebut setelah awalnya terendapkan mendatar?"
+  category="observation"
+  locale="id"
+/>
