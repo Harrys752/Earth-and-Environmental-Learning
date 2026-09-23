@@ -11,6 +11,8 @@ import {
   clearUserData,
   setAppliedState,
   setBuiltState,
+  hasSeenOnboardingRoadmap,
+  setHasSeenOnboardingRoadmap,
 } from '../../src/lib/storage';
 
 describe('Storage Abstraction Layer', () => {
@@ -109,5 +111,15 @@ describe('Storage Abstraction Layer', () => {
 
     const journey = getJourneyEntries();
     expect(journey.some((e) => e.type === 'reflection')).toBe(true);
+  });
+
+  it('persists and manages hasSeenOnboardingRoadmap preference flag', () => {
+    expect(hasSeenOnboardingRoadmap()).toBe(false);
+    setHasSeenOnboardingRoadmap(true);
+    expect(hasSeenOnboardingRoadmap()).toBe(true);
+    expect(loadState().preferences.hasSeenOnboardingRoadmap).toBe(true);
+
+    clearUserData();
+    expect(hasSeenOnboardingRoadmap()).toBe(false);
   });
 });

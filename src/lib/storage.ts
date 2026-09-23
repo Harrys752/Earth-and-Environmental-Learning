@@ -20,6 +20,7 @@ const DEFAULT_PREFERENCES: UserPreferences = {
   motionPreference: 'normal',
   soundEffects: false,
   fontSize: 'standard',
+  hasSeenOnboardingRoadmap: false,
 };
 
 export function getDefaultState(): LocalState {
@@ -290,6 +291,14 @@ export function saveReflection(
 
 export function getPreferences(): UserPreferences {
   return loadState().preferences;
+}
+
+export function hasSeenOnboardingRoadmap(): boolean {
+  return !!loadState().preferences.hasSeenOnboardingRoadmap;
+}
+
+export function setHasSeenOnboardingRoadmap(seen: boolean): void {
+  savePreferences({ hasSeenOnboardingRoadmap: seen });
 }
 
 export function savePreferences(prefs: Partial<UserPreferences>): UserPreferences {

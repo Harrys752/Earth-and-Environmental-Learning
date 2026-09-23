@@ -62,6 +62,7 @@ export interface UserPreferences {
   motionPreference: 'normal' | 'reduced';
   soundEffects: boolean;
   fontSize: 'standard' | 'large';
+  hasSeenOnboardingRoadmap?: boolean;
 }
 
 export interface LocalState {

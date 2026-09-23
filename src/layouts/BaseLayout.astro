@@ -1,6 +1,8 @@
 ---
 import '../styles/global.css';
+import { getCollection } from 'astro:content';
 import ThemeToggle from '../components/ui/ThemeToggle';
+import RoadmapCard from '../components/ui/RoadmapCard';
 import { withBase } from '../lib/url';
 
 export interface Props {
@@ -25,12 +27,34 @@ const fullTitle = title.includes('Earth Learning')
 
 const base = import.meta.env.BASE_URL;
 const currentPath = Astro.url.pathname;
+const isHome = currentPath === base || currentPath === base.slice(0, -1) || currentPath === '/' || currentPath === '';
 const isActive = (path: string) => {
   const target = withBase(path);
-  if (path === '/' && (currentPath === base || currentPath === base.slice(0, -1) || currentPath === '/')) return true;
+  if (path === '/' && isHome) return true;
   if (path !== '/' && currentPath.startsWith(target)) return true;
   return false;
 };
+
+// Data-driven topics & experiences for the Onboarding Roadmap
+const rawTopics = await getCollection('topics');
+const rawExperiences = await getCollection('experiences');
+
+const roadmapTopics = rawTopics.map((t) => ({
+  id: t.data.id || t.id,
+  title: t.data.title,
+  tagline: t.data.tagline || '',
+  description: t.data.description,
+  category: t.data.category,
+  experiences: rawExperiences
+    .filter((e) => e.data.topic === (t.data.id || t.id))
+    .map((e) => ({
+      id: e.data.id || e.id,
+      title: e.data.title,
+      difficulty: e.data.difficulty,
+      estimatedTime: e.data.estimatedTime,
+      featured: e.data.featured || (e.data.id || e.id) === 'why-volcanoes-form',
+    })),
+}));
 ---
 
 <!doctype html>
@@ -165,12 +189,12 @@ const isActive = (path: string) => {
           </a>
         </nav>
 
-        {/* Global Utilities: Search Icon & Theme Toggle Island */}
+        {/* Global Utilities: Search Icon, Theme Toggle & Roadmap Trigger Island */}
         <div class="flex items-center gap-2">
           <a
             href={withBase('/search')}
             class="w-9 h-9 rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:bg-[var(--color-surface-hover)] flex items-center justify-center transition-colors focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
-            title="Search topics, experiences, and concepts (Shortcut)"
+            title="Search topics, experiences, and concepts"
             aria-label="Search earth sciences knowledge base"
           >
             <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -180,6 +204,22 @@ const isActive = (path: string) => {
           </a>
 
           <ThemeToggle client:idle />
+
+          {/* Learning Roadmap Navbar Reopen Trigger (§2.3) */}
+          <button
+            type="button"
+            id="roadmap-navbar-trigger"
+            class="w-9 h-9 rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:bg-[var(--color-surface-hover)] flex items-center justify-center transition-colors cursor-pointer select-none focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
+            title="Show learning roadmap & curriculum structure"
+            aria-label="Show learning roadmap"
+            onclick="window.dispatchEvent(new CustomEvent('earth-learning:open-roadmap', { detail: { triggerId: 'roadmap-navbar-trigger' } }))"
+          >
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21" />
+              <line x1="9" y1="3" x2="9" y2="18" />
+              <line x1="15" y1="6" x2="15" y2="21" />
+            </svg>
+          </button>
 
           {/* Mobile Menu Trigger */}
           <div class="md:hidden flex items-center">
@@ -198,6 +238,9 @@ const isActive = (path: string) => {
     <main id="main-content" class={`flex-1 ${className}`}>
       <slot />
     </main>
+
+    <!-- Onboarding Learning Roadmap Modal Island (Option A) -->
+    <RoadmapCard client:load topics={roadmapTopics} isHomePage={isHome} />
 
     <!-- Global Educational Footer -->
     <footer class="border-t border-[var(--color-border)] bg-[var(--color-surface)] py-12 text-xs text-[var(--color-text-muted)]">
