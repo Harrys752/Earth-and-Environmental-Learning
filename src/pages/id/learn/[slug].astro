@@ -4,19 +4,27 @@ import LearningLayout from '../../../layouts/LearningLayout.astro';
 
 export async function getStaticPaths() {
   const experiences = await getCollection('experiences');
-  // For Indonesian route, generate paths for experiences that have an id/ version or all fallback to available content
-  const idExperiences = experiences.filter((e) => e.id.startsWith('id/'));
+  const enExperiences = experiences.filter((e) => !e.id.startsWith('id/'));
 
-  return idExperiences.map((entry) => {
-    const slug = (entry.data.id || entry.id).replace(/^id\//, '');
+  return enExperiences.map((enEntry) => {
+    const slug = (enEntry.data.id || enEntry.id).replace(/^id\//, '');
+    const idEntry = experiences.find((e) => e.id === `id/${slug}` || e.id === `id/${enEntry.id}`);
+
+    if (idEntry) {
+      return {
+        params: { slug },
+        props: { entry: idEntry, isFallback: false },
+      };
+    }
+
     return {
       params: { slug },
-      props: { entry },
+      props: { entry: enEntry, isFallback: true },
     };
   });
 }
 
-const { entry } = Astro.props;
+const { entry, isFallback = false } = Astro.props;
 const { Content } = await render(entry);
 
 const rawTopics = await getCollection('topics');
@@ -37,6 +45,8 @@ const topicTitle = topic?.data.title || entry.data.topic;
   difficulty={entry.data.difficulty}
   estimatedTime={entry.data.estimatedTime}
   scientific={entry.data.scientific}
+  isFallback={isFallback}
+  locale="id"
 >
   <Content />
 </LearningLayout>

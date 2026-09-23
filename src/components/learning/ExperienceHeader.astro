@@ -3,6 +3,8 @@ import Badge from '../ui/Badge.astro';
 import Breadcrumb from '../ui/Breadcrumb.astro';
 import type { ScientificMetadata } from '../../types/content';
 import { withBase } from '../../lib/url';
+import type { Locale } from '../../lib/i18nUrl';
+import { useTranslations } from '../../i18n';
 
 export interface Props {
   title: string;
@@ -12,6 +14,8 @@ export interface Props {
   difficulty: 'beginner' | 'intermediate' | 'advanced';
   estimatedTime: '5min' | '10min' | '20min' | '30plus';
   scientific?: ScientificMetadata;
+  isFallback?: boolean;
+  locale?: Locale;
   class?: string;
 }
 
@@ -23,12 +27,17 @@ const {
   difficulty,
   estimatedTime,
   scientific,
+  isFallback = false,
+  locale = 'en',
   class: className = '',
 } = Astro.props;
 
+const isId = locale === 'id';
+const t = useTranslations(locale);
+
 const breadcrumbItems = [
-  { label: 'Explore', href: '/explore' },
-  { label: topicTitle, href: `/explore/topics/${topicSlug}` },
+  { label: isId ? 'Jelajahi' : 'Explore', href: isId ? '/id/explore' : '/explore' },
+  { label: topicTitle, href: isId ? `/id/explore/topics/${topicSlug}` : `/explore/topics/${topicSlug}` },
   { label: title, current: true },
 ];
 ---
@@ -39,14 +48,20 @@ const breadcrumbItems = [
   <div class="space-y-4">
     <div class="flex items-center gap-2 flex-wrap text-xs">
       <a
-        href={withBase(`/explore/topics/${topicSlug}`)}
+        href={withBase(isId ? `/id/explore/topics/${topicSlug}` : `/explore/topics/${topicSlug}`)}
         class="font-semibold uppercase tracking-wider text-[var(--color-accent)] hover:underline"
       >
         {topicTitle}
       </a>
       <span class="text-[var(--color-border)]">•</span>
-      <Badge variant={difficulty}>{difficulty}</Badge>
-      <Badge variant="time">{estimatedTime}</Badge>
+      <Badge variant={difficulty}>{t.cards.difficulty[difficulty] || difficulty}</Badge>
+      <Badge variant="time">{t.cards.time[estimatedTime] || estimatedTime}</Badge>
+
+      {isFallback && (
+        <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold uppercase bg-amber-100 dark:bg-amber-950 text-amber-900 dark:text-amber-200 border border-amber-300 dark:border-amber-800" title={t.common.untranslatedBadgeLabel}>
+          {t.common.untranslatedBadge}
+        </span>
+      )}
 
       {scientific && (
         <span

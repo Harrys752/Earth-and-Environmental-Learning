@@ -27,6 +27,8 @@ const {
 const currentLocale: Locale = (locale as Locale) || 'en';
 const t = useTranslations(currentLocale);
 
+const isUntranslated = currentLocale === 'id' && slug !== 'plate-tectonics';
+
 const categoryIcons: Record<string, string> = {
   'plate-tectonics': 'M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5',
   atmosphere: 'M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z',
@@ -51,9 +53,16 @@ const topicHref = getLocalizedUrl(`/explore/topics/${slug}`, currentLocale);
         </svg>
       </div>
 
-      <span class="text-xs font-mono font-medium px-2.5 py-0.5 rounded-full bg-[var(--color-surface-hover)] border border-[var(--color-border)] text-[var(--color-text-muted)]">
-        {experienceCount} {experienceCount === 1 ? t.cards.experienceCountSingle : t.cards.experiencesCount}
-      </span>
+      <div class="flex items-center gap-1.5">
+        {isUntranslated && (
+          <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold uppercase bg-amber-100 dark:bg-amber-950 text-amber-900 dark:text-amber-200 border border-amber-300 dark:border-amber-800" title={t.common.untranslatedBadgeLabel}>
+            {t.common.untranslatedBadge}
+          </span>
+        )}
+        <span class="text-xs font-mono font-medium px-2.5 py-0.5 rounded-full bg-[var(--color-surface-hover)] border border-[var(--color-border)] text-[var(--color-text-muted)]">
+          {experienceCount} {experienceCount === 1 ? t.cards.experienceCountSingle : t.cards.experiencesCount}
+        </span>
+      </div>
     </div>
 
     <h3 class="text-lg font-bold text-[var(--color-text)] group-hover:text-[var(--color-secondary)] transition-colors leading-snug mb-2">

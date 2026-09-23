@@ -6,6 +6,8 @@ import {
   hasTranslation,
   getLocalizedUrl,
   getSwitchTargetUrl,
+  isExperienceTranslated,
+  isTopicTranslated,
 } from '../../src/lib/i18nUrl';
 
 describe('i18nUrl helper functions', () => {
@@ -39,12 +41,19 @@ describe('i18nUrl helper functions', () => {
     expect(hasTranslation('/geomap', 'id')).toBe(true);
 
     // Untranslated Phase 2 items
-    expect(hasTranslation('/learn/how-earthquakes-shake', 'id')).toBe(false);
-    expect(hasTranslation('/learn/rock-cycle-journey', 'id')).toBe(false);
-    expect(hasTranslation('/explore/topics/hydrology', 'id')).toBe(false);
+    expect(hasTranslation('/learn/how-rain-forms', 'id')).toBe(false);
+    expect(hasTranslation('/learn/the-rock-cycle', 'id')).toBe(false);
+    expect(hasTranslation('/explore/topics/atmosphere', 'id')).toBe(false);
 
     // English always has all translations
-    expect(hasTranslation('/learn/how-earthquakes-shake', 'en')).toBe(true);
+    expect(hasTranslation('/learn/how-rain-forms', 'en')).toBe(true);
+  });
+
+  it('isExperienceTranslated and isTopicTranslated accurately identify translated content', () => {
+    expect(isExperienceTranslated('why-volcanoes-form')).toBe(true);
+    expect(isExperienceTranslated('how-rain-forms')).toBe(false);
+    expect(isTopicTranslated('plate-tectonics')).toBe(true);
+    expect(isTopicTranslated('atmosphere')).toBe(false);
   });
 
   it('getLocalizedUrl prefixes with base and id/ appropriately', () => {
@@ -55,20 +64,20 @@ describe('i18nUrl helper functions', () => {
     expect(idUrl).toBe(withBase('id/about'));
   });
 
-  it('getSwitchTargetUrl falls back safely to /id for untranslated content in Indonesian', () => {
+  it('getSwitchTargetUrl always targets the exact same slug/position in the target locale', () => {
     // Translated item switches directly
     const directResult = getSwitchTargetUrl('/learn/why-volcanoes-form', 'id');
     expect(directResult.isDirectTranslation).toBe(true);
     expect(directResult.url).toBe(withBase('id/learn/why-volcanoes-form'));
 
-    // Untranslated item falls back to /id landing page
-    const fallbackResult = getSwitchTargetUrl('/learn/how-earthquakes-shake', 'id');
+    // Untranslated item keeps exact same slug under /id/ with fallback flag
+    const fallbackResult = getSwitchTargetUrl('/learn/how-rain-forms', 'id');
     expect(fallbackResult.isDirectTranslation).toBe(false);
-    expect(fallbackResult.url).toBe(withBase('id'));
+    expect(fallbackResult.url).toBe(withBase('id/learn/how-rain-forms'));
 
-    // Switching back to English is always direct
-    const enSwitch = getSwitchTargetUrl('/id/learn/why-volcanoes-form', 'en');
+    // Switching from Indonesian fallback page back to English
+    const enSwitch = getSwitchTargetUrl('/id/learn/how-rain-forms', 'en');
     expect(enSwitch.isDirectTranslation).toBe(true);
-    expect(enSwitch.url).toBe(withBase('learn/why-volcanoes-form'));
+    expect(enSwitch.url).toBe(withBase('learn/how-rain-forms'));
   });
 });

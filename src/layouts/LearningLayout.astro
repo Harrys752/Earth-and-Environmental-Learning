@@ -4,6 +4,8 @@ import ExperienceHeader from '../components/learning/ExperienceHeader.astro';
 import ProgressIndicator from '../components/journey/ProgressIndicator';
 import { getRelatedContent } from '../lib/contentGraph';
 import { withBase } from '../lib/url';
+import { useTranslations } from '../i18n';
+import type { Locale } from '../lib/i18nUrl';
 import type { ScientificMetadata } from '../types/content';
 
 export interface Props {
@@ -16,6 +18,8 @@ export interface Props {
   difficulty: 'beginner' | 'intermediate' | 'advanced';
   estimatedTime: '5min' | '10min' | '20min' | '30plus';
   scientific?: ScientificMetadata;
+  isFallback?: boolean;
+  locale?: Locale;
 }
 
 const {
@@ -28,13 +32,33 @@ const {
   difficulty,
   estimatedTime,
   scientific,
+  isFallback = false,
+  locale = 'en',
 } = Astro.props;
 
+const t = useTranslations(locale);
 const { relatedExperiences, relatedConcepts, relatedLocations } = getRelatedContent(experienceSlug);
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout title={title} description={description} locale={locale}>
   <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+    {isFallback && (
+      <div class="mb-6 p-4 rounded-2xl border border-amber-300 dark:border-amber-700/60 bg-amber-50/80 dark:bg-amber-950/40 flex items-start gap-3.5 text-xs sm:text-sm text-amber-950 dark:text-amber-200 leading-relaxed shadow-sm">
+        <span class="text-lg shrink-0 mt-0.5">🌐</span>
+        <div class="space-y-1">
+          <div class="font-bold flex items-center gap-2">
+            <span>{t.common.untranslatedNoticeTitle}</span>
+            <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold uppercase bg-amber-200 dark:bg-amber-900 text-amber-900 dark:text-amber-100 border border-amber-300 dark:border-amber-700">
+              {t.common.untranslatedBadge}
+            </span>
+          </div>
+          <p class="text-amber-800 dark:text-amber-300 text-xs">
+            {t.common.untranslatedNotice}
+          </p>
+        </div>
+      </div>
+    )}
+
     <!-- Experience Header with Meta & Scientific Source Badges -->
     <ExperienceHeader
       title={title}
@@ -44,6 +68,8 @@ const { relatedExperiences, relatedConcepts, relatedLocations } = getRelatedCont
       difficulty={difficulty}
       estimatedTime={estimatedTime}
       scientific={scientific}
+      isFallback={isFallback}
+      locale={locale}
     />
 
     <!-- Multi-Dimensional Progress Indicator Island -->

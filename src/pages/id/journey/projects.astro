@@ -1,0 +1,87 @@
+---
+import { getCollection } from 'astro:content';
+import JourneyLayout from '../../../layouts/JourneyLayout.astro';
+import Badge from '../../../components/ui/Badge.astro';
+import { withBase } from '../../../lib/url';
+
+const projects = await getCollection('projects');
+---
+
+<JourneyLayout
+  title="Proyek Terapan & Investigasi Sains"
+  description="Sintesis pemahaman sains Anda dengan menyusun model bahaya bencana, log pengamatan lapangan, dan laporan geologi."
+  activeTab="projects"
+  locale="id"
+>
+  <div class="space-y-6">
+    <div class="flex items-center justify-between border-b border-[var(--color-border)] pb-3">
+      <div>
+        <h2 class="text-lg font-bold text-[var(--color-text)]">
+          Proyek Investigasi Terapan
+        </h2>
+        <p class="text-xs text-[var(--color-text-muted)] mt-0.5">
+          Proyek yang telah diselesaikan akan tercatat di bawah dimensi "Terapan" pada jurnal pribadi Anda.
+        </p>
+      </div>
+      <span class="text-xs font-mono text-[var(--color-text-dim)]">
+        {projects.length} tersedia
+      </span>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {projects.map((proj) => (
+        <article class="p-6 rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] hover:border-[var(--color-accent)] transition-all space-y-4 shadow-sm flex flex-col justify-between">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between gap-2 flex-wrap">
+              <span class="text-xs font-mono font-bold uppercase tracking-wider text-[var(--color-accent)]">
+                {proj.data.topic}
+              </span>
+              <div class="flex items-center gap-1.5">
+                <Badge variant={proj.data.difficulty}>{proj.data.difficulty}</Badge>
+                <Badge variant="time">{proj.data.estimatedTime}</Badge>
+              </div>
+            </div>
+
+            <h3 class="text-lg font-bold text-[var(--color-text)]">
+              <a href={withBase(`/id/projects/${proj.data.id || proj.id}`)} class="hover:underline">
+                {proj.data.title}
+              </a>
+            </h3>
+
+            <p class="text-xs sm:text-sm text-[var(--color-text-muted)] leading-relaxed">
+              {proj.data.description}
+            </p>
+
+            <div class="text-xs space-y-1 pt-1">
+              <span class="font-semibold text-[var(--color-text)] block">
+                Jenis Luaran:
+              </span>
+              <span class="capitalize text-[var(--color-text-muted)] font-mono">
+                {proj.data.deliverableType.replace('-', ' ')}
+              </span>
+            </div>
+          </div>
+
+          <div class="pt-4 border-t border-[var(--color-border)] flex items-center justify-between">
+            <a
+              href={withBase(`/id/learn/${proj.data.relatedExperienceSlug}`)}
+              class="text-xs text-[var(--color-text-dim)] hover:underline"
+            >
+              Materi Terkait →
+            </a>
+
+            <a
+              href={withBase(`/id/projects/${proj.data.id || proj.id}`)}
+              class="inline-flex items-center gap-1 text-xs font-semibold px-3 py-1.5 rounded-lg bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-hover)] transition-colors"
+            >
+              <span>Lihat Panduan</span>
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="9 18 15 12 9 6" />
+              </svg>
+            </a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</JourneyLayout>

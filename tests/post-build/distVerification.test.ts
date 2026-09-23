@@ -21,11 +21,12 @@ function getHtmlFiles(dir: string): string[] {
 describe('Dist Build Artifact Integrity', () => {
   const distDir = path.resolve(process.cwd(), 'dist');
 
-  it('builds expected 44+ pages including all 8 experiences, 6 topics, and Indonesian routes', () => {
+  it('builds expected static pages including all English and Indonesian routes', () => {
     const htmlFiles = getHtmlFiles(distDir);
-    expect(htmlFiles.length).toBeGreaterThanOrEqual(44);
+    expect(htmlFiles.length).toBeGreaterThanOrEqual(55);
 
     const expectedPages = [
+      // English Experiences
       'learn/why-volcanoes-form/index.html',
       'learn/how-rain-forms/index.html',
       'learn/reading-rock-layers/index.html',
@@ -34,23 +35,43 @@ describe('Dist Build Artifact Integrity', () => {
       'learn/why-are-there-climate-zones/index.html',
       'learn/what-fossils-tell-us/index.html',
       'learn/why-do-landslides-happen/index.html',
+      // English Topics
       'explore/topics/plate-tectonics/index.html',
       'explore/topics/atmosphere/index.html',
       'explore/topics/geology/index.html',
       'explore/topics/natural-hazards/index.html',
       'explore/topics/climate/index.html',
       'explore/topics/paleontology/index.html',
+      // Indonesian Hubs & Base Pages
       'id/index.html',
       'id/about/index.html',
       'id/geomap/index.html',
       'id/search/index.html',
       'id/explore/index.html',
       'id/explore/topics/index.html',
-      'id/explore/topics/plate-tectonics/index.html',
       'id/explore/experiences/index.html',
+      'id/explore/discoveries/index.html',
       'id/learn/index.html',
-      'id/learn/why-volcanoes-form/index.html',
       'id/journey/index.html',
+      'id/journey/timeline/index.html',
+      'id/journey/reflections/index.html',
+      'id/journey/projects/index.html',
+      // Indonesian Translated & Fallback Experiences (ALL 8 exist)
+      'id/learn/why-volcanoes-form/index.html',
+      'id/learn/how-rain-forms/index.html',
+      'id/learn/reading-rock-layers/index.html',
+      'id/learn/why-do-earthquakes-happen/index.html',
+      'id/learn/the-rock-cycle/index.html',
+      'id/learn/why-are-there-climate-zones/index.html',
+      'id/learn/what-fossils-tell-us/index.html',
+      'id/learn/why-do-landslides-happen/index.html',
+      // Indonesian Translated & Fallback Topics (ALL 6 exist)
+      'id/explore/topics/plate-tectonics/index.html',
+      'id/explore/topics/atmosphere/index.html',
+      'id/explore/topics/geology/index.html',
+      'id/explore/topics/natural-hazards/index.html',
+      'id/explore/topics/climate/index.html',
+      'id/explore/topics/paleontology/index.html',
     ];
 
     for (const ep of expectedPages) {

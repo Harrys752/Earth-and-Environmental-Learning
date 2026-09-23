@@ -1,0 +1,33 @@
+---
+import JourneyLayout from '../../../layouts/JourneyLayout.astro';
+import JourneyTimeline from '../../../components/journey/JourneyTimeline';
+import JourneyEntryForm from '../../../components/journey/JourneyEntryForm';
+---
+
+<JourneyLayout
+  title="Linimasa Jurnal & Log Aktivitas"
+  description="Rekaman kronologis inkuiri sains, eksplorasi simulasi, pengamatan lapangan, dan refleksi Anda."
+  activeTab="timeline"
+  locale="id"
+>
+  <div class="space-y-10">
+    <!-- Manual Entry Creator Form Island -->
+    <section>
+      <JourneyEntryForm client:idle />
+    </section>
+
+    <!-- Chronological Timeline Grouped by Month -->
+    <section class="space-y-4">
+      <div class="flex items-center justify-between border-b border-[var(--color-border)] pb-3">
+        <h2 class="text-lg font-bold text-[var(--color-text)]">
+          Aktivitas Belajar
+        </h2>
+        <span class="text-xs text-[var(--color-text-dim)] font-mono">
+          Pelajari • Terapkan • Bangun • Amati
+        </span>
+      </div>
+
+      <JourneyTimeline client:visible />
+    </section>
+  </div>
+</JourneyLayout>

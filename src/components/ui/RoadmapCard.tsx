@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'preact/hooks';
-import { withBase } from '../../lib/url';
+import { useTranslations } from '../../i18n';
+import { parseLocalePath, getLocalizedUrl, type Locale } from '../../lib/i18nUrl';
 import { hasSeenOnboardingRoadmap, setHasSeenOnboardingRoadmap } from '../../lib/storage';
 
 export interface RoadmapExperience {
@@ -22,17 +23,24 @@ export interface RoadmapTopic {
 export interface Props {
   topics: RoadmapTopic[];
   isHomePage?: boolean;
+  locale?: Locale;
 }
 
-export default function RoadmapCard({ topics = [], isHomePage = false }: Props) {
+export default function RoadmapCard({ topics = [], isHomePage = false, locale: propLocale }: Props) {
   const [isOpen, setIsOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [currentLocale, setCurrentLocale] = useState<Locale>(propLocale || 'en');
   const modalRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const triggerElementRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     setMounted(true);
+
+    if (typeof window !== 'undefined') {
+      const { locale } = parseLocalePath(window.location.pathname);
+      setCurrentLocale(locale);
+    }
 
     // Auto-open on first visit to homepage
     if (isHomePage && !hasSeenOnboardingRoadmap()) {
@@ -115,6 +123,18 @@ export default function RoadmapCard({ topics = [], isHomePage = false }: Props) 
     return null;
   }
 
+  const t = useTranslations(currentLocale);
+
+  const getExperienceHref = (expId: string) => {
+    return getLocalizedUrl(`/learn/${expId}`, currentLocale);
+  };
+
+  const getTopicHref = (topicId: string) => {
+    return getLocalizedUrl(`/explore/topics/${topicId}`, currentLocale);
+  };
+
+  const flagshipHref = getLocalizedUrl('/learn/why-volcanoes-form', currentLocale);
+
   return (
     <div
       class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 lg:p-6 bg-slate-950/60 dark:bg-black/80 backdrop-blur-md transition-opacity duration-200"
@@ -139,17 +159,19 @@ export default function RoadmapCard({ topics = [], isHomePage = false }: Props) 
             <div class="flex items-center gap-2">
               <span class="w-2.5 h-2.5 rounded-full bg-[var(--color-accent)] animate-pulse" />
               <span class="text-[11px] font-mono font-bold uppercase tracking-wider text-[var(--color-accent)]">
-                Scientific Learning Curriculum & Structure
+                {t.roadmapModal.curriculumBadge}
               </span>
             </div>
 
             <h2 id="roadmap-title" class="text-2xl sm:text-3xl font-extrabold text-[var(--color-text)] tracking-tight">
-              Interactive Learning Roadmap
+              {t.roadmapModal.title}
             </h2>
 
             <p id="roadmap-desc" class="text-xs sm:text-sm text-[var(--color-text-muted)] max-w-2xl leading-relaxed">
-              Understand Earth’s living engine through a self-paced, inquiry-driven learning loop:
-              <strong class="text-[var(--color-text)] font-semibold"> Curiosity → Concept → Simulation → Real-World Field Anchors → Assessment & Synthesis</strong>.
+              {t.roadmapModal.description}{' '}
+              <strong class="text-[var(--color-text)] font-semibold">
+                {t.roadmapModal.loopHighlight}
+              </strong>.
             </p>
           </div>
 
@@ -158,8 +180,8 @@ export default function RoadmapCard({ topics = [], isHomePage = false }: Props) 
             type="button"
             onClick={closeModal}
             class="p-2 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface-hover)] text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:bg-[var(--color-surface)] transition-all cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] shrink-0"
-            aria-label="Close learning roadmap"
-            title="Close (Esc)"
+            aria-label={t.roadmapModal.closeAria}
+            title={t.roadmapModal.closeTitle}
           >
             <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <line x1="18" y1="6" x2="6" y2="18" />
@@ -174,41 +196,41 @@ export default function RoadmapCard({ topics = [], isHomePage = false }: Props) 
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
             <div class="p-3.5 rounded-2xl border border-[var(--color-accent)]/30 bg-[var(--color-accent-subtle)]/30 space-y-1.5">
               <div class="text-[10px] font-mono font-bold uppercase tracking-wider text-[var(--color-accent)]">
-                Step 1 • Inquire
+                {t.roadmapModal.step1Tag}
               </div>
-              <h4 class="text-xs font-bold text-[var(--color-text)]">Curiosity Trigger</h4>
+              <h4 class="text-xs font-bold text-[var(--color-text)]">{t.roadmapModal.step1Title}</h4>
               <p class="text-[11px] text-[var(--color-text-muted)] leading-relaxed">
-                Investigate real geological puzzles, such as why Java’s volcanoes sit 300 km north of the oceanic trench.
+                {t.roadmapModal.step1Desc}
               </p>
             </div>
 
             <div class="p-3.5 rounded-2xl border border-[var(--color-secondary)]/30 bg-[var(--color-secondary-subtle)]/30 space-y-1.5">
               <div class="text-[10px] font-mono font-bold uppercase tracking-wider text-[var(--color-secondary)]">
-                Step 2 • Model
+                {t.roadmapModal.step2Tag}
               </div>
-              <h4 class="text-xs font-bold text-[var(--color-text)]">Interactive Simulations</h4>
+              <h4 class="text-xs font-bold text-[var(--color-text)]">{t.roadmapModal.step2Title}</h4>
               <p class="text-[11px] text-[var(--color-text-muted)] leading-relaxed">
-                Manipulate subduction dip angles, moisture convection, and rock strata in real-time parameter models.
+                {t.roadmapModal.step2Desc}
               </p>
             </div>
 
             <div class="p-3.5 rounded-2xl border border-[var(--color-interactive)]/30 bg-[var(--color-interactive-subtle)]/30 space-y-1.5">
               <div class="text-[10px] font-mono font-bold uppercase tracking-wider text-[var(--color-interactive)]">
-                Step 3 • Anchor
+                {t.roadmapModal.step3Tag}
               </div>
-              <h4 class="text-xs font-bold text-[var(--color-text)]">GeoMap Field Sites</h4>
+              <h4 class="text-xs font-bold text-[var(--color-text)]">{t.roadmapModal.step3Title}</h4>
               <p class="text-[11px] text-[var(--color-text-muted)] leading-relaxed">
-                Connect physical mechanics to Mount Merapi, Karangsambung Geopark, and Bogor’s rain belt.
+                {t.roadmapModal.step3Desc}
               </p>
             </div>
 
             <div class="p-3.5 rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface-hover)] space-y-1.5">
               <div class="text-[10px] font-mono font-bold uppercase tracking-wider text-[var(--color-text-dim)]">
-                Step 4 • Synthesize
+                {t.roadmapModal.step4Tag}
               </div>
-              <h4 class="text-xs font-bold text-[var(--color-text)]">Assessment & Journey</h4>
+              <h4 class="text-xs font-bold text-[var(--color-text)]">{t.roadmapModal.step4Title}</h4>
               <p class="text-[11px] text-[var(--color-text-muted)] leading-relaxed">
-                Evaluate mastery, construct volcanic hazard maps, and preserve field logs in your private timeline.
+                {t.roadmapModal.step4Desc}
               </p>
             </div>
           </div>
@@ -217,73 +239,97 @@ export default function RoadmapCard({ topics = [], isHomePage = false }: Props) 
           <div class="space-y-4">
             <div class="flex items-center justify-between">
               <h3 class="text-base font-bold text-[var(--color-text)] flex items-center gap-2">
-                <span>Available Learning Tracks & Scientific Domains</span>
+                <span>{t.roadmapModal.domainsTitle}</span>
                 <span class="px-2 py-0.5 rounded-full text-[10px] font-mono font-semibold bg-[var(--color-surface-hover)] border border-[var(--color-border)] text-[var(--color-text-muted)]">
-                  {topics.length} Domains
+                  {t.roadmapModal.domainsCount.replace('{count}', String(topics.length))}
                 </span>
               </h3>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {topics.map((t) => (
-                <div
-                  key={t.id}
-                  class="p-4 rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] hover:border-[var(--color-accent)] transition-all flex flex-col justify-between space-y-3"
-                >
-                  <div class="space-y-2">
-                    <span class="px-2 py-0.5 rounded text-[10px] font-mono uppercase font-bold tracking-wider bg-[var(--color-surface-hover)] border border-[var(--color-border)] text-[var(--color-accent)]">
-                      {t.category}
-                    </span>
-
-                    <h4 class="text-sm font-bold text-[var(--color-text)]">
-                      {t.title}
-                    </h4>
-
-                    <p class="text-xs text-[var(--color-text-muted)] line-clamp-2 leading-relaxed">
-                      {t.description}
-                    </p>
-                  </div>
-
-                  <div class="space-y-2 pt-3 border-t border-[var(--color-border)]">
-                    <span class="text-[10px] font-mono text-[var(--color-text-dim)] block uppercase font-semibold">
-                      Included Modules:
-                    </span>
-                    <ul class="space-y-1 text-xs">
-                      {t.experiences.map((exp) => (
-                        <li key={exp.id}>
-                          <a
-                            href={withBase(`/learn/${exp.id}`)}
-                            onClick={closeModal}
-                            class={`inline-flex items-center gap-1.5 hover:underline font-medium ${
-                              exp.featured ? 'text-[var(--color-accent)] font-bold' : 'text-[var(--color-text)]'
-                            }`}
+              {topics.map((top) => {
+                const isTopicUntranslated = currentLocale === 'id' && top.id !== 'plate-tectonics';
+                return (
+                  <div
+                    key={top.id}
+                    class="p-4 rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] hover:border-[var(--color-accent)] transition-all flex flex-col justify-between space-y-3"
+                  >
+                    <div class="space-y-2">
+                      <div class="flex items-center gap-2 flex-wrap">
+                        <span class="px-2 py-0.5 rounded text-[10px] font-mono uppercase font-bold tracking-wider bg-[var(--color-surface-hover)] border border-[var(--color-border)] text-[var(--color-accent)]">
+                          {top.category}
+                        </span>
+                        {isTopicUntranslated && (
+                          <span
+                            class="px-1.5 py-0.2 rounded text-[9px] font-mono font-bold uppercase bg-amber-100 dark:bg-amber-950 text-amber-900 dark:text-amber-200 border border-amber-300 dark:border-amber-800"
+                            title={t.common.untranslatedBadgeLabel}
                           >
-                            <span>{exp.title}</span>
-                            {exp.featured && (
-                              <span class="px-1.5 py-0.2 rounded text-[9px] font-mono font-bold bg-[var(--color-accent)] text-white">
-                                Flagship
-                              </span>
-                            )}
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
+                            {t.common.untranslatedBadge}
+                          </span>
+                        )}
+                      </div>
 
-                    <div class="pt-2">
-                      <a
-                        href={withBase(`/explore/topics/${t.id}`)}
-                        onClick={closeModal}
-                        class="text-[11px] font-semibold text-[var(--color-secondary)] hover:underline inline-flex items-center gap-1"
-                      >
-                        <span>View Domain Overview</span>
-                        <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                          <polyline points="9 18 15 12 9 6" />
-                        </svg>
-                      </a>
+                      <h4 class="text-sm font-bold text-[var(--color-text)] flex items-center gap-1.5">
+                        <span>{top.title}</span>
+                      </h4>
+
+                      <p class="text-xs text-[var(--color-text-muted)] line-clamp-2 leading-relaxed">
+                        {top.description}
+                      </p>
+                    </div>
+
+                    <div class="space-y-2 pt-3 border-t border-[var(--color-border)]">
+                      <span class="text-[10px] font-mono text-[var(--color-text-dim)] block uppercase font-semibold">
+                        {t.roadmapModal.includedModules}
+                      </span>
+                      <ul class="space-y-1.5 text-xs">
+                        {top.experiences.map((exp) => {
+                          const isExpUntranslated = currentLocale === 'id' && exp.id !== 'why-volcanoes-form';
+                          return (
+                            <li key={exp.id}>
+                              <a
+                                href={getExperienceHref(exp.id)}
+                                onClick={closeModal}
+                                class={`inline-flex items-center gap-1.5 hover:underline font-medium flex-wrap ${
+                                  exp.featured ? 'text-[var(--color-accent)] font-bold' : 'text-[var(--color-text)]'
+                                }`}
+                              >
+                                <span>{exp.title}</span>
+                                {exp.featured && (
+                                  <span class="px-1.5 py-0.2 rounded text-[9px] font-mono font-bold bg-[var(--color-accent)] text-white">
+                                    {t.roadmapModal.flagshipBadge}
+                                  </span>
+                                )}
+                                {isExpUntranslated && (
+                                  <span
+                                    class="px-1.5 py-0.2 rounded text-[9px] font-mono font-bold uppercase bg-amber-100 dark:bg-amber-950 text-amber-900 dark:text-amber-200 border border-amber-300 dark:border-amber-800"
+                                    title={t.common.untranslatedBadgeLabel}
+                                  >
+                                    {t.common.untranslatedBadge}
+                                  </span>
+                                )}
+                              </a>
+                            </li>
+                          );
+                        })}
+                      </ul>
+
+                      <div class="pt-2">
+                        <a
+                          href={getTopicHref(top.id)}
+                          onClick={closeModal}
+                          class="text-[11px] font-semibold text-[var(--color-secondary)] hover:underline inline-flex items-center gap-1"
+                        >
+                          <span>{t.roadmapModal.viewDomain}</span>
+                          <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="9 18 15 12 9 6" />
+                          </svg>
+                        </a>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </div>
@@ -291,16 +337,16 @@ export default function RoadmapCard({ topics = [], isHomePage = false }: Props) 
         {/* Modal Action Footer */}
         <div class="px-6 py-4 border-t border-[var(--color-border)] bg-[var(--color-surface)]/80 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shrink-0">
           <div class="text-xs text-[var(--color-text-dim)]">
-            Explore freely at your own pace without locks or mandatory prerequisites.
+            {t.roadmapModal.footerNotice}
           </div>
 
           <div class="flex items-center gap-2 flex-wrap">
             <a
-              href={withBase('/learn/why-volcanoes-form')}
+              href={flagshipHref}
               onClick={closeModal}
               class="px-4 py-2 rounded-xl bg-[var(--color-accent)] text-white text-xs font-semibold hover:bg-[var(--color-accent-hover)] transition-all shadow-sm inline-flex items-center gap-1.5"
             >
-              <span>Launch Flagship Experience</span>
+              <span>{t.roadmapModal.launchFlagship}</span>
               <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <polyline points="9 18 15 12 9 6" />
               </svg>
@@ -311,7 +357,7 @@ export default function RoadmapCard({ topics = [], isHomePage = false }: Props) 
               onClick={closeModal}
               class="px-4 py-2 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface-hover)] text-[var(--color-text)] text-xs font-semibold hover:bg-[var(--color-surface)] transition-all cursor-pointer"
             >
-              Explore Freely
+              {t.roadmapModal.exploreFreely}
             </button>
           </div>
         </div>

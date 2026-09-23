@@ -37,6 +37,7 @@ const {
 const currentLocale: Locale = (locale as Locale) || 'en';
 const t = useTranslations(currentLocale);
 const expHref = getLocalizedUrl(`/learn/${slug}`, currentLocale);
+const isUntranslated = currentLocale === 'id' && slug !== 'why-volcanoes-form';
 ---
 
 <article
@@ -49,6 +50,11 @@ const expHref = getLocalizedUrl(`/learn/${slug}`, currentLocale);
         {topic}
       </span>
       <div class="flex items-center gap-1.5 flex-wrap">
+        {isUntranslated && (
+          <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold uppercase bg-amber-100 dark:bg-amber-950 text-amber-900 dark:text-amber-200 border border-amber-300 dark:border-amber-800" title={t.common.untranslatedBadgeLabel}>
+            {t.common.untranslatedBadge}
+          </span>
+        )}
         <Badge variant={difficulty}>{t.cards.difficulty[difficulty] || difficulty}</Badge>
         <Badge variant="time">{t.cards.time[estimatedTime] || estimatedTime}</Badge>
       </div>

@@ -15,10 +15,30 @@ export const PHASE_1_TRANSLATED_PATHS = new Set([
   '/explore/topics',
   '/explore/topics/plate-tectonics',
   '/explore/experiences',
+  '/explore/discoveries',
   '/learn',
   '/learn/why-volcanoes-form',
   '/journey',
+  '/journey/timeline',
+  '/journey/reflections',
+  '/journey/projects',
 ]);
+
+/**
+ * Checks whether an experience slug has a real Indonesian translation.
+ */
+export function isExperienceTranslated(slug: string): boolean {
+  const cleanSlug = slug.replace(/^id\//, '');
+  return cleanSlug === 'why-volcanoes-form';
+}
+
+/**
+ * Checks whether a topic slug has a real Indonesian translation.
+ */
+export function isTopicTranslated(slug: string): boolean {
+  const cleanSlug = slug.replace(/^id\//, '');
+  return cleanSlug === 'plate-tectonics';
+}
 
 /**
  * Normalizes a full URL or pathname by stripping the base path and trailing slash.
@@ -50,10 +70,10 @@ export function parseLocalePath(pathname: string): { locale: Locale; canonicalPa
 }
 
 /**
- * Checks if an Indonesian translation is available for a given canonical path.
+ * Checks if an authentic translation exists for a given canonical path (not fallback).
  */
 export function hasTranslation(canonicalPath: string, locale: Locale): boolean {
-  if (locale === 'en') return true; // All existing content is in English
+  if (locale === 'en') return true; // All content exists in English
   const normalized = canonicalPath.replace(/\/+$/, '') || '/';
   return PHASE_1_TRANSLATED_PATHS.has(normalized);
 }
@@ -71,21 +91,15 @@ export function getLocalizedUrl(canonicalPath: string, targetLocale: Locale): st
 
 /**
  * Resolves the counterpart URL when switching languages from the current page.
- * If target locale is 'id' and the page is not yet translated, falls back safely to '/id'.
+ * Always targets the same position/slug in the target locale (never redirects to homepage),
+ * relying on static fallback route generation for untranslated content.
  */
 export function getSwitchTargetUrl(currentPathname: string, targetLocale: Locale): { url: string; isDirectTranslation: boolean } {
   const { canonicalPath } = parseLocalePath(currentPathname);
   const isAvailable = hasTranslation(canonicalPath, targetLocale);
 
-  if (targetLocale === 'id' && !isAvailable) {
-    return {
-      url: withBase('id'),
-      isDirectTranslation: false,
-    };
-  }
-
   return {
     url: getLocalizedUrl(canonicalPath, targetLocale),
-    isDirectTranslation: true,
+    isDirectTranslation: isAvailable,
   };
 }

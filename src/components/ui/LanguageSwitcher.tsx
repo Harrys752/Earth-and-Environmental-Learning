@@ -8,19 +8,11 @@ export interface LanguageSwitcherProps {
 
 export default function LanguageSwitcher({ currentLocale: propLocale }: LanguageSwitcherProps) {
   const [currentLocale, setCurrentLocale] = useState<Locale>(propLocale || 'en');
-  const [targetInfo, setTargetInfo] = useState<{ url: string; isDirectTranslation: boolean }>({
-    url: '#',
-    isDirectTranslation: true,
-  });
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const { locale } = parseLocalePath(window.location.pathname);
       setCurrentLocale(locale);
-
-      const nextLocale: Locale = locale === 'en' ? 'id' : 'en';
-      const info = getSwitchTargetUrl(window.location.pathname, nextLocale);
-      setTargetInfo(info);
     }
   }, [propLocale]);
 
@@ -38,9 +30,7 @@ export default function LanguageSwitcher({ currentLocale: propLocale }: Language
   const nextLocale = currentLocale === 'en' ? 'id' : 'en';
   const buttonLabel = nextLocale.toUpperCase();
   const tooltipText = currentLocale === 'en'
-    ? (targetInfo.isDirectTranslation
-        ? 'Ganti ke Bahasa Indonesia'
-        : 'Halaman ini belum diterjemahkan ke Bahasa Indonesia. Klik untuk ke Beranda Bahasa Indonesia.')
+    ? 'Ganti ke Bahasa Indonesia'
     : 'Switch to English';
 
   return (

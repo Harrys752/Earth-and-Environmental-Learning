@@ -1,0 +1,118 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../components/ui/Breadcrumb.astro';
+import GeoMapLink from '../../../components/geomap/GeoMapLink.astro';
+import { withBase } from '../../../lib/url';
+
+const concepts = await getCollection('concepts');
+
+const breadcrumbItems = [
+  { label: 'Beranda', href: '/id' },
+  { label: 'Jelajahi', href: '/id/explore' },
+  { label: 'Penemuan Lapangan', current: true },
+];
+---
+
+<BaseLayout
+  title="Penemuan Lapangan & Fenomena Kebumian Nyata"
+  description="Temukan fenomena kebumian nyata, lokasi kajian geologi di seluruh Indonesia, dan konsep-konsep sains utama."
+  locale="id"
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-12">
+    <Breadcrumb items={breadcrumbItems} />
+
+    <header class="border-b border-[var(--color-border)] pb-8 space-y-3">
+      <span class="text-xs font-mono uppercase tracking-widest text-[var(--color-secondary)] font-bold">
+        Bukti Nyata Kebumian
+      </span>
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[var(--color-text)] tracking-tight">
+        Penemuan Dunia Nyata
+      </h1>
+      <p class="text-base sm:text-lg text-[var(--color-text-muted)] max-w-3xl leading-relaxed">
+        Ilmu kebumian tidak terbatas pada diagram abstrak di laboratorium. Fenomena sains tertulis nyata pada puncak pegunungan, busur gunung api, dan stratigrafi planet kita.
+      </p>
+    </header>
+
+    <!-- Geological Field Sites & Anchors -->
+    <section class="space-y-6">
+      <div>
+        <h2 class="text-2xl font-bold text-[var(--color-text)]">
+          Lokasi Studi Geologi di Indonesia
+        </h2>
+        <p class="text-xs sm:text-sm text-[var(--color-text-muted)] mt-1">
+          Jelajahi titik lapangan penting yang terhubung dengan modul pembelajaran kami via GeoMap Indonesia.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <GeoMapLink
+          locationSlug="java-volcanic-arc"
+          label="Busur Vulkanik Jawa & Gunung Merapi"
+          coordinates={{ lat: -7.5407, lng: 110.4457 }}
+          description="Stratovulkan andesitik aktif dengan aliran piroklastik, kubah lava, dan zona bahaya subduksi aktif."
+        />
+        <GeoMapLink
+          locationSlug="karangsambung-geopark"
+          label="Geopark Karangsambung (Sungai Luk Ulo)"
+          coordinates={{ lat: -7.5614, lng: 109.6814 }}
+          description="Melange subduksi purba zaman Kapur dengan singkapan basal bantal dasar samudra dan sekis biru yang terangkat ke daratan."
+        />
+        <GeoMapLink
+          locationSlug="bogor-rain-belt"
+          label="Sabuk Hujan Orografis Bogor"
+          coordinates={{ lat: -6.5971, lng: 106.806 }}
+          description="Pusat curah hujan tropis yang mendemonstrasikan pengangkatan orografis udara lembap membentur Gunung Salak dan Gede-Pangrango."
+        />
+        <GeoMapLink
+          locationSlug="sangiran-valley"
+          label="Lembah Manusia Purba Sangiran"
+          coordinates={{ lat: -7.4589, lng: 110.8319 }}
+          description="Stratigrafi sedimen luar biasa yang menyimpan rekaman 2 juta tahun fosil hominid dan mamalia Pleistosen."
+        />
+      </div>
+    </section>
+
+    <!-- Core Concepts Glossary Grid -->
+    <section class="space-y-6 pt-6 border-t border-[var(--color-border)]">
+      <div>
+        <h2 class="text-2xl font-bold text-[var(--color-text)]">
+          Konsep-Konsep Sains Inti
+        </h2>
+        <p class="text-xs sm:text-sm text-[var(--color-text-muted)] mt-1">
+          Definisi referensi, mekanisme geodinamika, dan koneksi lintas pengalaman belajar.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {concepts.map((c) => (
+          <article class="p-5 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] hover:border-[var(--color-accent)] transition-all flex flex-col justify-between">
+            <div class="space-y-2">
+              <span class="text-[10px] font-mono uppercase tracking-wider text-[var(--color-accent)] font-semibold">
+                {c.data.domain}
+              </span>
+              <h3 class="text-base font-bold text-[var(--color-text)]">
+                <a href={withBase(`/id/learn/concepts/${c.data.id || c.id}`)} class="hover:underline">
+                  {c.data.title}
+                </a>
+              </h3>
+              <p class="text-xs text-[var(--color-text-muted)] line-clamp-3 leading-relaxed">
+                {c.data.summary}
+              </p>
+            </div>
+
+            <div class="pt-3 mt-3 border-t border-[var(--color-border)] text-xs text-[var(--color-text-dim)] flex items-center justify-between">
+              <span>{c.data.relatedExperiences.length} materi terkait</span>
+              <a
+                href={withBase(`/id/learn/concepts/${c.data.id || c.id}`)}
+                class="font-semibold text-[var(--color-accent)] hover:underline"
+              >
+                Pelajari →
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+  </div>
+</BaseLayout>

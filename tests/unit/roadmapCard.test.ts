@@ -67,4 +67,18 @@ describe('RoadmapCard Feature Logic & Data Flow', () => {
     expect(manualEvent.type).toBe('earth-learning:open-roadmap');
     expect(manualEvent.detail.triggerId).toBe('roadmap-navbar-trigger');
   });
+
+  it('provides bilingual dictionaries for roadmap modal content in en and id', async () => {
+    const { en } = await import('../../src/i18n/en');
+    const { id } = await import('../../src/i18n/id');
+
+    expect(en.roadmapModal.title).toBe('Interactive Learning Roadmap');
+    expect(id.roadmapModal.title).toBe('Peta Pembelajaran Interaktif');
+
+    expect(en.roadmapModal.step1Tag).toContain('Step 1');
+    expect(id.roadmapModal.step1Tag).toContain('Langkah 1');
+
+    expect(en.roadmapModal.launchFlagship).toBe('Launch Flagship Experience');
+    expect(id.roadmapModal.launchFlagship).toBe('Buka Pengalaman Unggulan');
+  });
 });

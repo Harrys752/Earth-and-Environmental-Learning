@@ -4,32 +4,46 @@ import BaseLayout from '../../../../layouts/BaseLayout.astro';
 import Breadcrumb from '../../../../components/ui/Breadcrumb.astro';
 import LearningCard from '../../../../components/learning/LearningCard.astro';
 import EmptyState from '../../../../components/ui/EmptyState.astro';
+import { useTranslations } from '../../../../i18n';
 
 export async function getStaticPaths() {
   const topics = await getCollection('topics');
-  // Generate routes for Indonesian topics
-  const idTopics = topics.filter((t) => t.id.startsWith('id/'));
+  const enTopics = topics.filter((t) => !t.id.startsWith('id/'));
 
-  return idTopics.map((entry) => {
-    const slug = (entry.data.id || entry.id).replace(/^id\//, '');
+  return enTopics.map((enEntry) => {
+    const slug = (enEntry.data.id || enEntry.id).replace(/^id\//, '');
+    const idEntry = topics.find((t) => t.id === `id/${slug}` || t.id === `id/${enEntry.id}`);
+
+    if (idEntry) {
+      return {
+        params: { topic: slug },
+        props: { entry: idEntry, isFallback: false },
+      };
+    }
+
     return {
       params: { topic: slug },
-      props: { entry },
+      props: { entry: enEntry, isFallback: true },
     };
   });
 }
 
-const { entry } = Astro.props;
+const { entry, isFallback = false } = Astro.props;
 const { Content } = await render(entry);
+const t = useTranslations('id');
 
 const topicSlug = (entry.data.id || entry.id).replace(/^id\//, '');
 const allExperiences = await getCollection('experiences');
 
-// Filter Indonesian experiences for this topic
-const topicExperiences = allExperiences.filter((exp) => {
+// Filter experiences for this topic (prioritize id/ version, fallback to en)
+const rawTopicExperiences = allExperiences.filter((exp) => {
   const expTopic = exp.data.topic;
+  return expTopic === topicSlug;
+});
+
+const topicExperiences = rawTopicExperiences.filter((exp) => {
   const isId = exp.id.startsWith('id/');
-  return expTopic === topicSlug && isId;
+  return isId || !rawTopicExperiences.some((e) => e.id === `id/${exp.id}`);
 });
 
 const breadcrumbItems = [
@@ -42,9 +56,27 @@ const breadcrumbItems = [
 <BaseLayout
   title={`${entry.data.title} — Topik Ilmu Kebumian`}
   description={entry.data.description}
+  locale="id"
 >
   <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
     <Breadcrumb items={breadcrumbItems} class="mb-6" />
+
+    {isFallback && (
+      <div class="mb-8 p-4 rounded-2xl border border-amber-300 dark:border-amber-700/60 bg-amber-50/80 dark:bg-amber-950/40 flex items-start gap-3.5 text-xs sm:text-sm text-amber-950 dark:text-amber-200 leading-relaxed shadow-sm">
+        <span class="text-lg shrink-0 mt-0.5">🌐</span>
+        <div class="space-y-1">
+          <div class="font-bold flex items-center gap-2">
+            <span>{t.common.untranslatedNoticeTitle}</span>
+            <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold uppercase bg-amber-200 dark:bg-amber-900 text-amber-900 dark:text-amber-100 border border-amber-300 dark:border-amber-700">
+              {t.common.untranslatedBadge}
+            </span>
+          </div>
+          <p class="text-amber-800 dark:text-amber-300 text-xs">
+            {t.common.untranslatedNotice}
+          </p>
+        </div>
+      </div>
+    )}
 
     <header class="border-b border-[var(--color-border)] pb-8 mb-10 space-y-4">
       <div class="flex items-center gap-2">
@@ -55,6 +87,11 @@ const breadcrumbItems = [
         <span class="text-xs font-mono text-[var(--color-text-muted)]">
           {topicExperiences.length} pengalaman belajar
         </span>
+        {isFallback && (
+          <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold uppercase bg-amber-100 dark:bg-amber-950 text-amber-900 dark:text-amber-200 border border-amber-300 dark:border-amber-800">
+            {t.common.untranslatedBadge}
+          </span>
+        )}
       </div>
 
       <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[var(--color-text)] tracking-tight">

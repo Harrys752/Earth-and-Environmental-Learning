@@ -1,0 +1,24 @@
+---
+import JourneyLayout from '../../../layouts/JourneyLayout.astro';
+import ReflectionsViewer from '../../../components/journey/ReflectionsViewer';
+---
+
+<JourneyLayout
+  title="Arsip Refleksi Ilmiah"
+  description="Semua refleksi, hipotesis fenomena lapangan, dan catatan inkuiri pribadi yang didokumentasikan selama pengalaman belajar."
+  activeTab="reflections"
+  locale="id"
+>
+  <div class="space-y-6">
+    <div class="flex items-center justify-between border-b border-[var(--color-border)] pb-3">
+      <h2 class="text-lg font-bold text-[var(--color-text)]">
+        Catatan Refleksi
+      </h2>
+      <span class="text-xs text-[var(--color-text-dim)] font-mono">
+        Tersimpan lokal di browser
+      </span>
+    </div>
+
+    <ReflectionsViewer client:visible />
+  </div>
+</JourneyLayout>
