@@ -29,7 +29,7 @@ export default function AnswerOption({
       tabIndex={disabled ? -1 : 0}
       onClick={() => !disabled && onSelect(option.id)}
       onKeyDown={handleKeyDown}
-      class={`flex items-start gap-3 p-3.5 sm:p-4 rounded-xl border transition-all duration-150 select-none cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] ${
+      class={`flex items-start gap-3 p-3.5 sm:p-4 min-h-[48px] rounded-xl border transition-all duration-150 select-none cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] ${
         selected
           ? 'border-[var(--color-accent)] bg-[var(--color-accent-subtle)] text-[var(--color-text)] shadow-sm'
           : 'border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text)] hover:border-[var(--color-text-dim)] hover:bg-[var(--color-surface-hover)]'

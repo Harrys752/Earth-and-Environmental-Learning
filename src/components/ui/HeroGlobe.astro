@@ -185,10 +185,13 @@ const sangiranTitle = locale === 'id' ? 'Situs Sangiran' : (sangiranNode?.title 
     <!-- 1. MOUNT MERAPI (Volcanic Arc Anchor) -->
     <a
       href={merapiHref}
-      class="marker-interactive group focus:outline-none"
+      class="marker-interactive group focus:outline-none cursor-pointer"
       aria-label={`${merapiTitle} — ${t.home.globeMerapiDesc}`}
       tabindex="0"
     >
+      <!-- Invisible expanded touch hit target around dot (min 48x48px) -->
+      <rect x="181" y="240" width="48" height="48" fill="transparent" />
+
       <!-- Leader Line -->
       <path
         d="M 205 264 L 140 305 L 35 305"
@@ -217,7 +220,7 @@ const sangiranTitle = locale === 'id' ? 'Situs Sangiran' : (sangiranNode?.title 
         class="transition-transform duration-200 group-hover:scale-125 origin-[205px_264px]"
       />
 
-      <!-- Label Capsule -->
+      <!-- Label Capsule (Tappable Area) -->
       <g transform="translate(18, 260)" class="transition-transform duration-200 group-hover:-translate-y-0.5">
         <rect
           x="0"
@@ -257,10 +260,13 @@ const sangiranTitle = locale === 'id' ? 'Situs Sangiran' : (sangiranNode?.title 
     <!-- 2. PALU-KORO FAULT (Active Slip Tectonics) -->
     <a
       href={paluHref}
-      class="marker-interactive group focus:outline-none"
+      class="marker-interactive group focus:outline-none cursor-pointer"
       aria-label={`${paluTitle} — ${t.home.globePaluDesc}`}
       tabindex="0"
     >
+      <!-- Invisible expanded touch hit target around dot (min 48x48px) -->
+      <rect x="264" y="202" width="48" height="48" fill="transparent" />
+
       <!-- Leader Line -->
       <path
         d="M 288 226 L 350 178 L 465 178"
@@ -289,7 +295,7 @@ const sangiranTitle = locale === 'id' ? 'Situs Sangiran' : (sangiranNode?.title 
         class="transition-transform duration-200 group-hover:scale-125 origin-[288px_226px]"
       />
 
-      <!-- Label Capsule -->
+      <!-- Label Capsule (Tappable Area) -->
       <g transform="translate(325, 134)" class="transition-transform duration-200 group-hover:-translate-y-0.5">
         <rect
           x="0"
@@ -329,10 +335,13 @@ const sangiranTitle = locale === 'id' ? 'Situs Sangiran' : (sangiranNode?.title 
     <!-- 3. SANGIRAN SITE (Stratigraphy & Deep Time) -->
     <a
       href={sangiranHref}
-      class="marker-interactive group focus:outline-none"
+      class="marker-interactive group focus:outline-none cursor-pointer"
       aria-label={`${sangiranTitle} — ${t.home.globeSangiranDesc}`}
       tabindex="0"
     >
+      <!-- Invisible expanded touch hit target around dot (min 48x48px) -->
+      <rect x="218" y="260" width="48" height="48" fill="transparent" />
+
       <!-- Leader Line -->
       <path
         d="M 242 284 L 305 358 L 445 358"
@@ -361,7 +370,7 @@ const sangiranTitle = locale === 'id' ? 'Situs Sangiran' : (sangiranNode?.title 
         class="transition-transform duration-200 group-hover:scale-125 origin-[242px_284px]"
       />
 
-      <!-- Label Capsule -->
+      <!-- Label Capsule (Tappable Area) -->
       <g transform="translate(300, 314)" class="transition-transform duration-200 group-hover:-translate-y-0.5">
         <rect
           x="0"

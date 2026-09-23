@@ -221,8 +221,8 @@ const roadmapTopics = rawTopics
           </a>
         </nav>
 
-        {/* Global Utilities: Language Switcher, Search Icon, Theme Toggle & Roadmap Trigger Island */}
-        <div class="flex items-center gap-2">
+        {/* Desktop Global Utilities: Language Switcher, Search Icon, Theme Toggle & Roadmap Trigger Island */}
+        <div class="hidden md:flex items-center gap-2">
           {/* Language Switcher */}
           <LanguageSwitcher client:idle currentLocale={locale} />
 
@@ -255,19 +255,281 @@ const roadmapTopics = rawTopics
               <line x1="15" y1="6" x2="15" y2="21" />
             </svg>
           </button>
+        </div>
 
-          {/* Mobile Menu Trigger */}
-          <div class="md:hidden flex items-center">
-            <a
-              href={getLocalizedUrl('/explore', locale)}
-              class="px-2.5 py-1.5 rounded-lg border border-[var(--color-border)] text-xs font-semibold text-[var(--color-text-muted)]"
-            >
-              {t.nav.menu}
-            </a>
-          </div>
+        {/* Mobile Header Utility Cluster: Direct Search + Hamburger Menu */}
+        <div class="flex md:hidden items-center gap-2">
+          <a
+            href={getLocalizedUrl('/search', locale)}
+            class="w-10 h-10 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text-muted)] hover:text-[var(--color-text)] flex items-center justify-center transition-colors focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
+            title={t.nav.searchTitle}
+            aria-label={t.nav.search}
+          >
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8" />
+              <line x1="21" y1="21" x2="16.65" y2="16.65" />
+            </svg>
+          </a>
+
+          <button
+            type="button"
+            id="mobile-nav-toggle"
+            class="w-10 h-10 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text)] hover:bg-[var(--color-surface-hover)] flex items-center justify-center transition-colors cursor-pointer select-none focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
+            title={t.nav.menu}
+            aria-label={t.nav.menu}
+            aria-expanded="false"
+            aria-controls="mobile-nav-drawer"
+          >
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <line x1="3" y1="12" x2="21" y2="12" />
+              <line x1="3" y1="18" x2="21" y2="18" />
+            </svg>
+          </button>
         </div>
       </div>
     </header>
+
+    <!-- Mobile Navigation Drawer Backdrop & Panel -->
+    <div
+      id="mobile-nav-backdrop"
+      class="fixed inset-0 z-50 bg-slate-950/70 dark:bg-black/85 backdrop-blur-sm transition-opacity duration-300 opacity-0 pointer-events-none md:hidden"
+      aria-hidden="true"
+    ></div>
+
+    <aside
+      id="mobile-nav-drawer"
+      role="dialog"
+      aria-modal="true"
+      aria-label={t.nav.menu}
+      class="fixed inset-y-0 right-0 z-50 w-full max-w-xs sm:max-w-sm bg-[var(--color-surface)] border-l border-[var(--color-border)] shadow-2xl flex flex-col justify-between transition-transform duration-300 translate-x-full ease-out focus:outline-none md:hidden"
+      tabindex="-1"
+    >
+      <!-- Drawer Top Bar -->
+      <div class="px-5 py-4 border-b border-[var(--color-border)] flex items-center justify-between gap-3">
+        <div class="flex items-center gap-2">
+          <div class="w-7 h-7 rounded-lg bg-[var(--color-accent)] text-white flex items-center justify-center font-bold text-xs shadow-sm">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10" />
+              <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
+              <path d="M2 12h20" />
+            </svg>
+          </div>
+          <span class="font-extrabold text-sm text-[var(--color-text)] tracking-tight">
+            {t.nav.brandName}
+          </span>
+        </div>
+
+        <button
+          type="button"
+          id="mobile-nav-close"
+          class="w-10 h-10 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface-hover)] text-[var(--color-text-muted)] hover:text-[var(--color-text)] flex items-center justify-center transition-colors cursor-pointer select-none focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
+          aria-label={t.nav.closeMenu}
+          title={t.nav.closeMenu}
+        >
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Drawer Navigation Links -->
+      <div class="p-5 overflow-y-auto space-y-4 flex-1">
+        <nav class="space-y-1.5" aria-label="Mobile Navigation Links">
+          <a
+            href={getLocalizedUrl('/', locale)}
+            class={`flex items-center justify-between px-4 py-3 rounded-xl text-sm font-semibold transition-all ${
+              isActive('/')
+                ? 'bg-[var(--color-accent-subtle)] text-[var(--color-accent)] border border-[var(--color-accent)]/30'
+                : 'text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:bg-[var(--color-surface-hover)]'
+            }`}
+          >
+            <span>{t.nav.home}</span>
+            <svg class="w-4 h-4 opacity-70" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6" /></svg>
+          </a>
+          <a
+            href={getLocalizedUrl('/explore', locale)}
+            class={`flex items-center justify-between px-4 py-3 rounded-xl text-sm font-semibold transition-all ${
+              isActive('/explore')
+                ? 'bg-[var(--color-accent-subtle)] text-[var(--color-accent)] border border-[var(--color-accent)]/30'
+                : 'text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:bg-[var(--color-surface-hover)]'
+            }`}
+          >
+            <span>{t.nav.explore}</span>
+            <svg class="w-4 h-4 opacity-70" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6" /></svg>
+          </a>
+          <a
+            href={getLocalizedUrl('/learn', locale)}
+            class={`flex items-center justify-between px-4 py-3 rounded-xl text-sm font-semibold transition-all ${
+              isActive('/learn')
+                ? 'bg-[var(--color-accent-subtle)] text-[var(--color-accent)] border border-[var(--color-accent)]/30'
+                : 'text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:bg-[var(--color-surface-hover)]'
+            }`}
+          >
+            <span>{t.nav.learn}</span>
+            <svg class="w-4 h-4 opacity-70" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6" /></svg>
+          </a>
+          <a
+            href={getLocalizedUrl('/journey', locale)}
+            class={`flex items-center justify-between px-4 py-3 rounded-xl text-sm font-semibold transition-all ${
+              isActive('/journey')
+                ? 'bg-[var(--color-accent-subtle)] text-[var(--color-accent)] border border-[var(--color-accent)]/30'
+                : 'text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:bg-[var(--color-surface-hover)]'
+            }`}
+          >
+            <span>{t.nav.journey}</span>
+            <svg class="w-4 h-4 opacity-70" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6" /></svg>
+          </a>
+          <a
+            href={getLocalizedUrl('/geomap', locale)}
+            class={`flex items-center justify-between px-4 py-3 rounded-xl text-sm font-semibold transition-all ${
+              isActive('/geomap')
+                ? 'bg-[var(--color-interactive-subtle)] text-[var(--color-interactive)] border border-[var(--color-interactive)]/30'
+                : 'text-[var(--color-text-muted)] hover:text-[var(--color-interactive)] hover:bg-[var(--color-surface-hover)]'
+            }`}
+          >
+            <span>{t.nav.geomap}</span>
+            <svg class="w-4 h-4 opacity-70" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6" /></svg>
+          </a>
+          <a
+            href={getLocalizedUrl('/about', locale)}
+            class={`flex items-center justify-between px-4 py-3 rounded-xl text-sm font-semibold transition-all ${
+              isActive('/about')
+                ? 'bg-[var(--color-accent-subtle)] text-[var(--color-accent)] border border-[var(--color-accent)]/30'
+                : 'text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:bg-[var(--color-surface-hover)]'
+            }`}
+          >
+            <span>{t.nav.about}</span>
+            <svg class="w-4 h-4 opacity-70" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6" /></svg>
+          </a>
+        </nav>
+
+        <!-- Learning Roadmap Drawer Trigger Button -->
+        <button
+          type="button"
+          id="mobile-roadmap-drawer-trigger"
+          class="w-full p-3.5 rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface-hover)] hover:border-[var(--color-accent)] text-left flex items-center justify-between gap-3 transition-all cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
+        >
+          <div class="space-y-0.5">
+            <div class="text-xs font-bold text-[var(--color-text)] flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-[var(--color-accent)] animate-pulse" />
+              <span>{t.roadmapModal.title}</span>
+            </div>
+            <div class="text-[11px] text-[var(--color-text-muted)] line-clamp-1">
+              {t.nav.roadmapTitle}
+            </div>
+          </div>
+          <svg class="w-4 h-4 text-[var(--color-accent)] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="9 18 15 12 9 6" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Drawer Bottom Utilities -->
+      <div class="p-5 border-t border-[var(--color-border)] bg-[var(--color-surface-hover)]/60 space-y-3 shrink-0">
+        <div class="flex items-center justify-between gap-3">
+          <span class="text-xs font-semibold text-[var(--color-text-muted)] font-mono">
+            {locale === 'id' ? 'Bahasa / Language' : 'Language / Bahasa'}
+          </span>
+          <LanguageSwitcher client:idle currentLocale={locale} />
+        </div>
+        <div class="flex items-center justify-between gap-3 pt-2 border-t border-[var(--color-border)]/60">
+          <span class="text-xs font-semibold text-[var(--color-text-muted)] font-mono">
+            {locale === 'id' ? 'Mode Tampilan' : 'Appearance'}
+          </span>
+          <ThemeToggle client:idle />
+        </div>
+      </div>
+    </aside>
+
+    <!-- Mobile Navigation Drawer Interactive Controller Script -->
+    <script is:inline>
+      (function() {
+        const toggleBtn = document.getElementById('mobile-nav-toggle');
+        const closeBtn = document.getElementById('mobile-nav-close');
+        const drawer = document.getElementById('mobile-nav-drawer');
+        const backdrop = document.getElementById('mobile-nav-backdrop');
+        const roadmapDrawerTrigger = document.getElementById('mobile-roadmap-drawer-trigger');
+
+        if (!toggleBtn || !drawer || !backdrop) return;
+
+        let isOpen = false;
+
+        function openDrawer() {
+          isOpen = true;
+          toggleBtn.setAttribute('aria-expanded', 'true');
+          backdrop.classList.remove('opacity-0', 'pointer-events-none');
+          backdrop.classList.add('opacity-100', 'pointer-events-auto');
+          drawer.classList.remove('translate-x-full');
+          drawer.classList.add('translate-x-0');
+          document.body.style.overflow = 'hidden';
+          setTimeout(() => closeBtn?.focus(), 60);
+        }
+
+        function closeDrawer() {
+          if (!isOpen) return;
+          isOpen = false;
+          toggleBtn.setAttribute('aria-expanded', 'false');
+          backdrop.classList.remove('opacity-100', 'pointer-events-auto');
+          backdrop.classList.add('opacity-0', 'pointer-events-none');
+          drawer.classList.remove('translate-x-0');
+          drawer.classList.add('translate-x-full');
+          document.body.style.overflow = '';
+          toggleBtn.focus();
+        }
+
+        toggleBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          if (isOpen) closeDrawer();
+          else openDrawer();
+        });
+
+        closeBtn?.addEventListener('click', closeDrawer);
+        backdrop?.addEventListener('click', closeDrawer);
+
+        // Close on navigation link click
+        const drawerLinks = drawer.querySelectorAll('a');
+        drawerLinks.forEach((link) => {
+          link.addEventListener('click', () => {
+            closeDrawer();
+          });
+        });
+
+        if (roadmapDrawerTrigger) {
+          roadmapDrawerTrigger.addEventListener('click', () => {
+            closeDrawer();
+            window.dispatchEvent(new CustomEvent('earth-learning:open-roadmap', { detail: { triggerId: 'roadmap-navbar-trigger' } }));
+          });
+        }
+
+        // Keyboard support: Escape & Focus trap
+        document.addEventListener('keydown', (e) => {
+          if (!isOpen) return;
+
+          if (e.key === 'Escape') {
+            e.preventDefault();
+            closeDrawer();
+            return;
+          }
+
+          if (e.key === 'Tab') {
+            const focusables = drawer.querySelectorAll('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])');
+            if (focusables.length === 0) return;
+            const first = focusables[0];
+            const last = focusables[focusables.length - 1];
+
+            if (e.shiftKey && document.activeElement === first) {
+              e.preventDefault();
+              last.focus();
+            } else if (!e.shiftKey && document.activeElement === last) {
+              e.preventDefault();
+              first.focus();
+            }
+          }
+        });
+      })();
+    </script>
 
     <!-- Main Landmark -->
     <main id="main-content" class={`flex-1 ${className}`}>

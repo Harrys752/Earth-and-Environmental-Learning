@@ -18,6 +18,7 @@ export const id: TranslationDictionary = {
     roadmap: 'Tampilkan peta pembelajaran',
     roadmapTitle: 'Tampilkan peta pembelajaran & struktur kurikulum',
     menu: 'Menu',
+    closeMenu: 'Tutup menu navigasi',
     skipContent: 'Lompat ke konten utama',
     langSwitch: 'Ganti bahasa',
     langCurrent: 'Bahasa Indonesia',

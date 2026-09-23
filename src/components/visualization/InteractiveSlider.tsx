@@ -39,7 +39,7 @@ export default function InteractiveSlider({
         <p class="text-xs text-[var(--color-text-muted)] leading-relaxed">{description}</p>
       )}
 
-      <div class="relative flex items-center">
+      <div class="relative flex items-center py-2">
         <input
           type="range"
           id={id}
@@ -49,7 +49,7 @@ export default function InteractiveSlider({
           value={value}
           disabled={disabled}
           onInput={(e) => onChange(parseFloat((e.target as HTMLInputElement).value))}
-          class="w-full h-2 bg-[var(--color-border)] rounded-lg appearance-none cursor-pointer accent-[var(--color-accent)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] disabled:opacity-40 disabled:cursor-not-allowed"
+          class="w-full h-3 bg-[var(--color-border)] rounded-lg appearance-none cursor-pointer accent-[var(--color-accent)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] disabled:opacity-40 disabled:cursor-not-allowed"
           aria-valuemin={min}
           aria-valuemax={max}
           aria-valuenow={value}

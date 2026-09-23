@@ -16,6 +16,7 @@ export const en = {
     roadmap: 'Show learning roadmap',
     roadmapTitle: 'Show learning roadmap & curriculum structure',
     menu: 'Menu',
+    closeMenu: 'Close navigation menu',
     skipContent: 'Skip to main content',
     langSwitch: 'Switch language',
     langCurrent: 'English',

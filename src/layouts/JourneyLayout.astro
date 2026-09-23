@@ -71,15 +71,15 @@ if (activeTab !== 'overview') {
       </div>
 
       <!-- Navigation Tabs -->
-      <nav class="flex items-center gap-2 overflow-x-auto pt-6" aria-label="Journey Navigation">
+      <nav class="flex items-center gap-2 overflow-x-auto pt-6 -mx-4 px-4 sm:mx-0 sm:px-0 scrollbar-none pb-1" aria-label="Journey Navigation">
         {tabs.map((tab) => {
           const isCurrent = activeTab === tab.id;
           return (
             <a
               href={withBase(tab.href)}
-              class={`px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all ${
+              class={`px-4 py-2.5 min-h-[42px] flex items-center rounded-xl text-xs font-semibold whitespace-nowrap shrink-0 transition-all ${
                 isCurrent
-                  ? 'bg-[var(--color-accent)] text-white shadow-sm'
+                  ? 'bg-[var(--color-accent)] text-white shadow-sm font-bold'
                   : 'bg-[var(--color-surface)] border border-[var(--color-border)] text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:bg-[var(--color-surface-hover)]'
               }`}
             >
