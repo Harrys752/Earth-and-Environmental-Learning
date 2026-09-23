@@ -47,6 +47,9 @@ jobs:
         env:
           CI: true
 
+      - name: Verify Built Static Artifacts
+        run: npm run verify:dist
+
       - name: Upload GitHub Pages Artifact
         if: github.ref == 'refs/heads/main'
         uses: actions/upload-pages-artifact@v4

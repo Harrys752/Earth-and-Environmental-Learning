@@ -12,6 +12,7 @@
     "astro": "astro",
     "check": "astro check",
     "test": "vitest run",
+    "verify:dist": "vitest run --config vitest.postbuild.config.ts",
     "check:content": "astro check"
   },
   "dependencies": {

@@ -20,9 +20,9 @@ function getHtmlFiles(dir: string): string[] {
 
 describe('Dist Build Artifact Integrity', () => {
   const distDir = path.resolve(process.cwd(), 'dist');
-  const htmlFiles = getHtmlFiles(distDir);
 
   it('builds expected 34 pages including all 8 experiences and 6 topics', () => {
+    const htmlFiles = getHtmlFiles(distDir);
     expect(htmlFiles.length).toBeGreaterThanOrEqual(34);
 
     const expectedPages = [
@@ -49,6 +49,7 @@ describe('Dist Build Artifact Integrity', () => {
   });
 
   it('contains no unprefixed raw root-relative href links in built html files', () => {
+    const htmlFiles = getHtmlFiles(distDir);
     const rawHrefRegex = /href="\/((?!Earth-and-Environmental-Learning\/|#|\/\/)(learn|explore|projects|geomap|journey|search|about)[^"\s>]*)"/g;
     const violations: { file: string; match: string }[] = [];
 
