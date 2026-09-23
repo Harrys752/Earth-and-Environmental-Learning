@@ -27,3 +27,7 @@ In accordance with Section 27 of the Earth & Environmental Sciences Learning Pla
 - BMKG live seismic feed streaming
 - Real-time volcanic tremor alerts or evacuation routing
 - *Rationale:* Learning platform is an educational tool, not an emergency warning system.
+
+## 6. Onboarding & Guided First-Time Visitor Roadmap
+- Homepage: add a lightweight first-time-visitor 'Start here' roadmap/guided entry point, per user feedback.
+

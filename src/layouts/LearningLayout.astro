@@ -3,6 +3,7 @@ import BaseLayout from './BaseLayout.astro';
 import ExperienceHeader from '../components/learning/ExperienceHeader.astro';
 import ProgressIndicator from '../components/journey/ProgressIndicator';
 import { getRelatedContent } from '../lib/contentGraph';
+import { withBase } from '../lib/url';
 import type { ScientificMetadata } from '../types/content';
 
 export interface Props {
@@ -80,7 +81,7 @@ const { relatedExperiences, relatedConcepts, relatedLocations } = getRelatedCont
             <div class="space-y-2">
               {relatedConcepts.map((c) => (
                 <a
-                  href={c.href}
+                  href={withBase(c.href)}
                   class="block p-2.5 rounded-lg bg-[var(--color-surface-hover)] hover:border-[var(--color-accent)] border border-transparent transition-all"
                 >
                   <div class="text-xs font-bold text-[var(--color-text)]">{c.title}</div>
@@ -101,7 +102,7 @@ const { relatedExperiences, relatedConcepts, relatedLocations } = getRelatedCont
             <div class="space-y-2">
               {relatedExperiences.map((e) => (
                 <a
-                  href={e.href}
+                  href={withBase(e.href)}
                   class="block p-2.5 rounded-lg bg-[var(--color-surface-hover)] hover:border-[var(--color-secondary)] border border-transparent transition-all"
                 >
                   <div class="text-xs font-bold text-[var(--color-text)]">{e.title}</div>
@@ -122,7 +123,7 @@ const { relatedExperiences, relatedConcepts, relatedLocations } = getRelatedCont
             <div class="space-y-2">
               {relatedLocations.map((l) => (
                 <a
-                  href={l.href}
+                  href={withBase(l.href)}
                   class="block p-2.5 rounded-lg bg-[var(--color-surface-hover)] hover:border-[var(--color-interactive)] border border-transparent transition-all"
                 >
                   <div class="text-xs font-bold text-[var(--color-text)]">{l.title}</div>

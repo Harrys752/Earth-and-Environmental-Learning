@@ -83,15 +83,6 @@ export const SEARCH_INDEX: SearchIndexItem[] = [
     href: '/explore/topics/geology',
     badge: 'Topic',
   },
-  {
-    id: 'natural-hazards',
-    type: 'topic',
-    title: 'Natural Hazards & Planetary Risks',
-    summary: 'Earthquakes, volcanic eruptions, tsunamis, landslides, and mitigating human vulnerability.',
-    keywords: ['hazards', 'disaster', 'tsunami', 'earthquake', 'eruption', 'lahar', 'risk'],
-    href: '/explore/topics/natural-hazards',
-    badge: 'Topic',
-  },
 
   // Concepts
   {
@@ -115,6 +106,16 @@ export const SEARCH_INDEX: SearchIndexItem[] = [
     badge: 'Concept',
   },
   {
+    id: 'plate-tectonics-process',
+    type: 'concept',
+    title: 'Plate Tectonics Mechanism',
+    summary: 'Mantle convection, slab pull, and ridge push driving planetary crust dynamics.',
+    topic: 'Plate Tectonics',
+    keywords: ['mantle convection', 'slab pull', 'ridge push', 'lithosphere', 'asthenosphere'],
+    href: '/learn/concepts/plate-tectonics-process',
+    badge: 'Concept',
+  },
+  {
     id: 'stratigraphy',
     type: 'concept',
     title: 'Stratigraphy & Superposition',
@@ -134,8 +135,30 @@ export const SEARCH_INDEX: SearchIndexItem[] = [
     href: '/learn/concepts/condensation',
     badge: 'Concept',
   },
+  {
+    id: 'atmospheric-pressure',
+    type: 'concept',
+    title: 'Atmospheric Pressure Gradients',
+    summary: 'Pressure variations across air masses driving global and local wind circulation.',
+    topic: 'Atmosphere',
+    keywords: ['pressure gradient', 'barometer', 'air pressure', 'wind', 'isobars'],
+    href: '/learn/concepts/atmospheric-pressure',
+    badge: 'Concept',
+  },
 
-  // Locations
+  // Applied Projects
+  {
+    id: 'volcanic-hazard-map',
+    type: 'project',
+    title: 'Volcanic Hazard Risk Mapping Brief',
+    summary: 'Synthesize volcanology and subduction mechanics into a community hazard zonation map for Mount Merapi.',
+    topic: 'Plate Tectonics',
+    keywords: ['hazard map', 'merapi', 'risk', 'pyroclastic', 'lahar', 'project'],
+    href: '/projects/volcanic-hazard-map',
+    badge: 'Applied Project',
+  },
+
+  // Locations / Field Anchors
   {
     id: 'java-volcanic-arc',
     type: 'location',

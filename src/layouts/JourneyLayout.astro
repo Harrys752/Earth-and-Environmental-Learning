@@ -1,6 +1,7 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import Breadcrumb, { type BreadcrumbItem } from '../components/ui/Breadcrumb.astro';
+import { withBase } from '../lib/url';
 
 export interface Props {
   title: string;
@@ -64,7 +65,7 @@ if (activeTab !== 'overview') {
           const isCurrent = activeTab === tab.id;
           return (
             <a
-              href={tab.href}
+              href={withBase(tab.href)}
               class={`px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all ${
                 isCurrent
                   ? 'bg-[var(--color-accent)] text-white shadow-sm'

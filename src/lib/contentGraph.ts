@@ -35,19 +35,19 @@ export const CONTENT_GRAPH: Record<string, StaticGraphEntry> = {
     relatedConcepts: ['subduction', 'volcanic-arcs', 'plate-tectonics-process'],
     relatedLocations: ['java-volcanic-arc', 'mount-merapi'],
     relatedExperiences: ['reading-rock-layers', 'how-rain-forms'],
-    relatedTopics: ['plate-tectonics', 'natural-hazards', 'rocks'],
+    relatedTopics: ['plate-tectonics', 'geology'],
   },
   'how-rain-forms': {
-    relatedConcepts: ['condensation', 'atmospheric-pressure', 'water-cycle'],
+    relatedConcepts: ['condensation', 'atmospheric-pressure'],
     relatedLocations: ['bogor-rain-belt'],
     relatedExperiences: ['why-volcanoes-form', 'reading-rock-layers'],
-    relatedTopics: ['atmosphere', 'hydrology', 'climate'],
+    relatedTopics: ['atmosphere'],
   },
   'reading-rock-layers': {
-    relatedConcepts: ['stratigraphy', 'sedimentation', 'relative-dating'],
+    relatedConcepts: ['stratigraphy'],
     relatedLocations: ['karangsambung-geopark', 'sangiran-valley'],
     relatedExperiences: ['why-volcanoes-form'],
-    relatedTopics: ['geology', 'rocks', 'paleontology'],
+    relatedTopics: ['geology'],
   },
 
   // Concepts
@@ -71,33 +71,33 @@ export const CONTENT_GRAPH: Record<string, StaticGraphEntry> = {
   },
   'stratigraphy': {
     relatedExperiences: ['reading-rock-layers'],
-    relatedLocations: ['karangsambung-geopark'],
-    relatedConcepts: ['sedimentation', 'relative-dating'],
-    relatedTopics: ['geology', 'rocks'],
-  },
-  'sedimentation': {
-    relatedExperiences: ['reading-rock-layers'],
-    relatedLocations: ['sangiran-valley'],
-    relatedConcepts: ['stratigraphy'],
-    relatedTopics: ['geology', 'hydrology'],
+    relatedLocations: ['karangsambung-geopark', 'sangiran-valley'],
+    relatedConcepts: [],
+    relatedTopics: ['geology'],
   },
   'condensation': {
     relatedExperiences: ['how-rain-forms'],
     relatedLocations: ['bogor-rain-belt'],
     relatedConcepts: ['atmospheric-pressure'],
-    relatedTopics: ['atmosphere', 'hydrology'],
+    relatedTopics: ['atmosphere'],
+  },
+  'atmospheric-pressure': {
+    relatedExperiences: ['how-rain-forms'],
+    relatedLocations: ['bogor-rain-belt'],
+    relatedConcepts: ['condensation'],
+    relatedTopics: ['atmosphere'],
   },
 
   // Locations
   'java-volcanic-arc': {
     relatedExperiences: ['why-volcanoes-form'],
     relatedConcepts: ['subduction', 'volcanic-arcs'],
-    relatedTopics: ['plate-tectonics', 'natural-hazards'],
+    relatedTopics: ['plate-tectonics'],
   },
   'mount-merapi': {
     relatedExperiences: ['why-volcanoes-form'],
     relatedConcepts: ['volcanic-arcs'],
-    relatedTopics: ['natural-hazards', 'geology'],
+    relatedTopics: ['geology', 'plate-tectonics'],
   },
   'karangsambung-geopark': {
     relatedExperiences: ['reading-rock-layers', 'why-volcanoes-form'],
@@ -107,7 +107,7 @@ export const CONTENT_GRAPH: Record<string, StaticGraphEntry> = {
   'bogor-rain-belt': {
     relatedExperiences: ['how-rain-forms'],
     relatedConcepts: ['condensation'],
-    relatedTopics: ['atmosphere', 'climate'],
+    relatedTopics: ['atmosphere'],
   },
 };
 
@@ -174,14 +174,6 @@ export const NODE_REGISTRY: Record<string, KnowledgeNode> = {
     href: '/learn/concepts/stratigraphy',
     badge: 'Concept',
   },
-  'sedimentation': {
-    id: 'sedimentation',
-    type: 'concept',
-    title: 'Sedimentation & Deposition',
-    summary: 'The settling of mineral particles from water and wind over geological time.',
-    href: '/learn/concepts/sedimentation',
-    badge: 'Concept',
-  },
   'condensation': {
     id: 'condensation',
     type: 'concept',
@@ -196,14 +188,6 @@ export const NODE_REGISTRY: Record<string, KnowledgeNode> = {
     title: 'Atmospheric Pressure Gradients',
     summary: 'Pressure variations across air masses driving global and local wind circulation.',
     href: '/learn/concepts/atmospheric-pressure',
-    badge: 'Concept',
-  },
-  'relative-dating': {
-    id: 'relative-dating',
-    type: 'concept',
-    title: 'Relative Geological Dating',
-    summary: 'Determining the chronological sequence of events without absolute numerical ages.',
-    href: '/learn/concepts/relative-dating',
     badge: 'Concept',
   },
 

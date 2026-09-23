@@ -2,6 +2,7 @@
 import JourneyLayout from '../../layouts/JourneyLayout.astro';
 import JourneyTimeline from '../../components/journey/JourneyTimeline';
 import Button from '../../components/ui/Button.astro';
+import { withBase } from '../../lib/url';
 ---
 
 <JourneyLayout
@@ -34,7 +35,7 @@ import Button from '../../components/ui/Button.astro';
     <!-- Quick Navigation to Portfolio Sections -->
     <section class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6 border-t border-[var(--color-border)]">
       <a
-        href="/journey/timeline"
+        href={withBase('/journey/timeline')}
         class="p-5 rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] hover:border-[var(--color-accent)] transition-all space-y-2 block"
       >
         <span class="text-xs font-mono uppercase tracking-wider text-[var(--color-accent)] font-semibold">
@@ -49,7 +50,7 @@ import Button from '../../components/ui/Button.astro';
       </a>
 
       <a
-        href="/journey/reflections"
+        href={withBase('/journey/reflections')}
         class="p-5 rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] hover:border-[var(--color-secondary)] transition-all space-y-2 block"
       >
         <span class="text-xs font-mono uppercase tracking-wider text-[var(--color-secondary)] font-semibold">
@@ -64,7 +65,7 @@ import Button from '../../components/ui/Button.astro';
       </a>
 
       <a
-        href="/journey/projects"
+        href={withBase('/journey/projects')}
         class="p-5 rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] hover:border-[var(--color-interactive)] transition-all space-y-2 block"
       >
         <span class="text-xs font-mono uppercase tracking-wider text-[var(--color-interactive)] font-semibold">

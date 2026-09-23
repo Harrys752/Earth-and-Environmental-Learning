@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import JourneyLayout from '../../layouts/JourneyLayout.astro';
 import Badge from '../../components/ui/Badge.astro';
+import { withBase } from '../../lib/url';
 
 const projects = await getCollection('projects');
 ---
@@ -41,7 +42,7 @@ const projects = await getCollection('projects');
             </div>
 
             <h3 class="text-lg font-bold text-[var(--color-text)]">
-              <a href={`/projects/${proj.data.id || proj.id}`} class="hover:underline">
+              <a href={withBase(`/projects/${proj.data.id || proj.id}`)} class="hover:underline">
                 {proj.data.title}
               </a>
             </h3>
@@ -62,14 +63,14 @@ const projects = await getCollection('projects');
 
           <div class="pt-4 border-t border-[var(--color-border)] flex items-center justify-between">
             <a
-              href={`/learn/${proj.data.relatedExperienceSlug}`}
+              href={withBase(`/learn/${proj.data.relatedExperienceSlug}`)}
               class="text-xs text-[var(--color-text-dim)] hover:underline"
             >
               Related Experience →
             </a>
 
             <a
-              href={`/projects/${proj.data.id || proj.id}`}
+              href={withBase(`/projects/${proj.data.id || proj.id}`)}
               class="inline-flex items-center gap-1 text-xs font-semibold px-3 py-1.5 rounded-lg bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-hover)] transition-colors"
             >
               <span>View Brief</span>

@@ -1,8 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Breadcrumb from '../components/ui/Breadcrumb.astro';
-
-const GEOMAP_URL = 'https://harrys752.github.io/GeoMap-New/';
+import { GEOMAP_BASE_URL, buildGeoMapUrl } from '../lib/geomap';
+import { withBase } from '../lib/url';
 
 const breadcrumbItems = [
   { label: 'GeoMap Bridge', current: true },
@@ -61,7 +61,7 @@ const featuredLocations = [
 
       <div class="pt-2">
         <a
-          href={GEOMAP_URL}
+          href={GEOMAP_BASE_URL}
           target="_blank"
           rel="noopener noreferrer"
           class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[var(--color-interactive)] text-white text-sm font-semibold hover:bg-[var(--color-interactive-hover)] transition-all shadow-sm"
@@ -114,14 +114,14 @@ const featuredLocations = [
 
             <div class="pt-3 border-t border-[var(--color-border)] flex items-center justify-between">
               <a
-                href={`/learn/why-volcanoes-form`}
+                href={withBase('/learn/why-volcanoes-form')}
                 class="text-xs text-[var(--color-text-dim)] hover:underline"
               >
                 Related Concept →
               </a>
 
               <a
-                href={`${GEOMAP_URL}?location=${loc.slug}`}
+                href={buildGeoMapUrl({ locationSlug: loc.slug })}
                 target="_blank"
                 rel="noopener noreferrer"
                 class="inline-flex items-center gap-1 text-xs font-semibold text-[var(--color-interactive)] hover:underline"

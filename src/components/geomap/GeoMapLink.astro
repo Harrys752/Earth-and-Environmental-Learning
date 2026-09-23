@@ -1,4 +1,6 @@
 ---
+import { buildGeoMapUrl } from '../../lib/geomap';
+
 export interface Props {
   locationSlug: string;
   label?: string;
@@ -17,21 +19,11 @@ const {
   class: className = '',
 } = Astro.props;
 
-// Configurable external GeoMap URL
-const GEOMAP_BASE_URL = 'https://harrys752.github.io/GeoMap-New/';
-
-// Build deep link
-const queryParams = new URLSearchParams({
-  location: locationSlug,
-  ...deepLinkParams,
+const fullUrl = buildGeoMapUrl({
+  locationSlug,
+  coordinates,
+  deepLinkParams,
 });
-
-if (coordinates) {
-  queryParams.set('lat', coordinates.lat.toString());
-  queryParams.set('lng', coordinates.lng.toString());
-}
-
-const fullUrl = `${GEOMAP_BASE_URL}?${queryParams.toString()}`;
 ---
 
 <div class={`rounded-xl border border-[var(--color-interactive)]/30 bg-[var(--color-interactive-subtle)]/40 p-5 transition-all duration-200 hover:border-[var(--color-interactive)] hover:shadow-md ${className}`}>
