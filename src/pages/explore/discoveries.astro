@@ -4,8 +4,10 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumb from '../../components/ui/Breadcrumb.astro';
 import GeoMapLink from '../../components/geomap/GeoMapLink.astro';
 import { withBase } from '../../lib/url';
+import { resolveCollectionForLocale } from '../../lib/contentResolver';
 
-const concepts = await getCollection('concepts');
+const allConcepts = await getCollection('concepts');
+const concepts = resolveCollectionForLocale(allConcepts, 'en');
 
 const breadcrumbItems = [
   { label: 'Explore', href: '/explore' },

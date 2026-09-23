@@ -284,143 +284,285 @@ export default function Simulation({
         </div>
 
         {/* Scaled SVG schematic */}
-        <div class="w-full aspect-[2/1] min-h-[220px] sm:min-h-[280px] flex items-center justify-center">
+        <div class="w-full aspect-[2/1] min-h-[240px] sm:min-h-[300px] flex items-center justify-center">
           <svg
             viewBox="0 0 600 300"
             class="w-full h-full"
             role="img"
             aria-label={`Schematic cross section for ${model.title}`}
           >
-            {/* Background Mantle (Asthenosphere) */}
-            <rect x="0" y="0" width="600" height="300" fill="#2d1d17" />
+            <defs>
+              {/* Mantle wedge thermal gradient */}
+              <radialGradient id="mantleWedgeHeat" cx="60%" cy="50%" r="60%">
+                <stop offset="0%" stop-color="#f97316" stop-opacity="0.9" />
+                <stop offset="60%" stop-color="#ea580c" stop-opacity="0.7" />
+                <stop offset="100%" stop-color="#8c351e" stop-opacity="0.9" />
+              </radialGradient>
 
-            {boundary === 'convergent-subduction' && (
-              <g id="subduction-schematic">
-                {/* Ocean Layer */}
-                <path d="M 0,60 L 260,60 L 230,100 L 0,100 Z" fill="#1b4d63" opacity="0.6" />
-                <text x="50" y="80" fill="#7fd3ed" font-size="11" font-family="monospace">
-                  Indian Ocean (Trench)
-                </text>
+              {/* Magma chamber glow */}
+              <radialGradient id="magmaGlow" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#fef08a" />
+                <stop offset="40%" stop-color="#f97316" />
+                <stop offset="100%" stop-color="#ef4444" stop-opacity="0.8" />
+              </radialGradient>
+            </defs>
 
-                {/* Subducting Oceanic Plate */}
-                <path
-                  d="M 0,100 L 220,100 L 400,280 L 350,280 L 180,120 L 0,120 Z"
-                  fill="#4a5568"
-                  stroke="#2d3748"
-                  stroke-width="2"
-                />
-                <text x="70" y="115" fill="#e2e8f0" font-size="10" font-weight="bold">
-                  Oceanic Lithosphere ({subductionRate} cm/yr →)
-                </text>
+            {/* Background Asthenospheric Mantle */}
+            <rect x="0" y="0" width="600" height="300" fill="#24140e" />
 
-                {/* Overriding Continental Plate (Java/Sunda) */}
-                <path
-                  d="M 230,100 L 600,100 L 600,160 L 300,160 Z"
-                  fill="#7c604b"
-                  stroke="#564234"
-                  stroke-width="2"
-                />
-                <text x="420" y="130" fill="#ffffff" font-size="11" font-weight="bold">
-                  Continental Crust (Sunda Plate)
-                </text>
+            {/* 1. SUBDUCTION ZONE (Oceanic-Continental) */}
+            {boundary === 'convergent-subduction' && (() => {
+              // Reactivity variables
+              const animSpeedSec = Math.max(0.6, (14 - subductionRate) * 0.35);
+              const bubbleRadius = 2.5 + slabWaterContent * 0.6;
+              const bubbleOpacity = 0.35 + slabWaterContent * 0.065;
+              const magmaGlowScale = 0.6 + (slabWaterContent / 10) * 0.6;
 
-                {/* Mantle Wedge (Asthenosphere above slab) */}
-                <path d="M 230,100 L 300,160 L 600,160 L 600,300 L 380,300 Z" fill="#8c3f23" opacity="0.8" />
-                <text x="360" y="210" fill="#fbd38d" font-size="10" font-family="monospace">
-                  Mantle Wedge (Flux Melting Zone)
-                </text>
+              return (
+                <g id="subduction-schematic">
+                  {/* Mantle Wedge (Asthenosphere beneath continental crust and above descending slab) */}
+                  <path
+                    d="M 230,120 L 600,120 L 600,300 L 430,300 Z"
+                    fill="url(#mantleWedgeHeat)"
+                  />
+                  <text x="360" y="215" fill="#fbd38d" font-size="10" font-family="monospace" font-weight="bold">
+                    {isId ? 'Baji Mantel (Zona Pelelehan Fluks)' : 'Mantle Wedge (Flux Melting Zone)'}
+                  </text>
 
-                {/* Water dehydration arrows from descending slab */}
-                <g stroke="#63b3ed" stroke-width="2" stroke-dasharray="3,3">
-                  <line x1="280" y1="180" x2="320" y2="150" />
-                  <line x1="310" y1="210" x2="350" y2="180" />
-                  <line x1="340" y1="240" x2="380" y2="200" />
+                  {/* Subducting Oceanic Lithosphere (Indo-Australian Plate) plunging beneath continental crust */}
+                  <path
+                    d="M 0,90 L 170,90 Q 205,95 230,120 L 430,300 L 365,300 L 190,145 Q 165,125 0,125 Z"
+                    fill="#334155"
+                    stroke="#1e293b"
+                    stroke-width="2"
+                  />
+
+                  {/* Animated Motion Vectors along subducting plate */}
+                  <path
+                    d="M 10,107 L 170,107 Q 195,112 215,132 L 395,295"
+                    fill="none"
+                    stroke="#38bdf8"
+                    stroke-width="2"
+                    stroke-dasharray="6,6"
+                    opacity="0.85"
+                  >
+                    <animate
+                      attributeName="stroke-dashoffset"
+                      from="24"
+                      to="0"
+                      dur={`${animSpeedSec}s`}
+                      repeatCount="indefinite"
+                    />
+                  </path>
+
+                  {/* Plate label on top surface */}
+                  <text x="25" y="112" fill="#e2e8f0" font-size="10" font-weight="bold">
+                    {isId ? `Litosfer Samudra (${subductionRate} cm/thn →)` : `Oceanic Lithosphere (${subductionRate} cm/yr →)`}
+                  </text>
+
+                  {/* Overriding Continental Crust (Sunda Plate / Java) */}
+                  {/* Elevation ordering: Land surface sits at y=70 (above sea level y=75), rising to volcanic cone */}
+                  <path
+                    d="M 230,120 L 290,70 L 420,70 L 460,25 L 500,70 L 600,70 L 600,155 L 260,155 Z"
+                    fill="#785c46"
+                    stroke="#564132"
+                    stroke-width="2"
+                  />
+
+                  {/* Volcanic Cone Layers & Shading */}
+                  <polygon points="420,70 460,25 500,70" fill="#8d6e53" stroke="#564132" stroke-width="1.5" />
+                  <polygon points="450,70 460,25 470,70" fill="#a17d5d" />
+
+                  {/* Stratovolcano Crater and Summit Glow */}
+                  <path d="M 456,25 L 464,25 L 460,18 Z" fill="#ef4444" />
+                  <text x="440" y="16" fill="#f87171" font-size="10" font-weight="bold">
+                    {isId ? 'Busur Vulkanik (Gn. Merapi)' : 'Volcanic Arc (Mt. Merapi)'}
+                  </text>
+
+                  {/* Continental Crust Label */}
+                  <text x="490" y="110" fill="#ffffff" font-size="10" font-weight="bold">
+                    {isId ? 'Kerak Benua (Lempeng Sunda)' : 'Continental Crust (Sunda)'}
+                  </text>
+
+                  {/* Ocean Water Body (Indian Ocean) sitting above oceanic plate down to Trench */}
+                  <path
+                    d="M 0,75 L 290,75 L 230,120 L 170,90 L 0,90 Z"
+                    fill="#0284c7"
+                    opacity="0.5"
+                  />
+                  {/* Sea Level indicator line */}
+                  <line x1="0" y1="75" x2="290" y2="75" stroke="#38bdf8" stroke-width="1" stroke-dasharray="4,4" opacity="0.8" />
+                  <text x="15" y="70" fill="#7dd3fc" font-size="9" font-family="monospace">
+                    {isId ? 'Permukaan Laut (Samudra Hindia)' : 'Sea Level (Indian Ocean)'}
+                  </text>
+
+                  {/* Deep Subduction Trench Notch */}
+                  <line x1="230" y1="100" x2="230" y2="120" stroke="#f87171" stroke-width="1.5" />
+                  <text x="160" y="145" fill="#bae6fd" font-size="9" font-family="monospace" font-weight="bold">
+                    {isId ? 'Palung Jawa (~7.000 m)' : 'Java Trench (~7,000 m)'}
+                  </text>
+
+                  {/* Reactive H₂O Release Dehydration vectors from slab */}
+                  <g>
+                    {[
+                      { cx: 280, cy: 175, tx: 320, ty: 145 },
+                      { cx: 310, cy: 205, tx: 350, ty: 175 },
+                      { cx: 340, cy: 235, tx: 380, ty: 200 },
+                      { cx: 370, cy: 265, tx: 410, ty: 225 },
+                    ].map((pt, i) => (
+                      <g key={i}>
+                        <line
+                          x1={pt.cx}
+                          y1={pt.cy}
+                          x2={pt.tx}
+                          y2={pt.ty}
+                          stroke="#67e8f9"
+                          stroke-width="1.5"
+                          stroke-dasharray="3,3"
+                        />
+                        <circle
+                          cx={(pt.cx + pt.tx) / 2}
+                          cy={(pt.cy + pt.ty) / 2}
+                          r={bubbleRadius}
+                          fill="#38bdf8"
+                          opacity={bubbleOpacity}
+                        >
+                          <animate
+                            attributeName="cy"
+                            from={pt.cy}
+                            to={pt.ty}
+                            dur={`${animSpeedSec * 1.5}s`}
+                            repeatCount="indefinite"
+                          />
+                        </circle>
+                      </g>
+                    ))}
+                  </g>
+                  <text x="250" y="195" fill="#a5f3fc" font-size="9" font-family="monospace">
+                    H₂O ({slabWaterContent} wt%)
+                  </text>
+
+                  {/* Ascending Magma Diapirs & Crustal Magma Chamber */}
+                  <g opacity={0.9}>
+                    {/* Partial melt zone */}
+                    <ellipse
+                      cx="410"
+                      cy="190"
+                      rx={20 * magmaGlowScale}
+                      ry={14 * magmaGlowScale}
+                      fill="url(#magmaGlow)"
+                      opacity="0.85"
+                    />
+
+                    {/* Rising magma conduits */}
+                    <circle cx="435" cy="155" r={5 + slabWaterContent * 0.4} fill="#f97316" />
+                    <circle cx="450" cy="125" r={6 + slabWaterContent * 0.5} fill="#f97316" />
+
+                    {/* Crustal Magma Chamber */}
+                    <ellipse
+                      cx="460"
+                      cy="90"
+                      rx={18 * magmaGlowScale}
+                      ry={12 * magmaGlowScale}
+                      fill="url(#magmaGlow)"
+                      stroke="#ea580c"
+                      stroke-width="1"
+                    />
+                    <text x="478" y="93" fill="#fed7aa" font-size="8" font-family="monospace">
+                      {isId ? 'Kantung Magma' : 'Magma Chamber'}
+                    </text>
+
+                    {/* Volcanic Conduit feeding peak */}
+                    <line x1="460" y1="80" x2="460" y2="28" stroke="#ef4444" stroke-width="3" />
+                  </g>
                 </g>
-                <text x="250" y="200" fill="#90cdf4" font-size="9">
-                  H₂O release ({slabWaterContent} wt%)
-                </text>
+              );
+            })()}
 
-                {/* Ascending Magma Diapirs */}
-                <g fill="#f56565" opacity="0.9">
-                  <circle cx="390" cy="170" r="10" />
-                  <circle cx="420" cy="150" r="14" />
-                  <circle cx="460" cy="130" r="18" />
-                  <path d="M 450,110 L 470,110 L 460,70 Z" fill="#e53e3e" />
-                </g>
-
-                {/* Surface Volcano (e.g. Merapi) */}
-                <path d="M 420,100 L 460,40 L 500,100 Z" fill="#a0aec0" stroke="#718096" stroke-width="2" />
-                <path d="M 455,40 L 465,40 L 460,25 Z" fill="#feb2b2" />
-                <text x="440" y="30" fill="#fc8181" font-size="11" font-weight="bold">
-                  Volcanic Arc (Mount Merapi)
-                </text>
-              </g>
-            )}
-
+            {/* 2. CONTINENTAL COLLISION */}
             {boundary === 'convergent-collision' && (
               <g id="collision-schematic">
-                {/* Continental Plate 1 */}
-                <path d="M 0,100 L 260,100 L 290,60 L 300,160 L 0,160 Z" fill="#8c6d58" />
-                {/* Continental Plate 2 */}
-                <path d="M 600,100 L 340,100 L 310,60 L 300,160 L 600,160 Z" fill="#6d5545" />
+                {/* Continental Plate 1 (Left) */}
+                <path d="M 0,75 L 240,75 L 270,30 L 300,165 L 0,165 Z" fill="#8c6d58" stroke="#5c4535" stroke-width="2" />
+                {/* Continental Plate 2 (Right) */}
+                <path d="M 600,75 L 360,75 L 330,30 L 300,165 L 600,165 Z" fill="#6d5545" stroke="#483629" stroke-width="2" />
 
-                {/* Thickened Mountain Range Crust */}
-                <polygon points="260,100 300,20 340,100" fill="#b7791f" />
-                <polygon points="270,100 300,35 330,100" fill="#ecc94b" />
-                <text x="240" y="30" fill="#ffffff" font-size="12" font-weight="bold">
-                  Orogenic Mountain Belt
+                {/* Thickened Orogenic Mountain Range (Himalayan / Timor Style) */}
+                <polygon points="240,75 300,15 360,75" fill="#b7791f" stroke="#78350f" stroke-width="2" />
+                <polygon points="260,75 300,30 340,75" fill="#f59e0b" />
+
+                <text x="215" y="12" fill="#fef08a" font-size="11" font-weight="bold">
+                  {isId ? 'Sabuk Pegunungan Orogenik' : 'Orogenic Mountain Belt'}
                 </text>
-                <text x="240" y="190" fill="#fbd38d" font-size="10" font-family="monospace">
-                  Crustal Thickening (No Subduction Volcanism)
+                <text x="210" y="215" fill="#fbd38d" font-size="10" font-family="monospace">
+                  {isId ? 'Penebalan Kerak & Akar Isostasi (Tanpa Vulkanisme)' : 'Crustal Thickening & Deep Root (No Volcanism)'}
                 </text>
+
+                {/* Compression arrows */}
+                <path d="M 120,70 L 170,70" stroke="#fde047" stroke-width="2" marker-end="url(#arrow)" />
+                <path d="M 480,70 L 430,70" stroke="#fde047" stroke-width="2" marker-end="url(#arrow)" />
               </g>
             )}
 
+            {/* 3. MID-OCEAN RIDGE */}
             {boundary === 'divergent-oceanic' && (
               <g id="divergent-schematic">
-                {/* Oceanic Plate Left moving West */}
-                <rect x="0" y="90" width="280" height="40" fill="#4a5568" />
-                <text x="80" y="115" fill="#ffffff" font-size="11">
-                  ← Oceanic Plate (Spreading West)
+                {/* Ocean Water Layer above Ridge */}
+                <rect x="0" y="45" width="600" height="40" fill="#0284c7" opacity="0.5" />
+                <line x1="0" y1="45" x2="600" y2="45" stroke="#38bdf8" stroke-width="1" stroke-dasharray="4,4" opacity="0.8" />
+                <text x="20" y="40" fill="#7dd3fc" font-size="9" font-family="monospace">
+                  {isId ? 'Permukaan Samudra' : 'Sea Level'}
                 </text>
 
-                {/* Oceanic Plate Right moving East */}
-                <rect x="320" y="90" width="280" height="40" fill="#4a5568" />
-                <text x="360" y="115" fill="#ffffff" font-size="11">
-                  Oceanic Plate (Spreading East) →
+                {/* Oceanic Plate Left spreading West */}
+                <path d="M 0,85 L 275,85 L 290,105 L 270,145 L 0,145 Z" fill="#334155" stroke="#1e293b" stroke-width="2" />
+                <text x="60" y="115" fill="#e2e8f0" font-size="10" font-weight="bold">
+                  {isId ? '← Lempeng Samudra (Pemekaran Barat)' : '← Oceanic Plate (Spreading West)'}
                 </text>
 
-                {/* Decompression Upwelling Magma */}
-                <path d="M 280,300 L 300,90 L 320,300 Z" fill="#dd6b20" opacity="0.8" />
-                <polygon points="290,90 300,75 310,90" fill="#f6ad55" />
-                <text x="220" y="65" fill="#fbd38d" font-size="11" font-weight="bold">
-                  Central Rift Valley
+                {/* Oceanic Plate Right spreading East */}
+                <path d="M 600,85 L 325,85 L 310,105 L 330,145 L 600,145 Z" fill="#334155" stroke="#1e293b" stroke-width="2" />
+                <text x="360" y="115" fill="#e2e8f0" font-size="10" font-weight="bold">
+                  {isId ? 'Lempeng Samudra (Pemekaran Timur) →' : 'Oceanic Plate (Spreading East) →'}
                 </text>
-                <text x="220" y="220" fill="#feebc8" font-size="10" font-family="monospace">
-                  Decompression Melting (Basalt)
+
+                {/* Central Rift Valley Notch & Decompression Magma */}
+                <path d="M 270,300 L 290,105 L 300,90 L 310,105 L 330,300 Z" fill="url(#mantleWedgeHeat)" />
+                <polygon points="290,105 300,80 310,105" fill="#f97316" />
+
+                <text x="220" y="70" fill="#fef08a" font-size="11" font-weight="bold">
+                  {isId ? 'Lembah Retakan Celah Pusat (Rift Valley)' : 'Central Rift Valley'}
+                </text>
+                <text x="210" y="235" fill="#fed7aa" font-size="10" font-family="monospace">
+                  {isId ? 'Pelelehan Dekompresi (Magma Basal)' : 'Decompression Melting (Basaltic Melt)'}
                 </text>
               </g>
             )}
 
+            {/* 4. TRANSFORM FAULT */}
             {boundary === 'transform-fault' && (
               <g id="transform-schematic">
-                {/* Block A sliding UP/North */}
-                <polygon points="50,60 280,60 280,240 50,240" fill="#5a677d" />
-                <text x="120" y="140" fill="#ffffff" font-size="14" font-weight="bold">
-                  Plate A (↑ North)
+                {/* Block A sliding North */}
+                <polygon points="50,60 280,60 280,240 50,240" fill="#475569" stroke="#334155" stroke-width="2" />
+                <text x="110" y="130" fill="#ffffff" font-size="13" font-weight="bold">
+                  {isId ? 'Lempeng A (↑ Geser ke Utara)' : 'Plate A (↑ Shearing North)'}
+                </text>
+                <path d="M 165,150 L 165,185" stroke="#f87171" stroke-width="3" />
+                <polygon points="160,155 165,145 170,155" fill="#f87171" />
+
+                {/* Vertical Fault Plane Line */}
+                <line x1="290" y1="40" x2="290" y2="260" stroke="#ef4444" stroke-width="4" stroke-dasharray="6,6" />
+                <text x="225" y="275" fill="#fca5a5" font-size="10" font-family="monospace" font-weight="bold">
+                  {isId ? 'Bidang Sesar Mendatar (Sesar Geser)' : 'Strike-Slip Fault Plane'}
                 </text>
 
-                {/* Fault Plane */}
-                <line x1="290" y1="40" x2="290" y2="260" stroke="#f56565" stroke-width="4" stroke-dasharray="6,6" />
-                <text x="240" y="275" fill="#feb2b2" font-size="11" font-family="monospace">
-                  Strike-Slip Fault Line
+                {/* Block B sliding South */}
+                <polygon points="300,60 550,60 550,240 300,240" fill="#334155" stroke="#1e293b" stroke-width="2" />
+                <text x="360" y="150" fill="#ffffff" font-size="13" font-weight="bold">
+                  {isId ? 'Lempeng B (↓ Geser ke Selatan)' : 'Plate B (↓ Shearing South)'}
                 </text>
-
-                {/* Block B sliding DOWN/South */}
-                <polygon points="300,60 550,60 550,240 300,240" fill="#4a5568" />
-                <text x="360" y="160" fill="#ffffff" font-size="14" font-weight="bold">
-                  Plate B (↓ South)
-                </text>
+                <path d="M 425,160 L 425,195" stroke="#f87171" stroke-width="3" />
+                <polygon points="420,190 425,200 430,190" fill="#f87171" />
               </g>
             )}
           </svg>

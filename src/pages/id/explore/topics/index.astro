@@ -3,14 +3,13 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
 import Breadcrumb from '../../../../components/ui/Breadcrumb.astro';
 import TopicCard from '../../../../components/learning/TopicCard.astro';
+import { resolveCollectionForLocale } from '../../../../lib/contentResolver';
 
 const rawTopics = await getCollection('topics');
 const rawExperiences = await getCollection('experiences');
 
-const topics = rawTopics.filter((topic) => {
-  const isId = topic.id.startsWith('id/');
-  return isId || !rawTopics.some((t) => t.id === `id/${topic.id}`);
-});
+const topics = resolveCollectionForLocale(rawTopics, 'id');
+const experiences = resolveCollectionForLocale(rawExperiences, 'id');
 
 const breadcrumbItems = [
   { label: 'Jelajahi', href: '/id/explore' },
@@ -37,8 +36,8 @@ const breadcrumbItems = [
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
       {topics.map((topic) => {
         const topicSlug = (topic.data.id || topic.id).replace(/^id\//, '');
-        const count = rawExperiences.filter(
-          (e) => e.data.topic === topicSlug
+        const count = experiences.filter(
+          (e: any) => e.data.topic === topicSlug
         ).length;
         return (
           <TopicCard

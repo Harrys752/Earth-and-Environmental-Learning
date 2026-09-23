@@ -5,9 +5,13 @@ import Breadcrumb from '../../components/ui/Breadcrumb.astro';
 import TopicCard from '../../components/learning/TopicCard.astro';
 import LearningCard from '../../components/learning/LearningCard.astro';
 import Button from '../../components/ui/Button.astro';
+import { resolveCollectionForLocale } from '../../lib/contentResolver';
 
-const topics = await getCollection('topics');
-const experiences = await getCollection('experiences');
+const allTopics = await getCollection('topics');
+const allExperiences = await getCollection('experiences');
+
+const topics = resolveCollectionForLocale(allTopics, 'en');
+const experiences = resolveCollectionForLocale(allExperiences, 'en');
 
 const breadcrumbItems = [
   { label: 'Explore', current: true },

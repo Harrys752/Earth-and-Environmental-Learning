@@ -282,10 +282,12 @@ export const SEARCH_INDEX: SearchIndexItem[] = [
   },
 ];
 
+import type { Locale } from './i18nUrl';
+
 /**
  * Executes a prioritized search query
  */
-export function searchKnowledgeBase(query: string): SearchResult[] {
+export function searchKnowledgeBase(query: string, locale: Locale = 'en'): SearchResult[] {
   const clean = query.trim().toLowerCase();
   if (!clean) return [];
 
@@ -305,22 +307,22 @@ export function searchKnowledgeBase(query: string): SearchResult[] {
     // 1. Title exact match or term match (Priority 1)
     if (titleLower === clean) {
       score += 100;
-      matchReason = 'Exact title match';
+      matchReason = locale === 'id' ? 'Kecocokan judul persis' : 'Exact title match';
     } else if (titleLower.includes(clean)) {
       score += 60;
-      matchReason = 'Title contains phrase';
+      matchReason = locale === 'id' ? 'Judul memuat frasa' : 'Title contains phrase';
     } else {
       const titleMatches = terms.filter((t) => titleLower.includes(t)).length;
       if (titleMatches > 0) {
         score += titleMatches * 25;
-        matchReason = 'Title keyword match';
+        matchReason = locale === 'id' ? 'Kata kunci judul cocok' : 'Title keyword match';
       }
     }
 
     // 2. Topic relevance (Priority 2)
     if (topicLower.includes(clean)) {
       score += 35;
-      if (!matchReason) matchReason = `Matches topic: ${item.topic}`;
+      if (!matchReason) matchReason = locale === 'id' ? `Topik: ${item.topic}` : `Matches topic: ${item.topic}`;
     }
 
     // 3. Concept / keyword relevance (Priority 3)
@@ -332,18 +334,23 @@ export function searchKnowledgeBase(query: string): SearchResult[] {
     }
     if (keywordHits > 0) {
       score += keywordHits * 15;
-      if (!matchReason) matchReason = 'Matches scientific keywords';
+      if (!matchReason) matchReason = locale === 'id' ? 'Kata kunci ilmiah cocok' : 'Matches scientific keywords';
     }
 
     // 4. Summary / metadata match (Priority 4)
     if (summaryLower.includes(clean)) {
       score += 10;
-      if (!matchReason) matchReason = 'Matched in description';
+      if (!matchReason) matchReason = locale === 'id' ? 'Ditemukan dalam deskripsi' : 'Matched in description';
     }
 
     if (score > 0) {
+      const localizedHref = locale === 'id'
+        ? (item.href.startsWith('/geomap') ? `/id${item.href}` : `/id${item.href}`)
+        : item.href;
+
       results.push({
         ...item,
+        href: localizedHref,
         score,
         matchReason,
       });

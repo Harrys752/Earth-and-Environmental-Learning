@@ -4,9 +4,11 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Breadcrumb from '../../../components/ui/Breadcrumb.astro';
 import LearningCard from '../../../components/learning/LearningCard.astro';
 import EmptyState from '../../../components/ui/EmptyState.astro';
+import { resolveCollectionForLocale } from '../../../lib/contentResolver';
 
 export async function getStaticPaths() {
-  const topics = (await getCollection('topics')).filter((t) => !t.id.startsWith('id/'));
+  const allTopics = await getCollection('topics');
+  const topics = resolveCollectionForLocale(allTopics, 'en');
   return topics.map((entry) => ({
     params: { topic: entry.data.id || entry.id },
     props: { entry },
@@ -16,9 +18,11 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 const { Content } = await render(entry);
 
+const topicSlug = entry.data.id || entry.id;
 const allExperiences = await getCollection('experiences');
-const topicExperiences = allExperiences.filter(
-  (exp) => exp.data.topic === (entry.data.id || entry.id)
+const resolvedExperiences = resolveCollectionForLocale(allExperiences, 'en');
+const topicExperiences = resolvedExperiences.filter(
+  (exp) => exp.data.topic === topicSlug
 );
 
 const breadcrumbItems = [

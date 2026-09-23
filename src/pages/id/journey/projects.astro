@@ -3,14 +3,10 @@ import { getCollection } from 'astro:content';
 import JourneyLayout from '../../../layouts/JourneyLayout.astro';
 import Badge from '../../../components/ui/Badge.astro';
 import { withBase } from '../../../lib/url';
+import { resolveCollectionForLocale } from '../../../lib/contentResolver';
 
 const allProjects = await getCollection('projects');
-const enProjects = allProjects.filter((p) => !p.id.startsWith('id/'));
-const projects = enProjects.map((en) => {
-  const slug = (en.data.id || en.id).replace(/^id\//, '');
-  const idEntry = allProjects.find((p) => p.id === `id/${slug}` || p.id === `id/${en.id}`);
-  return idEntry || en;
-});
+const projects = resolveCollectionForLocale(allProjects, 'id');
 ---
 
 <JourneyLayout

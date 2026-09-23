@@ -5,6 +5,7 @@ import Breadcrumb from '../../../../components/ui/Breadcrumb.astro';
 import LearningCard from '../../../../components/learning/LearningCard.astro';
 import EmptyState from '../../../../components/ui/EmptyState.astro';
 import { useTranslations } from '../../../../i18n';
+import { resolveCollectionForLocale } from '../../../../lib/contentResolver';
 
 export async function getStaticPaths() {
   const topics = await getCollection('topics');
@@ -34,16 +35,10 @@ const t = useTranslations('id');
 
 const topicSlug = (entry.data.id || entry.id).replace(/^id\//, '');
 const allExperiences = await getCollection('experiences');
+const resolvedExperiences = resolveCollectionForLocale(allExperiences, 'id');
 
-// Filter experiences for this topic (prioritize id/ version, fallback to en)
-const rawTopicExperiences = allExperiences.filter((exp) => {
-  const expTopic = exp.data.topic;
-  return expTopic === topicSlug;
-});
-
-const topicExperiences = rawTopicExperiences.filter((exp) => {
-  const isId = exp.id.startsWith('id/');
-  return isId || !rawTopicExperiences.some((e) => e.id === `id/${exp.id}`);
+const topicExperiences = resolvedExperiences.filter((exp: any) => {
+  return exp.data.topic === topicSlug;
 });
 
 const breadcrumbItems = [
@@ -130,7 +125,7 @@ const breadcrumbItems = [
       {
         topicExperiences.length > 0 ? (
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {topicExperiences.map((exp) => (
+            {topicExperiences.map((exp: any) => (
               <LearningCard
                 id={(exp.data.id || exp.id).replace(/^id\//, '')}
                 slug={(exp.data.id || exp.id).replace(/^id\//, '')}

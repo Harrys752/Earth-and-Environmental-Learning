@@ -3,9 +3,13 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Breadcrumb from '../../../components/ui/Breadcrumb.astro';
 import TopicCard from '../../../components/learning/TopicCard.astro';
+import { resolveCollectionForLocale } from '../../../lib/contentResolver';
 
-const topics = await getCollection('topics');
-const experiences = await getCollection('experiences');
+const allTopics = await getCollection('topics');
+const allExperiences = await getCollection('experiences');
+
+const topics = resolveCollectionForLocale(allTopics, 'en');
+const experiences = resolveCollectionForLocale(allExperiences, 'en');
 
 const breadcrumbItems = [
   { label: 'Explore', href: '/explore' },
@@ -32,7 +36,7 @@ const breadcrumbItems = [
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
       {topics.map((topic) => {
         const count = experiences.filter(
-          (e) => e.data.topic === (topic.data.id || topic.id)
+          (e: any) => e.data.topic === (topic.data.id || topic.id)
         ).length;
         return (
           <TopicCard

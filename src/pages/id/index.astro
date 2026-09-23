@@ -7,22 +7,15 @@ import Button from '../../components/ui/Button.astro';
 import HeroGlobe from '../../components/ui/HeroGlobe.astro';
 import { withBase } from '../../lib/url';
 import { useTranslations } from '../../i18n';
+import { resolveCollectionForLocale } from '../../lib/contentResolver';
 
 const t = useTranslations('id');
 
 const rawTopics = await getCollection('topics');
 const rawExperiences = await getCollection('experiences');
 
-// Filter topics and experiences for Indonesian locale
-const topics = rawTopics.filter((topic) => {
-  const isId = topic.id.startsWith('id/');
-  return isId || !rawTopics.some((t) => t.id === `id/${topic.id}`);
-});
-
-const experiences = rawExperiences.filter((exp) => {
-  const isId = exp.id.startsWith('id/');
-  return isId || !rawExperiences.some((e) => e.id === `id/${exp.id}`);
-});
+const topics = resolveCollectionForLocale(rawTopics, 'id');
+const experiences = resolveCollectionForLocale(rawExperiences, 'id');
 
 const flagshipExp = experiences.find((e) => (e.data.id || e.id).includes('why-volcanoes-form')) || experiences[0];
 ---

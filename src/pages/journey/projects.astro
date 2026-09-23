@@ -3,9 +3,10 @@ import { getCollection } from 'astro:content';
 import JourneyLayout from '../../layouts/JourneyLayout.astro';
 import Badge from '../../components/ui/Badge.astro';
 import { withBase } from '../../lib/url';
+import { resolveCollectionForLocale } from '../../lib/contentResolver';
 
 const allProjects = await getCollection('projects');
-const projects = allProjects.filter((p) => !p.id.startsWith('id/'));
+const projects = resolveCollectionForLocale(allProjects, 'en');
 ---
 
 <JourneyLayout

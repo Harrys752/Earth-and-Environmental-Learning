@@ -47,41 +47,37 @@ const isActive = (path: string) => {
   return false;
 };
 
-// Data-driven topics & experiences for the Onboarding Roadmap
-const rawTopics = await getCollection('topics');
-const rawExperiences = await getCollection('experiences');
+import { resolveCollectionForLocale } from '../lib/contentResolver';
 
-// Filter experiences and topics appropriate for the locale
-const roadmapTopics = rawTopics
-  .filter((topic) => {
-    // If topic is in a subfolder like id/, only include if matching locale
-    const isId = topic.id.startsWith('id/');
-    return locale === 'id' ? isId || !rawTopics.some(t => t.id === `id/${topic.id}`) : !isId;
-  })
-  .map((t) => {
-    const topicSlug = (t.data.id || t.id).replace(/^id\//, '');
-    return {
-      id: topicSlug,
-      title: t.data.title,
-      tagline: t.data.tagline || '',
-      description: t.data.description,
-      category: t.data.category,
-      experiences: rawExperiences
-        .filter((e) => {
-          const expTopic = e.data.topic;
-          const isId = e.id.startsWith('id/');
-          const matchesLocale = locale === 'id' ? (isId || !rawExperiences.some(x => x.id === `id/${e.id}`)) : !isId;
-          return expTopic === topicSlug && matchesLocale;
-        })
-        .map((e) => ({
-          id: (e.data.id || e.id).replace(/^id\//, ''),
-          title: e.data.title,
-          difficulty: e.data.difficulty,
-          estimatedTime: e.data.estimatedTime,
-          featured: e.data.featured || (e.data.id || e.id).includes('why-volcanoes-form'),
-        })),
-    };
-  });
+// Data-driven topics & experiences for the Onboarding Roadmap
+const allTopics = await getCollection('topics');
+const allExperiences = await getCollection('experiences');
+
+const resolvedTopics = resolveCollectionForLocale(allTopics, locale);
+const resolvedExperiences = resolveCollectionForLocale(allExperiences, locale);
+
+const roadmapTopics = resolvedTopics.map((t) => {
+  const topicSlug = (t.data.id || t.id).replace(/^id\//, '');
+  return {
+    id: topicSlug,
+    title: t.data.title,
+    tagline: t.data.tagline || '',
+    description: t.data.description,
+    category: t.data.category,
+    experiences: resolvedExperiences
+      .filter((e) => {
+        const expTopic = e.data.topic;
+        return expTopic === topicSlug;
+      })
+      .map((e) => ({
+        id: (e.data.id || e.id).replace(/^id\//, ''),
+        title: e.data.title,
+        difficulty: e.data.difficulty,
+        estimatedTime: e.data.estimatedTime,
+        featured: e.data.featured || (e.data.id || e.id).includes('why-volcanoes-form'),
+      })),
+  };
+});
 ---
 
 <!doctype html>

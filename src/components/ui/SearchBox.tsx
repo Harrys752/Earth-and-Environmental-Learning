@@ -22,12 +22,12 @@ export default function SearchBox({ locale = 'en' }: SearchBoxProps) {
       const q = params.get('q');
       if (q) {
         setQuery(q);
-        const res = searchKnowledgeBase(q);
+        const res = searchKnowledgeBase(q, locale);
         setResults(res);
         setHasSearched(true);
       }
     }
-  }, []);
+  }, [locale]);
 
   const handleInput = (val: string) => {
     setQuery(val);
@@ -36,7 +36,7 @@ export default function SearchBox({ locale = 'en' }: SearchBoxProps) {
       setHasSearched(false);
       return;
     }
-    const res = searchKnowledgeBase(val);
+    const res = searchKnowledgeBase(val, locale);
     setResults(res);
     setHasSearched(true);
   };

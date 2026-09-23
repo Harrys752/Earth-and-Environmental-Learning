@@ -6,9 +6,13 @@ import LearningCard from '../components/learning/LearningCard.astro';
 import Button from '../components/ui/Button.astro';
 import HeroGlobe from '../components/ui/HeroGlobe.astro';
 import { withBase } from '../lib/url';
+import { resolveCollectionForLocale } from '../lib/contentResolver';
 
-const topics = await getCollection('topics');
-const experiences = await getCollection('experiences');
+const allTopics = await getCollection('topics');
+const allExperiences = await getCollection('experiences');
+
+const topics = resolveCollectionForLocale(allTopics, 'en');
+const experiences = resolveCollectionForLocale(allExperiences, 'en');
 const flagshipExp = experiences.find((e) => (e.data.id || e.id) === 'why-volcanoes-form') || experiences[0];
 ---
 

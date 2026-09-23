@@ -3,8 +3,10 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumb from '../../components/ui/Breadcrumb.astro';
 import LearningCard from '../../components/learning/LearningCard.astro';
+import { resolveCollectionForLocale } from '../../lib/contentResolver';
 
-const experiences = await getCollection('experiences');
+const allExperiences = await getCollection('experiences');
+const experiences = resolveCollectionForLocale(allExperiences, 'en');
 
 const breadcrumbItems = [
   { label: 'Explore', href: '/explore' },

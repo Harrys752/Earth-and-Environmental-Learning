@@ -3,13 +3,10 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Breadcrumb from '../../../components/ui/Breadcrumb.astro';
 import LearningCard from '../../../components/learning/LearningCard.astro';
+import { resolveCollectionForLocale } from '../../../lib/contentResolver';
 
 const rawExperiences = await getCollection('experiences');
-
-const experiences = rawExperiences.filter((exp) => {
-  const isId = exp.id.startsWith('id/');
-  return isId || !rawExperiences.some((e) => e.id === `id/${exp.id}`);
-});
+const experiences = resolveCollectionForLocale(rawExperiences, 'id');
 
 const breadcrumbItems = [
   { label: 'Jelajahi', href: '/id/explore' },

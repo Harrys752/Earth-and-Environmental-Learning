@@ -81,6 +81,7 @@ import Quiz from '../../components/quiz/Quiz';
 import ReflectionBox from '../../components/learning/ReflectionBox';
 import RealWorldExample from '../../components/learning/RealWorldExample.astro';
 import ObservationChallenge from '../../components/learning/ObservationChallenge.astro';
+import RainFormationDiagram from '../../components/visualization/RainFormationDiagram';
 import { howRainFormsQuiz } from '../../data/quizzes/how-rain-forms';
 
 ## Beat 1: The Invisible Ocean Overhead
@@ -103,6 +104,8 @@ To turn vapor into liquid droplets, the air must be cooled. In nature, air is co
 4. **Temperature Decline:** This work expends internal thermal energy, causing the temperature of the air parcel to drop—a thermodynamic process known as **adiabatic cooling** (~9.8°C for every 1,000 meters of elevation gain for dry air).
 
 When the rising air cools to its **dew point temperature**, its relative humidity reaches 100%. This specific altitude in the sky is called the **Lifting Condensation Level (LCL)**, visible from the ground as the razor-sharp, flat base of cumulus clouds.
+
+<RainFormationDiagram client:visible locale="en" />
 
 ---
 
