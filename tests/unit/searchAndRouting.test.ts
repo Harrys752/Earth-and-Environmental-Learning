@@ -10,11 +10,11 @@ describe('Search Index Integrity', () => {
     }
   });
 
-  it('contains all 8 experiences and 6 topics', () => {
+  it('contains all 17 experiences and 11 topics', () => {
     const experiences = SEARCH_INDEX.filter((i) => i.type === 'experience');
     const topics = SEARCH_INDEX.filter((i) => i.type === 'topic');
-    expect(experiences.length).toBe(8);
-    expect(topics.length).toBe(6);
+    expect(experiences.length).toBe(17);
+    expect(topics.length).toBe(11);
 
     const expectedExpSlugs = [
       'why-volcanoes-form',
@@ -25,6 +25,15 @@ describe('Search Index Integrity', () => {
       'why-are-there-climate-zones',
       'what-fossils-tell-us',
       'why-do-landslides-happen',
+      'whats-inside-the-earth',
+      'what-makes-a-mineral-a-mineral',
+      'jakarta-sinking-city-groundwater',
+      'indonesian-throughflow',
+      'how-tsunamis-form',
+      'ecosystem-recovery-after-eruption',
+      'the-carbon-cycle',
+      'peatlands-carbon-storage-or-release',
+      'nutrient-cycling-tropical-soils',
     ];
     for (const slug of expectedExpSlugs) {
       expect(experiences.some((e) => e.id === slug)).toBe(true);
@@ -37,6 +46,11 @@ describe('Search Index Integrity', () => {
       'natural-hazards',
       'climate',
       'paleontology',
+      'earth-structure',
+      'minerals',
+      'hydrology',
+      'environmental-systems',
+      'sustainability',
     ];
     for (const slug of expectedTopicSlugs) {
       expect(topics.some((t) => t.id === slug)).toBe(true);
@@ -73,6 +87,34 @@ describe('Search Index Integrity', () => {
 
     const landslide = searchKnowledgeBase('landslide');
     expect(landslide.some((r) => r.id === 'why-do-landslides-happen')).toBe(true);
+
+    // Tests for 9 new experiences
+    const earthStructure = searchKnowledgeBase('earth structure');
+    expect(earthStructure.some((r) => r.id === 'whats-inside-the-earth' || r.id === 'earth-structure')).toBe(true);
+
+    const mineral = searchKnowledgeBase('mineral');
+    expect(mineral.some((r) => r.id === 'what-makes-a-mineral-a-mineral' || r.id === 'minerals')).toBe(true);
+
+    const groundwater = searchKnowledgeBase('groundwater');
+    expect(groundwater.some((r) => r.id === 'jakarta-sinking-city-groundwater' || r.id === 'hydrology')).toBe(true);
+
+    const throughflow = searchKnowledgeBase('throughflow');
+    expect(throughflow.some((r) => r.id === 'indonesian-throughflow')).toBe(true);
+
+    const tsunami = searchKnowledgeBase('tsunami');
+    expect(tsunami.some((r) => r.id === 'how-tsunamis-form')).toBe(true);
+
+    const succession = searchKnowledgeBase('succession');
+    expect(succession.some((r) => r.id === 'ecosystem-recovery-after-eruption')).toBe(true);
+
+    const carbonCycle = searchKnowledgeBase('carbon cycle');
+    expect(carbonCycle.some((r) => r.id === 'the-carbon-cycle')).toBe(true);
+
+    const peatland = searchKnowledgeBase('peatland');
+    expect(peatland.some((r) => r.id === 'peatlands-carbon-storage-or-release')).toBe(true);
+
+    const nutrient = searchKnowledgeBase('nutrient');
+    expect(nutrient.some((r) => r.id === 'nutrient-cycling-tropical-soils')).toBe(true);
   });
 });
 
@@ -94,6 +136,15 @@ describe('Content Knowledge Graph Integrity', () => {
       'why-are-there-climate-zones',
       'what-fossils-tell-us',
       'why-do-landslides-happen',
+      'whats-inside-the-earth',
+      'what-makes-a-mineral-a-mineral',
+      'jakarta-sinking-city-groundwater',
+      'indonesian-throughflow',
+      'how-tsunamis-form',
+      'ecosystem-recovery-after-eruption',
+      'the-carbon-cycle',
+      'peatlands-carbon-storage-or-release',
+      'nutrient-cycling-tropical-soils',
     ];
 
     for (const slug of experienceSlugs) {

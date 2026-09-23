@@ -1,0 +1,181 @@
+---
+id: "how-tsunamis-form"
+title: "Tsunami: Bagaimana Gempa Jauh Menjadi Gelombang Raksasa"
+tagline: "Dislokasi Megathrust Dasar Laut, Efek Pendangkalan (Shoaling), dan Tragedi Aceh 2004"
+description: "Pelajari bagaimana gempa megathrust bawah laut mengangkat kolom air samudra, mengapa tsunami merambat 800 km/jam di laut dalam, dan bagaimana efek shoaling melipatgandakan tinggi gelombang di pesisir."
+topic: "natural-hazards"
+difficulty: "intermediate"
+estimatedTime: "20min"
+learningObjectives:
+  - "Menjelaskan bagaimana gempa megathrust di zona subduksi mengangkat dasar laut secara vertikal untuk membangkitkan tsunami."
+  - "Memahami fisika gelombang tsunami: panjang gelombang besar dan kecepatan tinggi (~800 km/jam) di laut dalam vs perlambatan drastis dan amplifikasi tinggi (shoaling) di pantai."
+  - "Menganalisis bencana 26 Desember 2004 Sumatra-Andaman Mw 9,1–9,3 sebagai studi kasus empiris dinamika patahan megathrust."
+  - "Membedakan deformasi vertikal primer Aceh 2004 dengan pemicu longsoran bawah laut sekunder sesar geser Palu 2018."
+prerequisites:
+  - "why-do-earthquakes-happen"
+interactiveElements:
+  - id: "tsunami-propagation-diagram"
+    type: "diagram"
+    title: "Perambatan Gelombang Tsunami & Fisika Shoaling"
+    pedagogicalPurpose: "Memvisualisasikan transisi dari perambatan laut dalam menuju amplifikasi tinggi di pesisir dangkal, serta perbandingan komparatif Aceh 2004 dan Palu 2018."
+    isIllustrativeModel: true
+    accessibleFallbackText: "Penampang batimetri yang menampilkan kecepatan gelombang laut dalam, amplifikasi tinggi gelombang akibat shoaling di pantai, dan mekanika sesar naik megathrust."
+quiz:
+  quizId: "quiz-how-tsunamis-form"
+  title: "Kuis Evaluasi Pemahaman: Bagaimana Tsunami Terbentuk?"
+  questionCount: 3
+realWorldConnections:
+  - title: "Gempa Megathrust Sumatra-Andaman & Tsunami Aceh 2004"
+    locationName: "Sumatra Bagian Utara & Pesisir Aceh, Indonesia"
+    isIndonesiaFirst: true
+    coordinates:
+      lat: 3.316
+      lng: 95.854
+    description: "Pada 26 Desember 2004, gempa mahadahsyat Mw 9,1–9,3 merobek ~1.300 km sesar megathrust Sunda di lepas pantai Sumatra, mengangkat dasar laut setinggi rata-rata 15 meter. Gelombang tsunami menerjang Aceh dalam tempo 20 menit dengan tinggi limpasan mencapai 51 meter."
+    phenomenon: "Tsunami lintas samudra menyeberangi Samudra Hindia dalam hitungan jam, menewaskan sekitar 227.898–230.000 jiwa di 14 negara, dan memicu berdirinya Sistem Peringatan Dini Tsunami Samudra Hindia (InaTEWS)."
+    globalGeneralization: "Bahaya tsunami megathrust mengancam garis pantai zona subduksi di seluruh dunia, termasuk Zona Subduksi Cascadia (Amerika Utara), Palung Jepang (Tohoku 2011), dan Palung Cile (1960/2010)."
+    geoMapSlug: "aceh-tsunami-rupture"
+geoMapConnections:
+  - locationSlug: "aceh-tsunami-rupture"
+    label: "Jelajahi Zona Patahan 2004 di GeoMap"
+    coordinates:
+      lat: 3.316
+      lng: 95.854
+    description: "Periksa palung subduksi Megathrust Sunda dan topografi pesisir Aceh yang terdampak genangan tsunami."
+reflection:
+  - id: "refl-tsunami-evacuation"
+    prompt: "Jika Anda berada di dekat pantai laut dan merasakan guncangan gempa yang kuat dan berlangsung lama atau melihat air laut surut drastis secara tiba-tiba, mengapa menunggu sirene resmi ponsel sering kali terlambat, dan tindakan penyelamatan fisik darurat apa yang harus segera Anda lakukan?"
+    placeholder: "Pertimbangkan waktu tempuh gelombang dari sesar megathrust dekat pantai, tanda bahaya alami, dan evakuasi ke tempat tinggi..."
+    category: "observation"
+nextExperiences:
+  - "why-do-earthquakes-happen"
+  - "why-volcanoes-form"
+scientific:
+  source:
+    - "NOAA Science On a Sphere (2024). Tsunami Historical Series: Sumatra – 2004."
+    - "NOAA National Centers for Environmental Information (NCEI). Global Historical Tsunami Database."
+    - "Stein, S., & Okal, E. A. (2005). Speed and size of the Sumatra earthquake. Nature, 434(7033), 581-582."
+    - "Bilek, S. L. (2007). Seismicity along the South American and Sunda subduction zones. Geological Society, London, Special Publications."
+  sourceType: "government-agency"
+  lastReviewed: "2026-09-24"
+  scientificLevel: "intermediate"
+  confidence: "well-supported"
+  references:
+    - title: "Tsunami Historical Series: Sumatra – 2004"
+      publisher: "NOAA Science On a Sphere"
+      year: 2024
+    - title: "Speed and size of the Sumatra earthquake"
+      publisher: "Nature"
+      year: 2005
+    - title: "Global Historical Tsunami Database"
+      publisher: "NOAA NCEI"
+      year: 2023
+  notesOnSimplification: "Kecepatan gelombang tsunami ($v = \\sqrt{g \\cdot d}$) dan transformasi amplifikasi tinggi dihitung berdasarkan model hidrodinamika gelombang dangkal."
+review:
+  reviewStatus: "published"
+  sourceList:
+    - "NOAA SOS"
+    - "Nature"
+    - "NOAA NCEI"
+  lastReviewed: "2026-09-24"
+  contentVersion: "1.0.0"
+featured: false
+---
+
+import Quiz from '../../../components/quiz/Quiz';
+import ReflectionBox from '../../../components/learning/ReflectionBox';
+import RealWorldExample from '../../../components/learning/RealWorldExample.astro';
+import ObservationChallenge from '../../../components/learning/ObservationChallenge.astro';
+import TsunamiPropagationDiagram from '../../../components/visualization/TsunamiPropagationDiagram';
+import { howTsunamisFormQuiz } from '../../../data/quizzes/id/how-tsunamis-form';
+
+## Bagian 1: Energi Samudra yang Bergerak
+
+Pada pagi hari **26 Desember 2004**, ribuan kilometer jauhnya di tengah laut dalam Samudra Hindia, kapal-kapal berlayar tanpa menyadari sama sekali bahwa gelombang dahsyat sedang melintas tepat di bawah lambung mereka.
+
+Permukaan air laut hanya naik kurang dari satu meter saat gelombang itu lewat. Namun, dalam hitungan jam, gelombang yang sama persis mencapai garis pantai **Aceh, Indonesia**, membubung menjadi tembok air raksasa yang menghancurkan **setinggi lebih dari 30 hingga 50 meter** dan menyapu daratan sejauh berkilo-kilometer.
+
+Bagaimana energi yang dilepaskan jauh di kedalaman kerak dasar laut dapat berubah menjadi gelombang laut dalam yang tak kasat mata, lalu bermutasi menjadi dinding air raksasa saat mencapai pantai?
+
+---
+
+## Bagian 2: Genesa Tsunami — Deformasi Vertikal Megathrust
+
+Gelombang laut biasa dibangkitkan oleh hembusan angin yang menyapu permukaan air. Sebaliknya, **tsunami** dibangkitkan oleh pergerakan fisik berskala masif dari **seluruh kolom air dari dasar laut hingga ke permukaan**.
+
+Mesin utama pembangkit tsunami dahsyat adalah **gempa megathrust bawah laut** di zona subduksi lempeng:
+
+1. **Penguncian Subduksi:** Lempeng samudra Indo-Australia menghujam ke bawah Lempeng Sunda. Gesekan mengunci bidang patahan, melengkungkan lempeng benua di atasnya ke bawah seperti busur panah yang ditarik selama ratusan tahun.
+2. **Pelepasan Elastis:** Ketika akumulasi tegangan melebihi kekuatan gesekan, bidang patahan yang terkunci robek seketika.
+3. **Lentingan Dasar Laut (Seafloor Rebound):** Lempeng benua melenting kembali ke atas setinggi **10 hingga 20 meter** di area ribuan kilometer persegi dasar laut dalam hitungan detik.
+4. **Dislokasi Kolom Air:** Pengangkatan vertikal seketika ini mendorong seluruh massa air laut di atasnya ke atas, meluncurkan deretan gelombang tsunami yang menjalar ke seluruh cekungan samudra.
+
+<TsunamiPropagationDiagram client:visible locale="id" />
+
+---
+
+## Bagian 3: Fisika Shoaling — Secepat Jet di Laut Dalam, Menjulang Tinggi di Pantai
+
+Di laut terbuka, perilaku tsunami mengikuti hukum fisika gelombang perairan dangkal yang diatur oleh kedalaman air (`d`):
+
+```
+Kecepatan Gelombang: v = √(g × d)
+```
+
+di mana `g ≈ 9,8 m/detik²` adalah percepatan gravitasi.
+
+### Di Laut Terbuka yang Sangat Dalam (`d ≈ 4.000 meter`):
+- **Kecepatan Setara Pesawat Jet:** Gelombang melesat dengan kecepatan **~800 km/jam** (200 m/detik).
+- **Panjang Gelombang Raksasa:** Jarak dari satu puncak gelombang ke puncak berikutnya mencapai **100 hingga 200 kilometer**.
+- **Tinggi Gelombang Nyaris Tak Terasa:** Karena energi yang luar biasa tersebar di sepanjang ratusan kilometer panjang gelombang, tinggi muka air hanya naik **kurang dari 1 meter**.
+
+### Saat Gelombang Memasuki Perairan Dangkal Pesisir (`d < 50 meter`):
+- **Kecepatan Anjlok:** Gesekan dengan dasar laut dangkal memperlambat muka gelombang menjadi **30–50 km/jam**.
+- **Panjang Gelombang Mampat:** Bagian belakang gelombang yang masih berada di perairan yang lebih dalam menyusul bagian depan yang melambat, memampatkan panjang gelombang dari 100 km menjadi hanya beberapa kilometer.
+- **Amplifikasi Pendangkalan (Shoaling Effect):** Hukum kekekalan energi memaksa massa air yang termampatkan membubung tinggi ke atas (*shoaling*), melonjakkan tinggi air hingga **20 sampai 51 meter** di pesisir Aceh.
+
+---
+
+## Bagian 4: Komparasi Aceh 2004 vs. Palu 2018
+
+<RealWorldExample
+  title="Megathrust Aceh vs. Longsor Bawah Laut Palu"
+  locationName="Pesisir Aceh vs. Teluk Palu, Indonesia"
+  isIndonesiaFirst={true}
+  coordinates={{ lat: 3.316, lng: 95.854 }}
+  phenomenon="Pada bencana Aceh 2004 (Mw 9,1–9,3), patahan megathrust primer mengangkat dasar laut secara vertikal sepanjang 1.300 km. Sebaliknya, pada gempa Palu 2018 (Mw 7,5), sesar geser horizontal tidak mengangkat laut terbuka, melainkan guncangan hebat memicu longsoran tebing sedimen bawah laut dan runtuhan pantai (likuifaksi) ke dalam Teluk Palu yang sempit, membangkitkan tsunami lokal dahsyat dalam tempo 3 menit."
+  globalGeneralization="Sistem peringatan dini tsunami modern harus mampu mendeteksi baik tsunami megathrust samudra terbuka maupun pemicu longsoran lokal pada sesar geser."
+  geoMapSlug="aceh-tsunami-rupture"
+/>
+
+---
+
+## Bagian 5: Tantangan Observasi Lapangan
+
+<ObservationChallenge
+  title="Mengenali Tanda-Tanda Peringatan Alami Tsunami"
+  targetPhenomenon="Mengidentifikasi surutnya air laut secara drastis sebelum puncak tsunami tiba."
+  observationSteps={[
+    "Jika gelombang tsunami tiba dengan fase lembah terlebih dahulu, air laut di pantai akan surut secara mendadak dan tidak wajar sejauh ratusan meter ke tengah laut, mengekspos karang dan ikan yang menggelepar.",
+    "Air surut mendadak ini adalah lonceng peringatan alami darurat: Anda hanya memiliki waktu sekitar 5 hingga 10 menit sebelum dinding gelombang raksasa datang.",
+    "Jangan sekali-kali turun ke dasar laut yang kering untuk mengambil ikan.",
+    "Segera lari secepat mungkin menuju tempat yang tinggi atau naik ke lantai atas bangunan bertulang beton yang kokoh."
+  ]}
+/>
+
+<ReflectionBox
+  id="refl-tsunami-evacuation"
+  prompt="Jika Anda berada di dekat pantai laut dan merasakan guncangan gempa yang kuat dan berlangsung lama atau melihat air laut surut drastis secara tiba-tiba, mengapa menunggu sirene resmi ponsel sering kali terlambat, dan tindakan penyelamatan fisik darurat apa yang harus segera Anda lakukan?"
+  placeholder="Pertimbangkan waktu tempuh gelombang dari sesar megathrust dekat pantai, tanda bahaya alami, dan evakuasi ke tempat tinggi..."
+  category="observation"
+/>
+
+---
+
+## Bagian 6: Kuis Evaluasi Pemahaman
+
+<Quiz
+  client:visible
+  quiz={howTsunamisFormQuiz}
+  locale="id"
+/>

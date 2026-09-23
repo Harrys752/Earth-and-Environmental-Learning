@@ -1,0 +1,169 @@
+---
+id: "peatlands-carbon-storage-or-release"
+title: "Can Indonesia's Peatlands Store Carbon — or Release It?"
+tagline: "Wetland Hydrology, Drainage Flammability, and the 2015 Fire Crisis"
+description: "Investigate why intact tropical peatlands are Earth's densest terrestrial carbon vaults, how drainage canals turn them into flammable tinder, and the lessons of Indonesia's 2015 peatland fire crisis."
+topic: "sustainability"
+difficulty: "intermediate"
+estimatedTime: "20min"
+learningObjectives:
+  - "Understand what tropical peatlands are and why waterlogged anoxic conditions accumulate organic soils up to 10 meters deep."
+  - "Explain the hydrological failure chain: canal drainage → lowered water table → aerobic drying → underground smoldering fire."
+  - "Analyze empirical data from the 2015 Indonesian fire crisis (781 Tg CO2 emitted; 53% of fires on peatland; 71% of PM2.5 haze)."
+  - "Evaluate nature-based sustainability solutions: canal blocking, rewetting, and community peatland restoration."
+prerequisites:
+  - "the-carbon-cycle"
+interactiveElements:
+  - id: "peatland-comparison-diagram"
+    type: "diagram"
+    title: "Tropical Peatland Hydrology & 2015 Fire Crisis Matrix"
+    pedagogicalPurpose: "Visualizes the physical contrast between an intact waterlogged peat carbon sink and a drained, smoldering peat profile with 2015 crisis data."
+    isIllustrativeModel: true
+    accessibleFallbackText: "A cross-section comparing water table height, anoxic carbon preservation, and subsurface fire combustion in drained tropical peatlands."
+quiz:
+  quizId: "quiz-peatlands-carbon-storage-or-release"
+  title: "Peatland Carbon Dynamics & 2015 Crisis Verification Quiz"
+  questionCount: 3
+realWorldConnections:
+  - title: "The 2015 Indonesian Peatland Fire & Haze Crisis"
+    locationName: "Central Kalimantan & Riau, Indonesia"
+    isIndonesiaFirst: true
+    coordinates:
+      lat: -2.21
+      lng: 113.92
+    description: "Between June and October 2015, severe El Niño drought combined with artificial canal drainage ignited ~127,000 fires across 2.6 million hectares of Indonesian land. Peatlands (only 12% of land area) accounted for 53% of all fires."
+    phenomenon: "Subsurface smoldering fires emitted ~781 Teragrams (Tg) of CO2—exceeding the entire European Union's emissions over the same period—and produced 71% of dangerous PM2.5 regional haze."
+    globalGeneralization: "Tropical peatlands globally (e.g., the Congo Basin and the Amazon) store immense terrestrial carbon, representing high-vulnerability tipping points in the global climate system if drained."
+    geoMapSlug: "krakatau-archipelago"
+geoMapConnections:
+  - locationSlug: "krakatau-archipelago"
+    label: "Explore Island & Wetland Interface on GeoMap"
+    coordinates:
+      lat: -6.102
+      lng: 105.423
+    description: "Inspect coastal and terrestrial wetland ecological settings across the Indonesian archipelago."
+reflection:
+  - id: "refl-peatland-policy"
+    prompt: "Peatland fires are driven by both human land-use decisions (canal drainage for agriculture) and natural climate variability (El Niño droughts). Which factor is more directly addressable through environmental policy, and what engineering methods can restore dried peat?"
+    placeholder: "Consider canal blocking, water table rewetting, paludiculture farming, and fire monitoring..."
+    category: "connection"
+nextExperiences:
+  - "the-carbon-cycle"
+  - "nutrient-cycling-tropical-soils"
+scientific:
+  source:
+    - "Miettinen, J., et al. (2017). Land cover distribution in the peatlands of Peninsular Malaysia, Sumatra and Borneo in 2015. International Peatland Journal."
+    - "Atmospheric Chemistry and Physics (2019). Fire emissions and regional air quality in Equatorial Asia during the 2015 El Niño."
+    - "University of Leeds / LEAF (2016). Impacts of the 2015 Indonesian fires on carbon emissions and human health."
+    - "Scientific Reports / Today CNA (2016). Quantifying the 2015 Indonesian fire emissions."
+  sourceType: "peer-reviewed"
+  lastReviewed: "2026-09-24"
+  scientificLevel: "intermediate"
+  confidence: "well-supported"
+  references:
+    - title: "Fire emissions and regional air quality in Equatorial Asia during the 2015 El Niño"
+      publisher: "Atmospheric Chemistry and Physics"
+      year: 2019
+    - title: "Land cover distribution in the peatlands of Peninsular Malaysia, Sumatra and Borneo"
+      publisher: "International Peatland Journal"
+      year: 2017
+    - title: "Quantifying the 2015 Indonesian peatland fire emissions"
+      publisher: "Scientific Reports"
+      year: 2016
+  notesOnSimplification: "Emissions estimates (~781 Tg CO2) and land cover fractions (12% land, 53% fire incidence) are cited directly from peer-reviewed atmospheric and remote sensing publications."
+review:
+  reviewStatus: "published"
+  sourceList:
+    - "Atmos Chem Phys"
+    - "Univ of Leeds LEAF"
+    - "Scientific Reports"
+  lastReviewed: "2026-09-24"
+  contentVersion: "1.0.0"
+featured: false
+---
+
+import Quiz from '../../components/quiz/Quiz';
+import ReflectionBox from '../../components/learning/ReflectionBox';
+import RealWorldExample from '../../components/learning/RealWorldExample.astro';
+import ObservationChallenge from '../../components/learning/ObservationChallenge.astro';
+import PeatlandComparisonDiagram from '../../components/visualization/PeatlandComparisonDiagram';
+import { peatlandsCarbonStorageOrReleaseQuiz } from '../../data/quizzes/peatlands-carbon-storage-or-release';
+
+## Beat 1: The Fire Beneath the Earth
+
+In the autumn of **2015**, satellite sensors tracking global atmosphere detected a shocking anomaly: over a period of just two months, fires burning across Indonesia released **more carbon dioxide into the atmosphere than the entire 28-nation European Union combined**.
+
+Dense yellow-brown toxic haze blanketed Southeast Asia, grounding flights, closing schools across multiple countries, and triggering respiratory crises for hundreds of thousands of people.
+
+These were not ordinary brush fires blazing through treetops. The flames were burning **underground**, consuming ancient organic soil that had been accumulating since the end of the last ice age.
+
+How can wet swampy soil burn, and how do tropical peatlands transform from Earth's greatest carbon sinks into massive climate tipping points?
+
+---
+
+## Beat 2: The Anatomy of a Tropical Peatland
+
+A **peatland** is a wetland ecosystem where dead plant material—leaves, branches, fallen tree trunks—does not fully decompose. Over thousands of years, waterlogged, low-oxygen (anoxic) conditions preserve this organic debris, building thick, sponge-like soil layers called **peat**.
+
+- **Immense Thickness:** In parts of Kalimantan, Sumatra, and Papua, peat layers can reach depths of **up to 10 to 15 meters**.
+- **Dense Carbon Storage:** While covering just 3% of the world's land area, global peatlands store **twice as much carbon as all the world's forests combined**.
+- **Natural Hydrology:** A healthy, intact peatland is 90% water by weight. It acts like a giant, sodden sponge that absorbs torrential monsoon rains and slowly releases freshwater during dry spells.
+
+<PeatlandComparisonDiagram client:visible locale="en" />
+
+---
+
+## Beat 3: The Failure Chain — From Drainage to Subsurface Fire
+
+When peatlands are targeted for agricultural expansion (such as oil palm or pulpwood plantations), developers dig extensive networks of **drainage canals** to lower the water table:
+
+1. **Canal Drainage:** Canals carry away the trapped groundwater, lowering the water table by 1 to 2 meters.
+2. **Aerobic Exposure:** As the water drains, atmospheric oxygen infiltrates deep into the spongy soil. The dead plant matter dries out into compressed, highly combustible fuel.
+3. **Deliberate or Accidental Ignition:** Fires set cheaply on the surface to clear brush quickly penetrate downward into the dry peat.
+4. **Subsurface Smoldering Combustion:** Unlike open flames that need strong wind, peat burns via low-temperature, oxygen-starved **smoldering combustion**. The fire creeps silently underground along dry root tunnels, burning for weeks or months beneath the surface and defying rain.
+
+---
+
+## Beat 4: Indonesian Real-World Anchor — The 2015 Fire Crisis
+
+<RealWorldExample
+  title="The 2015 Peatland Fire Crisis in Numbers"
+  locationName="Central Kalimantan & Riau, Indonesia"
+  isIndonesiaFirst={true}
+  coordinates={{ lat: -2.21, lng: 113.92 }}
+  phenomenon="During the 2015 El Niño drought, over 127,000 fires burned across 2.6 million hectares in Indonesia. Research published in Atmospheric Chemistry and Physics (2019) and Scientific Reports confirmed that peatlands—which made up just 12% of national land area—accounted for 53% of all fires, releasing 781 Tg of CO2 and generating 71% of regional PM2.5 haze."
+  globalGeneralization="Peatland restoration through canal blocking (rewetting) and strict moratoriums on wetland conversion is now recognized globally as one of the most urgent and impactful climate mitigation strategies."
+  geoMapSlug="krakatau-archipelago"
+/>
+
+---
+
+## Beat 5: Field Observation Challenge
+
+<ObservationChallenge
+  title="Understanding Peat Sponge Mechanics"
+  targetPhenomenon="Demonstrating how organic matter volume collapses when dried."
+  observationSteps={[
+    "Take a handful of wet organic soil, potting peat moss, or coconut coir (cocopeat).",
+    "Notice how it holds many times its weight in water, feeling bouncy and spongy.",
+    "Leave a portion in the hot sun for three days until completely bone-dry: notice how it shrinks, cracks, and becomes feather-light.",
+    "Try touching a lit match to dry fibrous peat vs wet peat—this simple experiment reveals why draining peatlands creates an extreme regional fire hazard!"
+  ]}
+/>
+
+<ReflectionBox
+  id="refl-peatland-policy"
+  prompt="Peatland fires are driven by both human land-use decisions (canal drainage for agriculture) and natural climate variability (El Niño droughts). Which factor is more directly addressable through environmental policy, and what engineering methods can restore dried peat?"
+  placeholder="Consider canal blocking, water table rewetting, paludiculture farming, and fire monitoring..."
+  category="connection"
+/>
+
+---
+
+## Beat 6: Knowledge Verification Quiz
+
+<Quiz
+  client:visible
+  quiz={peatlandsCarbonStorageOrReleaseQuiz}
+  locale="en"
+/>

@@ -1,0 +1,169 @@
+---
+id: "peatlands-carbon-storage-or-release"
+title: "Mampukah Gambut Indonesia Menyimpan Karbon — atau Melepaskannya?"
+tagline: "Hidrologi Lahan Basah, Kerentanan Drainase, dan Krisis Kebakaran Hutan 2015"
+description: "Selidiki mengapa lahan gambut tropis alami adalah brankas karbon daratan terpadat di Bumi, bagaimana kanal drainase mengubahnya menjadi bahan bakar mudah terbakar, dan pelajaran dari krisis kebakaran gambut 2015."
+topic: "sustainability"
+difficulty: "intermediate"
+estimatedTime: "20min"
+learningObjectives:
+  - "Memahami apa itu lahan gambut tropis dan mengapa kondisi jenuh air tanpa oksigen mengumpulkan tanah organik setebal hingga 10 meter."
+  - "Menjelaskan rantai kegagalan hidrologis: pembuatan kanal drainase → penurunan muka air tanah → pengeringan aerobik → kebakaran bawah tanah membara (smoldering)."
+  - "Menganalisis data empiris krisis kebakaran hutan Indonesia 2015 (781 Tg CO2 terlepas; 53% kebakaran terjadi di gambut; 71% kabut asap PM2.5)."
+  - "Mengevaluasi solusi keberlanjutan berbasis alam: sekat kanal, pembasahan kembali (rewetting), dan restorasi gambut berbasis masyarakat."
+prerequisites:
+  - "the-carbon-cycle"
+interactiveElements:
+  - id: "peatland-comparison-diagram"
+    type: "diagram"
+    title: "Hidrologi Lahan Gambut Tropis & Matriks Krisis Kebakaran 2015"
+    pedagogicalPurpose: "Memvisualisasikan perbedaan fisik antara lahan gambut alami jenuh air (penyimpan karbon) dengan profil gambut terdrainase yang membara beserta data krisis 2015."
+    isIllustrativeModel: true
+    accessibleFallbackText: "Penampang yang membandingkan ketinggian muka air tanah, pengawetan karbon anoksik, dan pembakaran bawah tanah pada lahan gambut tropis terdrainase."
+quiz:
+  quizId: "quiz-peatlands-carbon-storage-or-release"
+  title: "Kuis Evaluasi Pemahaman: Dinamika Karbon Gambut & Krisis 2015"
+  questionCount: 3
+realWorldConnections:
+  - title: "Krisis Kebakaran Lahan Gambut & Kabut Asap Indonesia 2015"
+    locationName: "Kalimantan Tengah & Riau, Indonesia"
+    isIndonesiaFirst: true
+    coordinates:
+      lat: -2.21
+      lng: 113.92
+    description: "Antara Juni dan Oktober 2015, kemarau panjang El Niño yang berpadu dengan kanalisasi buatan memicu ~127.000 titik api di 2,6 juta hektar lahan Indonesia. Lahan gambut (hanya 12% dari total daratan) menyumbang 53% dari seluruh kebakaran."
+    phenomenon: "Kebakaran bawah tanah melepaskan ~781 Teragram (Tg) CO2—melampaui total emisi seluruh Uni Eropa pada periode yang sama—dan menghasilkan 71% kabut asap partikulat berbahaya PM2.5."
+    globalGeneralization: "Lahan gambut tropis di seluruh dunia (seperti di Cekungan Kongo dan Amazon) menyimpan karbon darat masif, mewakili titik kritis kerentanan iklim global jika mengalami pengeringan."
+    geoMapSlug: "krakatau-archipelago"
+geoMapConnections:
+  - locationSlug: "krakatau-archipelago"
+    label: "Jelajahi Ekosistem Lahan Basah di GeoMap"
+    coordinates:
+      lat: -6.102
+      lng: 105.423
+    description: "Periksa pertautan lingkungan pesisir dan lahan basah tropis di kepulauan Indonesia."
+reflection:
+  - id: "refl-peatland-policy"
+    prompt: "Kebakaran lahan gambut dipicu oleh keputusan tata guna lahan manusia (pembuatan kanal untuk perkebunan) dan variabilitas iklim alami (kemarau El Niño). Faktor manakah yang lebih dapat dikendalikan melalui kebijakan lingkungan, dan metode rekayasa apa yang dapat memulihkan gambut kering?"
+    placeholder: "Pertimbangkan pembuatan sekat kanal, pembasahan kembali (rewetting), pertanian paludikultur, dan pemantauan titik api..."
+    category: "connection"
+nextExperiences:
+  - "the-carbon-cycle"
+  - "nutrient-cycling-tropical-soils"
+scientific:
+  source:
+    - "Miettinen, J., et al. (2017). Land cover distribution in the peatlands of Peninsular Malaysia, Sumatra and Borneo in 2015. International Peatland Journal."
+    - "Atmospheric Chemistry and Physics (2019). Fire emissions and regional air quality in Equatorial Asia during the 2015 El Niño."
+    - "University of Leeds / LEAF (2016). Impacts of the 2015 Indonesian fires on carbon emissions and human health."
+    - "Scientific Reports / Today CNA (2016). Quantifying the 2015 Indonesian fire emissions."
+  sourceType: "peer-reviewed"
+  lastReviewed: "2026-09-24"
+  scientificLevel: "intermediate"
+  confidence: "well-supported"
+  references:
+    - title: "Fire emissions and regional air quality in Equatorial Asia during the 2015 El Niño"
+      publisher: "Atmospheric Chemistry and Physics"
+      year: 2019
+    - title: "Land cover distribution in the peatlands of Peninsular Malaysia, Sumatra and Borneo"
+      publisher: "International Peatland Journal"
+      year: 2017
+    - title: "Quantifying the 2015 Indonesian peatland fire emissions"
+      publisher: "Scientific Reports"
+      year: 2016
+  notesOnSimplification: "Estimasi emisi (~781 Tg CO2) dan proporsi tutupan lahan (12% luas daratan, 53% insiden api) dirujuk langsung dari publikasi ilmiah peer-reviewed penginderaan jauh dan kimia atmosfer."
+review:
+  reviewStatus: "published"
+  sourceList:
+    - "Atmos Chem Phys"
+    - "Univ of Leeds LEAF"
+    - "Scientific Reports"
+  lastReviewed: "2026-09-24"
+  contentVersion: "1.0.0"
+featured: false
+---
+
+import Quiz from '../../../components/quiz/Quiz';
+import ReflectionBox from '../../../components/learning/ReflectionBox';
+import RealWorldExample from '../../../components/learning/RealWorldExample.astro';
+import ObservationChallenge from '../../../components/learning/ObservationChallenge.astro';
+import PeatlandComparisonDiagram from '../../../components/visualization/PeatlandComparisonDiagram';
+import { peatlandsCarbonStorageOrReleaseQuiz } from '../../../data/quizzes/id/peatlands-carbon-storage-or-release';
+
+## Bagian 1: Api di Bawah Perut Bumi
+
+Pada musim kemarau tahun **2015**, sensor satelit pemantau atmosfer bumi mendeteksi anomali yang mengguncang dunia: hanya dalam rentang waktu dua bulan, kebakaran lahan di Indonesia melepaskan **lebih banyak gas karbon dioksida ke atmosfer dibandingkan total emisi gabungan seluruh 28 negara anggota Uni Eropa**.
+
+Kabut asap kuning-kecokelatan beracun menyelimuti Asia Tenggara, melumpuhkan jadwal penerbangan, meliburkan sekolah di berbagai negara, dan memicu krisis pernapasan bagi ratusan ribu warga.
+
+Ini bukanlah kebakaran rumput ilalang biasa yang menjalar di pucuk pohon. Api tersebut menyala dan membara **di bawah tanah**, membakar lapisan tanah organik purba yang telah terakumulasi sejak akhir zaman es ribuan tahun silam.
+
+Bagaimana mungkin tanah rawa yang basah dapat terbakar, dan bagaimana lahan gambut tropis dapat berubah dari penyerap karbon terhebat di dunia menjadi pemicu krisis iklim global?
+
+---
+
+## Bagian 2: Anatomi Lahan Gambut Tropis Alami
+
+**Lahan gambut** adalah ekosistem lahan basah di mana sisa-sisa vegetasi tanaman mati—daun, ranting, dan batang pohon tumbang—tidak mengalami pembusukan secara sempurna. Selama ribuan tahun, kondisi jenuh air tanpa oksigen (anoksik) mengawetkan materi organik ini, menumpuknya menjadi lapisan tanah spons tebal yang disebut **gambut**.
+
+- **Ketebalan Luar Biasa:** Di sebagian wilayah Kalimantan, Sumatra, dan Papua, ketebalan kubah gambut dapat mencapai **10 hingga 15 meter**.
+- **Kepadatan Karbon Raksasa:** Meskipun hanya menutupi sekitar 3% daratan dunia, lahan gambut global menyimpan **dua kali lebih banyak karbon dibandingkan gabungan seluruh hutan di dunia**.
+- **Hidrologi Alami:** Lahan gambut alami yang sehat mengandung 90% air berdasarkan beratnya. Gambut berfungsi seperti spons raksasa yang menyerap curah hujan monsun lebat dan mengalirkannya secara perlahan saat musim kemarau.
+
+<PeatlandComparisonDiagram client:visible locale="id" />
+
+---
+
+## Bagian 3: Rantai Kerusakan — Dari Drainase Menuju Kebakaran Bawah Tanah
+
+Ketika lahan gambut dialihfungsikan untuk perkebunan monokultur skala besar, dibuatlah jaringan **kanal drainase buatan** untuk mengeringkan tanah:
+
+1. **Pengeringan Kanal:** Kanal buatan menguras air tanah yang terperangkap, menurunkan muka air tanah hingga 1–2 meter di bawah permukaan.
+2. **Paparan Oksigen Aerobik:** Saat air terkuras, oksigen udara masuk jauh ke dalam pori-pori tanah spons. Materi tanaman purba mengering menjadi tumpukan bahan bakar padat yang sangat mudah terbakar.
+3. **Penyulutan Api:** Api pembersihan lahan yang dinyalakan di permukaan merambat turun ke dalam lapisan gambut kering.
+4. **Pembakaran Membara Bawah Tanah (Smoldering Combustion):** Berbeda dengan api terbuka yang membutuhkan kobaran angin, gambut terbakar melalui pembakaran tanpa nyala bersuhu rendah (*smoldering*). Api merayap di lorong-lorong akar bawah tanah selama berminggu-minggu tanpa terlihat dan sulit padam oleh hujan permukaan.
+
+---
+
+## Bagian 4: Hubungan Dunia Nyata Indonesia — Krisis Gambut 2015
+
+<RealWorldExample
+  title="Krisis Kebakaran Gambut 2015 dalam Angka"
+  locationName="Kalimantan Tengah & Riau, Indonesia"
+  isIndonesiaFirst={true}
+  coordinates={{ lat: -2.21, lng: 113.92 }}
+  phenomenon="Selama kemarau El Niño 2015, lebih dari 127.000 titik api membakar 2,6 juta hektar lahan di Indonesia. Kajian ilmiah dalam Atmospheric Chemistry and Physics (2019) dan Scientific Reports membuktikan bahwa lahan gambut—yang hanya mencakup 12% luas daratan nasional—menyumbang 53% dari total kebakaran, melepaskan 781 Tg CO2 dan memicu 71% emisi kabut asap beracun PM2.5 regional."
+  globalGeneralization="Restorasi lahan gambut melalui sekat kanal (rewetting) dan moratorium perlindungan lahan basah diakui secara global sebagai strategi mitigasi iklim berbasis alam yang paling mendesak dan efektif."
+  geoMapSlug="krakatau-archipelago"
+/>
+
+---
+
+## Bagian 5: Tantangan Observasi Lapangan
+
+<ObservationChallenge
+  title="Memahami Sifat Mekanis Spons Gambut"
+  targetPhenomenon="Menunjukkan bagaimana volume bahan organik menyusut dan mudah terbakar saat dikeringkan."
+  observationSteps={[
+    "Ambil segenggam tanah organik gambut basah atau sabut kelapa (cocopeat) yang lembap.",
+    "Perhatikan bagaimana media tersebut mampu menahan air berlipat ganda dari beratnya sendiri, terasa kenyal seperti spons.",
+    "Jemur sebagian sampel di bawah terik matahari selama tiga hari hingga benar-benar kering kerontang: perhatikan bagaimana volumenya menyusut drastis, retak-retak, dan menjadi seringan kapas.",
+    "Dekatkan korek api ke sampel gambut kering vs sampel gambut basah—percobaan sederhana ini menunjukkan mengapa mengeringkan rawa gambut menciptakan risiko kebakaran regional yang mematikan!"
+  ]}
+/>
+
+<ReflectionBox
+  id="refl-peatland-policy"
+  prompt="Kebakaran lahan gambut dipicu oleh keputusan tata guna lahan manusia (pembuatan kanal untuk perkebunan) dan variabilitas iklim alami (kemarau El Niño). Faktor manakah yang lebih dapat dikendalikan melalui kebijakan lingkungan, dan metode rekayasa apa yang dapat memulihkan gambut kering?"
+  placeholder="Pertimbangkan pembuatan sekat kanal, pembasahan kembali (rewetting), pertanian paludikultur, dan pemantauan titik api..."
+  category="connection"
+/>
+
+---
+
+## Bagian 6: Kuis Evaluasi Pemahaman
+
+<Quiz
+  client:visible
+  quiz={peatlandsCarbonStorageOrReleaseQuiz}
+  locale="id"
+/>

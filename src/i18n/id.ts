@@ -84,6 +84,7 @@ export const id: TranslationDictionary = {
     time: {
       '5min': '5 mnt',
       '10min': '10 mnt',
+      '15min': '15 mnt',
       '20min': '20 mnt',
       '30plus': '30+ mnt',
     },

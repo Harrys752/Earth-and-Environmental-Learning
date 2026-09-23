@@ -1,0 +1,181 @@
+---
+id: "how-tsunamis-form"
+title: "Tsunamis: How a Distant Earthquake Becomes a Wave"
+tagline: "Megathrust Seafloor Uplift, Shoaling Amplification, and the 2004 Aceh Tragedy"
+description: "Discover how undersea megathrust earthquakes vertically displace ocean columns, why tsunami waves travel at 800 km/h in deep water, and how shoaling creates catastrophic coastal runups."
+topic: "natural-hazards"
+difficulty: "intermediate"
+estimatedTime: "20min"
+learningObjectives:
+  - "Explain how subduction megathrust earthquakes vertically displace the ocean column to generate tsunami waves."
+  - "Understand tsunami wave physics: long wavelength and high speed (~800 km/h) in deep ocean vs. severe speed drop and height amplification (shoaling) at the coast."
+  - "Analyze the 26 December 2004 Sumatra-Andaman Mw 9.1–9.3 disaster as an empirical case study of megathrust rupture dynamics."
+  - "Contrast the direct vertical displacement of Aceh 2004 with the indirect strike-slip submarine landslide trigger of Palu 2018."
+prerequisites:
+  - "why-do-earthquakes-happen"
+interactiveElements:
+  - id: "tsunami-propagation-diagram"
+    type: "diagram"
+    title: "Tsunami Wave Propagation & Shoaling Physics"
+    pedagogicalPurpose: "Visualizes the transition from deep-ocean long-wavelength propagation to shallow coastal shoaling amplification, plus a comparative contrast between Aceh 2004 and Palu 2018."
+    isIllustrativeModel: true
+    accessibleFallbackText: "A bathymetric cross-section showing open ocean wave speed, coastal shoaling height amplification, and fault displacement mechanics."
+quiz:
+  quizId: "quiz-how-tsunamis-form"
+  title: "Tsunami Physics & Genesis Verification Quiz"
+  questionCount: 3
+realWorldConnections:
+  - title: "The 2004 Sumatra-Andaman Megathrust Earthquake & Aceh Tsunami"
+    locationName: "Northern Sumatra & Aceh Coast, Indonesia"
+    isIndonesiaFirst: true
+    coordinates:
+      lat: 3.316
+      lng: 95.854
+    description: "On 26 December 2004, a massive Mw 9.1–9.3 earthquake ruptured ~1,300 km of the Sunda megathrust fault off Sumatra, vertically displacing the seabed by ~15 meters. The resulting tsunami struck Aceh within 20 minutes with runup heights reaching 51 meters."
+    phenomenon: "Trans-oceanic tsunami crossing the Indian Ocean in hours, causing an estimated 227,898–230,000 fatalities across 14 nations, leading directly to the creation of the Indian Ocean Tsunami Warning System."
+    globalGeneralization: "Megathrust tsunami hazards threaten subduction coastlines globally, including the Cascadia Subduction Zone (North America), Japan Trench (Tohoku 2011), and the Chile Trench (1960/2010)."
+    geoMapSlug: "aceh-tsunami-rupture"
+geoMapConnections:
+  - locationSlug: "aceh-tsunami-rupture"
+    label: "Explore the 2004 Rupture Zone on GeoMap"
+    coordinates:
+      lat: 3.316
+      lng: 95.854
+    description: "Inspect the Sunda Megathrust subduction trench and Aceh coastal inundation topography."
+reflection:
+  - id: "refl-tsunami-evacuation"
+    prompt: "If you are near an ocean coast and feel strong, prolonged ground shaking or notice the ocean receding rapidly, why is waiting for an official phone siren often too late, and what immediate physical action should you take?"
+    placeholder: "Consider wave travel times from near-shore megathrust faults, natural warning signs, and evacuation to high ground..."
+    category: "observation"
+nextExperiences:
+  - "why-do-earthquakes-happen"
+  - "why-volcanoes-form"
+scientific:
+  source:
+    - "NOAA Science On a Sphere (2024). Tsunami Historical Series: Sumatra – 2004."
+    - "NOAA National Centers for Environmental Information (NCEI). Global Historical Tsunami Database."
+    - "Stein, S., & Okal, E. A. (2005). Speed and size of the Sumatra earthquake. Nature, 434(7033), 581-582."
+    - "Bilek, S. L. (2007). Seismicity along the South American and Sunda subduction zones. Geological Society, London, Special Publications."
+  sourceType: "government-agency"
+  lastReviewed: "2026-09-24"
+  scientificLevel: "intermediate"
+  confidence: "well-supported"
+  references:
+    - title: "Tsunami Historical Series: Sumatra – 2004"
+      publisher: "NOAA Science On a Sphere"
+      year: 2024
+    - title: "Speed and size of the Sumatra earthquake"
+      publisher: "Nature"
+      year: 2005
+    - title: "Global Historical Tsunami Database"
+      publisher: "NOAA NCEI"
+      year: 2023
+  notesOnSimplification: "Tsunami wave velocities ($v = \\sqrt{g \\cdot d}$) and shoaling height transformations are rendered as an illustrative hydrodynamics cross-section."
+review:
+  reviewStatus: "published"
+  sourceList:
+    - "NOAA SOS"
+    - "Nature"
+    - "NOAA NCEI"
+  lastReviewed: "2026-09-24"
+  contentVersion: "1.0.0"
+featured: false
+---
+
+import Quiz from '../../components/quiz/Quiz';
+import ReflectionBox from '../../components/learning/ReflectionBox';
+import RealWorldExample from '../../components/learning/RealWorldExample.astro';
+import ObservationChallenge from '../../components/learning/ObservationChallenge.astro';
+import TsunamiPropagationDiagram from '../../components/visualization/TsunamiPropagationDiagram';
+import { howTsunamisFormQuiz } from '../../data/quizzes/how-tsunamis-form';
+
+## Beat 1: The Energy of an Ocean in Motion
+
+On the morning of **26 December 2004**, thousands of kilometers away in the deep waters of the Indian Ocean, ships sailed completely unaware that a catastrophic wave was passing directly beneath them.
+
+The water rose less than a single meter as the wave passed under their hulls. Yet, within hours, that exact same wave struck the coast of **Aceh, Indonesia**, rising into a devastating wall of water **over 30 to 50 meters high** that swept kilometers inland.
+
+How does energy released deep under the seafloor turn into an invisible deep-ocean wave that becomes a catastrophic wall of water at the coast?
+
+---
+
+## Beat 2: Tsunami Genesis — Megathrust Vertical Displacement
+
+Ordinary ocean waves are generated by wind blowing across the water surface. A **tsunami**, by contrast, is generated by a massive physical movement of the **entire water column from seafloor to surface**.
+
+The primary engine of major tsunamis is an **undersea megathrust earthquake** at a convergent subduction zone:
+
+1. **Subduction Lock:** The oceanic Indo-Australian Plate grinds beneath the Sunda Plate. Friction locks the fault boundary, bending the overriding continental plate downward like a drawn bow over hundreds of years.
+2. **Elastic Rupture:** When accumulated stress exceeds friction, the locked fault ruptures violently.
+3. **Seafloor Rebound:** The overriding plate snaps upward by **10 to 20 meters** across thousands of square kilometers of seabed in seconds.
+4. **Water Column Displacement:** This instantaneous vertical uplift pushes the entire overlying mass of ocean water upward, launching tsunami wave trains radiating outward across the ocean basin.
+
+<TsunamiPropagationDiagram client:visible locale="en" />
+
+---
+
+## Beat 3: The Physics of Shoaling — Fast in the Deep, Tall on the Shore
+
+A tsunami in the open ocean behaves according to shallow-water wave physics governed by the water depth (`d`):
+
+```
+Wave Velocity: v = √(g × d)
+```
+
+where `g ≈ 9.8 m/s²` is gravitational acceleration.
+
+### In the Deep Ocean (`d ≈ 4,000 m`):
+- **Jet-Airliner Speed:** The wave travels at **~800 km/h** (200 m/s).
+- **Enormous Wavelength:** The distance between wave crests is **100 to 200 kilometers**.
+- **Imperceptible Height:** Because the immense energy is spread over such a vast wavelength, wave height is **less than 1 meter**.
+
+### As the Wave Reaches Shallow Coastal Waters (`d < 50 m`):
+- **Speed Drops:** Friction with the shallow seafloor slows the wave front to **30–50 km/h**.
+- **Wavelength Compresses:** The back of the wave, still in deeper water, catches up to the slower front, compressing the wave from 100 km down to a few kilometers.
+- **Shoaling Amplification:** Conservation of total wave energy forces the compressed water column upward. The low 1-meter swell surges into a towering, crushing wall of water (*shoaling effect*) with runup heights exceeding **20 to 51 meters** in Aceh.
+
+---
+
+## Beat 4: Contrasting Aceh 2004 vs. Palu 2018
+
+<RealWorldExample
+  title="Aceh Megathrust vs. Palu Submarine Landslide"
+  locationName="Aceh Coast vs. Palu Bay, Indonesia"
+  isIndonesiaFirst={true}
+  coordinates={{ lat: 3.316, lng: 95.854 }}
+  phenomenon="In Aceh 2004 (Mw 9.1–9.3), a primary megathrust fault rupture vertically displaced the seabed over 1,300 km. In contrast, during the 2018 Palu earthquake (Mw 7.5), a horizontal strike-slip fault did not displace the open sea, but violent shaking triggered catastrophic secondary submarine sediment landslides and coastal liquefaction collapses within narrow Palu Bay, generating a deadly localized tsunami within 3 minutes."
+  globalGeneralization="Tsunami early warning systems must account for both open-ocean megathrust events and localized strike-slip landslide triggers."
+  geoMapSlug="aceh-tsunami-rupture"
+/>
+
+---
+
+## Beat 5: Field Observation Challenge
+
+<ObservationChallenge
+  title="Recognizing Natural Tsunami Warning Signs"
+  targetPhenomenon="Identifying the physical drawdown of water before a tsunami crest arrives."
+  observationSteps={[
+    "If a tsunami wave arrives trough-first, coastal sea water recedes rapidly and unnaturally hundreds of meters offshore, exposing flopping fish and reefs.",
+    "This sudden sea drawback is a critical natural warning: you have only 5 to 10 minutes before the towering wave crest strikes.",
+    "Never walk onto the exposed seabed to look at fish.",
+    "Immediately run inland toward high ground or ascend to the upper floors of reinforced concrete buildings."
+  ]}
+/>
+
+<ReflectionBox
+  id="refl-tsunami-evacuation"
+  prompt="If you are near an ocean coast and feel strong, prolonged ground shaking or notice the ocean receding rapidly, why is waiting for an official phone siren often too late, and what immediate physical action should you take?"
+  placeholder="Consider wave travel times from near-shore megathrust faults, natural warning signs, and evacuation to high ground..."
+  category="observation"
+/>
+
+---
+
+## Beat 6: Knowledge Verification Quiz
+
+<Quiz
+  client:visible
+  quiz={howTsunamisFormQuiz}
+  locale="en"
+/>

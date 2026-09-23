@@ -1,0 +1,168 @@
+---
+id: "nutrient-cycling-tropical-soils"
+title: "Daur Hara Tanah Hutan Hujan Tropis"
+tagline: "Paradoks Kesuburan Tanah, Daur Mikoriza Cepat, dan Pelindian Pasca-Deforestasi"
+description: "Pelajari mengapa hutan hujan tropis yang rimbun tumbuh di atas tanah tua yang sangat miskin hara, bagaimana daur ulang biologis cepat bekerja, dan mengapa deforestasi memicu penurunan kesuburan yang cepat."
+topic: "environmental-systems"
+difficulty: "beginner"
+estimatedTime: "15min"
+learningObjectives:
+  - "Menjelaskan paradoks tanah tropis: mengapa kanopi hutan raksasa berdiri di atas tanah yang sangat lapuk dan miskin hara (oxisol dan ultisol)."
+  - "Mendeskripsikan daur ulang hara biologis cepat yang didorong oleh kelembapan konstan, perakaran dangkal, dan cendawan mikoriza."
+  - "Membandingkan distribusi kolam hara hutan tropis (>80% di biomassa hidup) dengan ekosistem hutan iklim sedang (~50% di humus tanah)."
+  - "Menganalisis mekanisme penurunan kesuburan pertanian yang cepat saat hutan hujan ditebang dan dibakar (tebas-bakar)."
+prerequisites: []
+interactiveElements:
+  - id: "nutrient-cycling-diagram"
+    type: "diagram"
+    title: "Kolam Hara Tropis vs Iklim Sedang & Mekanisme Pelindian"
+    pedagogicalPurpose: "Memvisualisasikan alokasi kolam hara (biomassa vs tanah) antara hutan tropis dan iklim sedang serta dampak pembukaan hutan terhadap kesuburan tanah."
+    isIllustrativeModel: true
+    accessibleFallbackText: "Diagram komparatif yang membandingkan alokasi kolam hara biomassa vs tanah antara hutan hujan tropis dan hutan iklim sedang beserta rincian pelindian deforestasi."
+quiz:
+  quizId: "quiz-nutrient-cycling-tropical-soils"
+  title: "Kuis Evaluasi Pemahaman: Daur Hara Tanah Hutan Hujan Tropis"
+  questionCount: 3
+realWorldConnections:
+  - title: "Tanah Hutan Hujan Kalimantan & Sumatra: Spons Biologis Alami"
+    locationName: "Hutan Hujan Jantung Borneo & Bukit Barisan, Indonesia"
+    isIndonesiaFirst: true
+    coordinates:
+      lat: 0.50
+      lng: 114.00
+    description: "Di hutan primer purba Kalimantan dan Sumatra, pohon-pohon meranti dan tengkawang menjulang setinggi lebih dari 60 meter. Namun tanah mineral di bawahnya adalah oxisol asam yang sangat miskin hara. Ekosistem ini bertahan hidup sepenuhnya melalui sistem daur ulang biologis tertutup."
+    phenomenon: "Jaring perakaran dangkal membentuk lapisan spons pada kedalaman 10 cm teratas tanah, menangkap ion mineral (N, P, K, Ca, Mg) dalam hitungan jam setelah serasah terurai sebelum sempat tercuci oleh hujan lebat."
+    globalGeneralization: "Prinsip daur hara tertutup hutan hujan tropis berlaku universal di seluruh bioma hutan khatulistiwa dunia, termasuk Cekungan Amazon dan Cekungan Kongo."
+    geoMapSlug: "krakatau-archipelago"
+geoMapConnections:
+  - locationSlug: "krakatau-archipelago"
+    label: "Jelajahi Bentang Alam Hutan Tropis di GeoMap"
+    coordinates:
+      lat: -6.102
+      lng: 105.423
+    description: "Periksa topografi vulkanik dan formasi vegetasi khatulistiwa di sepanjang Busur Sunda."
+reflection:
+  - id: "refl-slash-and-burn"
+    prompt: "Jika lebih dari 80% unsur hara di hutan hujan tropis tersimpan di dalam pohon-pohon yang hidup dan bukan di dalam tanah, apa yang terjadi pada produktivitas tanaman pangan pada tahun kedua dan ketiga setelah hutan ditebang dan dibakar?"
+    placeholder: "Pertimbangkan lonjakan hara abu awal, pelindian hujan lebat, hilangnya spons perakaran, dan kebutuhan pupuk..."
+    category: "connection"
+nextExperiences:
+  - "the-carbon-cycle"
+  - "the-rock-cycle"
+scientific:
+  source:
+    - "Vitousek, P. M., & Sanford, R. L. (1986). Nutrient Cycling in Moist Tropical Forest. Annual Review of Ecology and Systematics, 17, 137-167."
+    - "Sanchez, P. A. (2019). Properties and Management of Soils in the Tropics (2nd Edition). Cambridge University Press."
+    - "Brady, N. C., & Weil, R. R. (2016). The Nature and Properties of Soils (15th Edition). Pearson."
+  sourceType: "textbook"
+  lastReviewed: "2026-09-24"
+  scientificLevel: "beginner"
+  confidence: "established"
+  references:
+    - title: "Nutrient Cycling in Moist Tropical Forest"
+      publisher: "Annual Review of Ecology and Systematics"
+      year: 1986
+    - title: "Properties and Management of Soils in the Tropics"
+      publisher: "Cambridge University Press"
+      year: 2019
+    - title: "The Nature and Properties of Soils"
+      publisher: "Pearson"
+      year: 2016
+  notesOnSimplification: "Persentase kolam hara (>80% biomassa pada hutan tropis vs ~50% humus tanah pada hutan iklim sedang) merupakan tolok ukur ekologi tanah standar (Vitousek & Sanford 1986; Sanchez 2019)."
+review:
+  reviewStatus: "published"
+  sourceList:
+    - "Annual Reviews Ecology"
+    - "Cambridge University Press"
+    - "Pearson Soil Science"
+  lastReviewed: "2026-09-24"
+  contentVersion: "1.0.0"
+featured: false
+---
+
+import Quiz from '../../../components/quiz/Quiz';
+import ReflectionBox from '../../../components/learning/ReflectionBox';
+import RealWorldExample from '../../../components/learning/RealWorldExample.astro';
+import ObservationChallenge from '../../../components/learning/ObservationChallenge.astro';
+import NutrientCyclingDiagram from '../../../components/visualization/NutrientCyclingDiagram';
+import { nutrientCyclingTropicalSoilsQuiz } from '../../../data/quizzes/id/nutrient-cycling-tropical-soils';
+
+## Bagian 1: Paradoks Besar Hutan Tropis
+
+Masuklah ke dalam hutan hujan tropis alami di Kalimantan atau Sumatra. Pohon-pohon raksasa menjulang hingga 60 meter menembus langit. Ribuan jenis pakis, liana, anggrek, dan palem berdesakan di setiap jengkal lantai hutan. Dari luar, hutan ini tampak berdiri di atas tanah yang paling subur di planet Bumi.
+
+Namun, jika Anda mengambil sampel tanah di bawah pohon-pohon raksasa tersebut, para ilmuwan tanah akan membeberkan fakta mengejutkan: **tanah mineral aslinya berusia sangat tua, masam, dan luar biasa miskin akan unsur hara esensial**.
+
+Mengapa petani yang membuka hutan lebat ini dengan metode tebas-bakar sering kali mendapati tanaman pangan mereka gagal panen dan tanah kehilangan kesuburannya hanya dalam tempo dua hingga tiga tahun?
+
+---
+
+## Bagian 2: Spons Daur Hara Biologis
+
+Di daerah beriklim sedang (seperti Eropa atau Amerika Utara), musim dingin yang membekukan memperlambat pembusukan serasah daun. Daun-daun mati menumpuk di lantai hutan dan terurai sangat lambat selama bertahun-tahun menjadi lapisan tanah hitam pekat yang tebal (**humus**). Di ekosistem tersebut, sekitar **50% cadangan hara tersimpan langsung di dalam tanah**.
+
+Di hutan hujan tropis khatulistiwa, kondisinya berbanding terbalik:
+- **Panas dan Lembap Konstan:** Suhu hangat sepanjang tahun (~28°C) dan kelembapan tinggi memacu aktivitas bakteri, jamur, dan serangga pengurai. Daun yang gugur membusuk hanya dalam hitungan **minggu, bukan tahun**.
+- **Daur Ulang Super Cepat:** Pengurai membebaskan ion hara seketika saat serasah menyentuh tanah.
+- **Spons Perakaran & Mikoriza:** Lebih dari 90% biomassa akar pohon tropis terkonsentrasi pada kedalaman **10 hingga 20 sentimeter teratas tanah**. Simbiosis cendawan akar (**mikoriza**) membentuk jaring mikroskopis rapat yang menyerap ion hara (Nitrogen, Fosfor, Kalium, Kalsium) seketika sebelum sempat terhanyut air hujan.
+
+Akibatnya, **lebih dari 80% hingga 90% seluruh cadangan hara di hutan hujan tropis terkunci di dalam biomassa tumbuhan hidup**, menyisakan sangat sedikit hara yang tersimpan di dalam tanah mineral di bawahnya.
+
+<NutrientCyclingDiagram client:visible locale="id" />
+
+---
+
+## Bagian 3: Mengapa Lahan Tebasan Cepat Menjadi Tandus
+
+Memahami di mana hara tersimpan menjelaskan mengapa deforestasi memicu pemiskinan tanah yang sangat cepat:
+
+1. **Brankas Hara Lenyap:** Ketika hutan ditebang atau dibakar, biomassa hidup yang menampung 80% hara ekosistem musnah atau diangkut keluar.
+2. **Lonjakan Abu Sementara (Tahun ke-1):** Abu hasil pembakaran batang kayu menyumbang lapisan hara sementara pada tanah atas, memberi kesuburan semu pada musim tanam pertama.
+3. **Pelindian Hujan Lebat (Tahun ke-2 dan 3):** Hujan badai tropis mencurahkan lebih dari **3.000 milimeter air per tahun**. Tanpa kanopi pelindung dan tanpa spons akar mikoriza, air hujan yang lebat melarutkan dan mencuci kation hara (*leaching*) ke lapisan tanah dalam di luar jangkauan akar tanaman pangan.
+4. **Fiksasi Tanah Masam:** Mineral tanah yang tersisa—didominasi oleh oksida besi dan aluminium (**oxisol dan ultisol**)—mengikat unsur fosfor secara kimiawi sehingga tidak dapat diserap oleh tanaman pertanian tanpa pemupukan intensif.
+
+---
+
+## Bagian 4: Hubungan Dunia Nyata Indonesia — Tanah Hutan Tropis Kalimantan
+
+<RealWorldExample
+  title="Daur Hara Jantung Borneo"
+  locationName="Kalimantan, Indonesia"
+  isIndonesiaFirst={true}
+  coordinates={{ lat: 0.50, lng: 114.00 }}
+  phenomenon="Di hutan dipterokarpa purba Kalimantan, pepohonan beradaptasi terhadap tanah miskin hara dengan membentuk akar banir raksasa dan jaring akar permukaan yang sangat padat. Riset ekologi membuktikan jaring akar ini menangkap lebih dari 95% hara terlarut dari air hujan dan serasah sebelum sempat merembes ke tanah bawah."
+  globalGeneralization="Model daur hara biologis tertutup ini berlaku universal di seluruh bioma hutan hujan tropis khatulistiwa, mulai dari Amazon hingga Cekungan Kongo."
+  geoMapSlug="krakatau-archipelago"
+/>
+
+---
+
+## Bagian 5: Tantangan Observasi Lapangan
+
+<ObservationChallenge
+  title="Mengamati Lapisan Spons Akar di Lantai Hutan"
+  targetPhenomenon="Mengidentifikasi konsentrasi akar permukaan dan dekomposisi serasah cepat."
+  observationSteps={[
+    "Kunjungilah hutan alami, kebun raya, atau taman rimbun di sekitar Anda.",
+    "Singkapkan sedikit lapisan teratas daun-daun cokelat yang gugur.",
+    "Perhatikan betapa tipisnya lapisan tanah organik gelap (sering kali hanya setebal 2–5 cm).",
+    "Amati jaring serabut akar putih halus dan benang jamur yang merajut langsung di sela-sela daun yang membusuk—inilah spons penyerap hara hidup yang sedang bekerja!"
+  ]}
+/>
+
+<ReflectionBox
+  id="refl-slash-and-burn"
+  prompt="Jika lebih dari 80% unsur hara di hutan hujan tropis tersimpan di dalam pohon-pohon yang hidup dan bukan di dalam tanah, apa yang terjadi pada produktivitas tanaman pangan pada tahun kedua dan ketiga setelah hutan ditebang dan dibakar?"
+  placeholder="Pertimbangkan lonjakan hara abu awal, pelindian hujan lebat, hilangnya spons perakaran, dan kebutuhan pupuk..."
+  category="connection"
+/>
+
+---
+
+## Bagian 6: Kuis Evaluasi Pemahaman
+
+<Quiz
+  client:visible
+  quiz={nutrientCyclingTropicalSoilsQuiz}
+  locale="id"
+/>

@@ -1,0 +1,172 @@
+---
+id: "jakarta-sinking-city-groundwater"
+title: "Where Does Groundwater Go? Jakarta's Sinking City"
+tagline: "Aquifers, Depressurization, and Irreversible Coastal Subsidence"
+description: "Investigate why Jakarta is sinking up to 12 cm per year due to excessive deep groundwater extraction, pore pressure loss, and irreversible clay compaction."
+topic: "hydrology"
+difficulty: "intermediate"
+estimatedTime: "20min"
+learningObjectives:
+  - "Understand the mechanics of unconfined and confined aquifers and pore-water pressure."
+  - "Explain how excessive groundwater pumping causes hydraulic depressurization and permanent clay compaction."
+  - "Analyze the documented 3–12 cm/year land subsidence in North Jakarta (Ancol) as an empirical case study."
+  - "Connect human hydrological resource extraction to geological surface deformation and coastal tidal flood risks."
+prerequisites: []
+interactiveElements:
+  - id: "subsidence-simulator-diagram"
+    type: "slider"
+    title: "Jakarta Aquifer Extraction & Land Subsidence Simulator"
+    pedagogicalPurpose: "Interactive simulation showing the mechanical link between deep extraction rates, pore pressure deficit, clay layer compaction, and ground surface drop."
+    isIllustrativeModel: true
+    accessibleFallbackText: "An interactive cross-section simulator displaying groundwater pumping from a deep confined aquifer, irreversible clay aquitard compaction, and sea-wall flood risk."
+quiz:
+  quizId: "quiz-jakarta-sinking-city-groundwater"
+  title: "Jakarta's Sinking City & Groundwater Verification Quiz"
+  questionCount: 3
+realWorldConnections:
+  - title: "North Jakarta & Ancol: Subsidence Hotspots on the Coast"
+    locationName: "Ancol & Muara Baru, North Jakarta, Indonesia"
+    isIndonesiaFirst: true
+    coordinates:
+      lat: -6.12
+      lng: 106.84
+    description: "North Jakarta's coastal neighborhoods have recorded subsidence rates of 3–10 cm/year, with some monitoring stations recording up to 12 cm/year. As a result, approximately 40% of Jakarta currently sits below sea level, protected only by concrete sea walls."
+    phenomenon: "Piping water access deficits forced widespread deep well extraction. Over 80–90% of observed ground subsidence has been scientifically traced by ITB researchers to this deep aquifer extraction."
+    globalGeneralization: "Anthropogenic groundwater-induced subsidence affects major river delta megacities worldwide, including Bangkok (Thailand), Mexico City (Mexico), and the Central Valley (California)."
+    geoMapSlug: "jakarta-ancol-subsidence"
+geoMapConnections:
+  - locationSlug: "jakarta-ancol-subsidence"
+    label: "Explore Jakarta Subsidence Hotspots on GeoMap"
+    coordinates:
+      lat: -6.12
+      lng: 106.84
+    description: "Inspect low-lying delta terrain and coastal sea wall defenses along Jakarta Bay."
+reflection:
+  - id: "refl-groundwater-tradeoffs"
+    prompt: "What complex trade-offs does a coastal megacity like Jakarta face in trying to rapidly halt groundwater extraction, given that millions of residents and industries currently lack access to piped municipal water?"
+    placeholder: "Consider municipal water infrastructure costs, river pollution, urban planning, and sea-wall engineering..."
+    category: "connection"
+nextExperiences:
+  - "the-rock-cycle"
+  - "peatlands-carbon-storage-or-release"
+scientific:
+  source:
+    - "Abidin, H. Z., et al. (2011). Land subsidence of Jakarta (Indonesia) and its relation with urban development. Natural Hazards, 59(3), 1753-1771."
+    - "International Journal of Technology (2017). Land subsidence characteristics of Jakarta City."
+    - "Badan Geologi / ESDM Indonesia (2023). Hydrogeological assessment of the Jakarta Groundwater Basin."
+    - "Firdaus, A. (2010). Geotechnical analysis of Jakarta coastal subsidence. The Jakarta Post."
+  sourceType: "peer-reviewed"
+  lastReviewed: "2026-09-24"
+  scientificLevel: "intermediate"
+  confidence: "well-supported"
+  references:
+    - title: "Land subsidence of Jakarta and its relation with urban development"
+      publisher: "Natural Hazards (Springer)"
+      year: 2011
+    - title: "Land Subsidence Characteristics of Jakarta City based on InSAR and GPS"
+      publisher: "International Journal of Technology"
+      year: 2017
+    - title: "Hydrogeological Assessment of Jakarta Groundwater Basin"
+      publisher: "Badan Geologi ESDM"
+      year: 2023
+  notesOnSimplification: "The relationship between pumping rate and clay compaction is rendered as an illustrative geotechnical model demonstrating pore-pressure equilibrium."
+review:
+  reviewStatus: "published"
+  sourceList:
+    - "Springer Natural Hazards"
+    - "IJTech"
+    - "Badan Geologi ESDM"
+  lastReviewed: "2026-09-24"
+  contentVersion: "1.0.0"
+featured: false
+---
+
+import Quiz from '../../components/quiz/Quiz';
+import ReflectionBox from '../../components/learning/ReflectionBox';
+import RealWorldExample from '../../components/learning/RealWorldExample.astro';
+import ObservationChallenge from '../../components/learning/ObservationChallenge.astro';
+import SubsidenceSimulator from '../../components/visualization/SubsidenceSimulator';
+import { jakartaSinkingCityGroundwaterQuiz } from '../../data/quizzes/jakarta-sinking-city-groundwater';
+
+## Beat 1: The Sinking Megacity
+
+Parts of **Jakarta**, home to over 10 million people, are sinking faster than almost any other coastal metropolis on the planet. Along the northern coast in districts like Muara Baru and Ancol, the ground has dropped by **up to 12 centimeters per year**.
+
+Today, roughly **40% of Jakarta's land area sits below sea level**, held back from catastrophic daily flooding only by a concrete coastal sea wall that must continually be built higher.
+
+Where is the ground beneath Jakarta actually going? Is the city simply too heavy, or is an unseen hydrological process pulling the foundation out from beneath the city?
+
+---
+
+## Beat 2: Aquifers and Pore-Water Pressure Mechanics
+
+The soil beneath Jakarta is not solid rock; it is a stack of soft, unconsolidated sediment layers deposited over thousands of years by the Ciliwung and surrounding rivers:
+
+1. **Unconfined Shallow Aquifers:** Near-surface sand and silt layers holding shallow water. In dense urban areas, this water is frequently polluted by surface runoff.
+2. **Confined Deep Aquifers:** Deep sand and gravel layers (100–300 m underground) containing clean, pressurized freshwater.
+3. **Compressible Marine Clay Aquitards:** Thick, dense clay layers sandwiched between the aquifers.
+
+### The Physics of Pore Pressure
+In an undisturbed aquifer, water fills the microscopic spaces (pores) between sediment grains. This trapped water exerts **hydrostatic pore pressure** that helps push upward against the immense weight of the overlying ground, buildings, and soil.
+
+When millions of liters of deep groundwater are pumped out each day to supply industries, hotels, and households that lack piped municipal water, **pore pressure drops sharply**.
+
+Without the upward hydraulic support of water, the full overburden weight of the city crushes the compressible clay layers. Microscopic clay flakes collapse and pack tightly together. The clay layer shrinks in thickness—and **the ground surface above sinks**.
+
+<SubsidenceSimulator client:visible locale="en" />
+
+---
+
+## Beat 3: The Irreversible Trap of Clay Compaction
+
+A critical geological reality of land subsidence is that **clay compaction is mechanically plastic and irreversible**.
+
+Unlike a flexible elastic sponge that springs back when re-submerged in water, clay minerals realign into an interlocking, dense crystal structure once crushed under lithostatic pressure. Even if all groundwater pumping were to stop tomorrow, the compacted clay layers will **never expand back to their original thickness**.
+
+The ground that has sunk into the sea is permanently lost to the ocean unless engineered barriers and artificial reclamation are maintained.
+
+---
+
+## Beat 4: Indonesian Real-World Anchor — The Science Behind Jakarta's Sinking
+
+<RealWorldExample
+  title="ITB Geodesy & The North Jakarta Subsidence Hotspots"
+  locationName="Ancol & Muara Baru, North Jakarta, Indonesia"
+  isIndonesiaFirst={true}
+  coordinates={{ lat: -6.12, lng: 106.84 }}
+  phenomenon="Continuous GPS monitoring and InSAR satellite radar data by Bandung Institute of Technology (ITB) researchers (led by Prof. Hasanuddin Z. Abidin) revealed that excessive groundwater extraction accounts for 80% to 90% of total land subsidence across Jakarta."
+  globalGeneralization="Land subsidence due to groundwater mining is a shared crisis across global river deltas, including Tokyo (which successfully halted sinking in the 1970s by banning deep groundwater pumping and supplying piped surface water) and Bangkok."
+  geoMapSlug="jakarta-ancol-subsidence"
+/>
+
+---
+
+## Beat 5: Field Observation Challenge
+
+<ObservationChallenge
+  title="Spotting Subsidence Signs in Urban Pavements"
+  targetPhenomenon="Identifying mechanical differential settlement in coastal infrastructure."
+  observationSteps={[
+    "Look at older buildings, bridges, and sea walls in coastal North Jakarta.",
+    "Observe doorways or ground-floor steps that have dropped below street asphalt level.",
+    "Notice bridge abutments where the road has subsided away from the deep-piloted concrete foundation.",
+    "Look at the height of high-tide sea water against the outside of coastal sea walls relative to the city streets behind them."
+  ]}
+/>
+
+<ReflectionBox
+  id="refl-groundwater-tradeoffs"
+  prompt="What complex trade-offs does a coastal megacity like Jakarta face in trying to rapidly halt groundwater extraction, given that millions of residents and industries currently lack access to piped municipal water?"
+  placeholder="Consider municipal water infrastructure costs, river pollution, urban planning, and sea-wall engineering..."
+  category="connection"
+/>
+
+---
+
+## Beat 6: Knowledge Verification Quiz
+
+<Quiz
+  client:visible
+  quiz={jakartaSinkingCityGroundwaterQuiz}
+  locale="en"
+/>

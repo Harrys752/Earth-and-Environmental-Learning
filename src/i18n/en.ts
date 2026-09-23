@@ -82,6 +82,7 @@ export const en = {
     time: {
       '5min': '5 min',
       '10min': '10 min',
+      '15min': '15 min',
       '20min': '20 min',
       '30plus': '30+ min',
     },

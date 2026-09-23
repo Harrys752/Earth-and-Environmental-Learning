@@ -97,7 +97,7 @@ const experiences = defineCollection({
     description: z.string(),
     topic: z.string(), // topic slug
     difficulty: z.enum(['beginner', 'intermediate', 'advanced']),
-    estimatedTime: z.enum(['5min', '10min', '20min', '30plus']),
+    estimatedTime: z.enum(['5min', '10min', '15min', '20min', '30plus']),
     learningObjectives: z.array(z.string()).min(1),
     prerequisites: z.array(z.string()).default([]),
     interactiveElements: z.array(interactiveElementSchema).default([]),

@@ -23,10 +23,10 @@ describe('Dist Build Artifact Integrity', () => {
 
   it('builds expected static pages including all English and Indonesian routes', () => {
     const htmlFiles = getHtmlFiles(distDir);
-    expect(htmlFiles.length).toBeGreaterThanOrEqual(55);
+    expect(htmlFiles.length).toBeGreaterThanOrEqual(80);
 
     const expectedPages = [
-      // English Experiences
+      // English Experiences (17 total)
       'learn/why-volcanoes-form/index.html',
       'learn/how-rain-forms/index.html',
       'learn/reading-rock-layers/index.html',
@@ -35,13 +35,27 @@ describe('Dist Build Artifact Integrity', () => {
       'learn/why-are-there-climate-zones/index.html',
       'learn/what-fossils-tell-us/index.html',
       'learn/why-do-landslides-happen/index.html',
-      // English Topics
+      'learn/whats-inside-the-earth/index.html',
+      'learn/what-makes-a-mineral-a-mineral/index.html',
+      'learn/jakarta-sinking-city-groundwater/index.html',
+      'learn/indonesian-throughflow/index.html',
+      'learn/how-tsunamis-form/index.html',
+      'learn/ecosystem-recovery-after-eruption/index.html',
+      'learn/the-carbon-cycle/index.html',
+      'learn/peatlands-carbon-storage-or-release/index.html',
+      'learn/nutrient-cycling-tropical-soils/index.html',
+      // English Topics (11 total)
       'explore/topics/plate-tectonics/index.html',
       'explore/topics/atmosphere/index.html',
       'explore/topics/geology/index.html',
       'explore/topics/natural-hazards/index.html',
       'explore/topics/climate/index.html',
       'explore/topics/paleontology/index.html',
+      'explore/topics/earth-structure/index.html',
+      'explore/topics/minerals/index.html',
+      'explore/topics/hydrology/index.html',
+      'explore/topics/environmental-systems/index.html',
+      'explore/topics/sustainability/index.html',
       // Indonesian Hubs & Base Pages
       'id/index.html',
       'id/about/index.html',
@@ -56,7 +70,7 @@ describe('Dist Build Artifact Integrity', () => {
       'id/journey/timeline/index.html',
       'id/journey/reflections/index.html',
       'id/journey/projects/index.html',
-      // Indonesian Translated & Fallback Experiences (ALL 8 exist)
+      // Indonesian Translated & Fallback Experiences (ALL 17 exist)
       'id/learn/why-volcanoes-form/index.html',
       'id/learn/how-rain-forms/index.html',
       'id/learn/reading-rock-layers/index.html',
@@ -65,13 +79,27 @@ describe('Dist Build Artifact Integrity', () => {
       'id/learn/why-are-there-climate-zones/index.html',
       'id/learn/what-fossils-tell-us/index.html',
       'id/learn/why-do-landslides-happen/index.html',
-      // Indonesian Translated & Fallback Topics (ALL 6 exist)
+      'id/learn/whats-inside-the-earth/index.html',
+      'id/learn/what-makes-a-mineral-a-mineral/index.html',
+      'id/learn/jakarta-sinking-city-groundwater/index.html',
+      'id/learn/indonesian-throughflow/index.html',
+      'id/learn/how-tsunamis-form/index.html',
+      'id/learn/ecosystem-recovery-after-eruption/index.html',
+      'id/learn/the-carbon-cycle/index.html',
+      'id/learn/peatlands-carbon-storage-or-release/index.html',
+      'id/learn/nutrient-cycling-tropical-soils/index.html',
+      // Indonesian Translated & Fallback Topics (ALL 11 exist)
       'id/explore/topics/plate-tectonics/index.html',
       'id/explore/topics/atmosphere/index.html',
       'id/explore/topics/geology/index.html',
       'id/explore/topics/natural-hazards/index.html',
       'id/explore/topics/climate/index.html',
       'id/explore/topics/paleontology/index.html',
+      'id/explore/topics/earth-structure/index.html',
+      'id/explore/topics/minerals/index.html',
+      'id/explore/topics/hydrology/index.html',
+      'id/explore/topics/environmental-systems/index.html',
+      'id/explore/topics/sustainability/index.html',
     ];
 
     for (const ep of expectedPages) {

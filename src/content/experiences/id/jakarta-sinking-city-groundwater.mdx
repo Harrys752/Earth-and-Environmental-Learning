@@ -1,0 +1,172 @@
+---
+id: "jakarta-sinking-city-groundwater"
+title: "Ke Mana Air Tanah Pergi? Kota Jakarta yang Ambles"
+tagline: "Akuifer, Penurunan Tekanan Pori, dan Amblesan Tanah Pesisir Permanen"
+description: "Selidiki mengapa Jakarta ambles hingga 12 cm per tahun akibat penyedotan air tanah dalam yang berlebihan, hilangnya tekanan pori, dan pemadatan lempung yang tidak dapat pulih."
+topic: "hydrology"
+difficulty: "intermediate"
+estimatedTime: "20min"
+learningObjectives:
+  - "Memahami mekanika akuifer bebas dan tertekan serta tekanan air pori tanah."
+  - "Menjelaskan bagaimana pemompaan air tanah berlebih memicu penurunan tekanan hidrolik dan pemadatan lapisan lempung permanen."
+  - "Menganalisis data empiris penurunan muka tanah 3–12 cm/tahun di Jakarta Utara (Ancol)."
+  - "Menghubungkan eksploitasi sumber daya air tanah dengan deformasi permukaan geologis dan ancaman banjir pasang rob."
+prerequisites: []
+interactiveElements:
+  - id: "subsidence-simulator-diagram"
+    type: "slider"
+    title: "Simulator Ekstraksi Akuifer & Penurunan Tanah Jakarta"
+    pedagogicalPurpose: "Simulasi interaktif yang menunjukkan hubungan mekanis antara laju ekstraksi dalam, defisit tekanan pori, pemadatan lempung, dan amblesan muka tanah."
+    isIllustrativeModel: true
+    accessibleFallbackText: "Simulator penampang interaktif yang menampilkan pemompaan air tanah dari akuifer dalam tertekan, pemadatan lapisan lempung permanen, dan risiko banjir di balik tanggul laut."
+quiz:
+  quizId: "quiz-jakarta-sinking-city-groundwater"
+  title: "Kuis Evaluasi Pemahaman: Mengapa Jakarta Tenggelam & Air Tanah"
+  questionCount: 3
+realWorldConnections:
+  - title: "Jakarta Utara & Ancol: Hotspot Penurunan Tanah di Pesisir"
+    locationName: "Ancol & Muara Baru, Jakarta Utara, Indonesia"
+    isIndonesiaFirst: true
+    coordinates:
+      lat: -6.12
+      lng: 106.84
+    description: "Kawasan pesisir Jakarta Utara mencatat laju amblesan 3–10 cm/tahun, dengan beberapa stasiun pemantau mencatat hingga 12 cm/tahun. Akibatnya, sekitar 40% wilayah Jakarta saat ini berada di bawah permukaan laut, dilindungi tanggul laut beton."
+    phenomenon: "Keterbatasan jaringan perpipaan air bersih memaksa ekstraksi sumur dalam massal. Lebih dari 80–90% amblesan tanah yang terjadi telah dibuktikan secara ilmiah oleh para peneliti ITB bersumber dari penyedotan air tanah dalam ini."
+    globalGeneralization: "Penurunan muka tanah antropogenik akibat ekstraksi air tanah memengaruhi kota-kota delta sungai besar di seluruh dunia, termasuk Bangkok (Thailand), Mexico City (Meksiko), dan Central Valley (California)."
+    geoMapSlug: "jakarta-ancol-subsidence"
+geoMapConnections:
+  - locationSlug: "jakarta-ancol-subsidence"
+    label: "Jelajahi Hotspot Penurunan Tanah Jakarta di GeoMap"
+    coordinates:
+      lat: -6.12
+      lng: 106.84
+    description: "Periksa bentang delta rendah dan tanggul laut penahan rob di sepanjang Teluk Jakarta."
+reflection:
+  - id: "refl-groundwater-tradeoffs"
+    prompt: "Dilema rumit apakah yang dihadapi megapolitan pesisir seperti Jakarta dalam upaya menghentikan total penyedotan air tanah, mengingat jutaan warga dan sektor industri belum memiliki akses pipa air bersih perpipaan?"
+    placeholder: "Pertimbangkan biaya infrastruktur air minum, pencemaran sungai, tata ruang kota, dan rekayasa tanggul laut..."
+    category: "connection"
+nextExperiences:
+  - "the-rock-cycle"
+  - "peatlands-carbon-storage-or-release"
+scientific:
+  source:
+    - "Abidin, H. Z., et al. (2011). Land subsidence of Jakarta (Indonesia) and its relation with urban development. Natural Hazards, 59(3), 1753-1771."
+    - "International Journal of Technology (2017). Land subsidence characteristics of Jakarta City."
+    - "Badan Geologi / ESDM Indonesia (2023). Hydrogeological assessment of the Jakarta Groundwater Basin."
+    - "Firdaus, A. (2010). Geotechnical analysis of Jakarta coastal subsidence. The Jakarta Post."
+  sourceType: "peer-reviewed"
+  lastReviewed: "2026-09-24"
+  scientificLevel: "intermediate"
+  confidence: "well-supported"
+  references:
+    - title: "Land subsidence of Jakarta and its relation with urban development"
+      publisher: "Natural Hazards (Springer)"
+      year: 2011
+    - title: "Land Subsidence Characteristics of Jakarta City based on InSAR and GPS"
+      publisher: "International Journal of Technology"
+      year: 2017
+    - title: "Hydrogeological Assessment of Jakarta Groundwater Basin"
+      publisher: "Badan Geologi ESDM"
+      year: 2023
+  notesOnSimplification: "Hubungan antara laju pemompaan dan pemadatan lempung dimodelkan secara skematis untuk mendemonstrasikan kesetimbangan tekanan pori geoteknik."
+review:
+  reviewStatus: "published"
+  sourceList:
+    - "Springer Natural Hazards"
+    - "IJTech"
+    - "Badan Geologi ESDM"
+  lastReviewed: "2026-09-24"
+  contentVersion: "1.0.0"
+featured: false
+---
+
+import Quiz from '../../../components/quiz/Quiz';
+import ReflectionBox from '../../../components/learning/ReflectionBox';
+import RealWorldExample from '../../../components/learning/RealWorldExample.astro';
+import ObservationChallenge from '../../../components/learning/ObservationChallenge.astro';
+import SubsidenceSimulator from '../../../components/visualization/SubsidenceSimulator';
+import { jakartaSinkingCityGroundwaterQuiz } from '../../../data/quizzes/id/jakarta-sinking-city-groundwater';
+
+## Bagian 1: Megapolitan yang Tenggelam
+
+Sebagian wilayah **Jakarta**, rumah bagi lebih dari 10 juta jiwa, tenggelam lebih cepat dibandingkan hampir seluruh kota pesisir lain di planet Bumi. Di sepanjang pesisir utara seperti Muara Baru dan Ancol, permukaan tanah ambles dengan laju **mencapai 12 sentimeter per tahun**.
+
+Saat ini, sekitar **40% wilayah daratan Jakarta sudah berada di bawah permukaan air laut**, tertahan dari banjir pasang rob harian hanya oleh dinding tanggul laut beton yang harus terus-menerus ditinggikan.
+
+Ke manakah tanah di bawah Jakarta sebenarnya pergi? Apakah kota ini terlalu berat menanggung beban gedung, ataukah ada proses hidrologi tak kasat mata yang meruntuhkan fondasi dari bawah tanah?
+
+---
+
+## Bagian 2: Akuifer & Mekanika Tekanan Air Pori
+
+Tanah di bawah Jakarta bukanlah batuan masif pejal; melainkan tumpukan lapisan sedimen aluvial lunak yang diendapkan selama ribuan tahun oleh Sungai Ciliwung dan sungai-sungai sekitarnya:
+
+1. **Akuifer Dangkal Bebas:** Lapisan pasir dan lanau dekat permukaan. Di permukiman padat perkotaan, air tanah dangkal ini kerap tercemar limbah domestik.
+2. **Akuifer Dalam Tertekan:** Lapisan pasir dan kerikil di kedalaman 100–300 meter yang mengandung air tawar bersih bertekanan hidraulik tinggi.
+3. **Lapisan Lempung Mampat (Aquitard):** Lapisan tanah lempung laut tebal yang berada di antara lapisan-lapisan akuifer.
+
+### Fisika Tekanan Pori
+Pada akuifer alami yang seimbang, air mengisi rongga pori-pori mikroskopis di antara butiran sedimen. Air yang terperangkap ini memberikan **tekanan air pori hidrostatis** yang ikut menopang beban berat tanah, bangunan, dan infrastruktur di atasnya.
+
+Ketika jutaan liter air tanah dalam disedot setiap hari oleh industri, pusat perbelanjaan, dan warga yang belum terlayani jaringan pipa air bersih, **tekanan air pori hidrostatik anjlok drastis**.
+
+Tanpa sokongan hidraulik air, seluruh beban vertikal kota menekan lapisan lempung yang dapat mampat. Lempengan lempung mikroskopis runtuh dan merapat satu sama lain. Ketebalan lapisan lempung menyusut—dan **permukaan tanah di atasnya ambles ke bawah**.
+
+<SubsidenceSimulator client:visible locale="id" />
+
+---
+
+## Bagian 3: Jebakan Deformasi Lempung Permanen (Tak Dapat Balik)
+
+Kenyataan geologis paling krusial dari amblesan tanah adalah bahwa **pemadatan lempung bersifat plastis dan permanen (irreversible)**.
+
+Tidak seperti spons elastis yang dapat membal kembali saat dicelupkan ke dalam air, butiran mineral lempung yang telah runtuh di bawah tekanan beban tanah menyusun ulang kisi atomnya menjadi struktur padat terkunci. Sekalipun seluruh penyedotan air tanah dihentikan total esok hari, lapisan lempung yang telah memadat **tidak akan pernah mengembang kembali ke ketebalan semula**.
+
+Daratan yang telah ambles ke bawah muka air laut telah hilang secara permanen kecuali ditopang oleh tanggul dan pompa buatan manusia.
+
+---
+
+## Bagian 4: Hubungan Dunia Nyata Indonesia — Kajian Ilmiah Amblesan Jakarta
+
+<RealWorldExample
+  title="Riset Geodesi ITB & Hotspot Amblesan Jakarta Utara"
+  locationName="Ancol & Muara Baru, Jakarta Utara, Indonesia"
+  isIndonesiaFirst={true}
+  coordinates={{ lat: -6.12, lng: 106.84 }}
+  phenomenon="Pemantauan GPS kontinu dan citra radar satelit InSAR oleh para peneliti Institut Teknologi Bandung (dipimpin Prof. Hasanuddin Z. Abidin) membuktikan bahwa penyedotan air tanah dalam yang berlebihan bertanggung jawab atas 80% hingga 90% dari total amblesan tanah di Jakarta."
+  globalGeneralization="Amblesan tanah akibat penambangan air tanah adalah krisis bersama di delta-delta sungai dunia, termasuk Tokyo (yang berhasil menghentikan penurunan tanah pada tahun 1970-an dengan melarang pompa air tanah dalam dan menggantinya dengan pipa air permukaan) serta Bangkok."
+  geoMapSlug="jakarta-ancol-subsidence"
+/>
+
+---
+
+## Bagian 5: Tantangan Observasi Lapangan
+
+<ObservationChallenge
+  title="Mengamati Jejak Penurunan Tanah di Kota"
+  targetPhenomenon="Mengidentifikasi penurunan tanah diferensial pada infrastruktur pesisir."
+  observationSteps={[
+    "Amati bangunan tua, jembatan, atau dermaga di kawasan pesisir Jakarta Utara.",
+    "Perhatikan pintu masuk atau anak tangga lantai dasar yang posisinya sudah berada di bawah aspal jalan raya.",
+    "Lihat pangkal jembatan di mana aspal jalan ambles turun menjauhi tiang pancang jembatan yang tertancap ke batuan keras dalam.",
+    "Bandingkan tinggi muka air laut pasang di luar tanggul laut dengan ketinggian jalan permukiman di belakangnya."
+  ]}
+/>
+
+<ReflectionBox
+  id="refl-groundwater-tradeoffs"
+  prompt="Dilema rumit apakah yang dihadapi megapolitan pesisir seperti Jakarta dalam upaya menghentikan total penyedotan air tanah, mengingat jutaan warga dan sektor industri belum memiliki akses pipa air bersih perpipaan?"
+  placeholder="Pertimbangkan biaya infrastruktur air minum, pencemaran sungai, tata ruang kota, dan rekayasa tanggul laut..."
+  category="connection"
+/>
+
+---
+
+## Bagian 6: Kuis Evaluasi Pemahaman
+
+<Quiz
+  client:visible
+  quiz={jakartaSinkingCityGroundwaterQuiz}
+  locale="id"
+/>

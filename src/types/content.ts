@@ -4,7 +4,7 @@
 
 export type DifficultyLevel = 'beginner' | 'intermediate' | 'advanced';
 
-export type EstimatedTimeBucket = '5min' | '10min' | '20min' | '30plus';
+export type EstimatedTimeBucket = '5min' | '10min' | '15min' | '20min' | '30plus';
 
 export type ScientificSourceType =
   | 'textbook'

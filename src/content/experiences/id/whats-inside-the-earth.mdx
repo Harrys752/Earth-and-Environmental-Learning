@@ -1,0 +1,169 @@
+---
+id: "whats-inside-the-earth"
+title: "Apa Isi di Dalam Bumi?"
+tagline: "Lapisan Keplanetan, Gelombang Seismik, dan Membaca Interior Dalam Bumi"
+description: "Pelajari bagaimana geofisikawan memetakan interior konsentris Bumi—kerak, mantel konvektif, inti luar cair, dan inti dalam padat—menggunakan gelombang kejut seismik gempa dan zona bayangan."
+topic: "earth-structure"
+difficulty: "beginner"
+estimatedTime: "15min"
+learningObjectives:
+  - "Mengidentifikasi lapisan internal utama Bumi: kerak, mantel, inti luar, dan inti dalam."
+  - "Memahami bagaimana komposisi, wujud fisik, dan temperatur berubah dari permukaan hingga ke pusat planet."
+  - "Menjelaskan bagaimana gelombang seismik P dan gelombang S mengungkap struktur interior Bumi melalui zona bayangan global."
+  - "Menghubungkan fisika gempa bumi dengan pencitraan keplanetan: gempa bumi adalah instrumen yang digunakan ilmuwan untuk 'melihat' isi Bumi."
+prerequisites: []
+interactiveElements:
+  - id: "earth-layers-diagram"
+    type: "diagram"
+    title: "Lapisan Konsentris Bumi & Lintasan Gelombang Seismik"
+    pedagogicalPurpose: "Diagram interaktif untuk mengeksplorasi kedalaman lapisan, suhu, wujud fisik, dan zona bayangan gelombang S."
+    isIllustrativeModel: true
+    accessibleFallbackText: "Diagram penampang lapisan internal Bumi yang menampilkan kerak, mantel, inti luar cair, dan inti dalam padat beserta lintasan gelombang seismik."
+quiz:
+  quizId: "quiz-whats-inside-the-earth"
+  title: "Kuis Evaluasi Pemahaman: Apa Isi di Dalam Bumi?"
+  questionCount: 3
+realWorldConnections:
+  - title: "Pemboran Kola Superdeep vs. Kedalaman Interior Bumi"
+    locationName: "Zapolyarny, Semenanjung Kola, Rusia"
+    isIndonesiaFirst: false
+    coordinates:
+      lat: 69.396
+      lng: 30.609
+    description: "Lubang bor terdalam yang pernah dibuat manusia mencapai kedalaman 12.262 meter (12,2 km). Meskipun merupakan pencapaian teknik luar biasa, pemboran ini baru menembus sepertiga kerak benua, membuktikan bahwa pemetaan planet harus mengandalkan data seismik geofisika tidak langsung."
+    phenomenon: "Tekanan litostatik ekstrem dan suhu tinggi (~180°C) menghentikan pemboran di kedalaman 12,2 km, menyisakan 99,8% jari-jari Bumi (6.371 km) yang mustahil dijangkau dengan pengambilan sampel fisik langsung."
+    globalGeneralization: "Jaringan seismologi di seluruh dunia merekam gempa bumi global secara terus-menerus, memanfaatkan tomografi seismik untuk memetakan arus konveksi mantel dan batas inti-mantel."
+    geoMapSlug: "java-volcanic-arc"
+geoMapConnections:
+  - locationSlug: "java-volcanic-arc"
+    label: "Jelajahi Vulkanisme Busur Sunda di GeoMap"
+    coordinates:
+      lat: -7.54
+      lng: 110.45
+    description: "Amati bagaimana pelelehan fluks di mantel dalam menyuplai deretan gunung api strato aktif di sepanjang Busur Sunda."
+reflection:
+  - id: "refl-earth-interior"
+    prompt: "Jika gempa bumi adalah alat diagnostik utama para ilmuwan untuk 'melihat' interior Bumi, bagian manakah dari interior dalam planet yang menurut Anda informasinya kurang pasti—wilayah dengan sedikit gempa, atau wilayah dengan banyak gempa?"
+    placeholder: "Pertimbangkan distribusi stasiun seismograf global dan lokasi episentrum gempa..."
+    category: "observation"
+nextExperiences:
+  - "why-do-earthquakes-happen"
+  - "why-volcanoes-form"
+scientific:
+  source:
+    - "USGS Earthquake Hazards Program (2024). Inside the Earth: Layers and Seismic Waves."
+    - "Dziewonski, A. M., & Anderson, D. L. (1981). Preliminary Reference Earth Model (PREM). Physics of the Earth and Planetary Interiors."
+    - "Tarbuck, E. J., Lutgens, F. K., & Tasa, D. (2017). Earth: An Introduction to Physical Geology. Pearson."
+  sourceType: "textbook"
+  lastReviewed: "2026-09-24"
+  scientificLevel: "beginner"
+  confidence: "established"
+  references:
+    - title: "Inside the Earth: The Interior of the Earth"
+      publisher: "USGS Educational Publication"
+      year: 2024
+    - title: "Preliminary Reference Earth Model (PREM)"
+      publisher: "Physics of the Earth and Planetary Interiors"
+      year: 1981
+    - title: "Earth: An Introduction to Physical Geology"
+      publisher: "Pearson"
+      year: 2017
+  notesOnSimplification: "Lapisan keplanetan konsentris dan lintasan gelombang seismik disajikan sebagai model bola skematis berdasarkan kerangka geofisika standar PREM."
+review:
+  reviewStatus: "published"
+  sourceList:
+    - "USGS"
+    - "PEPI PREM"
+    - "Pearson Earth Science"
+  lastReviewed: "2026-09-24"
+  contentVersion: "1.0.0"
+featured: false
+---
+
+import Quiz from '../../../components/quiz/Quiz';
+import ReflectionBox from '../../../components/learning/ReflectionBox';
+import RealWorldExample from '../../../components/learning/RealWorldExample.astro';
+import ObservationChallenge from '../../../components/learning/ObservationChallenge.astro';
+import EarthLayersDiagram from '../../../components/visualization/EarthLayersDiagram';
+import { whatsInsideTheEarthQuiz } from '../../../data/quizzes/id/whats-inside-the-earth';
+
+## Bagian 1: Lubang Bor yang Mustahil
+
+Umat manusia telah meluncurkan wahana antariksa miliaran kilometer melintasi ruang antarbintang dan mendaratkan robot penjelajah di Mars. Namun, tepat di bawah telapak kaki kita sendiri, pemboran terdalam yang pernah dilakukan manusia tidak pernah melebihi **12,2 kilometer**.
+
+Lubang bor terdalam di dunia—**Kola Superdeep Borehole** di Rusia—membutuhkan waktu hampir dua dekade kerja keras sebelum suhu batuan ekstrem (~180°C) dan tekanan litostatik yang luar biasa membuat mata bor gagal berfungsi. Jika dibandingkan dengan jari-jari planet Bumi yang mencapai **6.371 kilometer**, lubang Kola hanyalah goresan mikroskopis di permukaan: ibarat menusuk kulit apel tanpa pernah menyentuh daging buah di dalamnya.
+
+Namun, para geofisikawan mampu menjelaskan dengan kepastian ilmiah yang tinggi apa yang ada pada kedalaman 3.000 km dan 6.000 km di bawah kaki kita. Bagaimana kita bisa mengetahui isi interior Bumi jika kita tidak bisa mengebornya secara fisik?
+
+---
+
+## Bagian 2: Arsitektur Konsentris Planet Bumi
+
+Melalui metode geofisika tidak langsung, para ilmuwan memetakan bahwa interior Bumi tersusun atas empat cangkang konsentris utama yang terpisah berdasarkan massa jenisnya:
+
+1. **Kerak Bumi (0–70 km):** Lapisan batuan silikat terluar yang tipis dan rapuh. Kerak benua (dominan granit) tebal (30–70 km) dan ringan, sedangkan kerak samudra (basalt padat) tipis (5–10 km).
+2. **Mantel Bumi (70–2.890 km):** Lapisan masif batuan silikat kaya besi-magnesium (peridotit) yang mencakup **84% dari total volume Bumi**. Meskipun berwujud padat akibat tekanan sangat tinggi, mantel cukup panas untuk mengalami aliran plastis konveksi lambat selama jutaan tahun yang menggerakkan lempeng benua.
+3. **Inti Luar (2.890–5.150 km):** Lautan logam **besi dan nikel cair yang mendidih** pada suhu 4.000–5.000°C. Arus konveksi logam cair di lapisan ini bertindak sebagai dinamo alami yang membangkitkan medan geomagnetik pelindung Bumi.
+4. **Inti Dalam (5.150–6.371 km):** Bola logam padat paduan besi-nikel kristalin berukuran kira-kira sebesar Bulan. Meskipun suhunya mencapai 5.000–6.000°C (sepanas permukaan Matahari), tekanan mahadasyat (~3,6 juta atmosfer) memaksa atom-atom besi memadat menjadi kisi kristal yang kokoh.
+
+<EarthLayersDiagram client:visible locale="id" />
+
+---
+
+## Bagian 3: Gelombang Seismik — Gempa Bumi Sebagai USG Keplanetan
+
+Alat utama yang digunakan para ilmuwan untuk "melihat" ke dalam perut Bumi adalah **gempa bumi**.
+
+Saat patahan batuan robek saat gempa, terjadi pelepasan dua jenis utama gelombang seismik bodi yang merambat melintasi interior dalam Bumi:
+- **Gelombang P (Primer / Kompresional):** Gelombang tercepat. Gelombang ini mendorong dan menarik batuan searah rambatannya (seperti gelombang suara) dan mampu merambat melalui **medium padat maupun cair**.
+- **Gelombang S (Sekunder / Geser):** Gelombang yang lebih lambat dan menggetarkan batuan tegak lurus arah rambatan. Gelombang S memerlukan kekakuan geser material untuk dapat merambat, yang berarti **gelombang S tidak dapat menembus zat cair sama sekali**.
+
+Saat gempa besar terjadi, ribuan seismometer di seluruh dunia merekam waktu tiba gelombang. Para geofisikawan menemukan keanehan: stasiun seismograf di sisi Bumi yang berlawanan dari episentrum (antara sudut 103° hingga 180°) **tidak pernah menerima gelombang S langsung**.
+
+Keberadaan **zona bayangan gelombang S** global ini memberikan bukti fisik mutlak bahwa Bumi memiliki **inti luar berwujud cair** yang memblokir total perambatan gelombang geser.
+
+---
+
+## Bagian 4: Hubungan Dunia Nyata — Membor Kerak vs Memetakan Inti
+
+<RealWorldExample
+  title="Kola Superdeep Borehole & Seismologi Global"
+  locationName="Zapolyarny, Semenanjung Kola, Rusia"
+  isIndonesiaFirst={false}
+  coordinates={{ lat: 69.396, lng: 30.609 }}
+  phenomenon="Kola Superdeep Borehole mencapai kedalaman 12,2 km setelah 20 tahun pemboran. Pada kedalaman itu, batuan berperilaku seperti lempung plastis akibat tekanan litostatik luar biasa, dan suhu mencapai 180°C yang merusak mata bor industri. Ini membuktikan pengambilan sampel fisik hanya mampu menyentuh permukaan terluar kerak."
+  globalGeneralization="Jaringan seismik global adalah mata keplanetan sejati kita. Ketika gempa bumi mengguncang Cincin Api Indonesia, stasiun seismik di Eropa, Amerika, dan Antarktika merekam pembiasan gelombang yang tiba, menyempurnakan model tomografi mantel dan inti Bumi."
+  geoMapSlug="java-volcanic-arc"
+/>
+
+---
+
+## Bagian 5: Tantangan Observasi Lapangan
+
+<ObservationChallenge
+  title="Memetakan Bayangan Seismik"
+  targetPhenomenon="Memvisualisasikan bagaimana gelombang seismik membelok dan membias melintasi batas diskontinuitas massa jenis planet."
+  observationSteps={[
+    "Amati diagram interaktif Lapisan Bumi di atas dan aktifkan tombol Gelombang Seismik.",
+    "Lacak lintasan gelombang P biru saat membelok di mantel dan menembus inti luar cair.",
+    "Perhatikan di mana gelombang S merah menabrak batas inti luar dan terhenti total, menciptakan zona bayangan seismik.",
+    "Pikirkan bagaimana ketepatan waktu tempuh gelombang seismik memungkinkan para ilmuwan mengukur kedalaman batas inti hingga ketelitian beberapa kilometer."
+  ]}
+/>
+
+<ReflectionBox
+  id="refl-earth-interior"
+  prompt="Jika gempa bumi adalah alat diagnostik utama para ilmuwan untuk 'melihat' interior Bumi, bagian manakah dari interior dalam planet yang menurut Anda informasinya kurang pasti—wilayah dengan sedikit gempa, atau wilayah dengan banyak gempa?"
+  placeholder="Pertimbangkan distribusi stasiun seismograf global dan lokasi episentrum gempa..."
+  category="observation"
+/>
+
+---
+
+## Bagian 6: Kuis Evaluasi Pemahaman
+
+<Quiz
+  client:visible
+  quiz={whatsInsideTheEarthQuiz}
+  locale="id"
+/>

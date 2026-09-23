@@ -1,0 +1,172 @@
+---
+id: "indonesian-throughflow"
+title: "Bagaimana Arlindo Membentuk Iklim Global?"
+tagline: "Sabuk Konveyor Samudra, Inflow Selat Makassar, dan Aliran Kalor Khatulistiwa"
+description: "Pelajari bagaimana kemiringan muka laut mengalirkan 15 juta meter kubik air per detik melintasi selat-selat Indonesia, mengekspor 1 Petawatt kalor dan mengatur iklim planet Bumi."
+topic: "climate"
+difficulty: "intermediate"
+estimatedTime: "15min"
+learningObjectives:
+  - "Menjelaskan gradien tinggi muka laut hidraulik antara Pasifik dan Hindia yang menggerakkan Arus Lintas Indonesia (Arlindo/ITF)."
+  - "Melacak jalur samudra utama: inflow Selat Makassar (~11,6 Sv) serta jalur keluar Selat Lombok, Ombai, dan Celah Timor."
+  - "Memahami peran Arlindo sebagai sabuk konveyor energi panas global berdaya ~1 Petawatt penghubung Pasifik dan Hindia."
+  - "Menganalisis bagaimana osilasi ENSO (El Niño vs. La Niña) memodulasi kekuatan aliran Arlindo dan ekosistem laut timur Indonesia."
+prerequisites:
+  - "why-are-there-climate-zones"
+interactiveElements:
+  - id: "throughflow-map-diagram"
+    type: "simulation"
+    title: "Peta Hidrodinamika Arlindo & Regulator Iklim ENSO"
+    pedagogicalPurpose: "Memungkinkan pengguna mengubah fase iklim ENSO (Netral, La Niña, El Niño) dan mengamati perubahan dinamis transpor volume (Sv), fluks panas (PW), dan kecepatan arus."
+    isIllustrativeModel: true
+    accessibleFallbackText: "Peta skematis interaktif kepulauan Indonesia yang menampilkan vektor arus lintas Pasifik-Hindia melalui Selat Makassar, Lombok, dan Timor."
+quiz:
+  quizId: "quiz-indonesian-throughflow"
+  title: "Kuis Evaluasi Pemahaman: Arus Lintas Indonesia (Arlindo)"
+  questionCount: 3
+realWorldConnections:
+  - title: "Selat Makassar: Jantung Sabuk Konveyor Maritim Global"
+    locationName: "Selat Makassar, antara Kalimantan & Sulawesi, Indonesia"
+    isIndonesiaFirst: true
+    coordinates:
+      lat: -0.50
+      lng: 118.50
+    description: "Selat Makassar yang dalam (~2.000 meter) mengalirkan lebih dari 80% (sekitar 11,6 Sverdrup) dari total arus masuk Pasifik ke perairan dalam Indonesia. Ini merupakan gerbang utama perpindahan panas dan massa air tawar lintang rendah di planet Bumi."
+    phenomenon: "Perbedaan tinggi muka laut 20–35 cm mendorong 15 juta meter kubik air hangat Pasifik per detik melintasi kepulauan Indonesia menuju Samudra Hindia."
+    globalGeneralization: "Arlindo adalah mata rantai vital dalam sirkulasi termohalin global ('sabuk konveyor samudra'), yang mengatur muson Asia, Dipol Samudra Hindia (IOD), dan pola hujan di Afrika."
+    geoMapSlug: "makassar-strait"
+geoMapConnections:
+  - locationSlug: "makassar-strait"
+    label: "Jelajahi Arus Lintas Indonesia di GeoMap"
+    coordinates:
+      lat: -0.50
+      lng: 118.50
+    description: "Periksa palung batimetri dalam dan celah sempit perairan lintas samudra di Selat Makassar dan Selat Lombok."
+reflection:
+  - id: "refl-throughflow-fisheries"
+    prompt: "Bagaimanakah melemahnya arus Arlindo selama tahun El Niño dapat memengaruhi kedalaman termoklin, pengadukan nutrien (upwelling), dan hasil tangkapan nelayan di kawasan timur Indonesia?"
+    placeholder: "Pertimbangkan kedalaman termoklin, pasokan hara plankton, migrasi ikan pelagis..."
+    category: "connection"
+nextExperiences:
+  - "why-are-there-climate-zones"
+  - "the-carbon-cycle"
+scientific:
+  source:
+    - "Potemra, J. T. (1999). Seasonal Variations of Upper Ocean Transport from the Pacific to the Indian Ocean via Indonesian Straits. Journal of Physical Oceanography, 29(11), 2930-2944."
+    - "Gordon, A. L., et al. (2012). The Indonesian Throughflow during 2004–2006 as observed by the INSTANT program. Dynamics of Atmospheres and Oceans, 50(2), 115-128."
+    - "Sprintall, J., et al. (2014). The Indonesian seas and their role in the global ocean circulation. Oceanography, 27(4), 16-29."
+  sourceType: "peer-reviewed"
+  lastReviewed: "2026-09-24"
+  scientificLevel: "intermediate"
+  confidence: "well-supported"
+  references:
+    - title: "Seasonal Variations of Upper Ocean Transport from the Pacific to the Indian Ocean via Indonesian Straits"
+      publisher: "Journal of Physical Oceanography"
+      year: 1999
+    - title: "The Indonesian Throughflow during 2004–2006 as observed by INSTANT"
+      publisher: "Dynamics of Atmospheres and Oceans"
+      year: 2012
+    - title: "The Indonesian seas and their role in global ocean circulation"
+      publisher: "Oceanography"
+      year: 2014
+  notesOnSimplification: "Nilai transpor volume (Sverdrup) dan fluks panas merupakan angka rata-rata observasi multi-tahun dari program pemantauan oseanografi internasional INSTANT dan MITF."
+review:
+  reviewStatus: "published"
+  sourceList:
+    - "JPO Potemra"
+    - "INSTANT Program"
+    - "Oceanography Sprintall"
+  lastReviewed: "2026-09-24"
+  contentVersion: "1.0.0"
+featured: false
+---
+
+import Quiz from '../../../components/quiz/Quiz';
+import ReflectionBox from '../../../components/learning/ReflectionBox';
+import RealWorldExample from '../../../components/learning/RealWorldExample.astro';
+import ObservationChallenge from '../../../components/learning/ObservationChallenge.astro';
+import ThroughflowMap from '../../../components/visualization/ThroughflowMap';
+import { indonesianThroughflowQuiz } from '../../../data/quizzes/id/indonesian-throughflow';
+
+## Bagian 1: Jalan Tol Laut Tak Kasat Mata
+
+Amati bola dunia planet Bumi. Benua-benua membentang dari utara ke selatan, memblokir aliran arus samudra di kawasan khatulistiwa di hampir setiap belahan dunia. Hanya ada **satu wilayah di Bumi** di mana Samudra Pasifik tropis dan Samudra Hindia terhubung langsung melintasi lintang rendah: **kepulauan Indonesia**.
+
+Melalui labirin pulau dan palung laut dalam inilah mengalir arus samudra raksasa yang senyap, dikenal sebagai **Arus Lintas Indonesia (Arlindo)** atau *Indonesian Throughflow (ITF)*.
+
+Setiap detik, Arlindo mengalirkan sekitar **15 juta meter kubik air**—lebih dari **70 kali lipat debit gabungan seluruh sungai di dunia**. Mengapa air ini mengalir sedemikian deras secara konstan, dan bagaimana arus ini membentuk cuaca hingga ke India dan Afrika?
+
+---
+
+## Bagian 2: Gradien Tekanan Hidrolik Muka Air Laut
+
+Mesin pendorong Arlindo sesungguhnya berakar pada prinsip fisika dasar: **perbedaan tinggi muka air laut**.
+
+1. **Angin Pasat Menumpuk Air:** Angin pasat timur yang bertiup kencang melintasi Samudra Pasifik tropis mendorong air hangat permukaan ke arah barat.
+2. **Kolam Hangat Pasifik Barat (Warm Pool):** Proses ini menciptakan timbunan massa air hangat di utara Papua dan Indonesia, sehingga tinggi muka air laut di Pasifik Barat menjadi **20 hingga 35 sentimeter lebih tinggi** daripada di Samudra Hindia Timur.
+3. **Gravitasi Menjalankan Tugasnya:** Air secara alami mengalir dari tempat yang lebih tinggi ke tempat yang lebih rendah. Kemiringan hidraulik yang konstan ini memaksa massa air Pasifik meluncur deras ke selatan melintasi selat-selat Indonesia menuju Samudra Hindia.
+
+### Gerbang-Gerbang Utama Arlindo
+- **Arteri Masuk (Inflow):** Lebih dari 80% debit (~11,6 Sverdrup, di mana `1 Sv = 1.000.000 m³/detik`) masuk melalui **Selat Makassar** yang dalam antara Kalimantan dan Sulawesi.
+- **Gerbang Keluar (Outflow):** Air keluar menuju Samudra Hindia terutama melalui **Selat Lombok**, **Selat Ombai**, dan **Celah Timor**.
+
+<ThroughflowMap client:visible locale="id" />
+
+---
+
+## Bagian 3: Mesin Kalor Keplanetan — Katup 1 Petawatt
+
+Saat mengalir melintasi perairan Indonesia, Arlindo mentransfer energi panas sekitar **1 Petawatt (10¹⁵ Watt)** dari Pasifik ke Hindia.
+
+Sebagai gambaran, 1 Petawatt setara dengan total daya listrik yang dihasilkan oleh **satu juta pembangkit listrik tenaga nuklir besar**.
+
+Dengan mengekspor energi panas dalam jumlah masif dari Samudra Pasifik:
+- Arlindo bertindak sebagai katup pendingin alami bagi Kolam Hangat Pasifik.
+- Arus ini menyuplai air hangat ke Samudra Hindia, memberi energi bagi dinamika konveksi **Muson Asia** dan **Dipol Samudra Hindia (IOD)**.
+- Arus ini memodulasi iklim global: saat **La Niña**, angin pasat menguat tajam, mempercuram kemiringan laut dan memacu debit Arlindo hingga ~18,5 Sv; saat **El Niño**, gradien mendatar dan aliran melemah hingga ~10 Sv.
+
+---
+
+## Bagian 4: Hubungan Dunia Nyata Indonesia — Gerbang Selat Makassar
+
+<RealWorldExample
+  title="Selat Makassar & Program Riset Laut INSTANT"
+  locationName="Selat Makassar, antara Kalimantan & Sulawesi, Indonesia"
+  isIndonesiaFirst={true}
+  coordinates={{ lat: -0.50, lng: 118.50 }}
+  phenomenon="Pemasangan pelampung tambat alat ukur arus akustik laut dalam oleh peneliti Indonesia (BRIN/LIPI) bersama oseanograf internasional (program INSTANT) mengukur arus bawah permukaan berkecepatan lebih dari 1 m/detik pada kedalaman 150 meter, mengonfirmasi Selat Makassar sebagai pembawa utama 11,6 Sv aliran Pasifik."
+  globalGeneralization="Arlindo adalah komponen lintang rendah tak tergantikan dalam sabuk konveyor termohalin global, yang menyatukan sirkulasi angin Pasifik dengan sirkulasi laut dalam Hindia dan Atlantik."
+  geoMapSlug="makassar-strait"
+/>
+
+---
+
+## Bagian 5: Tantangan Observasi Lapangan
+
+<ObservationChallenge
+  title="Melacak Kemiringan Muka Air Laut"
+  targetPhenomenon="Memvisualisasikan bagaimana topografi samudra menggerakkan kecepatan arus global."
+  observationSteps={[
+    "Amati peta interaktif Arlindo di atas dan pilih fase 'La Niña'.",
+    "Perhatikan bagaimana anak panah aliran di Selat Makassar bergerak lebih cepat saat kemiringan muka laut mencapai +35 cm.",
+    "Beralihlah ke 'El Niño' dan amati bagaimana debit transpor volume melambat menjadi 10,2 Sv.",
+    "Renungkan bagaimana posisi geografis kepulauan Indonesia secara langsung menentukan stabilitas iklim planet Bumi."
+  ]}
+/>
+
+<ReflectionBox
+  id="refl-throughflow-fisheries"
+  prompt="Bagaimanakah melemahnya arus Arlindo selama tahun El Niño dapat memengaruhi kedalaman termoklin, pengadukan nutrien (upwelling), dan hasil tangkapan nelayan di kawasan timur Indonesia?"
+  placeholder="Pertimbangkan kedalaman termoklin, pasokan hara plankton, migrasi ikan pelagis..."
+  category="connection"
+/>
+
+---
+
+## Bagian 6: Kuis Evaluasi Pemahaman
+
+<Quiz
+  client:visible
+  quiz={indonesianThroughflowQuiz}
+  locale="id"
+/>

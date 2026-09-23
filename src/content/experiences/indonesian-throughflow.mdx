@@ -1,0 +1,172 @@
+---
+id: "indonesian-throughflow"
+title: "How Does the Indonesian Throughflow Shape Global Climate?"
+tagline: "Ocean Conveyors, Makassar Strait Inflow, and Equatorial Heat Transfer"
+description: "Discover how a persistent sea-level gradient drives 15 million cubic meters of water per second through Indonesian straits, exporting 1 Petawatt of heat and regulating global climate."
+topic: "climate"
+difficulty: "intermediate"
+estimatedTime: "15min"
+learningObjectives:
+  - "Explain the hydraulic sea-surface-height gradient between the Pacific and Indian oceans that drives the Indonesian Throughflow (ITF)."
+  - "Trace major oceanic pathways: Makassar Strait inflow (~11.6 Sv) and Lombok, Ombai, and Timor outflow passages."
+  - "Understand the ITF's role as a ~1 Petawatt global heat conveyor connecting the Pacific and Indian oceans."
+  - "Analyze how ENSO oscillations (El Niño vs. La Niña) modulate Throughflow strength and eastern Indonesian marine ecosystems."
+prerequisites:
+  - "why-are-there-climate-zones"
+interactiveElements:
+  - id: "throughflow-map-diagram"
+    type: "simulation"
+    title: "Indonesian Throughflow (ITF) Hydrodynamic Map & ENSO Regulator"
+    pedagogicalPurpose: "Allows learners to adjust ENSO climate phases (Neutral, La Niña, El Niño) and observe dynamic changes in volume transport (Sv), heat flux (PW), and flow velocities."
+    isIllustrativeModel: true
+    accessibleFallbackText: "An interactive schematic map of the Indonesian archipelago displaying Pacific-to-Indian throughflow current vectors through the Makassar, Lombok, and Timor straits."
+quiz:
+  quizId: "quiz-indonesian-throughflow"
+  title: "Indonesian Throughflow (ITF) Verification Quiz"
+  questionCount: 3
+realWorldConnections:
+  - title: "Makassar Strait: The Heart of the Global Marine Conveyor"
+    locationName: "Makassar Strait, between Kalimantan & Sulawesi, Indonesia"
+    isIndonesiaFirst: true
+    coordinates:
+      lat: -0.50
+      lng: 118.50
+    description: "The deep (~2,000 m) Makassar Strait carries over 80% (roughly 11.6 Sverdrups) of the total Pacific inflow into Indonesian seas. It represents the primary low-latitude oceanic heat and freshwater transfer gateway on Earth."
+    phenomenon: "A 20–35 cm sea surface height difference pushes 15 million cubic meters of warm Pacific water per second through Indonesian passages into the Indian Ocean."
+    globalGeneralization: "The ITF forms an indispensable link in Earth's global thermohaline circulation ('ocean conveyor belt'), modulating the Asian monsoon, Indian Ocean Dipole, and African rainfall patterns."
+    geoMapSlug: "makassar-strait"
+geoMapConnections:
+  - locationSlug: "makassar-strait"
+    label: "Explore the Indonesian Throughflow on GeoMap"
+    coordinates:
+      lat: -0.50
+      lng: 118.50
+    description: "Inspect deep bathymetric channels and oceanic choke points across the Makassar and Lombok straits."
+reflection:
+  - id: "refl-throughflow-fisheries"
+    prompt: "How might a weakened Indonesian Throughflow during an El Niño year affect nutrient upwelling, sea surface temperatures, and local coastal fishing communities in eastern Indonesia?"
+    placeholder: "Consider ocean thermocline depth, nutrient upwelling, plankton blooms, and pelagic fish migration..."
+    category: "connection"
+nextExperiences:
+  - "why-are-there-climate-zones"
+  - "the-carbon-cycle"
+scientific:
+  source:
+    - "Potemra, J. T. (1999). Seasonal Variations of Upper Ocean Transport from the Pacific to the Indian Ocean via Indonesian Straits. Journal of Physical Oceanography, 29(11), 2930-2944."
+    - "Gordon, A. L., et al. (2012). The Indonesian Throughflow during 2004–2006 as observed by the INSTANT program. Dynamics of Atmospheres and Oceans, 50(2), 115-128."
+    - "Sprintall, J., et al. (2014). The Indonesian seas and their role in the global ocean circulation. Oceanography, 27(4), 16-29."
+  sourceType: "peer-reviewed"
+  lastReviewed: "2026-09-24"
+  scientificLevel: "intermediate"
+  confidence: "well-supported"
+  references:
+    - title: "Seasonal Variations of Upper Ocean Transport from the Pacific to the Indian Ocean via Indonesian Straits"
+      publisher: "Journal of Physical Oceanography"
+      year: 1999
+    - title: "The Indonesian Throughflow during 2004–2006 as observed by INSTANT"
+      publisher: "Dynamics of Atmospheres and Oceans"
+      year: 2012
+    - title: "The Indonesian seas and their role in global ocean circulation"
+      publisher: "Oceanography"
+      year: 2014
+  notesOnSimplification: "Volume transport (Sverdrup) and heat flux values represent multi-year observational averages from the international INSTANT and MITF oceanographic monitoring programs."
+review:
+  reviewStatus: "published"
+  sourceList:
+    - "JPO Potemra"
+    - "INSTANT Program"
+    - "Oceanography Sprintall"
+  lastReviewed: "2026-09-24"
+  contentVersion: "1.0.0"
+featured: false
+---
+
+import Quiz from '../../components/quiz/Quiz';
+import ReflectionBox from '../../components/learning/ReflectionBox';
+import RealWorldExample from '../../components/learning/RealWorldExample.astro';
+import ObservationChallenge from '../../components/learning/ObservationChallenge.astro';
+import ThroughflowMap from '../../components/visualization/ThroughflowMap';
+import { indonesianThroughflowQuiz } from '../../data/quizzes/indonesian-throughflow';
+
+## Beat 1: The Invisible Ocean Superhighway
+
+Look at a globe of planet Earth. Continents stretch from north to south, blocking equatorial ocean currents almost everywhere. There is only **one place on Earth** where the equatorial Pacific and Indian oceans connect through tropical latitudes: **the Indonesian archipelago**.
+
+Through this intricate maze of islands and deep marine trenches flows a massive, silent ocean current known as the **Indonesian Throughflow (ITF)** or *Arlindo* (*Arus Lintas Indonesia*).
+
+Every second, the Throughflow carries approximately **15 million cubic meters of water**—more than **70 times the combined flow of all the world's rivers combined**. Why does this water flow so steadily, and how does it shape weather as far away as India and Africa?
+
+---
+
+## Beat 2: The Hydraulic Pressure Gradient
+
+The engine driving the Indonesian Throughflow is remarkably simple: **sea level difference**.
+
+1. **Trade Winds Pile Water Up:** Persistent easterly trade winds blow across the vast tropical Pacific, pushing warm surface water westward.
+2. **The Western Pacific Warm Pool:** This creates a massive reservoir of warm, light water north of Papua and Indonesia, raising the sea surface height in the western Pacific **20 to 35 centimeters higher** than in the eastern Indian Ocean.
+3. **Gravity Does the Work:** Water naturally flows downhill. This persistent hydraulic gradient forces water to plunge southward through Indonesian straits to reach the lower Indian Ocean.
+
+### Major Marine Gateways
+- **Inflow Artery:** Over 80% (~11.6 Sverdrup, where `1 Sv = 1,000,000 m³/s`) enters through the deep **Makassar Strait** between Kalimantan and Sulawesi.
+- **Outflow Exits:** Water exits into the Indian Ocean primarily through the **Lombok Strait**, the **Ombai Strait**, and the wide **Timor Passage**.
+
+<ThroughflowMap client:visible locale="en" />
+
+---
+
+## Beat 3: Planetary Heat Engine — The 1-Petawatt Choke Point
+
+As the Throughflow moves through the Indonesian seas, it transports roughly **1 Petawatt (10¹⁵ Watts) of heat energy** from the Pacific into the Indian Ocean.
+
+To put 1 Petawatt in perspective, it is equal to the output of **one million large nuclear power plants**.
+
+By exporting immense thermal energy out of the Pacific:
+- The ITF acts as an essential cooling valve for the Pacific Warm Pool.
+- It supplies the Indian Ocean with warm water, fueling the convective engines of the **Asian Monsoon** and the **Indian Ocean Dipole (IOD)**.
+- It modulates global climate cycles: during **La Niña**, the trade winds intensify, steepening the sea-level slope and accelerating Throughflow transport to ~18.5 Sv; during **El Niño**, the gradient collapses and flow drops to ~10 Sv.
+
+---
+
+## Beat 4: Indonesian Real-World Anchor — The Makassar Strait Gateway
+
+<RealWorldExample
+  title="Makassar Strait & The International INSTANT Program"
+  locationName="Makassar Strait, between Kalimantan & Sulawesi, Indonesia"
+  isIndonesiaFirst={true}
+  coordinates={{ lat: -0.50, lng: 118.50 }}
+  phenomenon="Deep-sea acoustic current meter moorings deployed by Indonesian (BRIN/LIPI) and international oceanographers (the INSTANT program) measured continuous subsurface currents reaching velocities over 1 m/s at depths of 150 meters, confirming the Makassar Strait as the primary conduit for 11.6 Sv of Pacific inflow."
+  globalGeneralization="The Indonesian Throughflow is the vital low-latitude connector of Earth's global thermohaline conveyor belt, linking Pacific wind-driven circulation with Indian and Atlantic deep-water return flows."
+  geoMapSlug="makassar-strait"
+/>
+
+---
+
+## Beat 5: Field Observation Challenge
+
+<ObservationChallenge
+  title="Tracking Sea Level Slopes"
+  targetPhenomenon="Visualizing how oceanic topography drives global current velocity."
+  observationSteps={[
+    "Look at the Throughflow map above and select the 'La Niña' phase.",
+    "Notice how the flow arrows through Makassar Strait pulse faster as the sea level gradient reaches +35 cm.",
+    "Switch to 'El Niño' and observe how the weakened gradient slows volume transport down to 10.2 Sv.",
+    "Reflect on how this single ocean current links Indonesian geography directly to global climate stability."
+  ]}
+/>
+
+<ReflectionBox
+  id="refl-throughflow-fisheries"
+  prompt="How might a weakened Indonesian Throughflow during an El Niño year affect nutrient upwelling, sea surface temperatures, and local coastal fishing communities in eastern Indonesia?"
+  placeholder="Consider ocean thermocline depth, nutrient upwelling, plankton blooms, and pelagic fish migration..."
+  category="connection"
+/>
+
+---
+
+## Beat 6: Knowledge Verification Quiz
+
+<Quiz
+  client:visible
+  quiz={indonesianThroughflowQuiz}
+  locale="en"
+/>

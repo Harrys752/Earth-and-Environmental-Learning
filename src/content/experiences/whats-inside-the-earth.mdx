@@ -1,0 +1,169 @@
+---
+id: "whats-inside-the-earth"
+title: "What's Inside the Earth?"
+tagline: "Planetary Layering, Seismic Waves, and Decoding the Deep Interior"
+description: "Discover how geophysicists map Earth's concentric interior—crust, convective mantle, liquid outer core, and solid inner core—using earthquake seismic shockwaves and shadow zones."
+topic: "earth-structure"
+difficulty: "beginner"
+estimatedTime: "15min"
+learningObjectives:
+  - "Identify Earth's major internal layers: crust, mantle, outer core, and inner core."
+  - "Understand how composition, physical state, and temperature vary from surface to center."
+  - "Explain how seismic P-waves and S-waves reveal Earth's interior structure indirectly through global shadow zones."
+  - "Connect earthquake physics to planetary imaging: earthquakes are the tool scientists use to 'see' inside Earth."
+prerequisites: []
+interactiveElements:
+  - id: "earth-layers-diagram"
+    type: "diagram"
+    title: "Concentric Earth Layers & Seismic Wave Paths"
+    pedagogicalPurpose: "Interactive diagram for exploring layer depths, temperatures, physical states, and S-wave shadow zones."
+    isIllustrativeModel: true
+    accessibleFallbackText: "A cross-section diagram of Earth's internal layers highlighting the crust, mantle, liquid outer core, and solid inner core with seismic wave ray paths."
+quiz:
+  quizId: "quiz-whats-inside-the-earth"
+  title: "What's Inside the Earth? Verification Quiz"
+  questionCount: 3
+realWorldConnections:
+  - title: "The Kola Superdeep Borehole vs. Earth's Deep Interior"
+    locationName: "Zapolyarny, Kola Peninsula, Russia"
+    isIndonesiaFirst: false
+    coordinates:
+      lat: 69.396
+      lng: 30.609
+    description: "The deepest hole ever drilled into Earth reached a depth of 12,262 meters (12.2 km). While an extraordinary engineering achievement, this barely penetrates one-third of the continental crust, proving that deep planetary mapping must rely on indirect geophysical seismic data."
+    phenomenon: "Extreme lithostatic pressure and high temperatures (~180°C) halted drilling at 12.2 km, leaving 99.8% of Earth's 6,371 km radius unreachable by direct physical sampling."
+    globalGeneralization: "Seismological networks around the world continuously record global earthquakes, utilizing seismic tomography to image mantle convection plumes and core-mantle boundary structures."
+    geoMapSlug: "java-volcanic-arc"
+geoMapConnections:
+  - locationSlug: "java-volcanic-arc"
+    label: "Explore Subduction-Fed Volcanism on GeoMap"
+    coordinates:
+      lat: -7.54
+      lng: 110.45
+    description: "Inspect where deep mantle flux melting fuels explosive surface stratovolcanoes along the Sunda Arc."
+reflection:
+  - id: "refl-earth-interior"
+    prompt: "If earthquakes are the primary diagnostic tool scientists use to 'see' inside the Earth, what parts of the planet's deep interior do you think we know less confidently about—regions with very few earthquakes, or regions with many?"
+    placeholder: "Consider the global distribution of seismograph stations and earthquake epicenters..."
+    category: "observation"
+nextExperiences:
+  - "why-do-earthquakes-happen"
+  - "why-volcanoes-form"
+scientific:
+  source:
+    - "USGS Earthquake Hazards Program (2024). Inside the Earth: Layers and Seismic Waves."
+    - "Dziewonski, A. M., & Anderson, D. L. (1981). Preliminary Reference Earth Model (PREM). Physics of the Earth and Planetary Interiors."
+    - "Tarbuck, E. J., Lutgens, F. K., & Tasa, D. (2017). Earth: An Introduction to Physical Geology. Pearson."
+  sourceType: "textbook"
+  lastReviewed: "2026-09-24"
+  scientificLevel: "beginner"
+  confidence: "established"
+  references:
+    - title: "Inside the Earth: The Interior of the Earth"
+      publisher: "USGS Educational Publication"
+      year: 2024
+    - title: "Preliminary Reference Earth Model (PREM)"
+      publisher: "Physics of the Earth and Planetary Interiors"
+      year: 1981
+    - title: "Earth: An Introduction to Physical Geology"
+      publisher: "Pearson"
+      year: 2017
+  notesOnSimplification: "The concentric planetary layers and seismic wave trajectories are rendered as an illustrative spherical model based on the standard PREM radial geophysics framework."
+review:
+  reviewStatus: "published"
+  sourceList:
+    - "USGS"
+    - "PEPI PREM"
+    - "Pearson Earth Science"
+  lastReviewed: "2026-09-24"
+  contentVersion: "1.0.0"
+featured: false
+---
+
+import Quiz from '../../components/quiz/Quiz';
+import ReflectionBox from '../../components/learning/ReflectionBox';
+import RealWorldExample from '../../components/learning/RealWorldExample.astro';
+import ObservationChallenge from '../../components/learning/ObservationChallenge.astro';
+import EarthLayersDiagram from '../../components/visualization/EarthLayersDiagram';
+import { whatsInsideTheEarthQuiz } from '../../data/quizzes/whats-inside-the-earth';
+
+## Beat 1: The Impossible Drill Hole
+
+We have sent spacecraft billions of kilometers into interstellar space and landed rovers on Mars. Yet, beneath our own feet, humanity has never drilled more than **12.2 kilometers** into the Earth.
+
+The deepest hole ever drilled—the **Kola Superdeep Borehole** in Russia—took nearly two decades of effort before extreme rock temperatures (~180°C) and immense lithostatic pressure made further drilling impossible. Compared to Earth's radius of **6,371 kilometers**, the Kola borehole is a mere scratch on the surface: like piercing the skin of an apple without ever touching the fruit inside.
+
+Yet geophysicists can tell you with remarkable confidence what exists 3,000 km and 6,000 km beneath our feet. How do we know what's inside the Earth if we cannot drill into it?
+
+---
+
+## Beat 2: The Concentric Architecture of Planet Earth
+
+Through indirect geophysics, scientists have determined that Earth is organized into four major concentric shells, stratified by density:
+
+1. **The Crust (0–70 km):** A thin, brittle silicate rock shell. Continental crust (mostly granite) is thick (30–70 km) and buoyant, while oceanic crust (dense basalt) is thin (5–10 km).
+2. **The Mantle (70–2,890 km):** A massive layer of iron-magnesium silicate rock (peridotite) comprising **84% of Earth's total volume**. Despite being solid under colossal pressure, the mantle is hot enough to slowly deform and flow plastically over millions of years, driving continental drift.
+3. **The Outer Core (2,890–5,150 km):** A swirling sea of **molten liquid iron and nickel** at temperatures of 4,000–5,000°C. Convection currents of liquid metal in this layer generate Earth's global geomagnetic field.
+4. **The Inner Core (5,150–6,371 km):** A solid sphere of crystalline iron-nickel alloy roughly the size of the Moon. Even though temperatures reach 5,000–6,000°C (as hot as the Sun's surface), crushing pressures (~3.6 million atmospheres) force the metal atoms into a solid crystal lattice.
+
+<EarthLayersDiagram client:visible locale="en" />
+
+---
+
+## Beat 3: Seismic Waves — Earthquakes as Planetary CT Scans
+
+The tool scientists use to "see" inside the planet is the **earthquake**.
+
+When an earthquake ruptures, it radiates two fundamental types of body seismic waves through Earth's deep interior:
+- **P-Waves (Primary / Compressional Waves):** The fastest seismic waves. They push and pull rock like a sound wave and can travel through **both solids and liquids**.
+- **S-Waves (Secondary / Shear Waves):** Slower waves that shake rock perpendicular to their direction of travel. S-waves require shear rigidity to propagate, meaning **S-waves cannot travel through liquids**.
+
+When a large earthquake strikes, thousands of seismometers worldwide record the arriving waves. Geophysicists noticed a striking pattern: seismographs on the opposite side of Earth (between 103° and 180° from the epicenter) **never receive direct S-waves**.
+
+This global **S-wave shadow zone** provided the definitive physical proof that Earth possesses a **liquid outer core** that blocks shear waves completely.
+
+---
+
+## Beat 4: Real-World Connection — Drilling the Crust vs. Imaging the Core
+
+<RealWorldExample
+  title="The Kola Superdeep Borehole & Seismology"
+  locationName="Zapolyarny, Kola Peninsula, Russia"
+  isIndonesiaFirst={false}
+  coordinates={{ lat: 69.396, lng: 30.609 }}
+  phenomenon="The Kola Superdeep Borehole reached 12.2 km deep after 20 years of drilling. At that depth, rock behaved like plastic clay due to immense lithostatic pressure, and temperatures reached 180°C, causing drill bits to fail. It proves that direct sampling can only touch the outermost crust."
+  globalGeneralization="Global seismic networks provide our true planetary 'eyes.' When earthquakes strike the Indonesian Ring of Fire, seismic stations in Europe, America, and Antarctica record the refracted waves, continuously refining tomography models of the mantle and core."
+  geoMapSlug="java-volcanic-arc"
+/>
+
+---
+
+## Beat 5: Field Reflection Challenge
+
+<ObservationChallenge
+  title="Mapping Seismic Shadows"
+  targetPhenomenon="Visualizing how seismic waves bend and refract across planetary density discontinuities."
+  observationSteps={[
+    "Look at the interactive Earth Layers diagram above and toggle on the Seismic Waves.",
+    "Trace the path of blue P-waves as they bend through the mantle and penetrate the liquid outer core.",
+    "Notice where the red S-waves hit the outer core boundary and stop, creating the shadow zone.",
+    "Reflect on how geophysicists use the exact timing of wave arrivals to measure the depth of the core boundary to within a few kilometers."
+  ]}
+/>
+
+<ReflectionBox
+  id="refl-earth-interior"
+  prompt="If earthquakes are the primary diagnostic tool scientists use to 'see' inside the Earth, what parts of the planet's deep interior do you think we know less confidently about—regions with very few earthquakes, or regions with many?"
+  placeholder="Consider the global distribution of seismograph stations and earthquake epicenters..."
+  category="observation"
+/>
+
+---
+
+## Beat 6: Knowledge Verification Quiz
+
+<Quiz
+  client:visible
+  quiz={whatsInsideTheEarthQuiz}
+  locale="en"
+/>
