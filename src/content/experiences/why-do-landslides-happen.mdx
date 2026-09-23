@@ -1,0 +1,212 @@
+---
+id: "why-do-landslides-happen"
+title: "Why Do Landslides Happen?"
+tagline: "Slope Stability Physics, Pore-Water Pressure, and Tropical Monsoon Triggers"
+description: "Understand the delicate physical balance of hillside slopes, how intense monsoon rainfall and deforestation reduce soil cohesion, and why Indonesia's volcanic highlands face recurring landslide hazards."
+topic: "natural-hazards"
+difficulty: "beginner"
+estimatedTime: "20min"
+learningObjectives:
+  - "Explain slope stability as a mechanical balance between driving forces (gravitational shear stress) and resisting forces (frictional shear strength and cohesion)."
+  - "Describe how water infiltration increases soil weight and elevates pore-water pressure, drastically lowering effective friction along slip planes."
+  - "Identify primary environmental and anthropogenic landslide triggers: heavy monsoon precipitation, steep slope geometry, root loss from deforestation, and seismic ground shaking."
+  - "Analyze BNPB disaster records and real-world case studies in West Java (such as the 2021 Sumedang landslide) to connect slope physics to hazard mitigation."
+prerequisites: []
+interactiveElements:
+  - id: "slope-stability-simulator"
+    type: "simulation"
+    title: "Interactive Slope Stability & Factor of Safety Simulator"
+    pedagogicalPurpose: "Allows learners to adjust slope angle, rainfall saturation, and vegetation cover to observe real-time changes in the Factor of Safety (resisting vs driving forces) and trigger slope failure."
+    isIllustrativeModel: true
+    accessibleFallbackText: "An interactive slope model demonstrating how increasing rain saturation and removing vegetation pushes a hillside past its critical failure threshold."
+quiz:
+  quizId: "quiz-why-do-landslides-happen"
+  title: "Why Do Landslides Happen? Verification Quiz"
+  questionCount: 4
+realWorldConnections:
+  - title: "Rainfall-Triggered Landslides in the Highlands of West Java"
+    locationName: "Cimanggung, Sumedang Regency, West Java, Indonesia"
+    isIndonesiaFirst: true
+    coordinates:
+      lat: -6.8580
+      lng: 107.9240
+    description: "In January 2021, intense seasonal monsoon rainfall triggered fatal cascading landslides in Cimanggung, Sumedang Regency, West Java, demonstrating how saturated volcanic soils on developed slopes can fail abruptly."
+    phenomenon: "Heavy precipitation infiltrating porous volcanic breccia and weathered clay layers, creating high pore-water pressure and slip plane failure."
+    globalGeneralization: "Tropical mountainous regions worldwide—from the Andes of Colombia to the Himalayas of Nepal and the Philippines—experience similar rainfall-induced slope instability during peak monsoon cycles."
+    geoMapSlug: "sumedang-landslides"
+geoMapConnections:
+  - locationSlug: "sumedang-landslides"
+    label: "See a landslide-prone region on GeoMap"
+    coordinates:
+      lat: -6.8580
+      lng: 107.9240
+    description: "Explore the steep, volcanic hilly terrain of Sumedang Regency and the surrounding West Java highlands on GeoMap."
+reflection:
+  - id: "refl-landslide-warning"
+    prompt: "What environmental warning signs might indicate that a hillside slope behind a residential area is becoming unstable before a catastrophic landslide occurs?"
+    placeholder: "Consider tilting trees, sudden cracks in the soil or paved roads, muddy well water, or springs emerging in new locations..."
+    category: "observation"
+nextExperiences:
+  - "why-do-earthquakes-happen"
+  - "the-rock-cycle"
+scientific:
+  source:
+    - "BNPB (Badan Nasional Penanggulangan Bencana Indonesia). Disaster Information Reports and Landslide Hazard Mapping."
+    - "Cruden, D. M., & Varnes, D. J. (1996). Landslide types and processes. Transportation Research Board Special Report 247."
+    - "ReliefWeb / UN OCHA (2021). Indonesia: West Java Landslides Situation Report."
+  sourceType: "government-agency"
+  lastReviewed: "2026-09-23"
+  scientificLevel: "beginner"
+  confidence: "well-supported"
+  references:
+    - title: "Indonesia Disaster Profile & Landslide Vulnerability Analysis"
+      publisher: "BNPB (National Disaster Management Agency)"
+      year: 2022
+    - title: "Landslide Types and Processes: Special Report 247"
+      publisher: "Transportation Research Board, National Academy of Sciences"
+      year: 1996
+    - title: "West Java Landslide Field Assessment (Cimanggung, Sumedang)"
+      publisher: "ReliefWeb / UN OCHA"
+      year: 2021
+  notesOnSimplification: "The slope stability calculator utilizes an infinite slope approximation model to compute the geotechnical Factor of Safety (FS = resisting shear strength / driving shear stress) for direct conceptual learning."
+review:
+  reviewStatus: "published"
+  sourceList:
+    - "BNPB Indonesia"
+    - "UN OCHA"
+    - "Transportation Research Board"
+  lastReviewed: "2026-09-23"
+  contentVersion: "1.0.0"
+featured: false
+---
+
+import SlopeStabilitySimulator from '../../components/visualization/SlopeStabilitySimulator';
+import Quiz from '../../components/quiz/Quiz';
+import ReflectionBox from '../../components/learning/ReflectionBox';
+import RealWorldExample from '../../components/learning/RealWorldExample.astro';
+import ObservationChallenge from '../../components/learning/ObservationChallenge.astro';
+import { whyDoLandslidesHappenQuiz } from '../../data/quizzes/why-do-landslides-happen';
+
+## Beat 1: The Opening Question
+
+> **Why does the exact same tropical rainfall that nourishes Indonesia's lush agricultural terraces also make it one of the most landslide-prone nations on the planet?**
+
+Every year between **December and February**, heavy monsoon clouds drench the Indonesian archipelago. While this rainfall fills reservoirs and irrigates crops, it also destabilizes thousands of hillside slopes across Sumatra, Java, Bali, and Sulawesi.
+
+According to data published by Indonesia's National Disaster Management Agency (**BNPB**), over **41 million Indonesians live in landslide-prone districts and regencies**. Why does water turn solid hillsides into devastating avalanches of mud and debris?
+
+The answer lies in the physics of **slope stability** and the invisible forces operating inside wet soil.
+
+---
+
+## Beat 2: The Physical Balance — Resisting vs. Driving Forces
+
+Every hillside is locked in a continuous tug-of-war between two opposing physical forces:
+
+1. **Driving Forces (Gravitational Shear Stress):**
+   - Gravity pulls the weight of the soil and rock downward. On an inclined slope, a component of this gravity acts parallel to the hill surface, pulling material downslope.
+2. **Resisting Forces (Shear Strength):**
+   - **Internal Friction:** The microscopic interlocking between mineral grains and rock fragments.
+   - **Cohesion:** Chemical electrostatic attraction between clay minerals and the mechanical anchoring provided by deep plant root systems.
+
+```
+                      [ Hillside Soil Mass ]
+                           /          \
+  Driving Force (Shear Stress)     Resisting Force (Shear Strength)
+  • Gravity component downslope    • Internal grain friction
+  • Weight of added water          • Root network cohesion
+  • Slope steepness                • Inter-particle bonding
+```
+
+Geotechnical engineers measure this balance using the **Factor of Safety (FS)**:
+
+```
+Factor of Safety (FS) = Resisting Forces (Shear Strength) / Driving Forces (Shear Stress)
+```
+
+- When `FS > 1.0`, resisting forces dominate and the slope is stable.
+- When `FS <= 1.0`, driving stress exceeds resisting strength, and slope failure occurs.
+
+---
+
+## Beat 3: The Role of Water & Pore-Water Pressure
+
+Water is the primary trigger of slope failure worldwide for two critical physical reasons:
+1. **Added Gravitational Weight:** As rainwater fills empty air pores in dry soil, it increases the total mass pushing downslope.
+2. **Elevated Pore-Water Pressure:** Water trapped within soil pores pushes outward against surrounding mineral grains. This hydraulic pressure reduces the contact friction between particles (lowering effective normal stress), acting like a fluid cushion that lubricates potential slip planes.
+
+When combined with deforestation (loss of root reinforcement) or artificial slope cutting for roads and settlements, high-intensity rainfall rapidly drives FS below 1.0.
+
+---
+
+## Beat 4: Interactive Simulation — Slope Stability Simulator
+
+Experiment with the interactive model below. Adjust the **Slope Angle**, **Rainfall Saturation**, and **Vegetation Cover** to observe how the Factor of Safety changes and find the tipping point where slope failure occurs.
+
+<SlopeStabilitySimulator
+  client:visible
+  id="slope-simulator"
+  experienceSlug="why-do-landslides-happen"
+/>
+
+---
+
+## Beat 5: Real-World Indonesian Anchor — The West Java Highlands
+
+The mountainous interior of West Java is one of the most active landslide corridors in Southeast Asia due to its steep topography, thick weathered volcanic ash, and intense rainy seasons.
+
+<RealWorldExample
+  title="Monsoon Slope Failure in Sumedang Regency, West Java"
+  locationName="Cimanggung, Sumedang Regency, West Java, Indonesia"
+  isIndonesiaFirst={true}
+  coordinates={{ lat: -6.8580, lng: 107.9240 }}
+  phenomenon="In January 2021, sustained monsoon rains saturated steep, developed slopes in Cimanggung, Sumedang. A primary landslide occurred, followed hours later by a fatal secondary collapse while rescue workers were operating on site, resulting in 19 fatalities. The event highlighted the vulnerability of weathered volcanic breccia overlays sitting atop impermeable clay slip surfaces."
+  globalGeneralization="Landslides across volcanic island arcs follow this characteristic pattern: young, poorly consolidated volcanic soils absorb monsoon water rapidly until the shear boundary with underlying impermeable rock fails."
+  geoMapSlug="sumedang-landslides"
+/>
+
+### Landslides vs. Earthquake Liquefaction:
+It is important to connect slope physics across natural hazards:
+- **Rainfall Landslides:** Triggered on steep slopes as rainwater elevates pore-water pressure and gravity pulls the saturated mass down.
+- **Co-seismic Liquefaction (e.g., Palu 2018):** Triggered even on flat or gentle 1–2° slopes when seismic shaking suddenly pressurizes groundwater, turning loose sands into fluid slurry without needing steep topography.
+
+---
+
+## Beat 6: Field Observation Challenge & BNPB Early Warning Signs
+
+<ObservationChallenge
+  title="Recognizing Early Warning Signs of Slope Instability"
+  targetPhenomenon="Identifying physical indicators of ground movement before sudden failure."
+  observationSteps={[
+    "Look at trees and telephone poles on a slope: are they tilted, curved, or leaning downslope ('pistol-butt' curved trunks indicate slow soil creep)?",
+    "Inspect retaining walls and paved roads for fresh, widening tension cracks aligned parallel to the slope contour.",
+    "Check local wells and drainage ditches: has clean well water suddenly turned muddy or murky?",
+    "Look for new, unexpected water springs or soggy saturation zones emerging at the base of a slope."
+  ]}
+  whatToLookFor="Tension cracks at the top of a slope (crown) and bulging soil at the base (toe) are classic signs that shear failure is imminent."
+  experienceSlug="why-do-landslides-happen"
+/>
+
+---
+
+## Beat 7: Conceptual Verification & Assessment
+
+Verify your understanding of slope stability forces, pore-water pressure mechanics, and Indonesian landslide hazard management.
+
+<Quiz
+  client:visible
+  quiz={whyDoLandslidesHappenQuiz}
+  experienceSlug="why-do-landslides-happen"
+  experienceTitle="Why Do Landslides Happen?"
+/>
+
+---
+
+## Beat 8: Scientific Reflection
+
+<ReflectionBox
+  client:idle
+  experienceSlug="why-do-landslides-happen"
+  prompt="What environmental warning signs might indicate that a hillside slope behind a residential area is becoming unstable before a catastrophic landslide occurs?"
+  category="observation"
+/>

@@ -4,7 +4,6 @@
  * Results ranking priority: 1) title, 2) topic, 3) concept relevance, 4) description/metadata.
  */
 
-
 export interface SearchIndexItem {
   id: string;
   type: 'experience' | 'topic' | 'concept' | 'location' | 'project';
@@ -23,7 +22,7 @@ export interface SearchResult extends SearchIndexItem {
 
 // Built-in static search index
 export const SEARCH_INDEX: SearchIndexItem[] = [
-  // Experiences
+  // Experiences (8 total)
   {
     id: 'why-volcanoes-form',
     type: 'experience',
@@ -54,8 +53,58 @@ export const SEARCH_INDEX: SearchIndexItem[] = [
     href: '/learn/reading-rock-layers',
     badge: 'Experience',
   },
+  {
+    id: 'why-do-earthquakes-happen',
+    type: 'experience',
+    title: 'Why Do Earthquakes Happen?',
+    summary: 'Elastic rebound theory, fault boundary kinematics, seismic waves, and the 2018 Palu Mw 7.5 strike-slip earthquake case study.',
+    topic: 'Natural Hazards',
+    keywords: ['earthquake', 'fault', 'elastic rebound', 'palu', 'koro', 'sulawesi', 'strike-slip', 'liquefaction', 'tsunami', 'seismic', 'hazard'],
+    href: '/learn/why-do-earthquakes-happen',
+    badge: 'Experience',
+  },
+  {
+    id: 'the-rock-cycle',
+    type: 'experience',
+    title: 'What Is the Rock Cycle?',
+    summary: 'Planetary crustal transformations across igneous, sedimentary, and metamorphic rock classes, from volcanic lava to river sediment.',
+    topic: 'Geology & Rocks',
+    keywords: ['rock cycle', 'igneous', 'sedimentary', 'metamorphic', 'weathering', 'erosion', 'lithification', 'magma', 'lava', 'granite', 'basalt'],
+    href: '/learn/the-rock-cycle',
+    badge: 'Experience',
+  },
+  {
+    id: 'why-are-there-climate-zones',
+    type: 'experience',
+    title: 'Why Are There Climate Zones?',
+    summary: 'Solar insolation geometry, spherical beam spreading, tropical equatorial climates, and the physical causes of Earth\'s thermal belts.',
+    topic: 'Climate',
+    keywords: ['climate', 'climate zones', 'tropical', 'temperate', 'polar', 'solar', 'insolation', 'sun angle', 'equator', 'latitude', 'pontianak'],
+    href: '/learn/why-are-there-climate-zones',
+    badge: 'Experience',
+  },
+  {
+    id: 'what-fossils-tell-us',
+    type: 'experience',
+    title: 'What Fossils Tell Us',
+    summary: 'Fossilization taphonomy, stratigraphic dating, and the 2.4-million-year Homo erectus paleoanthropological record of Sangiran in Central Java.',
+    topic: 'Paleontology',
+    keywords: ['fossil', 'fossils', 'paleontology', 'sangiran', 'homo erectus', 'superposition', 'taphonomy', 'java man', 'deep time', 'pleistocene'],
+    href: '/learn/what-fossils-tell-us',
+    badge: 'Experience',
+  },
+  {
+    id: 'why-do-landslides-happen',
+    type: 'experience',
+    title: 'Why Do Landslides Happen?',
+    summary: 'Slope stability physics, pore-water pressure, tropical monsoon saturation triggers, and West Java landslide disaster mitigation.',
+    topic: 'Natural Hazards',
+    keywords: ['landslide', 'landslides', 'slope stability', 'pore pressure', 'monsoon', 'rain', 'bnpb', 'sumedang', 'java', 'hazard', 'safety factor'],
+    href: '/learn/why-do-landslides-happen',
+    badge: 'Experience',
+  },
 
-  // Topics
+  // Topics (6 total)
   {
     id: 'plate-tectonics',
     type: 'topic',
@@ -79,8 +128,35 @@ export const SEARCH_INDEX: SearchIndexItem[] = [
     type: 'topic',
     title: 'Geological Processes & Strata',
     summary: 'Earth materials, rock cycles, deep time, stratigraphy, and surface evolution.',
-    keywords: ['geology', 'rocks', 'minerals', 'sediments', 'strata', 'erosion', 'deep time'],
+    keywords: ['geology', 'rocks', 'minerals', 'sediments', 'strata', 'erosion', 'deep time', 'rock cycle'],
     href: '/explore/topics/geology',
+    badge: 'Topic',
+  },
+  {
+    id: 'natural-hazards',
+    type: 'topic',
+    title: 'Natural Hazards & Risk Mitigation',
+    summary: 'Geophysical and hydro-meteorological hazards: earthquakes, tsunamis, landslides, and disaster resilience.',
+    keywords: ['hazard', 'natural hazards', 'earthquake', 'landslide', 'tsunami', 'disaster', 'risk', 'bnpb', 'liquefaction'],
+    href: '/explore/topics/natural-hazards',
+    badge: 'Topic',
+  },
+  {
+    id: 'climate',
+    type: 'topic',
+    title: 'Climate Science & Zonation',
+    summary: 'Planetary energy budgets, latitudinal insolation, monsoonal shifts, and long-term climate dynamics.',
+    keywords: ['climate', 'climate zones', 'insolation', 'tropical', 'monsoon', 'equator', 'atmosphere'],
+    href: '/explore/topics/climate',
+    badge: 'Topic',
+  },
+  {
+    id: 'paleontology',
+    type: 'topic',
+    title: 'Paleontology & Deep Time History',
+    summary: 'The fossil record, evolutionary taphonomy, Pleistocene hominids, and ancient environmental reconstruction.',
+    keywords: ['paleontology', 'fossils', 'evolution', 'sangiran', 'homo erectus', 'deep time', 'strata'],
+    href: '/explore/topics/paleontology',
     badge: 'Topic',
   },
 
@@ -176,6 +252,33 @@ export const SEARCH_INDEX: SearchIndexItem[] = [
     keywords: ['merapi', 'yogyakarta', 'dome', 'pyroclastic', 'lahar', 'stratovolcano', 'indonesia'],
     href: '/geomap?location=mount-merapi',
     badge: 'Indonesia Anchor',
+  },
+  {
+    id: 'palu-koro-fault',
+    type: 'location',
+    title: 'Palu-Koro Fault Zone',
+    summary: 'Active strike-slip fault system cutting through Central Sulawesi and Palu Bay, site of the 2018 Mw 7.5 earthquake.',
+    keywords: ['palu', 'koro', 'sulawesi', 'fault', 'earthquake', 'liquefaction', 'geomap'],
+    href: '/geomap?location=palu-koro-fault',
+    badge: 'Active Fault',
+  },
+  {
+    id: 'sangiran-early-man',
+    type: 'location',
+    title: 'Sangiran Early Man Site',
+    summary: 'UNESCO World Heritage Site in Central Java preserving 2.4 million years of hominid fossils and stone tool strata.',
+    keywords: ['sangiran', 'fossils', 'homo erectus', 'java man', 'unesco', 'solo', 'geomap'],
+    href: '/geomap?location=sangiran-early-man',
+    badge: 'UNESCO Site',
+  },
+  {
+    id: 'sumedang-landslides',
+    type: 'location',
+    title: 'Sumedang Highlands Landslide Region',
+    summary: 'Steep volcanic terrain in West Java prone to heavy rainfall-triggered slope failures and mudflows.',
+    keywords: ['sumedang', 'landslides', 'west java', 'bnpb', 'hazard', 'geomap'],
+    href: '/geomap?location=sumedang-landslides',
+    badge: 'Hazard Region',
   },
 ];
 

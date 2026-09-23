@@ -1,0 +1,212 @@
+---
+id: "why-do-earthquakes-happen"
+title: "Why Do Earthquakes Happen?"
+tagline: "Elastic Rebound, Fault Kinematics, and Secondary Coastal Hazards"
+description: "Investigate how tectonic stress accumulates as elastic strain along locked faults, why ruptures release destructive seismic energy, and how the 2018 Palu Mw 7.5 strike-slip earthquake triggered unexpected tsunamis and catastrophic liquefaction."
+topic: "natural-hazards"
+difficulty: "intermediate"
+estimatedTime: "20min"
+learningObjectives:
+  - "Explain how stress builds up and releases along a fault as elastic strain according to elastic rebound theory."
+  - "Distinguish the three primary fault and plate boundary types: convergent (megathrust), transform (strike-slip), and divergent (rift)."
+  - "Understand how shallow strike-slip earthquakes can trigger secondary hazards like soil liquefaction and localized submarine-landslide tsunamis."
+  - "Analyze the 2018 Palu-Koro fault rupture in Central Sulawesi as a real-world case study of multi-hazard cascading disaster dynamics."
+prerequisites:
+  - "why-volcanoes-form"
+interactiveElements:
+  - id: "fault-simulation"
+    type: "simulation"
+    title: "Fault Kinematics & Boundary Simulator"
+    pedagogicalPurpose: "Allows learners to adjust tectonic boundary mechanisms (transform, convergent, divergent) and observe stress accumulation and seismic rupture."
+    isIllustrativeModel: true
+    accessibleFallbackText: "An interactive kinematic model demonstrating strike-slip fault shear strain, locked asperities, and seismic wave propagation."
+quiz:
+  quizId: "quiz-why-do-earthquakes-happen"
+  title: "Why Do Earthquakes Happen? Verification Quiz"
+  questionCount: 4
+realWorldConnections:
+  - title: "The 2018 Palu Earthquake & Palu-Koro Fault System"
+    locationName: "Palu-Koro Fault, Central Sulawesi, Indonesia"
+    isIndonesiaFirst: true
+    coordinates:
+      lat: -0.9000
+      lng: 119.8500
+    description: "On 28 September 2018, a shallow Mw 7.5 earthquake ruptured the fast-slipping Palu-Koro strike-slip fault in Central Sulawesi, triggering catastrophic liquefaction flows and a localized bay tsunami."
+    phenomenon: "Supershear strike-slip rupture, severe soil liquefaction in Balaroa and Petobo, and submarine sediment collapse generating rapid tsunami waves in Palu Bay."
+    globalGeneralization: "Transform fault hazards exist along major strike-slip faults worldwide, including the San Andreas Fault (California), the North Anatolian Fault (Turkey), and the Great Sumatran Fault (Indonesia)."
+    geoMapSlug: "palu-koro-fault"
+geoMapConnections:
+  - locationSlug: "palu-koro-fault"
+    label: "Explore the Palu-Koro Fault on GeoMap"
+    coordinates:
+      lat: -0.9000
+      lng: 119.8500
+    description: "Inspect the active trace of the Palu-Koro strike-slip fault system cutting through Central Sulawesi and Palu Bay."
+reflection:
+  - id: "refl-earthquake-soil"
+    prompt: "If you were assessing earthquake risk for a coastal Indonesian city, what would you want to know about the soil and groundwater conditions beneath it, not just the distance to nearby active faults?"
+    placeholder: "Consider sediment grain size, water table depth, coastal slope bathymetry, or irrigation practices..."
+    category: "observation"
+nextExperiences:
+  - "why-do-landslides-happen"
+  - "why-volcanoes-form"
+scientific:
+  source:
+    - "Springer, Landslides journal (2018). Field reconnaissance of the 2018 Palu earthquake and tsunami."
+    - "Journal of Geoscience, Engineering, Environment, and Technology (JGEET) (2018). Palu disaster geological analysis."
+    - "Journal of Engineering and Technological Sciences, ITB (2024). Liquefaction susceptibility in Central Sulawesi."
+    - "Nature Geoscience / NTU Singapore (2019). Irrigation-driven liquefaction mechanisms during the 2018 Palu earthquake."
+  sourceType: "peer-reviewed"
+  lastReviewed: "2026-09-23"
+  scientificLevel: "intermediate"
+  confidence: "well-supported"
+  references:
+    - title: "The 28 September 2018 Mw 7.5 Palu earthquake: preliminary field observations and multi-hazard analysis"
+      publisher: "Springer (Landslides)"
+      year: 2018
+    - title: "Disaster Analysis of the 2018 Sulawesi Earthquake and Tsunami"
+      publisher: "Journal of Geoscience, Engineering, Environment, and Technology (JGEET)"
+      year: 2018
+    - title: "Geotechnical Evaluation of Massive Liquefaction in Palu Valley"
+      publisher: "ITB Journal of Engineering and Technological Sciences"
+      year: 2024
+    - title: "Irrigation-driven soil liquefaction during the 2018 Mw 7.5 Palu earthquake"
+      publisher: "Nature Geoscience (NTU Singapore)"
+      year: 2019
+  notesOnSimplification: "The fault rupture kinematics and wave propagation are rendered as illustrative physical models. The specific secondary tsunami genesis mechanism in Palu Bay remains an active area of peer-reviewed modeling."
+review:
+  reviewStatus: "published"
+  sourceList:
+    - "Springer Landslides"
+    - "JGEET"
+    - "ITB"
+    - "Nature Geoscience"
+  lastReviewed: "2026-09-23"
+  contentVersion: "1.0.0"
+featured: true
+---
+
+import Simulation from '../../components/visualization/Simulation';
+import Quiz from '../../components/quiz/Quiz';
+import ReflectionBox from '../../components/learning/ReflectionBox';
+import RealWorldExample from '../../components/learning/RealWorldExample.astro';
+import ObservationChallenge from '../../components/learning/ObservationChallenge.astro';
+import { whyDoEarthquakesHappenQuiz } from '../../data/quizzes/why-do-earthquakes-happen';
+
+## Beat 1: The Opening Mystery of Palu 2018
+
+> **Why did a single earthquake in Central Sulawesi in 2018 trigger a deadly tsunami and turn solid residential land into flowing mud—from a fault type that textbook geology says rarely causes tsunamis?**
+
+On the evening of **28 September 2018**, a shallow **moment magnitude (Mw) 7.5** earthquake struck Central Sulawesi, Indonesia. Within minutes, over **4,300 lives were lost**, entire residential suburbs slid for hundreds of meters as liquefied mud, and 2-to-6-meter tsunami waves swept into the enclosed inlet of Palu Bay.
+
+The epicenter lay along the **Palu-Koro Fault**, a major **strike-slip (transform) fault**. According to classical seismology, strike-slip faults slide horizontally past each other and do not displace huge vertical columns of ocean water to generate tsunamis. Why did Palu defy the simple textbook rules?
+
+To answer this, we must understand the fundamental physical engine of earthquakes: **elastic rebound**.
+
+---
+
+## Beat 2: The Physical Engine — Elastic Rebound Theory
+
+Earth's brittle crust is crisscrossed by fractures known as **faults**. Tectonic plate motions constantly push crustal blocks against each other at rates of several centimeters per year.
+
+However, faults do not slide smoothly. Frictional resistance along rough contact surfaces (called **asperities**) keeps the fault locked tightly in place.
+
+```
+1. Continuous Tectonic Stress → Fault remains locked by friction.
+                ↓
+2. Elastic Strain Accumulation → Rock bodies bend, warp, and store elastic potential energy.
+                ↓
+3. Frictional Threshold Exceeded → Asperities fracture; locked fault suddenly slips.
+                ↓
+4. Seismic Energy Release → Elastic strain snaps back, releasing radiating seismic P and S waves.
+```
+
+When stored mechanical stress exceeds the shear strength of the locked fault plane, the rock fractures in milliseconds. The deformed rock snaps back toward its unstrained state—a phenomenon formulated by Harry Fielding Reid as **Elastic Rebound Theory**. The shock radiates through the crust as seismic waves that shake the ground surface.
+
+---
+
+## Beat 3: The Three Major Fault & Boundary Types
+
+Different tectonic boundary configurations produce distinct fault kinematics, stress regimes, and earthquake depths:
+
+1. **Transform / Strike-Slip Faults (Shear Stress):**
+   - Blocks slide horizontally past one another (e.g., Palu-Koro Fault in Sulawesi, Great Sumatran Fault in Sumatra, San Andreas Fault in California).
+   - Earthquakes are typically shallow (depth under 20 km), producing intense local surface shaking.
+2. **Convergent / Reverse & Megathrust Faults (Compressional Stress):**
+   - One crustal plate overrides another (e.g., Java Subduction Trench, Sunda Megathrust).
+   - Capable of generating massive vertical seafloor displacements and open-ocean megatsunamis (e.g., 2004 Indian Ocean Mw 9.1–9.3).
+3. **Divergent / Normal Faults (Tensional Stress):**
+   - Crust pulls apart and drops down along extensional fault blocks (e.g., Mid-Atlantic Ridge, East African Rift).
+
+---
+
+## Beat 4: Interactive Simulation — Fault Boundary Kinematics
+
+Explore how different plate boundaries deform crustal rock. Observe how shear stress accumulates along transform fault planes until catastrophic frictional failure triggers seismic shockwaves.
+
+<Simulation
+  client:visible
+  experienceSlug="why-do-earthquakes-happen"
+  initialBoundary="transform-fault"
+/>
+
+---
+
+## Beat 5: Real-World Indonesian Anchor — The 2018 Palu Mw 7.5 Disaster
+
+The Palu earthquake serves as one of the most thoroughly documented multi-hazard natural disaster sequences in modern earth science.
+
+<RealWorldExample
+  title="The 2018 Palu-Koro Strike-Slip Rupture & Cascading Hazards"
+  locationName="Palu-Koro Fault, Central Sulawesi, Indonesia"
+  isIndonesiaFirst={true}
+  coordinates={{ lat: -0.9000, lng: 119.8500 }}
+  phenomenon="The Mw 7.5 rupture occurred at ~10–11 km depth along the Palu-Koro Fault, which moves at an exceptionally high slip rate of ~7 cm per year. The rupture exhibited supershear velocity (propagating faster than S-wave speed), causing severe high-frequency ground shaking that triggered massive flow-liquefaction in saturated alluvial sediments (Balaroa, Petobo, Jono Oge) and triggered submarine coastal landslides that generated rapid tsunami waves inside Palu Bay."
+  globalGeneralization="The lessons of Palu transformed global earthquake hazard science: high-velocity strike-slip faults can produce devastating secondary liquefaction flows and coastal landslide-triggered tsunamis even without traditional subduction megathrust seafloor uplift."
+  geoMapSlug="palu-koro-fault"
+/>
+
+### Why Palu Liquefied and Flooded:
+- **Massive Soil Liquefaction:** Saturated alluvial soils in the Palu valley lost all shear strength during prolonged shaking. Groundwater under pressure forced sand grains apart, converting solid ground into a viscous liquid slurry that flowed down gentle 1–2° slopes for over 1.5 kilometers. Recent peer-reviewed studies (NTU / Nature Geoscience, 2019) demonstrated that unlined agricultural irrigation aqueducts had elevated the local water table to near-surface levels, multiplying liquefaction severity.
+- **The Secondary Tsunami Mechanism:** Scientists from Springer *Landslides* (2018) and JGEET verified that the tsunami was primarily generated by steep coastal and submarine sediment landslides collapsing into Palu Bay rather than vertical fault displacement alone.
+
+---
+
+## Beat 6: Field Observation Challenge
+
+<ObservationChallenge
+  title="Identifying Active Fault Scarp Geomorphology"
+  targetPhenomenon="Observing surface traces, offset river channels, and linear fault valleys."
+  observationSteps={[
+    "Look for linear fault valleys or unusually straight mountain front scarps on satellite maps or topography.",
+    "Examine stream and river paths crossing the fault: notice if river channels take sharp, 90-degree lateral bends (offset streams) where strike-slip motion displaced the drainage network.",
+    "Identify triangular facets along hillsides where repeated fault movement has truncated topographic ridges.",
+    "Look for sag ponds or spring lines aligned along the linear depression of the fault zone."
+  ]}
+  whatToLookFor="Along active strike-slip faults like the Palu-Koro or Great Sumatran Fault, streams are visibly offset by dozens to hundreds of meters, and long linear valleys mark the pulverized fault gouge zone."
+  experienceSlug="why-do-earthquakes-happen"
+/>
+
+---
+
+## Beat 7: Conceptual Verification & Assessment
+
+Test your understanding of elastic rebound, fault boundaries, and the multi-hazard dynamics of the Palu earthquake.
+
+<Quiz
+  client:visible
+  quiz={whyDoEarthquakesHappenQuiz}
+  experienceSlug="why-do-earthquakes-happen"
+  experienceTitle="Why Do Earthquakes Happen?"
+/>
+
+---
+
+## Beat 8: Scientific Reflection
+
+<ReflectionBox
+  client:idle
+  experienceSlug="why-do-earthquakes-happen"
+  prompt="If you were assessing earthquake risk for a coastal Indonesian city, what would you want to know about the soil and groundwater conditions beneath it, not just the distance to nearby active faults?"
+  category="observation"
+/>

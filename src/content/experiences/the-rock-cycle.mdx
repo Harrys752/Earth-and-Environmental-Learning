@@ -1,0 +1,211 @@
+---
+id: "the-rock-cycle"
+title: "What Is the Rock Cycle?"
+tagline: "Igneous, Sedimentary, and Metamorphic Crustal Transformations"
+description: "Discover how planetary heat, surface weathering, and tectonic forces constantly recycle Earth's crust across millions of years, transforming volcanic lava into river sediment and deeply buried metamorphic stone."
+topic: "geology"
+difficulty: "beginner"
+estimatedTime: "20min"
+learningObjectives:
+  - "Identify the three primary rock classes: igneous, sedimentary, and metamorphic."
+  - "Explain the transformative geological processes: cooling and crystallization, weathering, erosion, deposition, lithification, metamorphism, and melting."
+  - "Understand the rock cycle as a non-linear, continuous dynamic system with no single starting point or ending point."
+  - "Connect the rock cycle to active Indonesian volcanic landscapes where fresh igneous rocks rapidly weather into rich sedimentary soils."
+prerequisites: []
+interactiveElements:
+  - id: "rock-cycle-interactive"
+    type: "diagram"
+    title: "Interactive Rock Cycle Transformation Explorer"
+    pedagogicalPurpose: "Allows learners to click rock classes and transformative pathways to inspect geological processes and physical mechanisms."
+    isIllustrativeModel: true
+    accessibleFallbackText: "An interactive diagram displaying transitions between Magma, Igneous, Sediment, Sedimentary, and Metamorphic rock states."
+quiz:
+  quizId: "quiz-the-rock-cycle"
+  title: "What Is the Rock Cycle? Verification Quiz"
+  questionCount: 4
+realWorldConnections:
+  - title: "The Rock Cycle in Action: Java's Volcanic Arc to Sedimentary Basins"
+    locationName: "Java Volcanic Arc, Indonesia"
+    isIndonesiaFirst: true
+    coordinates:
+      lat: -7.5407
+      lng: 110.4457
+    description: "The island of Java provides a living laboratory for the rock cycle: subduction feeds active volcanoes producing igneous andesite, tropical rains rapidly weather the rock into rich fertile sediments, which rivers deposit into sedimentary basins that will one day be buried and metamorphosed."
+    phenomenon: "Rapid tropical weathering of volcanic tephra and andesite lava flows into alluvial fertile soils and river gravels."
+    globalGeneralization: "Every continent on Earth is composed of rocks continually moving through this global recycling engine across deep geological time."
+    geoMapSlug: "java-volcanic-arc"
+geoMapConnections:
+  - locationSlug: "java-volcanic-arc"
+    label: "See where these rocks form on GeoMap"
+    coordinates:
+      lat: -7.5407
+      lng: 110.4457
+    description: "Explore the volcanic chains of Java where fresh igneous crust is continually erupted and weathered."
+reflection:
+  - id: "refl-rock-pebble"
+    prompt: "Pick a rock or pebble you have seen in your local environment—what geological pathway do you think it followed to reach its current state, and where might it go next in the cycle?"
+    placeholder: "Consider whether it shows visible crystals, sedimentary layers, rounded water-worn edges, or signs of heat/pressure..."
+    category: "observation"
+nextExperiences:
+  - "reading-rock-layers"
+  - "why-volcanoes-form"
+  - "why-do-earthquakes-happen"
+scientific:
+  source:
+    - "USGS Educational Resources (2023). The Rock Cycle and Rock Classification."
+    - "Tarbuck, E. J., Lutgens, F. K., & Tasa, D. (2020). Earth: An Introduction to Physical Geology (13th ed.). Pearson."
+    - "Badan Geologi Indonesia (2022). Geological Overview of the Indonesian Archipelago."
+  sourceType: "textbook"
+  lastReviewed: "2026-09-23"
+  scientificLevel: "beginner"
+  confidence: "established"
+  references:
+    - title: "Earth: An Introduction to Physical Geology"
+      publisher: "Pearson"
+      year: 2020
+    - title: "USGS Geology and the Rock Cycle"
+      publisher: "USGS"
+      year: 2023
+  notesOnSimplification: "The model groups geological transformations into fundamental thermodynamic and surface processes for clear pedagogical progression."
+review:
+  reviewStatus: "published"
+  sourceList:
+    - "USGS"
+    - "Pearson Education"
+    - "Badan Geologi Indonesia"
+  lastReviewed: "2026-09-23"
+  contentVersion: "1.0.0"
+featured: false
+---
+
+import RockCycleDiagram from '../../components/visualization/RockCycleDiagram';
+import Quiz from '../../components/quiz/Quiz';
+import ReflectionBox from '../../components/learning/ReflectionBox';
+import RealWorldExample from '../../components/learning/RealWorldExample.astro';
+import ObservationChallenge from '../../components/learning/ObservationChallenge.astro';
+import { theRockCycleQuiz } from '../../data/quizzes/the-rock-cycle';
+
+## Beat 1: The Opening Question
+
+> **A single grain of quartz or volcanic sand on a Javanese riverbank might once have erupted from a fiery stratovolcano, and might millions of years from now become part of a towering mountain range. How does Earth continually reshape its solid crust?**
+
+To human eyes, rocks seem eternal and unchanging. Yet the ground beneath our feet is participating in an unending, slow-motion planetary recycling system: the **rock cycle**.
+
+Driven by two grand thermal engines—Earth's internal radioactive heat engine and the external radiant energy of the Sun—every rock on our planet is constantly formed, broken down, deformed, and reborn.
+
+---
+
+## Beat 2: The Three Rock Classes
+
+Geologists classify all crustal rocks into three fundamental families based on their genetic origin:
+
+1. **Igneous Rocks (Fire-Formed):**
+   - Born when molten magma (underground) or lava (at the surface) cools and crystallizes.
+   - *Intrusive (Plutonic):* Cooled slowly deep in the crust, producing coarse, visible interlocking crystals (e.g., Granite, Diorite).
+   - *Extrusive (Volcanic):* Cooled rapidly at the surface, producing fine-grained or glassy textures (e.g., Basalt, Andesite, Obsidian).
+
+2. **Sedimentary Rocks (Layered & Lithified):**
+   - Formed at Earth's surface when pre-existing rocks are broken down into sediment by weathering, transported by water or wind, deposited in basins, and compacted/cemented through **lithification** (e.g., Sandstone, Shale, Limestone).
+
+3. **Metamorphic Rocks (Transformed by Heat & Pressure):**
+   - Formed in the solid state when existing rocks are subjected to intense temperature and confining/differential pressure without fully melting. Mineral grains recrystallize into dense, often banded (foliated) textures (e.g., Marble from limestone, Schist, Gneiss).
+
+---
+
+## Beat 3: The Transformative Geological Pathways
+
+The rock cycle is not a simple, one-way circular track. It is an interconnected web where any rock family can transform into any other:
+
+```
+                  [ Magma / Lava ]
+                     /         \
+       Cooling &    /           \ Melting
+    Crystallization/             \
+                  ↓               \
+          [ Igneous Rock ]         \
+             /          \           \
+  Weathering/            \ Heat &    \
+& Erosion  /              \ Pressure  \
+          ↓                ↓           \
+    [ Sediment ]     [ Metamorphic ]    \
+          |           [    Rock     ] ←--+
+Lithification         /          ↑
+ (Compaction)        / Heat &    | Heat &
+          ↓         /  Pressure  | Pressure
+   [ Sedimentary ]-/             |
+   [    Rock     ]---------------+
+```
+
+- **Weathering & Erosion:** Physical freeze-thaw/thermal expansion and chemical reactions with rain break surface rock into mineral grains and ions.
+- **Lithification:** Burial pressure compacts sediment, while mineral-bearing groundwater precipitates calcite or quartz "glue," welding particles into stone.
+- **Metamorphism:** Tectonic collision or deep burial heats stone up to 300°C–800°C, causing solid-state recrystallization.
+- **Melting:** When temperatures exceed the melting curve, rock returns to liquid magma, resetting the cycle.
+
+---
+
+## Beat 4: Interactive Exploration — The Rock Cycle Explorer
+
+Click on any rock class or transformative pathway in the interactive diagram below to explore how physical forces alter crystal structures and mineral compositions.
+
+<RockCycleDiagram
+  client:visible
+  id="rock-cycle-diagram"
+  experienceSlug="the-rock-cycle"
+/>
+
+---
+
+## Beat 5: Real-World Indonesian Anchor — From Volcanic Peaks to River Plains
+
+Indonesia provides an exceptional real-world demonstration of the rock cycle operating in real time.
+
+<RealWorldExample
+  title="The Rock Cycle in Motion: The Java Volcanic Arc"
+  locationName="Mount Merapi to Progo River Basin, Central Java, Indonesia"
+  isIndonesiaFirst={true}
+  coordinates={{ lat: -7.5407, lng: 110.4457 }}
+  phenomenon="Subduction of the Indo-Australian plate generates andesitic magma that erupts as fresh igneous rock at Mount Merapi. Intense tropical monsoons weather this volcanic rock at rapid rates, eroding ash and lava into river systems like the Progo and Opak. These rivers transport and deposit mineral sediment into lowland plains and coastal basins, initiating the first stage of new sedimentary strata."
+  globalGeneralization="This seamless transition—from igneous eruption to weathering, sediment transport, and eventual sedimentary lithification—is the primary engine through which all continental landmasses grow and renew their surface crust."
+  geoMapSlug="java-volcanic-arc"
+/>
+
+---
+
+## Beat 6: Field Observation Challenge
+
+<ObservationChallenge
+  title="Distinguishing Igneous, Sedimentary, and Metamorphic Textures"
+  targetPhenomenon="Analyzing rock textures in hand specimens and local masonry."
+  observationSteps={[
+    "Find a clean rock surface or river pebble in your local area.",
+    "Check for bedding layers: are there parallel horizontal bands or distinct grain layers? (Signature of sedimentary rock).",
+    "Check for interlocking crystals: do randomly oriented mineral crystals fit tightly together like a mosaic? (Signature of igneous rock).",
+    "Check for foliation or warping: do mineral bands appear squished, wavy, or aligned in parallel sheets? (Signature of metamorphic rock)."
+  ]}
+  whatToLookFor="Sedimentary rocks often scratch easily and feel gritty; igneous rocks show crystalline specks without aligned bands; metamorphic rocks show folded or shiny mineral alignment (such as mica flakes)."
+  experienceSlug="the-rock-cycle"
+/>
+
+---
+
+## Beat 7: Conceptual Verification & Assessment
+
+Verify your understanding of rock classes, genetic processes, and the dynamic pathways of the rock cycle.
+
+<Quiz
+  client:visible
+  quiz={theRockCycleQuiz}
+  experienceSlug="the-rock-cycle"
+  experienceTitle="What Is the Rock Cycle?"
+/>
+
+---
+
+## Beat 8: Scientific Reflection
+
+<ReflectionBox
+  client:idle
+  experienceSlug="the-rock-cycle"
+  prompt="Pick a rock or pebble you have seen recently—what part of the rock cycle do you think it is currently in, and what geological forces might transform it in the future?"
+  category="observation"
+/>

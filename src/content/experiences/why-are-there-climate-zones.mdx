@@ -1,0 +1,186 @@
+---
+id: "why-are-there-climate-zones"
+title: "Why Are There Climate Zones?"
+tagline: "Solar Insolation Geometry, Latitude, and Earth's Thermal Regimes"
+description: "Explore how Earth's spherical curvature distributes solar energy unevenly across latitudes, creating distinct tropical, temperate, and polar climate zones, and why equatorial Indonesia experiences year-round warmth."
+topic: "climate"
+difficulty: "beginner"
+estimatedTime: "20min"
+learningObjectives:
+  - "Explain why solar insolation per unit surface area varies dramatically by latitude due to beam spreading across a curved planet."
+  - "Distinguish the characteristics of Earth's primary climate zones: Tropical, Subtropical, Temperate, and Polar."
+  - "Understand why equatorial regions like Indonesia maintain warm temperatures and ~12-hour day lengths year-round."
+  - "Differentiate between short-term weather fluctuations and multi-decadal statistical climate norms."
+prerequisites: []
+interactiveElements:
+  - id: "climate-latitude-slider"
+    type: "slider"
+    title: "Solar Insolation & Latitude Angle Simulator"
+    pedagogicalPurpose: "Allows learners to adjust latitude from 0° (Equator) to 90° (Poles) to observe solar beam concentration, surface area spreading, and insolation intensity."
+    isIllustrativeModel: true
+    accessibleFallbackText: "An interactive slider demonstrating that direct 90° solar rays at the equator deliver maximum energy per square meter, while oblique rays at the poles spread energy over a wider area."
+quiz:
+  quizId: "quiz-why-are-there-climate-zones"
+  title: "Why Are There Climate Zones? Verification Quiz"
+  questionCount: 4
+realWorldConnections:
+  - title: "Equatorial Climate of the Indonesian Archipelago"
+    locationName: "Equatorial Belt, Indonesia (0° Latitude)"
+    isIndonesiaFirst: true
+    coordinates:
+      lat: 0.0000
+      lng: 109.3333
+    description: "Bisected by the Equator across Sumatra, Borneo (Pontianak), Sulawesi, and Maluku, Indonesia experiences nearly vertical midday sunlight all year, producing high average temperatures (26–28°C) and consistent 12-hour days."
+    phenomenon: "Stable equatorial thermal energy driving year-round oceanic evaporation, high humidity, and monsoon-dominated rainfall patterns."
+    globalGeneralization: "All equatorial landmasses—including the Amazon Basin in South America and the Congo Basin in Africa—share this high-insolation tropical regime."
+geoMapConnections: []
+reflection:
+  - id: "refl-climate-latitude"
+    prompt: "What would change about daily life, agriculture, clothing, and natural ecosystems in your region if your town were suddenly relocated to 65° North latitude instead of where it is now?"
+    placeholder: "Consider seasonal temperatures, daylight hours in summer vs winter, snowfall, crop growing seasons..."
+    category: "observation"
+nextExperiences:
+  - "how-rain-forms"
+  - "why-do-landslides-happen"
+scientific:
+  source:
+    - "NOAA National Centers for Environmental Information (2023). Earth's Climate Zones."
+    - "BMKG (Badan Meteorologi, Klimatologi, dan Geofisika Indonesia). Climate Atlas of Indonesia."
+    - "Ahrens, C. D., & Henson, R. (2021). Meteorology Today (13th ed.). Cengage Learning."
+  sourceType: "textbook"
+  lastReviewed: "2026-09-23"
+  scientificLevel: "beginner"
+  confidence: "established"
+  references:
+    - title: "Meteorology Today: An Introduction to Weather, Climate, and the Environment"
+      publisher: "Cengage Learning"
+      year: 2021
+    - title: "Climate of Indonesia: Climatological Normals and Monsoonal Dynamics"
+      publisher: "BMKG Indonesia"
+      year: 2023
+  notesOnSimplification: "Solar insolation calculations are presented assuming average top-of-atmosphere baseline solar constant (~1361 W/m²) modulated by cosine of solar zenith angle for clear conceptual understanding."
+review:
+  reviewStatus: "published"
+  sourceList:
+    - "BMKG Indonesia"
+    - "NOAA"
+    - "Cengage Learning"
+  lastReviewed: "2026-09-23"
+  contentVersion: "1.0.0"
+featured: false
+---
+
+import ClimateLatitudeSlider from '../../components/visualization/ClimateLatitudeSlider';
+import Quiz from '../../components/quiz/Quiz';
+import ReflectionBox from '../../components/learning/ReflectionBox';
+import RealWorldExample from '../../components/learning/RealWorldExample.astro';
+import ObservationChallenge from '../../components/learning/ObservationChallenge.astro';
+import { whyAreThereClimateZonesQuiz } from '../../data/quizzes/why-are-there-climate-zones';
+
+## Beat 1: The Opening Question
+
+> **Indonesia sits directly on the Equator and has no freezing winter. Why does the exact same Sun that keeps Southeast Asia warm produce sub-zero blizzards and months of darkness in Scandinavia?**
+
+A common misconception is that the equator is hot because it is "closer to the sun." In reality, the Sun is roughly 150 million kilometers away from Earth—the few thousand kilometers difference across Earth's diameter is completely negligible.
+
+The true cause of Earth's climate zones lies in **geometry**: Earth is a sphere, and sunlight strikes different parts of its curved surface at vastly different angles.
+
+---
+
+## Beat 2: Solar Insolation Geometry & Beam Spreading
+
+Because Earth is curved:
+1. **At the Equator (0°):** Incoming solar rays strike the surface almost vertically (at a 90° angle). The beam's solar energy is concentrated onto the smallest possible surface area, delivering maximum heat per square meter.
+2. **At Mid-Latitudes (45°):** Rays strike at an oblique angle, spreading the same bundle of sunlight over a larger oval footprint.
+3. **Near the Poles (90°):** Sunlight grazes the surface at a shallow angle. The energy is spread over a vast expanse of ground, while traveling through a much thicker layer of atmosphere that absorbs and scatters incoming radiation.
+
+```
+Incoming Solar Radiation (Parallel Beams):
+===================================================
+Equator (Direct):        [===] → Hits small area (Concentrated Heat: HIGH)
+Mid-Latitudes (Oblique): [===] → Hits medium area (Moderate Heat)
+Poles (Grazing):         [===] → Hits huge area (Diluted Heat: LOW)
+===================================================
+```
+
+---
+
+## Beat 3: The Major Climate Zones
+
+This latitudinal solar gradient divides Earth into three primary climatic belts:
+
+1. **The Tropical Zone (0° to 23.5° N/S):**
+   - Bounded by the Tropic of Cancer and Tropic of Capricorn.
+   - Characterized by high solar input year-round, minimal temperature seasonality, and high humidity and precipitation.
+2. **The Temperate Zones (23.5° to 66.5° N/S):**
+   - Distinct four seasons (spring, summer, autumn, winter) caused by the combination of latitude and Earth's 23.5° axial tilt as it orbits the Sun.
+3. **The Polar Zones (66.5° to 90° N/S):**
+   - Extremely low annual solar energy, pervasive ice/tundra, and dramatic swings between 24-hour summer daylight (Midnight Sun) and total winter polar night.
+
+---
+
+## Beat 4: Interactive Simulation — Solar Angle & Latitude Slider
+
+Adjust the latitude slider below from the Equator (0°) to the Poles (90°) to see how solar beam spreading dilutes incoming radiant heat energy.
+
+<ClimateLatitudeSlider
+  client:visible
+  id="climate-slider"
+  experienceSlug="why-are-there-climate-zones"
+/>
+
+---
+
+## Beat 5: Real-World Indonesian Anchor — Life on the Equator
+
+Indonesia sits squarely in the heart of the global tropical zone.
+
+<RealWorldExample
+  title="Equatorial Climate Dynamics: Pontianak & the Indonesian Archipelago"
+  locationName="Pontianak, West Kalimantan, Indonesia (0°0' N/S)"
+  isIndonesiaFirst={true}
+  coordinates={{ lat: 0.0000, lng: 109.3333 }}
+  phenomenon="In cities like Pontianak, the midday sun passes almost directly overhead throughout the year. As a result, mean monthly temperatures vary by less than 2°C across all twelve months. Instead of thermal seasons (summer/winter), Indonesia experiences seasons driven by monsoon wind shifts that alternate between wet (rainy) and dry periods."
+  globalGeneralization="Every region situated in Earth's equatorial trough experiences this high-energy atmospheric state, which powers the Intertropical Convergence Zone (ITCZ) and fuels planetary atmospheric circulation cells (Hadley Cells)."
+/>
+
+---
+
+## Beat 6: Field Observation Challenge
+
+<ObservationChallenge
+  title="Tracking Solar Elevation and Shadow Length"
+  targetPhenomenon="Observing how solar angle determines ground heating intensity."
+  observationSteps={[
+    "Place a vertical meter stick or straight pole in an open, level area under direct sunlight.",
+    "Measure the length of the pole's shadow at solar noon (around 11:45 AM - 12:15 PM local solar time).",
+    "Notice how short the shadow is compared to measurements taken in high-latitude countries at the same time of year.",
+    "Observe how the air temperature reaches its peak when the solar angle is highest and the shadow is shortest."
+  ]}
+  whatToLookFor="Near the equator, midday shadows are extremely short or almost directly beneath the object, demonstrating concentrated solar insolation with minimal beam spreading."
+  experienceSlug="why-are-there-climate-zones"
+/>
+
+---
+
+## Beat 7: Conceptual Verification & Assessment
+
+Verify your understanding of solar geometry, latitude zones, and the physical causes of Earth's climate patterns.
+
+<Quiz
+  client:visible
+  quiz={whyAreThereClimateZonesQuiz}
+  experienceSlug="why-are-there-climate-zones"
+  experienceTitle="Why Are There Climate Zones?"
+/>
+
+---
+
+## Beat 8: Scientific Reflection
+
+<ReflectionBox
+  client:idle
+  experienceSlug="why-are-there-climate-zones"
+  prompt="What would change about daily life in your area if it were located at 60° latitude instead of where it is now?"
+  category="observation"
+/>

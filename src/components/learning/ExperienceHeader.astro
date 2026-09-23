@@ -2,6 +2,7 @@
 import Badge from '../ui/Badge.astro';
 import Breadcrumb from '../ui/Breadcrumb.astro';
 import type { ScientificMetadata } from '../../types/content';
+import { withBase } from '../../lib/url';
 
 export interface Props {
   title: string;
@@ -38,7 +39,7 @@ const breadcrumbItems = [
   <div class="space-y-4">
     <div class="flex items-center gap-2 flex-wrap text-xs">
       <a
-        href={`/explore/topics/${topicSlug}`}
+        href={withBase(`/explore/topics/${topicSlug}`)}
         class="font-semibold uppercase tracking-wider text-[var(--color-accent)] hover:underline"
       >
         {topicTitle}
